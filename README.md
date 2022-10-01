@@ -30,3 +30,11 @@
   * 
   * 
   * 
+  
+  
+# 3rd Party Licenses 
+* [Lottie Simple License (FL 9.13.21)](https://lottiefiles.com/page/license)
+* [.NET MAUI Community Toolkit](https://github.com/CommunityToolkit/Maui)
+
+#License
+* Code released under the [MIT license](https://opensource.org/licenses/MIT).
