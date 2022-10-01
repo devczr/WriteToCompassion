@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    x:Class="WriteToCompassion.Views.ThoughtsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:animations="clr-namespace:WriteToCompassion.Animations"
+    xmlns:triggers="clr-namespace:WriteToCompassion.Triggers"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    xmlns:skctl="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    xmlns:models="clr-namespace:WriteToCompassion.Models"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:controls="clr-namespace:WriteToCompassion.Controls"
+    x:DataType="viewmodels:ThoughtsViewModel"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
+
+
+    <ContentPage.Resources>
+        <animations:StoryBoard
+            x:Key="Cloud1Animation"
+            Target="{x:Reference cloud1}">
+            <animations:CloudAnimation RepeatForever="True"/>
+        </animations:StoryBoard>
+
+
+        <Style x:Key="CloudButtonStyle"
+               TargetType="{x:Type controls:CloudButton}">
+            <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+            <Setter Property="VerticalOptions"
+                    Value="End"/>
+            <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+            <Setter Property="HeightRequest"
+                    Value="100"/>
+            <Setter Property="WidthRequest"
+                    Value="100"/>
+            <Setter Property="CloudImage"
+                    Value="cloud.png"/>
+        </Style>
+    </ContentPage.Resources>
+
+    
+    
+    
+    <Grid x:Name="primaryGrid"
+        RowSpacing="0"
+        BackgroundColor="Transparent"
+        InputTransparent="False"
+        RowDefinitions="5*,*,80"
+        Padding="15">
+
+
+        <Border BackgroundColor="Teal"
+                Grid.Row="0"
+                InputTransparent="True"
+                ZIndex="0"/>
+
+        <!--Cloud 1-->
+        <controls:CustomCloudControl
+            x:Name="cloud1"
+            Grid.Row="1"
+            AllowCloudAnimation="{Binding }">
+            <controls:CustomCloudControl.GestureRecognizers>
+                <TapGestureRecognizer />
+                <PanGestureRecognizer />
+            </controls:CustomCloudControl.GestureRecognizers>
+            <controls:CustomCloudControl.Triggers>
+                <Trigger TargetType="controls:CustomCloudControl"
+                            Property="controls:CloudButton.IsVisible"
+                            Value="True">
+                    <Trigger.EnterActions>
+                        <triggers:BeginAnimation Animation="{StaticResource Cloud1Animation}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+                <EventTrigger Event="Pressed">
+                    <triggers:CancelAnimation />
+                </EventTrigger>
+            </controls:CustomCloudControl.Triggers>
+        </controls:CustomCloudControl>
+
+
+        <skia:SKLottieView  x:Name="cloudlottie"
+                            Grid.Row="1"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="Center"
+                            WidthRequest="600"
+                            HeightRequest="140"
+                            Opacity="1"
+                            IsAnimationEnabled="false"
+                            IsVisible="True"
+                            ZIndex="0"
+                            RepeatCount="-1"
+                            Source="bigcloudlottie.json"/>
+
+
+        <!--Bottom Buttons-->
+        <Grid 
+              Grid.Row="3"
+              ColumnDefinitions="*,*,*">
+            <HorizontalStackLayout Grid.Column="0">
+                <Button Text="Settings"
+                        Command="{Binding GoToSettingsCommand}"
+                        FontSize="Micro"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                        BackgroundColor="LightPink"/>
+                <Button Text="Add New Thought"
+                        Command="{Binding GoToSettingsCommand}"
+                        FontSize="Small"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                        BackgroundColor="HotPink"/>
+
+            </HorizontalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

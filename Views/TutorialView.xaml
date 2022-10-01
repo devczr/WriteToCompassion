@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WriteToCompassion.Views.TutorialView"
+             xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             x:DataType="viewmodels:TutorialViewModel"
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             Title="Tutorial">
+
+
+    <Grid 
+        RowDefinitions="*,*,*">
+
+        <Label 
+            Text="Welcome to the TUTORIAL!"
+            TextColor="Pink"
+            FontSize="35"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Grid Grid.Row="2"
+              BackgroundColor="DarkSalmon">
+            <Label Text="Go To Thoughts"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   FontSize="30"/>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding SkipTutorialCommand}"
+                    NumberOfTapsRequired="1"/>
+            </Grid.GestureRecognizers>
+        </Grid>
+    </Grid>
+</ContentPage>

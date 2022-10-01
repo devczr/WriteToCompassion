@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             x:DataType="viewmodels:SettingsViewModel"
+             x:Class="WriteToCompassion.Views.SettingsView"
+             BackgroundColor="Black"
+             Shell.PresentationMode="ModalAnimated">
+
+    <VerticalStackLayout Spacing="20"
+                         Padding="0,20">
+        <Label 
+            Text="Settings"
+            Padding="0,20"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+           
+            <Button 
+                Text="Toggle Tutorial Status"
+                Command="{Binding ToggleDisplayTutorialCommand}"/>
+
+        <Button
+            Padding="0,20"
+                Text="Thoughts Page"
+            BackgroundColor="DeepSkyBlue"
+                TextColor="Black"
+                Command="{Binding GoToThoughtsCommand}"/>
+
+        <Button
+            Padding="0,20"
+                Text="Admin Page"
+            BackgroundColor="Firebrick"
+                TextColor="DarkGoldenrod"
+                Command="{Binding GoToMainPageCommand}"/>
+
+    </VerticalStackLayout>
+</ContentPage>
