@@ -35,9 +35,6 @@ public static class MauiProgram
         return builder.Build();
     }
 
-
-
-
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
@@ -51,26 +48,21 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
-        //singleton
         mauiAppBuilder.Services.AddSingleton<MainViewModel>();
         mauiAppBuilder.Services.AddSingleton<SettingsViewModel>();
         mauiAppBuilder.Services.AddSingleton<TutorialViewModel>();
 
-        //transient
         mauiAppBuilder.Services.AddTransient<ThoughtsViewModel>();
-
 
         return mauiAppBuilder;
     }
 
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
-        //singleton
         mauiAppBuilder.Services.AddSingleton<MainPage>();
         mauiAppBuilder.Services.AddSingleton<SettingsView>();
         mauiAppBuilder.Services.AddSingleton<TutorialView>();
 
-        //transient
         mauiAppBuilder.Services.AddTransient<ThoughtsPage>();
 
         return mauiAppBuilder;

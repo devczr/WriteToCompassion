@@ -5,10 +5,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
            	xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-    x:DataType="viewmodels:ThoughtsViewModel">
+    x:DataType="viewmodels:ThoughtsViewModel"
+    Color="Transparent"
+    >
 
+    
     <VerticalStackLayout Style="{StaticResource PopupLayout}">
-
+        
         <VerticalStackLayout.Resources>
             <ResourceDictionary>
                 <Style x:Key="Title" TargetType="Label">
@@ -21,7 +24,7 @@
                 <Style x:Key="Divider" TargetType="BoxView">
                     <Setter Property="HeightRequest" Value="1" />
                     <Setter Property="Margin" Value="50, 25" />
-                    <Setter Property="Color" Value="#c3c3c3" />
+                    <Setter Property="Color" Value="#a5e0dc" />
                 </Style>
                 <Style x:Key="Content" TargetType="Label">
                     <Setter Property="HorizontalTextAlignment" Value="Start" />
@@ -33,6 +36,7 @@
             </ResourceDictionary>
         </VerticalStackLayout.Resources>
 
+        
         <Label Style="{StaticResource Title}" Text="Add Thought" />
         <BoxView Style="{StaticResource Divider}" />
         <Label Style="{StaticResource Content}" Text="Write something nice for your future self to read!" FontSize="Micro"/>
