@@ -7,7 +7,7 @@ public partial class CustomCloudControl : ContentView
 
 
     public static readonly BindableProperty AllowCloudAnimationProperty =
-        BindableProperty.Create(nameof(AllowCloudAnimation), typeof(bool), typeof(CustomCloudControl), false);
+        BindableProperty.Create(nameof(AllowCloudAnimation), typeof(bool), typeof(CustomCloudControl), false, BindingMode.TwoWay);
 
     public CustomCloudControl()
     {
@@ -25,7 +25,6 @@ public partial class CustomCloudControl : ContentView
         PanGestureRecognizer panGesture = new PanGestureRecognizer();
         panGesture.PanUpdated += OnPanUpdated;
         this.GestureRecognizers.Add(panGesture);
-        AllowCloudAnimation = true;
     }
 
     private void OnPanUpdated(object sender, PanUpdatedEventArgs e)

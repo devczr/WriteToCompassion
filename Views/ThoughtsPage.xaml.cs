@@ -1,18 +1,8 @@
-using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Shapes;
-using SkiaSharp;
-using System.Timers;
-using WriteToCompassion.Models;
 using WriteToCompassion.Models.Popups;
 using WriteToCompassion.ViewModels;
 using WriteToCompassion.Views.Popups;
-using SkiaSharp.Extended;
-using SkiaSharp.Views.Maui;
-using CommunityToolkit.Maui.Alerts;
-using WriteToCompassion.Animations;
 using WriteToCompassion.Services;
+using CommunityToolkit.Maui.Views;
 
 namespace WriteToCompassion.Views;
 
@@ -42,15 +32,18 @@ public partial class ThoughtsPage : ContentPage
         animationService.UpdateScreenXYValues(width, height);
     }
 
-/*    public void DisplayPopup()
+
+    async void HandleCloudPopupButtonClicked(object sender, EventArgs e)
     {
-        var popup = new AddThoughtPopupView(popupSizeConstants);
-        this.ShowPopup(popup);
+        /*    var cloudPopup = new CloudPopup();
+            await this.ShowPopupAsync(cloudPopup);*/
+
+        var thoughtPopup = new AddThoughtPopupView(popupSizeConstants);
+        await this.ShowPopupAsync(thoughtPopup);
     }
 
-    private void AddThoughtPopupButton(object sender, EventArgs e)
+    private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
     {
-        DisplayPopup();
-        cloudlottie.IsAnimationEnabled = true;
-    }*/
+
+    }
 }

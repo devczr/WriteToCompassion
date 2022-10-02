@@ -114,6 +114,15 @@ public partial class ThoughtsViewModel : BaseViewModel
 
     }
 
+    [RelayCommand]
+    async Task ReverseMyBool()
+    {
+        if(MyBool)
+            MyBool = false;
+        else
+            MyBool = true;
+    }
+
 
     [RelayCommand]
     async Task GoToMainPageAsync()

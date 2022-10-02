@@ -9,7 +9,7 @@ public partial class AddThoughtPopupView : Popup
 	{
 		InitializeComponent();
 
-		Size = popupSizeConstants.Tiny;
+		Size = popupSizeConstants.Small;
 	}
 
 	private void Button_Clicked(object sender, EventArgs e)

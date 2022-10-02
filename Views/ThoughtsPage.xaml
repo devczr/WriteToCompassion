@@ -61,22 +61,39 @@
         <controls:CustomCloudControl
             x:Name="cloud1"
             Grid.Row="1"
-            AllowCloudAnimation="{Binding }">
+            AllowCloudAnimation="{Binding MyBool}">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="AnimationAllowed">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Source={x:Reference cloud1}, Path=AllowCloudAnimation}"
+                                                 Value="True"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor"
+                                    Value="Purple"/>
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="AnimationNotAllowed">
+                        <VisualState.StateTriggers>
+                            <CompareStateTrigger Property="{Binding Source={x:Reference cloud1}, Path=AllowCloudAnimation}"
+                                                 Value="True"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor"
+                                    Value="Red"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
             <controls:CustomCloudControl.GestureRecognizers>
                 <TapGestureRecognizer />
-                <PanGestureRecognizer />
+                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
             </controls:CustomCloudControl.GestureRecognizers>
             <controls:CustomCloudControl.Triggers>
-                <Trigger TargetType="controls:CustomCloudControl"
-                            Property="controls:CloudButton.IsVisible"
-                            Value="True">
-                    <Trigger.EnterActions>
-                        <triggers:BeginAnimation Animation="{StaticResource Cloud1Animation}"/>
-                    </Trigger.EnterActions>
-                </Trigger>
-                <EventTrigger Event="Pressed">
-                    <triggers:CancelAnimation />
-                </EventTrigger>
+                
             </controls:CustomCloudControl.Triggers>
         </controls:CustomCloudControl>
 
@@ -101,18 +118,23 @@
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
                 <Button Text="Settings"
-                        Command="{Binding GoToSettingsCommand}"
-                        FontSize="Micro"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                        BackgroundColor="LightPink"/>
+                    Command="{Binding GoToSettingsCommand}"
+                    FontSize="Micro"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    BackgroundColor="LightPink"/>
                 <Button Text="Add New Thought"
-                        Command="{Binding GoToSettingsCommand}"
-                        FontSize="Small"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                        BackgroundColor="HotPink"/>
-
+                    Clicked="HandleCloudPopupButtonClicked"
+                    FontSize="Small"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    BackgroundColor="HotPink"/>
+                <Button Text="myBool"
+                    Command="{Binding ReverseMyBoolCommand}"
+                    FontSize="Micro"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    BackgroundColor="LightPink"/>
             </HorizontalStackLayout>
         </Grid>
 

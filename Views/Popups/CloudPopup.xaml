@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="WriteToCompassion.Views.Popups.CloudPopup"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    Color="Transparent">
+
+    <Frame 
+        BackgroundColor="Aquamarine"
+        VerticalOptions="Center"
+        HorizontalOptions="Center"
+        ZIndex="2"
+        HeightRequest="{OnPlatform Default='150',
+                                   Android='150'}"
+        WidthRequest="{OnPlatform Default='150',
+                                  Android='150'}" >
+
+        <VerticalStackLayout IsClippedToBounds="True">
+            <Editor WidthRequest="350"
+                    HeightRequest="350">
+                
+            </Editor>
+        </VerticalStackLayout>
+    </Frame>
+</mct:Popup>
