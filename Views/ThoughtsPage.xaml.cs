@@ -42,29 +42,6 @@ public partial class ThoughtsPage : ContentPage
         await this.ShowPopupAsync(thoughtPopup);
     }
 
-    private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
-    {
-
-    }
-
-    private async void AnimateButton(object sender, EventArgs e)
-    {
-
-    }
-
-    private void NoneClicked(object sender, EventArgs e)
-    {
-        cloud1.CloudAnimation = Controls.CustomCloudControl.CloudAnimationType.None;
-    }
-
-    private void HoverClicked(object sender, EventArgs e)
-    {
-        cloud1.CloudAnimation = Controls.CustomCloudControl.CloudAnimationType.Hover;
-    }
 
 
-    private void DriftClicked(object sender, EventArgs e)
-    {
-        cloud1.CloudAnimation = Controls.CustomCloudControl.CloudAnimationType.Drift;
-    }
 }

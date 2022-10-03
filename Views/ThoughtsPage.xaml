@@ -2,7 +2,6 @@
 <ContentPage 
     x:Class="WriteToCompassion.Views.ThoughtsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:animations="clr-namespace:WriteToCompassion.Animations"
     xmlns:triggers="clr-namespace:WriteToCompassion.Triggers"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
@@ -17,41 +16,38 @@
     Shell.TabBarIsVisible="False">
 
 
-    <ContentPage.Resources>
-        <animations:StoryBoard
-            x:Key="Cloud1Animation"
-            Target="{x:Reference cloud1}">
-            <animations:CloudAnimation RepeatForever="True"/>
-        </animations:StoryBoard>
-
-    </ContentPage.Resources>
-
-    
-    
-    
     <Grid x:Name="primaryGrid"
-        RowSpacing="0"
         BackgroundColor="Transparent"
         InputTransparent="False"
         RowDefinitions="5*,*,80"
         Padding="15">
 
+        <Border Grid.Row="0"
+                BackgroundColor="Yellow"/>
 
         <!--Cloud 1-->
         <controls:CustomCloudControl
             x:Name="cloud1"
-            Grid.Row="0"
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
             AutomationId="cloud1"
-            ZIndex="4"/>
+            CloudAnimation="{Binding CloudAnimation}"
+            ZIndex="2"/>
 
 
         <!--Cloud 2-->
         <controls:CustomCloudControl
             x:Name="cloud2"
+            Grid.Row="1"
             AutomationId="cloud2"
-            Grid.Row="0"
-            HorizontalOptions="End"
-            ZIndex="5"/>
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            WidthRequest="200"
+            HeightRequest="126"
+            Scale="0.8"
+            CloudAnimation="{Binding Cloud2Animation}"
+            ZIndex="2"/>
 
 
         <skia:SKLottieView  x:Name="cloudlottie"
@@ -63,7 +59,7 @@
                             Opacity="1"
                             IsAnimationEnabled="false"
                             IsVisible="False"
-                            ZIndex="0"
+                            ZIndex="3"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
 
@@ -74,13 +70,11 @@
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
                 <Button Text="animate"
-                    Clicked="AnimateButton"
                     FontSize="Micro"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     BackgroundColor="LightPink"/>
                 <Button Text="Add New Thought"
-                    Clicked="HandleCloudPopupButtonClicked"
                     FontSize="Small"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
@@ -90,7 +84,7 @@
                 <Button Text="none"
                     MaximumHeightRequest="30"
                     MaximumWidthRequest="75"
-                        Clicked="NoneClicked"
+                    Command="{Binding CancelCloudCommand}"
                     FontSize="Micro"
                     VerticalOptions="Fill"
                     HorizontalOptions="Center"
@@ -98,7 +92,7 @@
                 <Button Text="hover"
                     MaximumHeightRequest="30"
                     MaximumWidthRequest="75"
-                        Clicked="HoverClicked"
+                    Command="{Binding HoverCloudCommand}"
                     FontSize="Micro"
                     VerticalOptions="Fill"
                     HorizontalOptions="Fill"
@@ -107,7 +101,7 @@
                     MaximumHeightRequest="30"
                     MaximumWidthRequest="75"
                     Text="drif"
-                    Clicked="DriftClicked"
+                    Command="{Binding DriftCloudCommand}"
                     FontSize="Micro"
                     VerticalOptions="Fill"
                     HorizontalOptions="Center"

@@ -7,14 +7,6 @@ namespace WriteToCompassion.Controls;
 
 public partial class CustomCloudControl : ContentView
 {
-
-    public enum CloudAnimationType
-    {
-        None,
-        Drift,
-        Hover
-    }
-
     public static readonly BindableProperty CloudAnimationProperty =
      BindableProperty.Create(nameof(CloudAnimation), typeof(CloudAnimationType), typeof(CustomCloudControl), CloudAnimationType.None,
      propertyChanged: OnCloudAnimationChanged);
@@ -87,6 +79,11 @@ public partial class CustomCloudControl : ContentView
             await this.TranslateTo(startingX, startingY, 1000);
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
+
+    private void HandleDoubleTap(object sender, EventArgs e)
+    {
+
+    }
 }
 /*    private int PanGestureTracker { get; set; }
 
@@ -131,22 +128,22 @@ public partial class CustomCloudControl : ContentView
 
     }
 */
-    /*        if (deviceInfo.Platform == DevicePlatform.Android)
+/*        if (deviceInfo.Platform == DevicePlatform.Android)
+        {
+            label.TranslationX += e.TotalX;
+            label.TranslationY += e.TotalY;
+        }
+        else
+        {
+            switch (e.StatusType)
             {
-                label.TranslationX += e.TotalX;
-                label.TranslationY += e.TotalY;
+                case GestureStatus.Running:
+                    this.TranslationX += e.TotalX;
+                    this.TranslationY += e.TotalY;
+                    break;
+                case GestureStatus.Completed:
+                    this.TranslationX += e.TotalX;
+                    this.TranslationY += e.TotalY;
+                    break;
             }
-            else
-            {
-                switch (e.StatusType)
-                {
-                    case GestureStatus.Running:
-                        this.TranslationX += e.TotalX;
-                        this.TranslationY += e.TotalY;
-                        break;
-                    case GestureStatus.Completed:
-                        this.TranslationX += e.TotalX;
-                        this.TranslationY += e.TotalY;
-                        break;
-                }
-            }*/
+        }*/

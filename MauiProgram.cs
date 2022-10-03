@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using WriteToCompassion.Animations;
 using WriteToCompassion.Models.Popups;
 using WriteToCompassion.Services;
 using WriteToCompassion.Services.Navigation;
@@ -42,7 +41,6 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<NoteService>();
         mauiAppBuilder.Services.AddSingleton<ThoughtsService>();
         mauiAppBuilder.Services.AddSingleton<AnimationService>();
-        mauiAppBuilder.Services.AddSingleton<StoryBoard>();
         return mauiAppBuilder;
     }
 
