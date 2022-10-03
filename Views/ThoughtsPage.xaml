@@ -42,38 +42,8 @@
             x:Name="cloud1"
             Grid.Row="0"
             AutomationId="cloud1"
-            AllowCloudAnimation="False"
-            ZIndex="4">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup>
-                    <VisualState x:Name="AnimationAllowed">
-                        <VisualState.StateTriggers>
-                            <CompareStateTrigger Property="{Binding Source={x:Reference cloud1}, Path=AllowCloudAnimation}"
-                                                 Value="True"/>
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor"
-                                    Value="Purple"/>
-                        </VisualState.Setters>
-                    </VisualState>
-
-                    <VisualState x:Name="AnimationNotAllowed">
-                        <VisualState.StateTriggers>
-                            <CompareStateTrigger Property="{Binding Source={x:Reference cloud1}, Path=AllowCloudAnimation}"
-                                                 Value="True"/>
-                        </VisualState.StateTriggers>
-                    </VisualState>
-                    
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <controls:CustomCloudControl.GestureRecognizers>
-                <TapGestureRecognizer />
-                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
-            </controls:CustomCloudControl.GestureRecognizers>
-            <controls:CustomCloudControl.Triggers>
-                
-            </controls:CustomCloudControl.Triggers>
-        </controls:CustomCloudControl>
+            AllowCloudAnimation="True"
+            ZIndex="4"/>
 
 
         <!--Cloud 2-->
