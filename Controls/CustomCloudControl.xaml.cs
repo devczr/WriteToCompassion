@@ -1,6 +1,6 @@
-using WriteToCompassion.Triggers;
-using System;
-using System.Timers;
+
+using WriteToCompassion.Services;
+
 
 namespace WriteToCompassion.Controls;
 
@@ -26,15 +26,16 @@ public partial class CustomCloudControl : ContentView
             cloudReportingChange.CancelAnimations();
         }
     }
-
+    AnimationService cloudAnimationService;
     public CustomCloudControl()
     {
         PanGestureRecognizer panGesture = new PanGestureRecognizer();
         panGesture.PanUpdated += OnPanUpdated;
         this.GestureRecognizers.Add(panGesture);
         PanGestureTracker = -1;
+        AnimationService animationService = new AnimationService();
         InitializeComponent();
-
+        cloudAnimationService = animationService;
     }
     public bool AllowCloudAnimation
     {
@@ -44,32 +45,10 @@ public partial class CustomCloudControl : ContentView
 
     private int PanGestureTracker { get; set; }
 
-    private double PanStartingX { get; set; }
-    private double PanStartingY { get; set; }
-    private double PanX { get; set; }
-    private double PanY { get; set; }
+    private double PanFinalX { get; set; }
+    public double PanFinalY { get; set; }
 
-    private bool PanTimeElapsed { get; set; }
-
-    private System.Timers.Timer panTimer;
-
-
-    private void SetTimer()
-    {
-        // Create a timer with a two second interval.
-        panTimer = new System.Timers.Timer(50);
-        // Hook up the Elapsed event for the timer. 
-        panTimer.Elapsed += OnPanTimerFinished;
-        panTimer.AutoReset = false;
-        panTimer.Enabled = true;
-    }
-
-    private void OnPanTimerFinished(object sender, ElapsedEventArgs e)
-    {
-        PanTimeElapsed = true;
-    }
-
-    private async void OnPanUpdated(object sender, PanUpdatedEventArgs e)
+     private async void OnPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         ArgumentNullException.ThrowIfNull(sender);
 
@@ -77,37 +56,23 @@ public partial class CustomCloudControl : ContentView
         //checking the id avoids excessive calls to this.CancelAnimations
         if (e.GestureId != PanGestureTracker)
         {
-            /*            var sendingCloud = (sender as CustomCloudControl);
-                        PanStartingX = sendingCloud.TranslationX;
-                        PanStartingY = sendingCloud.TranslationY;*/
+
             this.AllowCloudAnimation = false;
             PanGestureTracker = e.GestureId;
         }
         else
         {
-            if ((e.StatusType is GestureStatus.Running) && PanTimeElapsed == true)
+            if (e.StatusType is GestureStatus.Running)
             {
                 this.TranslationX = e.TotalX;
                 this.TranslationY = e.TotalY;
-                Shell.Current.DisplayAlert("pan timer elapse", $"x: {PanStartingX} \n y: {PanStartingY}", "ok");
             }
-/*            else if ((e.StatusType == GestureStatus.Running) && !PanTimeElapsed)
-            {
-
-            }
-*/            else if (e.StatusType == GestureStatus.Started)
-            {
-                this.SetTimer();
-                this.TranslationX = (PanStartingX + e.TotalX);
-                this.TranslationY = (PanStartingY + e.TotalY);
-            }
-            else if (e.StatusType == GestureStatus.Completed)
+            else if (e.StatusType is GestureStatus.Completed)
             {
                 this.TranslationX += e.TotalX;
-                PanX = this.TranslationX;
-
                 this.TranslationY += e.TotalY;
-                PanY = this.TranslationY;
+                PanFinalX = this.TranslationX;
+                PanFinalY = this.TranslationY;
                 this.ShortHoverAnimation();
             }
         }
@@ -137,26 +102,34 @@ public partial class CustomCloudControl : ContentView
 
     public async Task BeginDrift()
     {
-        //  var animation = new Animation(v=> this.TranslateTo(-50,-50))
-        await this.TranslateTo(-100, 0, 2500);    // Move image left
+        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
+
+
+        //        var randomDriftAnimation = new Animation(v => this.TranslateTo(x, y, durationRnd, Easing.SinInOut));
+
+        var parentAnimation = new Animation();
+        var randomDriftXAnimation = new Animation(v => this.TranslationX = v, this.TranslationX, x, Easing.SinInOut, null); 
+        var randomDriftYAnimation = new Animation(v => this.TranslationY = v, this.TranslationY, y, Easing.SinInOut, null);
+
+        //       var driftAnimation = new Animation(v => this.TranslationX = v,0,1,Easing.Linear);
+        parentAnimation.Add(0, 1, randomDriftXAnimation);
+        parentAnimation.Add(0, 1, randomDriftYAnimation);
+        parentAnimation.Commit(this, "ChildAnimations", 16, durationRnd);
+
+        /*await this.TranslateTo(-100, 0, 2500);    // Move image left
         await this.TranslateTo(-100, -100, 2500); // Move image diagonally up and left
         await this.TranslateTo(100, 100, 2500);   // Move image diagonally down and right
         await this.TranslateTo(0, 100, 2500);     // Move image left
-        await this.TranslateTo(0, 0, 2500);       // Move image up
+        await this.TranslateTo(0, 0, 2500);       // Move image up*/
     }
 
     public async Task ShortHoverAnimation()
     {
-        PanStartingX = this.TranslationX;
-        PanStartingY = this.TranslationY;
-        await this.TranslateTo(PanX - 5, PanY - 5, 500);
-        await this.TranslateTo(PanX - 5, PanY, 500);
-        await this.TranslateTo(PanX, PanY - 5, 500);
-        await this.TranslateTo(PanX, PanY, 500);
 
-        PanStartingX = this.TranslationX;
-        PanStartingY = this.TranslationY;
-
+        await this.TranslateTo(PanFinalX - 5, PanFinalY - 5, 500);
+        await this.TranslateTo(PanFinalX - 5, PanFinalY, 500);
+        await this.TranslateTo(PanFinalX, PanFinalY - 5, 500);
+        await this.TranslateTo(PanFinalX, PanFinalY, 500);
         this.AllowCloudAnimation = true;
 
     }
@@ -170,4 +143,6 @@ public partial class CustomCloudControl : ContentView
         Shell.Current.DisplayAlert("border tap", $"autoid: {testDetails}", "ok");
 
     }
+
+
 }
