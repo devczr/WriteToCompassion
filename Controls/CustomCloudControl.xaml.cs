@@ -1,6 +1,6 @@
 
-using Microsoft.Maui.Devices;
-using WriteToCompassion.Triggers;
+using WriteToCompassion.Services;
+
 
 namespace WriteToCompassion.Controls;
 
@@ -8,28 +8,34 @@ namespace WriteToCompassion.Controls;
 public partial class CustomCloudControl : ContentView
 {
 
-
     public static readonly BindableProperty AllowCloudAnimationProperty =
         BindableProperty.Create(nameof(AllowCloudAnimation), typeof(bool), typeof(CustomCloudControl), false, propertyChanged: OnAllowCloudAnimationChanged);
 
-    static void OnAllowCloudAnimationChanged(BindableObject bindable, object oldValue, object newValue)
+    static async void OnAllowCloudAnimationChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if(bindable is null) return;
+        if (bindable is null) return;
         var cloudReportingChange = (CustomCloudControl)bindable;
         var val = (bool)newValue;
 
-        if (val)
-            cloudReportingChange.BeginDrift();
-        else if (!val)
+        if (val is true)
+            await cloudReportingChange.BeginDrift();
+        else if (val is false)
+        {
+            //can this throw an exception if no animation is running?
+            //could check if AnimationIsRunning("Drift") before calling 
             cloudReportingChange.CancelAnimations();
-
-        Shell.Current.DisplayAlert(" ok", $"type is: {val}", "ok");
+        }
     }
-
+    AnimationService cloudAnimationService;
     public CustomCloudControl()
     {
+        PanGestureRecognizer panGesture = new PanGestureRecognizer();
+        panGesture.PanUpdated += OnPanUpdated;
+        this.GestureRecognizers.Add(panGesture);
+        PanGestureTracker = -1;
+        AnimationService animationService = new AnimationService();
         InitializeComponent();
-        Initialize();
+        cloudAnimationService = animationService;
     }
     public bool AllowCloudAnimation
     {
@@ -37,55 +43,85 @@ public partial class CustomCloudControl : ContentView
         set => SetValue(AllowCloudAnimationProperty, value);
     }
 
+    private int PanGestureTracker { get; set; }
 
+    private double PanFinalX { get; set; }
+    public double PanFinalY { get; set; }
 
-    private void Initialize()
-    {
-/*        PanGestureRecognizer panGesture = new PanGestureRecognizer();
-        panGesture.PanUpdated += OnPanUpdated;
-        this.GestureRecognizers.Add(panGesture);*/
-    }
-
-/*    private void OnPanUpdated(object sender, PanUpdatedEventArgs e)
+     private async void OnPanUpdated(object sender, PanUpdatedEventArgs e)
     {
         ArgumentNullException.ThrowIfNull(sender);
 
-        //        Shell.Current.DisplayAlert("Pan", "Ok", "Ok");
-        this.CancelAnimations();
-
-
-        *//*        if (deviceInfo.Platform == DevicePlatform.Android)
-                {
-                    label.TranslationX += e.TotalX;
-                    label.TranslationY += e.TotalY;
-                }
-                else
-                {
-        *//*
-
-        switch (e.StatusType)
+        //gesture IDs start at 0, so PanGestureTracker is initialized to -1
+        //checking the id avoids excessive calls to this.CancelAnimations
+        if (e.GestureId != PanGestureTracker)
         {
-            case GestureStatus.Running:
-                this.TranslationX += e.TotalX;
-                this.TranslationY += e.TotalY;
-                break;
-            case GestureStatus.Completed:
-                this.TranslationX += e.TotalX;
-                this.TranslationY += e.TotalY;
-                break;
-        }
 
-    }*/
+            this.AllowCloudAnimation = false;
+            PanGestureTracker = e.GestureId;
+        }
+        else
+        {
+            if (e.StatusType is GestureStatus.Running)
+            {
+                this.TranslationX = e.TotalX;
+                this.TranslationY = e.TotalY;
+            }
+            else if (e.StatusType is GestureStatus.Completed)
+            {
+                this.TranslationX += e.TotalX;
+                this.TranslationY += e.TotalY;
+                PanFinalX = this.TranslationX;
+                PanFinalY = this.TranslationY;
+                this.ShortHoverAnimation();
+            }
+        }
+    }
+
+
+    /*        if (deviceInfo.Platform == DevicePlatform.Android)
+            {
+                label.TranslationX += e.TotalX;
+                label.TranslationY += e.TotalY;
+            }
+            else
+            {
+                switch (e.StatusType)
+                {
+                    case GestureStatus.Running:
+                        this.TranslationX += e.TotalX;
+                        this.TranslationY += e.TotalY;
+                        break;
+                    case GestureStatus.Completed:
+                        this.TranslationX += e.TotalX;
+                        this.TranslationY += e.TotalY;
+                        break;
+                }
+            }*/
 
 
     public async Task BeginDrift()
     {
-        //  var animation = new Animation(v=> this.TranslateTo(-50,-50))
-        await this.TranslateTo(-100, 0, 2500);    // Move image left
-        await this.TranslateTo(-100, -100, 2500); // Move image diagonally up and left
-        await this.TranslateTo(100, 100, 2500);   // Move image diagonally down and right
-        await this.TranslateTo(0, 100, 2500);     // Move image left
-        await this.TranslateTo(0, 0, 2500);       // Move image up
+        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
+
+
+        var animation = new Animation();
+
+        animation.WithConcurrent((v) => this.TranslationX = v, this.TranslationX, x, Easing.SinInOut,0,1); 
+        animation.WithConcurrent((v) => this.TranslationY = v, this.TranslationY, y, Easing.SinInOut, 0,1);
+
+        animation.Commit(this, "driftanimation", 16,durationRnd);
+    }
+
+    public async Task ShortHoverAnimation()
+    {
+
+        await this.TranslateTo(PanFinalX - 5, PanFinalY - 5, 500);
+        await this.TranslateTo(PanFinalX - 5, PanFinalY, 500);
+        await this.TranslateTo(PanFinalX, PanFinalY - 5, 500);
+        await this.TranslateTo(PanFinalX, PanFinalY, 500);
+        this.AllowCloudAnimation = true;
+
     }
 
     private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -97,4 +133,6 @@ public partial class CustomCloudControl : ContentView
         Shell.Current.DisplayAlert("border tap", $"autoid: {testDetails}", "ok");
 
     }
+
+
 }
