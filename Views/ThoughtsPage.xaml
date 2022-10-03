@@ -10,6 +10,7 @@
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
     xmlns:models="clr-namespace:WriteToCompassion.Models"
     xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:ThoughtsViewModel"
     Shell.NavBarIsVisible="False"
@@ -23,22 +24,6 @@
             <animations:CloudAnimation RepeatForever="True"/>
         </animations:StoryBoard>
 
-
-        <Style x:Key="CloudButtonStyle"
-               TargetType="{x:Type controls:CloudButton}">
-            <Setter Property="BackgroundColor"
-                    Value="Transparent"/>
-            <Setter Property="VerticalOptions"
-                    Value="End"/>
-            <Setter Property="HorizontalOptions"
-                    Value="Center"/>
-            <Setter Property="HeightRequest"
-                    Value="100"/>
-            <Setter Property="WidthRequest"
-                    Value="100"/>
-            <Setter Property="CloudImage"
-                    Value="cloud.png"/>
-        </Style>
     </ContentPage.Resources>
 
     
@@ -52,16 +37,13 @@
         Padding="15">
 
 
-        <Border BackgroundColor="Teal"
-                Grid.Row="0"
-                InputTransparent="True"
-                ZIndex="0"/>
-
         <!--Cloud 1-->
         <controls:CustomCloudControl
             x:Name="cloud1"
-            Grid.Row="1"
-            AllowCloudAnimation="{Binding MyBool}">
+            Grid.Row="0"
+            AutomationId="cloud1"
+            AllowCloudAnimation="False"
+            ZIndex="4">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
                     <VisualState x:Name="AnimationAllowed">
@@ -80,10 +62,6 @@
                             <CompareStateTrigger Property="{Binding Source={x:Reference cloud1}, Path=AllowCloudAnimation}"
                                                  Value="True"/>
                         </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <Setter Property="BackgroundColor"
-                                    Value="Red"/>
-                        </VisualState.Setters>
                     </VisualState>
                     
                 </VisualStateGroup>
@@ -98,6 +76,22 @@
         </controls:CustomCloudControl>
 
 
+        <!--Cloud 2-->
+        <controls:CustomCloudControl
+            x:Name="cloud2"
+            AutomationId="cloud2"
+            Grid.Row="0"
+            HorizontalOptions="End"
+            AllowCloudAnimation="{Binding MyBool}"
+            ZIndex="5">
+            <controls:CustomCloudControl.Triggers>
+                <EventTrigger Event="OnAllowCloudAnimationChanged">
+                    <triggers:BeginDrift/>
+                </EventTrigger>
+            </controls:CustomCloudControl.Triggers>
+        </controls:CustomCloudControl>
+
+
         <skia:SKLottieView  x:Name="cloudlottie"
                             Grid.Row="1"
                             VerticalOptions="EndAndExpand"
@@ -106,7 +100,7 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="false"
-                            IsVisible="True"
+                            IsVisible="False"
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
@@ -117,8 +111,8 @@
               Grid.Row="3"
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
-                <Button Text="Settings"
-                    Command="{Binding GoToSettingsCommand}"
+                <Button Text="animate"
+                    Clicked="AnimateButton"
                     FontSize="Micro"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"

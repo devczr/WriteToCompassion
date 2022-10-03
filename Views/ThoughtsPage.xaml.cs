@@ -46,4 +46,9 @@ public partial class ThoughtsPage : ContentPage
     {
 
     }
+
+    private async void AnimateButton(object sender, EventArgs e)
+    {
+
+    }
 }

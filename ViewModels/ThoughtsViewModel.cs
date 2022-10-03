@@ -27,6 +27,11 @@ public partial class ThoughtsViewModel : BaseViewModel
     [ObservableProperty]
     bool myBool;
 
+    [ObservableProperty]
+    bool animateCloud1;
+
+    [ObservableProperty]
+    bool animateCloud2;
 
     public ICommand TriggerAnimationCommand { get; set; }
 
@@ -109,8 +114,10 @@ public partial class ThoughtsViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task CancelAnimationFromTap()
+    async Task CancelAnimationFromTap(object whatever)
     {
+        string whatCouldItBe = Convert.ToString(whatever);
+        Shell.Current.DisplayAlert("vm tap", $"{whatCouldItBe}", "ok");
 
     }
 
