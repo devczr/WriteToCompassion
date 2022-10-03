@@ -105,22 +105,12 @@ public partial class CustomCloudControl : ContentView
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
 
 
-        //        var randomDriftAnimation = new Animation(v => this.TranslateTo(x, y, durationRnd, Easing.SinInOut));
+        var animation = new Animation();
 
-        var parentAnimation = new Animation();
-        var randomDriftXAnimation = new Animation(v => this.TranslationX = v, this.TranslationX, x, Easing.SinInOut, null); 
-        var randomDriftYAnimation = new Animation(v => this.TranslationY = v, this.TranslationY, y, Easing.SinInOut, null);
+        animation.WithConcurrent((v) => this.TranslationX = v, this.TranslationX, x, Easing.SinInOut,0,1); 
+        animation.WithConcurrent((v) => this.TranslationY = v, this.TranslationY, y, Easing.SinInOut, 0,1);
 
-        //       var driftAnimation = new Animation(v => this.TranslationX = v,0,1,Easing.Linear);
-        parentAnimation.Add(0, 1, randomDriftXAnimation);
-        parentAnimation.Add(0, 1, randomDriftYAnimation);
-        parentAnimation.Commit(this, "ChildAnimations", 16, durationRnd);
-
-        /*await this.TranslateTo(-100, 0, 2500);    // Move image left
-        await this.TranslateTo(-100, -100, 2500); // Move image diagonally up and left
-        await this.TranslateTo(100, 100, 2500);   // Move image diagonally down and right
-        await this.TranslateTo(0, 100, 2500);     // Move image left
-        await this.TranslateTo(0, 0, 2500);       // Move image up*/
+        animation.Commit(this, "driftanimation", 16,durationRnd);
     }
 
     public async Task ShortHoverAnimation()
