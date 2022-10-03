@@ -42,7 +42,6 @@
             x:Name="cloud1"
             Grid.Row="0"
             AutomationId="cloud1"
-            AllowCloudAnimation="True"
             ZIndex="4"/>
 
 
@@ -52,14 +51,7 @@
             AutomationId="cloud2"
             Grid.Row="0"
             HorizontalOptions="End"
-            AllowCloudAnimation="{Binding MyBool}"
-            ZIndex="5">
-            <controls:CustomCloudControl.Triggers>
-                <EventTrigger Event="OnAllowCloudAnimationChanged">
-                    <triggers:BeginDrift/>
-                </EventTrigger>
-            </controls:CustomCloudControl.Triggers>
-        </controls:CustomCloudControl>
+            ZIndex="5"/>
 
 
         <skia:SKLottieView  x:Name="cloudlottie"
@@ -77,7 +69,7 @@
 
 
         <!--Bottom Buttons-->
-        <Grid 
+        <Grid
               Grid.Row="3"
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
@@ -93,13 +85,34 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     BackgroundColor="HotPink"/>
-                <Button Text="myBool"
-                    Command="{Binding ReverseMyBoolCommand}"
-                    FontSize="Micro"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    BackgroundColor="LightPink"/>
             </HorizontalStackLayout>
+            <VerticalStackLayout Grid.Column="2">
+                <Button Text="none"
+                    MaximumHeightRequest="30"
+                    MaximumWidthRequest="75"
+                        Clicked="NoneClicked"
+                    FontSize="Micro"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Center"
+                    BackgroundColor="HotPink"/>
+                <Button Text="hover"
+                    MaximumHeightRequest="30"
+                    MaximumWidthRequest="75"
+                        Clicked="HoverClicked"
+                    FontSize="Micro"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="HotPink"/>
+                <Button 
+                    MaximumHeightRequest="30"
+                    MaximumWidthRequest="75"
+                    Text="drif"
+                    Clicked="DriftClicked"
+                    FontSize="Micro"
+                    VerticalOptions="Fill"
+                    HorizontalOptions="Center"
+                    BackgroundColor="HotPink"/>
+            </VerticalStackLayout>
         </Grid>
 
     </Grid>

@@ -8,24 +8,45 @@ namespace WriteToCompassion.Controls;
 public partial class CustomCloudControl : ContentView
 {
 
-    public static readonly BindableProperty AllowCloudAnimationProperty =
-        BindableProperty.Create(nameof(AllowCloudAnimation), typeof(bool), typeof(CustomCloudControl), false, propertyChanged: OnAllowCloudAnimationChanged);
+    public enum CloudAnimationType
+    {
+        None,
+        Drift,
+        Hover
+    }
 
-    static async void OnAllowCloudAnimationChanged(BindableObject bindable, object oldValue, object newValue)
+    public static readonly BindableProperty CloudAnimationProperty =
+     BindableProperty.Create(nameof(CloudAnimation), typeof(CloudAnimationType), typeof(CustomCloudControl), CloudAnimationType.None,
+     propertyChanged: OnCloudAnimationChanged);
+
+    public CloudAnimationType CloudAnimation
+    {
+        get => (CloudAnimationType)GetValue(CloudAnimationProperty);
+        set => SetValue(CloudAnimationProperty, value);
+    }
+
+    static async void OnCloudAnimationChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is null) return;
         var cloudReportingChange = (CustomCloudControl)bindable;
-        var val = (bool)newValue;
+        var newCloudAnimationValue = (CloudAnimationType)newValue;
 
-        if (val is true)
-            await cloudReportingChange.BeginDrift();
-        else if (val is false)
+        if(newCloudAnimationValue is CloudAnimationType.None)
         {
-            //can this throw an exception if no animation is running?
-            //could check if AnimationIsRunning("Drift") before calling 
             cloudReportingChange.CancelAnimations();
         }
+        else if(newCloudAnimationValue is CloudAnimationType.Drift)
+        {
+            cloudReportingChange.DriftAround();
+
+        }
+        else if (newCloudAnimationValue is CloudAnimationType.Hover)
+        {
+            cloudReportingChange.LocalHover();
+        }
     }
+
+
     AnimationService cloudAnimationService;
     public CustomCloudControl()
     {
@@ -36,11 +57,6 @@ public partial class CustomCloudControl : ContentView
         AnimationService animationService = new AnimationService();
         InitializeComponent();
         cloudAnimationService = animationService;
-    }
-    public bool AllowCloudAnimation
-    {
-        get => (bool)GetValue(AllowCloudAnimationProperty);
-        set => SetValue(AllowCloudAnimationProperty, value);
     }
 
     private int PanGestureTracker { get; set; }
@@ -57,7 +73,6 @@ public partial class CustomCloudControl : ContentView
         if (e.GestureId != PanGestureTracker)
         {
 
-            this.AllowCloudAnimation = false;
             PanGestureTracker = e.GestureId;
         }
         else
@@ -73,7 +88,6 @@ public partial class CustomCloudControl : ContentView
                 this.TranslationY += e.TotalY;
                 PanFinalX = this.TranslationX;
                 PanFinalY = this.TranslationY;
-                this.ShortHoverAnimation();
             }
         }
     }
@@ -99,19 +113,53 @@ public partial class CustomCloudControl : ContentView
                 }
             }*/
 
+    public async Task TestActionFinished()
+    {
+       await Shell.Current.DisplayAlert("action sent this", $"", "ok");
+
+    }
 
     public async Task BeginDrift()
     {
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
-
 
         var animation = new Animation();
 
         animation.WithConcurrent((v) => this.TranslationX = v, this.TranslationX, x, Easing.SinInOut,0,1); 
         animation.WithConcurrent((v) => this.TranslationY = v, this.TranslationY, y, Easing.SinInOut, 0,1);
 
-        animation.Commit(this, "driftanimation", 16,durationRnd);
+        animation.Commit(this, "driftanimation", 16,durationRnd,finished: (d,b) =>
+        {
+
+        });
     }
+
+    public async Task DriftAround()
+    {
+        do
+        {
+            cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
+            await this.TranslateTo(x, y, durationRnd, easing: Easing.SinInOut);
+
+        } while (this.CloudAnimation == CloudAnimationType.Drift);
+    }
+
+
+
+    public async Task LocalHover()
+    {
+        var startingX = this.TranslationX;
+        var startingY = this.TranslationY;
+
+        do
+        {
+            await this.TranslateTo(startingX - 5, startingY - 5, 1000);
+            await this.TranslateTo(startingX - 5, startingY, 1000);
+            await this.TranslateTo(startingX, startingY - 5, 1000);
+            await this.TranslateTo(startingX, startingY, 1000);
+        } while (this.CloudAnimation == CloudAnimationType.Hover);
+    }
+
 
     public async Task ShortHoverAnimation()
     {
@@ -120,7 +168,6 @@ public partial class CustomCloudControl : ContentView
         await this.TranslateTo(PanFinalX - 5, PanFinalY, 500);
         await this.TranslateTo(PanFinalX, PanFinalY - 5, 500);
         await this.TranslateTo(PanFinalX, PanFinalY, 500);
-        this.AllowCloudAnimation = true;
 
     }
 
