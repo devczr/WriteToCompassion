@@ -1,6 +1,5 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
 
 namespace WriteToCompassion.ViewModels
@@ -20,13 +19,11 @@ namespace WriteToCompassion.ViewModels
         bool isBusy;
         public bool IsNotBusy => !isBusy;
 
-        public INavigationService NavigationService { get; private set; }
 
         public ISettingsService SettingsService { get; private set; }
 
-        public BaseViewModel(INavigationService navigationService, ISettingsService settingsService)
+        public BaseViewModel(ISettingsService settingsService)
         {
-            NavigationService = navigationService;
             SettingsService = settingsService;
         }
 

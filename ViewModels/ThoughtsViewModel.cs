@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WriteToCompassion.Services.Settings;
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Views;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services;
@@ -106,8 +105,8 @@ public partial class ThoughtsViewModel : BaseViewModel
     #endregion
 
 
-    public ThoughtsViewModel(ThoughtsService thoughtsService, INavigationService navigationService, ISettingsService settingsService)
-            : base(navigationService, settingsService)
+    public ThoughtsViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
+            : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
         Thoughts = new ObservableCollection<Thought>();

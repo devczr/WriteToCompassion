@@ -3,7 +3,6 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;
 #endif
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
 
 
@@ -12,14 +11,12 @@ namespace WriteToCompassion;
 public partial class App : Application
 {
     private readonly ISettingsService _settingsService;
-    private readonly INavigationService _navigationService;
 
     const int WindowWidth = 450;
     const int WindowHeight = 800;
-    public App(ISettingsService settingsService, INavigationService navigationService)
+    public App(ISettingsService settingsService)
     {
         _settingsService = settingsService;
-        _navigationService = navigationService;
         InitializeComponent();
 
         //Windows app window size help on dotnet/maui github
@@ -36,7 +33,7 @@ public partial class App : Application
             appWindow.Resize(new SizeInt32(WindowWidth, WindowHeight));
 #endif
         });
-        MainPage = new AppShell(navigationService);
+        MainPage = new AppShell();
     }
 }
 

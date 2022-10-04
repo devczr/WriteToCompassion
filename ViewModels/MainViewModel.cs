@@ -5,7 +5,6 @@ using System.Diagnostics;
 using WriteToCompassion.Views;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services;
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Services.Thoughts;
 
@@ -20,8 +19,8 @@ namespace WriteToCompassion.ViewModels
 
 
 
-        public MainViewModel(ThoughtsService thoughtsService, INavigationService navigationService, ISettingsService settingsService) 
-            : base(navigationService, settingsService)
+        public MainViewModel(ThoughtsService thoughtsService, ISettingsService settingsService) 
+            : base(settingsService)
         {
             Title = "Write To Compassion";
 

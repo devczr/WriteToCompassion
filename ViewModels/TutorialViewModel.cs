@@ -1,5 +1,4 @@
-﻿using WriteToCompassion.Services.Navigation;
-using WriteToCompassion.Services.Settings;
+﻿using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Views;
 
 namespace WriteToCompassion.ViewModels;
@@ -8,7 +7,7 @@ public partial class TutorialViewModel : BaseViewModel
 {
     private readonly ISettingsService _settingsService;
 
-	public TutorialViewModel(ISettingsService settingsService, INavigationService navigationService) : base(navigationService, settingsService)
+	public TutorialViewModel(ISettingsService settingsService) : base(settingsService)
 	{
 		_settingsService = settingsService;
 	}

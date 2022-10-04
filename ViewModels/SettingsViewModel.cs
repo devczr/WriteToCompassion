@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services;
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -21,7 +20,7 @@ public partial class SettingsViewModel : BaseViewModel
     string entryText;
 
 
-    public SettingsViewModel(ISettingsService settingsService, INavigationService navigationService, ThoughtsService thoughtsService) : base(navigationService, settingsService)
+    public SettingsViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.settingsService = settingsService;
         this.thoughtService = thoughtsService;

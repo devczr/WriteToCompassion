@@ -4,10 +4,12 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              xmlns:models="clr-namespace:WriteToCompassion.Models"
              x:DataType="viewmodels:SettingsViewModel"
-             x:Class="WriteToCompassion.Views.SettingsView"
-             BackgroundColor="Black"
-             Shell.PresentationMode="ModalAnimated">
-
+             x:Class="WriteToCompassion.Views.SettingsView">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="True"
+                            IsVisible="True" />
+    </Shell.BackButtonBehavior>
+    
     <VerticalStackLayout Spacing="20"
                          Padding="0,20">
         <Label 
