@@ -29,7 +29,7 @@ public class ThoughtsService
 
     public async Task AddThought(string content)
     {
-        int result = 0;
+        int result;
         try
         {
             await Init();
@@ -40,7 +40,7 @@ public class ThoughtsService
             result = await dbAsyncConn.InsertAsync(
                 new Thought
                 {
-                    Unread = true,
+                    ReadCount = 0,
                     Content = content.Trim(),
                     TimeSaved = DateTime.Now,
                 }); 
@@ -49,10 +49,56 @@ public class ThoughtsService
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
-            await Shell.Current.DisplayAlert("Error",
-                $"Unable to save. Please try again. Error Type: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlert($"Error",
+                $"Unable to save. If the problem persists, please restart the app and try again. \n {ex.Message}", "OK");
         }
     }
+
+    public async Task DeleteThought(int id)
+    {
+        try
+        {
+            await Init();
+            await dbAsyncConn.DeleteAsync<Thought>(id);
+
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert($"Error",
+                $"Unable to delete. If the problem persists, please restart the app and try again. \n {ex.Message}", "OK");
+        }
+    }
+
+/*    public async Task EditThought(Thought thought)
+    {
+        int result;
+        Thought t;
+        try
+        {
+            await Init();
+
+            if (thought is null)
+                return;
+
+            result = await dbAsyncConn.InsertAsync(
+    new Thought
+    {
+        ReadCount = 0,
+        Content = content.Trim(),
+        TimeSaved = DateTime.Now,
+    });
+
+            result = await dbAsyncConn.UpdateAsync(thought);
+
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex);
+            await Shell.Current.DisplayAlert($"Error",
+                $"Unable to save. If the problem persists, please restart the app and try again. \n {ex.Message}", "OK");
+        }
+    }*/
+
 
     List<Thought> thoughtList = new();
     public async Task<List<Thought>> GetAllThoughts()

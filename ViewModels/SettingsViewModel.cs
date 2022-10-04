@@ -19,6 +19,9 @@ public partial class SettingsViewModel : BaseViewModel
     [ObservableProperty]
     string entryText;
 
+    [ObservableProperty]
+    string thoughtsCount;
+
 
     public SettingsViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
@@ -49,6 +52,23 @@ public partial class SettingsViewModel : BaseViewModel
         await Shell.Current.GoToAsync(nameof(ThoughtsPage));
     }
 
+
+    [RelayCommand]
+    async Task EditThought(Thought thought)
+    {
+        if (thought == null)
+        {
+            await Shell.Current.DisplayAlert("Tnull", "ok", "OK");
+            return;
+        }
+
+        var monkeyID = thought.Id.ToString();
+        var monkeyContent = thought.Content;
+        await Shell.Current.DisplayAlert(monkeyID, monkeyContent, "OK");
+
+    }
+
+
     [RelayCommand]
     async Task GetAllThoughtsAsync()
     {
@@ -73,4 +93,7 @@ public partial class SettingsViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
+
+
 }

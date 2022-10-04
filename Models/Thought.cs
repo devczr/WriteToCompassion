@@ -9,7 +9,7 @@ public class Thought
 
     public string Content { get; set; }
 
-    public bool Unread { get; set; }
+    public int ReadCount { get; set; }
 
     public string ReadSessionID { get; set; }
 

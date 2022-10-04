@@ -118,6 +118,7 @@
                     BackgroundColor="LightPink"/>
                 <Button Text="Add New Thought"
                     FontSize="Small"
+                        Clicked="HandleCloudPopupButtonClicked"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     BackgroundColor="HotPink"/>
