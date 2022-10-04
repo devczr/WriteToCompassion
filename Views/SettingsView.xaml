@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             xmlns:models="clr-namespace:WriteToCompassion.Models"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="WriteToCompassion.Views.SettingsView"
              BackgroundColor="Black"
@@ -30,8 +31,19 @@
             Padding="0,20"
                 Text="Admin Page"
             BackgroundColor="Firebrick"
-                TextColor="DarkGoldenrod"
-                Command="{Binding GoToMainPageCommand}"/>
+                TextColor="DarkGoldenrod"/>
+
+        <CollectionView
+            ItemsSource="{Binding Thoughts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Thought">
+                    <HorizontalStackLayout Spacing="10" Padding="10">
+                        <Label TextColor="DarkSalmon" FontSize="Medium" Text="{Binding Content}"/>
+                        <Label Text="{Binding Id}"/>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
     </VerticalStackLayout>
 </ContentPage>

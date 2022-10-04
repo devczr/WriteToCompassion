@@ -25,6 +25,10 @@ public partial class ThoughtsViewModel : BaseViewModel
     [ObservableProperty]
     bool animateCloudLottie = false;
 
+    [ObservableProperty]
+    double cloudScale = 0.5;
+
+    #region CloudAnimationTypes for MVVM Bindings
     private CloudAnimationType _cloudAnimation;
     public CloudAnimationType CloudAnimation
     {
@@ -55,8 +59,52 @@ public partial class ThoughtsViewModel : BaseViewModel
         }
     }
 
+    private CloudAnimationType _cloud3Animation;
+    public CloudAnimationType Cloud3Animation
+    {
+        get => _cloud3Animation;
+        set
+        {
+            if (_cloud3Animation != value)
+            {
+                _cloud3Animation = value;
+                OnPropertyChanged();
+            }
 
-    public ICommand TriggerAnimationCommand { get; set; }
+        }
+    }
+
+    private CloudAnimationType _cloud4Animation;
+    public CloudAnimationType Cloud4Animation
+    {
+        get => _cloud4Animation;
+        set
+        {
+            if (_cloud4Animation != value)
+            {
+                _cloud4Animation = value;
+                OnPropertyChanged();
+            }
+
+        }
+    }
+
+    private CloudAnimationType _cloud5Animation;
+    public CloudAnimationType Cloud5Animation
+    {
+        get => _cloud5Animation;
+        set
+        {
+            if (_cloud5Animation != value)
+            {
+                _cloud5Animation = value;
+                OnPropertyChanged();
+            }
+
+        }
+    }
+    #endregion
+
 
     public ThoughtsViewModel(ThoughtsService thoughtsService, INavigationService navigationService, ISettingsService settingsService)
             : base(navigationService, settingsService)
@@ -107,13 +155,19 @@ public partial class ThoughtsViewModel : BaseViewModel
 
             foreach (var thought in thoughts)
                 Thoughts.Add(thought);
-
         }
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error",
                 $"Unable to get your saved notes: {ex.Message}", "OK");
         }
+    }
+
+
+    
+    public void DriftUnreadClouds()
+    {
+        
     }
 
 
@@ -147,15 +201,5 @@ public partial class ThoughtsViewModel : BaseViewModel
 /*        cloud1Animation = CloudAnimationType.None;
         cloud2Animation = CloudAnimationType.None;*/
     }
-
-
-    [RelayCommand]
-    async Task GoToMainPageAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(MainPage));
-    }
-
-
-
 }
 

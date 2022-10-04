@@ -1,40 +1,45 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
+using WriteToCompassion.Models;
 using WriteToCompassion.Services;
 using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
+using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
 namespace WriteToCompassion.ViewModels;
 
 public partial class SettingsViewModel : BaseViewModel
 {
+    private readonly ISettingsService settingsService;
+    private readonly ThoughtsService thoughtService;
 
-    private readonly ISettingsService _settingsService;
+    public ObservableCollection<Thought> Thoughts { get; } = new();
 
     [ObservableProperty]
-    string tutorialStatus;
+    string entryText;
 
-    public SettingsViewModel(ISettingsService settingsService, INavigationService navigationService) : base(navigationService, settingsService)
+
+    public SettingsViewModel(ISettingsService settingsService, INavigationService navigationService, ThoughtsService thoughtsService) : base(navigationService, settingsService)
     {
-        _settingsService = settingsService;
-        tutorialStatus = _settingsService.DisplayTutorial.ToString();
+        this.settingsService = settingsService;
+        this.thoughtService = thoughtsService;
+        Title = "Settings";
     }
 
     [RelayCommand]
     private void ToggleDisplayTutorial()
     {
-        if (_settingsService.DisplayTutorial)
+        if (settingsService.DisplayTutorial)
         {
-            _settingsService.DisplayTutorial = false;
-            TutorialStatus = "False";
+            settingsService.DisplayTutorial = false;
             Shell.Current.DisplayAlert("Tutorial Disabled", "Preference saved. Tutorial will not show on app startup.", "OK");
         }
 
         else
         {
-            _settingsService.DisplayTutorial = true;
-            TutorialStatus = "True";
+            settingsService.DisplayTutorial = true;
             Shell.Current.DisplayAlert("Tutorial Enabled", "Preference saved. Tutorial will show on next app startup.", "OK");
         }
     }
@@ -46,10 +51,27 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task GoToMainPageAsync()
+    async Task GetAllThoughtsAsync()
     {
-        await Shell.Current.GoToAsync(nameof(MainPage));
+        try
+        {
+            IsBusy = true;
+            //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
+            var thoughts = await thoughtService.GetAllThoughts();
+
+            Thoughts.Clear();
+
+            foreach (var thought in thoughts)
+                Thoughts.Add(thought);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error",
+                $"Unable to get your saved thoughts: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
-
-
 }

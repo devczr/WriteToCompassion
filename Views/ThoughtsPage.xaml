@@ -19,7 +19,7 @@
     <Grid x:Name="primaryGrid"
         BackgroundColor="Transparent"
         InputTransparent="False"
-        RowDefinitions="5*,*,80"
+        RowDefinitions="2*,3*,*,80"
         Padding="15">
 
         <Border Grid.Row="0"
@@ -28,10 +28,11 @@
         <!--Cloud 1-->
         <controls:CustomCloudControl
             x:Name="cloud1"
-            Grid.Row="1"
+            AutomationId="cloud1"
+            Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="End"
-            AutomationId="cloud1"
+            Scale="{Binding CloudScale}"
             CloudAnimation="{Binding CloudAnimation}"
             ZIndex="2"/>
 
@@ -39,16 +40,56 @@
         <!--Cloud 2-->
         <controls:CustomCloudControl
             x:Name="cloud2"
-            Grid.Row="1"
             AutomationId="cloud2"
+            Grid.Row="2"
             HorizontalOptions="Center"
             VerticalOptions="End"
             WidthRequest="200"
             HeightRequest="126"
-            Scale="0.8"
+            Scale="{Binding CloudScale}"
             CloudAnimation="{Binding Cloud2Animation}"
             ZIndex="2"/>
 
+        <!--Cloud 3-->
+        <controls:CustomCloudControl
+            x:Name="cloud3"
+            AutomationId="cloud3"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            WidthRequest="200"
+            HeightRequest="126"
+            Scale="{Binding CloudScale}"
+            CloudAnimation="{Binding Cloud3Animation}"
+            ZIndex="2"/>
+
+        <!--Cloud 4-->
+        <controls:CustomCloudControl
+            x:Name="cloud4"
+            AutomationId="cloud4"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            WidthRequest="200"
+            HeightRequest="126"
+            Scale="{Binding CloudScale}"
+            CloudAnimation="{Binding Cloud4Animation}"
+            ZIndex="2"/>
+
+        <!--Cloud 5-->
+        <controls:CustomCloudControl
+            x:Name="cloud5"
+            AutomationId="cloud5"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            WidthRequest="200"
+            HeightRequest="126"
+            Scale="{Binding CloudScale}"
+            CloudAnimation="{Binding Cloud5Animation}"
+            ZIndex="2"/>
+
+        
 
         <skia:SKLottieView  x:Name="cloudlottie"
                             Grid.Row="1"
@@ -69,8 +110,9 @@
               Grid.Row="3"
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
-                <Button Text="animate"
+                <Button Text="settings"
                     FontSize="Micro"
+                    Command="{Binding GoToSettingsCommand}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     BackgroundColor="LightPink"/>

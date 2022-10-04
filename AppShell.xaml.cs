@@ -29,7 +29,6 @@ public partial class AppShell : Shell
 	// TODO: delete comment if relative routing refresh works
 	private static void InitializeRouting()
 	{
-        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(ThoughtsPage), typeof(ThoughtsPage));
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));
         Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));

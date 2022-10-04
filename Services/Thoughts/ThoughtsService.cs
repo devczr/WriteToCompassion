@@ -20,7 +20,7 @@ public class ThoughtsService
         if (dbAsyncConn != null)
             return;
 
-        var dbPath = Path.Combine(FileSystem.Current.AppDataDirectory, "MyThoughts.db");
+        var dbPath = Path.Combine(FileSystem.Current.AppDataDirectory, "ThoughtRepo.db");
 
         dbAsyncConn = new SQLiteAsyncConnection(dbPath);
 
@@ -34,17 +34,16 @@ public class ThoughtsService
         {
             await Init();
 
-            //basic validation - how can i improve this?
             if (string.IsNullOrEmpty(content))
                 return;
 
             result = await dbAsyncConn.InsertAsync(
                 new Thought
                 {
+                    Unread = true,
                     Content = content.Trim(),
                     TimeSaved = DateTime.Now,
-                    Image = "cloud.png"
-                });
+                }); 
 
         }
         catch (Exception ex)
