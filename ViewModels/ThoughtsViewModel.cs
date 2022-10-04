@@ -7,6 +7,7 @@ using WriteToCompassion.Models;
 using WriteToCompassion.Services;
 using WriteToCompassion.Services.Thoughts;
 using System.Collections.ObjectModel;
+using WriteToCompassion.Controls;
 using CommunityToolkit.Maui.Alerts;
 using System.Windows.Input;
 
@@ -24,14 +25,36 @@ public partial class ThoughtsViewModel : BaseViewModel
     [ObservableProperty]
     bool animateCloudLottie = false;
 
-    [ObservableProperty]
-    bool myBool;
+    private CloudAnimationType _cloudAnimation;
+    public CloudAnimationType CloudAnimation
+    {
+        get => _cloudAnimation;
+        set
+        {
+            if (_cloudAnimation != value)
+            {
+                _cloudAnimation = value;
+                OnPropertyChanged();
+            }
 
-    [ObservableProperty]
-    bool animateCloud1;
+        }
+    }
 
-    [ObservableProperty]
-    bool animateCloud2;
+    private CloudAnimationType _cloud2Animation;
+    public CloudAnimationType Cloud2Animation
+    {
+        get => _cloud2Animation;
+        set
+        {
+            if (_cloud2Animation != value)
+            {
+                _cloud2Animation = value;
+                OnPropertyChanged();
+            }
+
+        }
+    }
+
 
     public ICommand TriggerAnimationCommand { get; set; }
 
@@ -100,34 +123,29 @@ public partial class ThoughtsViewModel : BaseViewModel
         await Shell.Current.GoToAsync(nameof(SettingsView));
     }
 
-    //Fade out lottie animation & fade in imagebutton
-    [RelayCommand]
-    async Task LottieLoadSuccess()
-    {
 
+    [RelayCommand]
+    async Task DriftCloud()
+    {
+        CloudAnimation = CloudAnimationType.Drift;
+        Cloud2Animation = CloudAnimationType.Drift;
     }
 
     [RelayCommand]
-    async Task LottieLoadFailure()
+    async Task HoverCloud()
     {
-
+/*        cloud1Animation = CloudAnimationType.Hover;
+        cloud2Animation = CloudAnimationType.Hover;
+        await Shell.Current.DisplaySnackbar("hover");*/
     }
 
     [RelayCommand]
-    async Task CancelAnimationFromTap(object whatever)
+    async Task CancelCloud()
     {
-        string whatCouldItBe = Convert.ToString(whatever);
-        Shell.Current.DisplayAlert("vm tap", $"{whatCouldItBe}", "ok");
-
-    }
-
-    [RelayCommand]
-    async Task ReverseMyBool()
-    {
-        if(MyBool)
-            MyBool = false;
-        else
-            MyBool = true;
+        CloudAnimation = CloudAnimationType.None;
+        Cloud2Animation = CloudAnimationType.None;
+/*        cloud1Animation = CloudAnimationType.None;
+        cloud2Animation = CloudAnimationType.None;*/
     }
 
 

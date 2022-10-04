@@ -14,8 +14,8 @@ public partial class App : Application
     private readonly ISettingsService _settingsService;
     private readonly INavigationService _navigationService;
 
-    const int WindowWidth = 500;
-    const int WindowHeight = 1000;
+    const int WindowWidth = 450;
+    const int WindowHeight = 800;
     public App(ISettingsService settingsService, INavigationService navigationService)
     {
         _settingsService = settingsService;
