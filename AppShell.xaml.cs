@@ -39,5 +39,6 @@ public partial class AppShell : Shell
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));
         Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
         Routing.RegisterRoute(nameof(AddThoughtPopupView), typeof(AddThoughtPopupView));
+        Routing.RegisterRoute(nameof(EditThoughtPopup), typeof(EditThoughtPopup));
     }
 }

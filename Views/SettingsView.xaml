@@ -46,8 +46,7 @@
                                        Grid.Row="0"
                                        FontAttributes="Italic"
                                        FontAutoScalingEnabled="True"
-                                       MaxLines="4"
-                                       LineBreakMode="TailTruncation"/>
+                                       MaxLines="4"/>
                                 <HorizontalStackLayout 
                                     Grid.Row="1"
                                     VerticalOptions="End"
@@ -55,10 +54,10 @@
                                     <Button 
                                     Text="Details"/>
                                     <Button 
-                                    Text="Edit"
+                                        Text="Edit"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=EditThoughtCommand}"
-                                        CommandParameter="{Binding .}"/>
-                                    
+                                        CommandParameter="{Binding .}"
+                                        Clicked="HandleEditClicked"/>
                                     <Button 
                                     Text="Delete"/>
                                 </HorizontalStackLayout>

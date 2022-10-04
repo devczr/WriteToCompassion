@@ -1,4 +1,4 @@
-﻿
+﻿using WriteToCompassion.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls;
 
@@ -21,22 +21,17 @@ public partial class AnimationService : ObservableObject
     double rightCloudBoundary = 200;
 
 
-    private static double ScreenXValue { get; set; }
-    private static double ScreenYValue { get; set; }
+
 
     private static readonly Random rnd = new();
 
 
 
-    public void UpdateScreenXYValues(double x, double y)
-    {
-        ScreenXValue = x;
-        ScreenYValue = y;
-    }
+
 
     async Task SetVerticalBoundaries()
     {
-        double yBoundary = ScreenYValue;
+        double yBoundary = ScreenHelper.ScreenYValue;
 
         //subtracting bottom grid cell set to 50 units
         yBoundary -= 50;
@@ -74,7 +69,7 @@ public partial class AnimationService : ObservableObject
     {
         //Clouds are set to HorizontalOptions Center, so the middle is 0, to the right border is half the width
 
-        double xBoundary = ScreenXValue / 2;
+        double xBoundary = ScreenHelper.ScreenXValue / 2;
 
         //subtracting aesthetic buffer
         xBoundary -= 50;

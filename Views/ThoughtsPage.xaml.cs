@@ -3,6 +3,7 @@ using WriteToCompassion.ViewModels;
 using WriteToCompassion.Views.Popups;
 using WriteToCompassion.Services;
 using CommunityToolkit.Maui.Views;
+using WriteToCompassion.Helpers;
 
 namespace WriteToCompassion.Views;
 
@@ -10,14 +11,12 @@ public partial class ThoughtsPage : ContentPage
 {
     readonly PopupSizeConstants popupSizeConstants;
     readonly ThoughtsViewModel vm;
-    readonly AnimationService animationService;
-    public ThoughtsPage(ThoughtsViewModel vm, PopupSizeConstants popupSizeConstants, AnimationService animationService)
+    public ThoughtsPage(ThoughtsViewModel vm, PopupSizeConstants popupSizeConstants)
     {
         InitializeComponent();
         BindingContext = vm;
         this.vm = vm;
         this.popupSizeConstants = popupSizeConstants;
-        this.animationService = animationService;
     }
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
@@ -29,7 +28,7 @@ public partial class ThoughtsPage : ContentPage
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-        animationService.UpdateScreenXYValues(width, height);
+        ScreenHelper.UpdateScreenXYValues(width, height);
     }
 
 

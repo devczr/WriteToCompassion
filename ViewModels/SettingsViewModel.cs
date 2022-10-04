@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using WriteToCompassion.Models;
@@ -6,6 +7,8 @@ using WriteToCompassion.Services;
 using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
+using WriteToCompassion.Views.Popups;
+using CommunityToolkit.Maui.Alerts;
 
 namespace WriteToCompassion.ViewModels;
 
@@ -17,7 +20,7 @@ public partial class SettingsViewModel : BaseViewModel
     public ObservableCollection<Thought> Thoughts { get; } = new();
 
     [ObservableProperty]
-    string entryText;
+    string entryEditorText;
 
     [ObservableProperty]
     string thoughtsCount;
@@ -58,6 +61,24 @@ public partial class SettingsViewModel : BaseViewModel
     {
         if (thought == null)
         {
+            await Shell.Current.DisplayAlert("Unable to edit thought", "Null reference", "OK");
+            return;
+        }
+        EntryEditorText = thought.Content;
+        Shell.Current.DisplaySnackbar(EntryEditorText);
+    }
+
+    public void UpdateEntryEditText(string id)
+    {
+        Shell.Current.DisplaySnackbar(id);
+    }
+
+
+    [RelayCommand]
+    async Task ProcessPopupChanges(Thought thought)
+    {
+        if (thought == null)
+        {
             await Shell.Current.DisplayAlert("Tnull", "ok", "OK");
             return;
         }
@@ -65,8 +86,8 @@ public partial class SettingsViewModel : BaseViewModel
         var monkeyID = thought.Id.ToString();
         var monkeyContent = thought.Content;
         await Shell.Current.DisplayAlert(monkeyID, monkeyContent, "OK");
-
     }
+
 
 
     [RelayCommand]
