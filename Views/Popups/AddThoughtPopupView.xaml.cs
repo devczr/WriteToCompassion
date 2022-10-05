@@ -5,11 +5,9 @@ namespace WriteToCompassion.Views.Popups;
 
 public partial class AddThoughtPopupView : Popup
 {
-	public AddThoughtPopupView(PopupSizeConstants popupSizeConstants)
+	public AddThoughtPopupView()
 	{
 		InitializeComponent();
-
-		Size = popupSizeConstants.Small;
 	}
 
 	private void Button_Clicked(object sender, EventArgs e)

@@ -37,7 +37,7 @@ public partial class ThoughtsPage : ContentPage
         /*    var cloudPopup = new CloudPopup();
             await this.ShowPopupAsync(cloudPopup);*/
 
-        var thoughtPopup = new AddThoughtPopupView(popupSizeConstants);
+        var thoughtPopup = new AddThoughtPopupView();
         await this.ShowPopupAsync(thoughtPopup);
     }
 
