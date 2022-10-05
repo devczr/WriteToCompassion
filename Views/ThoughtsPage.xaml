@@ -110,46 +110,19 @@
               Grid.Row="3"
               ColumnDefinitions="*,*,*">
             <HorizontalStackLayout Grid.Column="0">
-                <Button Text="settings"
-                    FontSize="Micro"
-                    Command="{Binding GoToSettingsCommand}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    BackgroundColor="LightPink"/>
                 <Button Text="Add New Thought"
                     FontSize="Small"
                         Clicked="HandleCloudPopupButtonClicked"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     BackgroundColor="HotPink"/>
+                <Button Text="settings"
+                    FontSize="Micro"
+                    Command="{Binding GoToSettingsCommand}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    BackgroundColor="LightPink"/>
             </HorizontalStackLayout>
-            <VerticalStackLayout Grid.Column="2">
-                <Button Text="none"
-                    MaximumHeightRequest="30"
-                    MaximumWidthRequest="75"
-                    Command="{Binding CancelCloudCommand}"
-                    FontSize="Micro"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Center"
-                    BackgroundColor="HotPink"/>
-                <Button Text="hover"
-                    MaximumHeightRequest="30"
-                    MaximumWidthRequest="75"
-                    Command="{Binding HoverCloudCommand}"
-                    FontSize="Micro"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Fill"
-                    BackgroundColor="HotPink"/>
-                <Button 
-                    MaximumHeightRequest="30"
-                    MaximumWidthRequest="75"
-                    Text="drif"
-                    Command="{Binding DriftCloudCommand}"
-                    FontSize="Micro"
-                    VerticalOptions="Fill"
-                    HorizontalOptions="Center"
-                    BackgroundColor="HotPink"/>
-            </VerticalStackLayout>
         </Grid>
 
     </Grid>

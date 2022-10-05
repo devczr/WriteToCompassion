@@ -1,2 +1,10 @@
 ﻿global using CommunityToolkit.Mvvm.Input;
 global using CommunityToolkit.Maui;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using WriteToCompassion.Models;
+global using WriteToCompassion.ViewModels;
+global using WriteToCompassion.Services;
+global using WriteToCompassion.Services.Settings;
+global using WriteToCompassion.Triggers;
+global using WriteToCompassion.Helpers;
+global using WriteToCompassion.Controls;

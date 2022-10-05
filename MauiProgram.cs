@@ -27,9 +27,7 @@ public static class MauiProgram
             .RegisterViewModels()
             .RegisterViews()
             .RegisterPopups();
-
         RegisterEssentials(builder.Services);
-
         return builder.Build();
     }
 
@@ -45,20 +43,19 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<MainViewModel>();
-        mauiAppBuilder.Services.AddSingleton<SettingsViewModel>();
         mauiAppBuilder.Services.AddSingleton<TutorialViewModel>();
-
         mauiAppBuilder.Services.AddTransient<ThoughtsViewModel>();
-
+        mauiAppBuilder.Services.AddTransient<EditorViewModel>();
+        mauiAppBuilder.Services.AddTransient<SettingsViewModel>();
         return mauiAppBuilder;
     }
 
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<SettingsView>();
         mauiAppBuilder.Services.AddSingleton<TutorialView>();
-
+        mauiAppBuilder.Services.AddTransient<SettingsView>();
         mauiAppBuilder.Services.AddTransient<ThoughtsPage>();
+        mauiAppBuilder.Services.AddTransient<EditorView>();
 
         return mauiAppBuilder;
     }
@@ -68,8 +65,6 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<PopupSizeConstants>();
         mauiAppBuilder.Services.AddTransient<AddThoughtPopupView>();
         mauiAppBuilder.Services.AddTransient<EditThoughtPopup>();
-
-
         return mauiAppBuilder;
     }
 
