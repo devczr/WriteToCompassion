@@ -83,6 +83,9 @@
 	  <MauiXaml Update="Views\SettingsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\ThoughtCollectionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ThoughtsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

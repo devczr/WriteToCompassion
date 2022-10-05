@@ -11,64 +11,11 @@
                             IsVisible="True" />
     </Shell.BackButtonBehavior>
 
-    <ContentPage.Behaviors>
-        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
-    </ContentPage.Behaviors>
-
     <Grid RowDefinitions="*,Auto"
              ColumnDefinitions="*,*"
              ColumnSpacing="5"
              RowSpacing="0"
           Padding="5">
-
-        <RefreshView
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            Command="{Binding GetAllThoughtsCommand}">
-        
-        <CollectionView
-            ItemsSource="{Binding Thoughts}"
-            SelectionMode="None">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Thought">
-                    <Grid Padding="10">
-                        <Frame HeightRequest="125" Style="{StaticResource CardView}">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=GoToEditorCommand}"
-                                        CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid 
-                                RowDefinitions="2*,*"
-                                Padding="2">
-                                <Label Text="{Binding Content}" 
-                                       TextColor="Black"
-                                       Grid.Row="0"
-                                       FontAttributes="Italic"
-                                       FontAutoScalingEnabled="True"
-                                       MaxLines="4"/>
-                                <HorizontalStackLayout 
-                                    Grid.Row="1"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="Center">
-                                    <Button 
-                                    Text="Details"/>
-                                    <Button 
-                                        Text="Edit"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=EditThoughtCommand}"
-                                        CommandParameter="{Binding .}"
-                                        Clicked="HandleEditClicked"/>
-                                    <Button 
-                                    Text="Delete"/>
-                                </HorizontalStackLayout>
-
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        </RefreshView>
 
         <VerticalStackLayout
                 Grid.Row="1"

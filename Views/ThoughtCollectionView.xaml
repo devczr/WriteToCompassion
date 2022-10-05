@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:models="clr-namespace:WriteToCompassion.Models"
+             xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             x:Class="WriteToCompassion.Views.ThoughtCollectionView"
+             x:DataType="viewmodels:ThoughtCollectionViewModel"
+             Title="My Thought Collection">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="True"
+                            IsVisible="False"/>
+    </Shell.BackButtonBehavior>
+
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="*,Auto"
+             ColumnDefinitions="*,*"
+             ColumnSpacing="5"
+             RowSpacing="0"
+             Padding="1">
+
+        <RefreshView
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Command="{Binding GetAllThoughtsCommand}">
+
+            <CollectionView
+            ItemsSource="{Binding Thoughts}"
+            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Thought">
+                        <Grid Padding="8">
+                            <Frame HeightRequest="75" Style="{StaticResource CardView}">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ThoughtCollectionViewModel}}, Path=GoToEditorCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="5">   
+                                <Label Text="{Binding Content}" 
+                                       TextColor="Black"
+                                       Grid.Row="0"
+                                       FontAttributes="Italic"
+                                       FontAutoScalingEnabled="True"
+                                       MaxLines="4"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
