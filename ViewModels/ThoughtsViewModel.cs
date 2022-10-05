@@ -1,14 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using WriteToCompassion.Services.Settings;
-using WriteToCompassion.Views;
-using WriteToCompassion.Models;
-using WriteToCompassion.Services;
+﻿using WriteToCompassion.Views;
 using WriteToCompassion.Services.Thoughts;
 using System.Collections.ObjectModel;
-using WriteToCompassion.Controls;
-using CommunityToolkit.Maui.Alerts;
-using System.Windows.Input;
+
 
 namespace WriteToCompassion.ViewModels;
 public partial class ThoughtsViewModel : BaseViewModel
@@ -163,15 +156,8 @@ public partial class ThoughtsViewModel : BaseViewModel
     }
 
 
-    
-    public void DriftUnreadClouds()
-    {
-        
-    }
-
-
     [RelayCommand]
-    async Task GoToSettingsAsync()
+    async Task GoToSettings()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
     }

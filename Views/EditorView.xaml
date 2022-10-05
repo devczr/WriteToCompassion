@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WriteToCompassion.Views.EditorView"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              Title="Edit"
-             x:DataType="viewmodels:EditorViewModel">
-    <ScrollView>
-        <VerticalStackLayout>
-            <Grid ColumnDefinitions="*,Auto,*" RowDefinitions="160, Auto">
-                <BoxView
-                    Grid.ColumnSpan="3"
-                    HeightRequest="160"
-                    HorizontalOptions="FillAndExpand" />
-                <Frame
-                    Grid.RowSpan="2"
-                    Grid.Column="1"
-                    Margin="0,80,0,0"
-                    HeightRequest="160"
-                    WidthRequest="160"
-                    HorizontalOptions="Center" 
-                    Padding="0"
-                    IsClippedToBounds="True"
-                    CornerRadius="80"
-                    BackgroundColor="Pink">
-                </Frame>
-            </Grid>
-            <VerticalStackLayout Padding="10" Spacing="10">
-                <Label Style="{StaticResource MediumLabel}" Text="{Binding Thought.Content}" />
-                <Label Style="{StaticResource MicroLabel}" Text="{Binding Thought.Id, StringFormat='Id: {0}'}" />
-                <Label Style="{StaticResource MicroLabel}" Text="{Binding Thought.ReadCount, StringFormat='Read Count: {0}'}" />
-            </VerticalStackLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+             x:DataType="viewmodels:EditorViewModel"
+             x:Class="WriteToCompassion.Views.EditorView"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding UpdateThoughtWithDatabaseCommand}"/>
+    </Shell.BackButtonBehavior>
+
+    <Grid>
+        <Editor 
+            x:Name="thoughtEditor"
+            Text="{Binding Thought.Content}">
+            <Editor.Behaviors>
+                <mct:EventToCommandBehavior EventName="TextChanged"
+                                            Command="{Binding UpdateThoughtContentCommand}"
+                                            CommandParameter="{Binding Source={x:Reference thoughtEditor}, Path=Text}"/>
+            </Editor.Behaviors>
+            
+        </Editor>
+    </Grid>
 </ContentPage>

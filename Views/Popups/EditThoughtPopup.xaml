@@ -41,8 +41,7 @@
         <Label Style="{StaticResource Title}" Text="Edit" />
         <BoxView Style="{StaticResource Divider}" />
         <Label Style="{StaticResource Content}" Text="Edit your thought"/>
-        <Editor AutoSize="TextChanges"
-                Text="{Binding EntryEditorText}"/>
+        <Editor AutoSize="TextChanges"/>
         <Button Text="Cancel"
                 Clicked="OnCancelButtonClicked"/>
         <Button Text="Save"

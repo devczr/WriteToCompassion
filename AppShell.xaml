@@ -3,13 +3,25 @@
     x:Class="WriteToCompassion.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:WriteToCompassion.Views">
+    xmlns:views="clr-namespace:WriteToCompassion.Views"
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    FlyoutHeaderBehavior="Default">
 
 
-    <ShellContent
-        Shell.NavBarIsVisible="False"
-        Title="WriteToCompassion"
-        ContentTemplate="{DataTemplate views:ThoughtsPage}"
-        Route="MainPage"/>
+    <FlyoutItem Title="Home">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:ThoughtsPage}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="My Thought Collection">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"/>
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

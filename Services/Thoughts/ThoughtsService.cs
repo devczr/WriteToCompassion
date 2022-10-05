@@ -69,27 +69,16 @@ public class ThoughtsService
         }
     }
 
-/*    public async Task EditThought(Thought thought)
+    public async Task UpdateThought(Thought thought)
     {
         int result;
-        Thought t;
         try
         {
             await Init();
 
             if (thought is null)
                 return;
-
-            result = await dbAsyncConn.InsertAsync(
-    new Thought
-    {
-        ReadCount = 0,
-        Content = content.Trim(),
-        TimeSaved = DateTime.Now,
-    });
-
             result = await dbAsyncConn.UpdateAsync(thought);
-
         }
         catch (Exception ex)
         {
@@ -97,7 +86,7 @@ public class ThoughtsService
             await Shell.Current.DisplayAlert($"Error",
                 $"Unable to save. If the problem persists, please restart the app and try again. \n {ex.Message}", "OK");
         }
-    }*/
+    }
 
 
     List<Thought> thoughtList = new();
