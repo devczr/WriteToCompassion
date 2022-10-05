@@ -2,36 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             xmlns:models="clr-namespace:WriteToCompassion.Models"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodels:SettingsViewModel"
-             x:Class="WriteToCompassion.Views.SettingsView"
-             BackgroundColor="Black"
-             Shell.PresentationMode="ModalAnimated">
+             x:Class="WriteToCompassion.Views.SettingsView">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="True"
+                            IsVisible="True" />
+    </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout Spacing="20"
-                         Padding="0,20">
-        <Label 
-            Text="Settings"
-            Padding="0,20"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-           
-            <Button 
-                Text="Toggle Tutorial Status"
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid RowDefinitions="*,Auto"
+             ColumnDefinitions="*,*"
+             ColumnSpacing="5"
+             RowSpacing="0"
+          Padding="5">
+
+        <RefreshView
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Command="{Binding GetAllThoughtsCommand}">
+        
+        <CollectionView
+            ItemsSource="{Binding Thoughts}"
+            SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Thought">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125" Style="{StaticResource CardView}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=EditThoughtCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid 
+                                RowDefinitions="2*,*"
+                                Padding="2">
+                                <Label Text="{Binding Content}" 
+                                       TextColor="Black"
+                                       Grid.Row="0"
+                                       FontAttributes="Italic"
+                                       FontAutoScalingEnabled="True"
+                                       MaxLines="4"/>
+                                <HorizontalStackLayout 
+                                    Grid.Row="1"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="Center">
+                                    <Button 
+                                    Text="Details"/>
+                                    <Button 
+                                        Text="Edit"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=EditThoughtCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="HandleEditClicked"/>
+                                    <Button 
+                                    Text="Delete"/>
+                                </HorizontalStackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </RefreshView>
+
+        <VerticalStackLayout
+                Grid.Row="1"
+                Grid.ColumnSpan="2">
+            <Button Text="Show Tutorial On Start"
                 Command="{Binding ToggleDisplayTutorialCommand}"/>
+            <Button Text="Delete All Notes"
+                />
+        </VerticalStackLayout>
+    </Grid>
 
-        <Button
-            Padding="0,20"
-                Text="Thoughts Page"
-            BackgroundColor="DeepSkyBlue"
-                TextColor="Black"
-                Command="{Binding GoToThoughtsCommand}"/>
-
-        <Button
-            Padding="0,20"
-                Text="Admin Page"
-            BackgroundColor="Firebrick"
-                TextColor="DarkGoldenrod"
-                Command="{Binding GoToMainPageCommand}"/>
-
-    </VerticalStackLayout>
 </ContentPage>

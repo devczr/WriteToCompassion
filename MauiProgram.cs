@@ -2,7 +2,6 @@
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using WriteToCompassion.Models.Popups;
 using WriteToCompassion.Services;
-using WriteToCompassion.Services.Navigation;
 using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.ViewModels;
@@ -37,7 +36,6 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
-        mauiAppBuilder.Services.AddSingleton<INavigationService, MauiNavigationService>();
         mauiAppBuilder.Services.AddSingleton<NoteService>();
         mauiAppBuilder.Services.AddSingleton<ThoughtsService>();
         mauiAppBuilder.Services.AddSingleton<AnimationService>();
@@ -57,7 +55,6 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<MainPage>();
         mauiAppBuilder.Services.AddSingleton<SettingsView>();
         mauiAppBuilder.Services.AddSingleton<TutorialView>();
 
@@ -70,6 +67,8 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<PopupSizeConstants>();
         mauiAppBuilder.Services.AddTransient<AddThoughtPopupView>();
+        mauiAppBuilder.Services.AddTransient<EditThoughtPopup>();
+
 
         return mauiAppBuilder;
     }

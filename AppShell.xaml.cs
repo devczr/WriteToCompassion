@@ -1,15 +1,12 @@
-﻿using WriteToCompassion.Services.Navigation;
-using WriteToCompassion.Views;
+﻿using WriteToCompassion.Views;
 using WriteToCompassion.Views.Popups;
 
 namespace WriteToCompassion;
 
 public partial class AppShell : Shell
 {
-	private readonly INavigationService _navigationService;
-	public AppShell(INavigationService navigationService)
+	public AppShell()
 	{
-		_navigationService = navigationService;
 
 		AppShell.InitializeRouting();
 		InitializeComponent();
@@ -22,17 +19,26 @@ public partial class AppShell : Shell
 
 		if (Handler is not null)
 		{
-			await _navigationService.InitializeAsync();
-		}
-	}
+            /*nav service was calling initialize to determine which starting page here based on tutorial preference
+             * await _navigationService.InitializeAsync();
+             *   from the nav service -->   public async Task InitializeAsync()
+                {
+                    if (_settingsService.DisplayTutorial)
+                        await Shell.Current.GoToAsync(nameof(TutorialView));
+                    else
+                        await Shell.Current.GoToAsync(nameof(ThoughtsPage));
+                }
+            */
+        }
+    }
 
 	// TODO: delete comment if relative routing refresh works
 	private static void InitializeRouting()
 	{
-        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(ThoughtsPage), typeof(ThoughtsPage));
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));
         Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
         Routing.RegisterRoute(nameof(AddThoughtPopupView), typeof(AddThoughtPopupView));
+        Routing.RegisterRoute(nameof(EditThoughtPopup), typeof(EditThoughtPopup));
     }
 }

@@ -6,8 +6,10 @@
     xmlns:views="clr-namespace:WriteToCompassion.Views">
 
 
-    <FlyoutItem>
-        <ShellContent ContentTemplate="{DataTemplate views:TutorialView}"/>
-    </FlyoutItem>
+    <ShellContent
+        Shell.NavBarIsVisible="False"
+        Title="WriteToCompassion"
+        ContentTemplate="{DataTemplate views:ThoughtsPage}"
+        Route="MainPage"/>
 
 </Shell>

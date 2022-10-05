@@ -8,10 +8,12 @@ public class Thought
     public int Id { get; set; }
 
     public string Content { get; set; }
-    public string Image { get; set; }
-    public DateTime TimeSaved { get; set; }
 
-    public DateTime TimeRead { get; set; }
+    public int ReadCount { get; set; }
+
+    public string ReadSessionID { get; set; }
+
+    public DateTime TimeSaved { get; set; }
 
 
 }
