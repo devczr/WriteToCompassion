@@ -35,7 +35,7 @@
                         <Frame HeightRequest="125" Style="{StaticResource CardView}">
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=EditThoughtCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SettingsViewModel}}, Path=GoToEditorCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
                             <Grid 

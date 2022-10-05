@@ -50,6 +50,20 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    async Task GoToEditor(Thought thought)
+    {
+        if (thought is null)
+            return;
+
+        await Shell.Current.GoToAsync(nameof(EditorView), true, new Dictionary<string, object>
+        {
+            {"Thought", thought }
+        });
+    }
+
+
+
+    [RelayCommand]
     async Task GoToThoughtsAsync()
     {
         await Shell.Current.GoToAsync(nameof(ThoughtsPage));
