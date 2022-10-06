@@ -14,7 +14,10 @@
     x:DataType="viewmodels:ThoughtsViewModel"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False">
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="True"
+                            IsVisible="False"/>
+    </Shell.BackButtonBehavior>
 
     <Grid x:Name="primaryGrid"
         BackgroundColor="Transparent"
@@ -107,22 +110,9 @@
 
         <!--Bottom Buttons-->
         <Grid
-              Grid.Row="3"
-              ColumnDefinitions="*,*,*">
-            <HorizontalStackLayout Grid.Column="0">
-                <Button Text="Add New Thought"
-                    FontSize="Small"
-                        Clicked="HandleCloudPopupButtonClicked"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    BackgroundColor="HotPink"/>
-                <Button Text="settings"
-                    FontSize="Micro"
-                    Command="{Binding GoToSettingsCommand}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    BackgroundColor="LightPink"/>
-            </HorizontalStackLayout>
+            Grid.Row="3">
+            <Button Text="+"
+                    Command="{Binding GoToNewThoughtEditorCommand}"/>
         </Grid>
 
     </Grid>

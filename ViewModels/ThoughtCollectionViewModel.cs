@@ -11,6 +11,9 @@ public partial class ThoughtCollectionViewModel : BaseViewModel
     private readonly ThoughtsService thoughtService;
     public ObservableCollection<Thought> Thoughts { get; } = new();
 
+    [ObservableProperty]
+    bool isRefreshing;
+
     public ThoughtCollectionViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
 	{
         this.thoughtService = thoughtsService;
@@ -50,6 +53,7 @@ public partial class ThoughtCollectionViewModel : BaseViewModel
         finally
         {
             IsBusy = false;
+            IsRefreshing = false;
         }
     }
 }
