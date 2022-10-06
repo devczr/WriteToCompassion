@@ -26,7 +26,7 @@ public partial class EditorViewModel : BaseViewModel
 	[RelayCommand]
 	async Task UpdateThoughtContent(string newText)
 	{
-		Thought.Content = newText;
+		await Task.Run(()=>Thought.Content = newText);
 	}
 
 

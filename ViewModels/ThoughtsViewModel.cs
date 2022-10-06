@@ -105,36 +105,6 @@ public partial class ThoughtsViewModel : BaseViewModel
         Thoughts = new ObservableCollection<Thought>();
     }
 
-
-    [RelayCommand]
-    async Task AddThoughtAsync()
-    {
-        int result = 0;
-
-        try
-        {
-            IsBusy = true;
-            //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
-
-            if (string.IsNullOrEmpty(PopText))
-                return;
-
-            await thoughtsService.AddThought(PopText);
-
-            PopText = string.Empty;
-        }
-        catch (Exception ex)
-        {
-            await Shell.Current.DisplayAlert("Error",
-                $"Unable to get save note: {ex.Message}", "OK");
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-    }
-
-
     [RelayCommand]
     async Task GetAllThoughtsAsync()
     {
@@ -160,6 +130,12 @@ public partial class ThoughtsViewModel : BaseViewModel
     async Task GoToSettings()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
+    }
+
+    [RelayCommand]
+    async Task GoToNewThoughtEditorAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
     }
 
 

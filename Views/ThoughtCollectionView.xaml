@@ -17,7 +17,6 @@
     </ContentPage.Behaviors>
 
     <Grid RowDefinitions="*,Auto"
-             ColumnDefinitions="*,*"
              ColumnSpacing="5"
              RowSpacing="0"
              Padding="1">
@@ -25,29 +24,33 @@
         <RefreshView
             Grid.Row="0"
             Grid.ColumnSpan="2"
-            Command="{Binding GetAllThoughtsCommand}">
+            Command="{Binding GetAllThoughtsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
 
             <CollectionView
             ItemsSource="{Binding Thoughts}"
             SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Thought">
-                        <Grid Padding="8">
-                            <Frame HeightRequest="75" Style="{StaticResource CardView}">
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ThoughtCollectionViewModel}}, Path=GoToEditorCommand}"
+                        <Border
+                            MinimumHeightRequest="75"
+                            MinimumWidthRequest="150"
+                            HorizontalOptions="Start">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ThoughtCollectionViewModel}}, Path=GoToEditorCommand}"
                                         CommandParameter="{Binding .}"/>
-                                </Frame.GestureRecognizers>
-                                <Grid Padding="5">   
-                                <Label Text="{Binding Content}" 
-                                       TextColor="Black"
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding Content}" 
+                                       TextColor="White"
                                        Grid.Row="0"
                                        FontAttributes="Italic"
                                        FontAutoScalingEnabled="True"
-                                       MaxLines="4"/>
-                                </Grid>
-                            </Frame>
-                        </Grid>
+                                       MaxLines="9"/>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

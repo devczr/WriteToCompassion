@@ -3,26 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-             Title="Edit"
-             x:DataType="viewmodels:EditorViewModel"
-             x:Class="WriteToCompassion.Views.EditorView"
-             Shell.NavBarIsVisible="False"
+             x:DataType="viewmodels:NewThoughtEditorViewModel"
+             x:Class="WriteToCompassion.Views.NewThoughtEditorView"
+             Title="NewThoughtEditorView"
              Shell.FlyoutBehavior="Disabled">
-
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding UpdateThoughtWithDatabaseCommand}"/>
+        <BackButtonBehavior Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
     </Shell.BackButtonBehavior>
 
+
     <Grid>
-        <Editor Margin="10"
-            x:Name="thoughtEditor"
-            Text="{Binding Thought.Content}">
+        <Editor 
+            x:Name="editor"
+            Placeholder="Enter your new thought here">
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"
                                             Command="{Binding UpdateThoughtContentCommand}"
-                                            CommandParameter="{Binding Source={x:Reference thoughtEditor}, Path=Text}"/>
+                                            CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
             </Editor.Behaviors>
-            
+
         </Editor>
     </Grid>
 </ContentPage>

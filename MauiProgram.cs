@@ -46,6 +46,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<TutorialViewModel>();
         mauiAppBuilder.Services.AddTransient<ThoughtsViewModel>();
         mauiAppBuilder.Services.AddTransient<EditorViewModel>();
+        mauiAppBuilder.Services.AddTransient<NewThoughtEditorViewModel>();
         mauiAppBuilder.Services.AddTransient<SettingsViewModel>();
         mauiAppBuilder.Services.AddTransient<ThoughtCollectionViewModel>();
         return mauiAppBuilder;
@@ -55,8 +56,9 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<TutorialView>();
         mauiAppBuilder.Services.AddTransient<SettingsView>();
-        mauiAppBuilder.Services.AddTransient<ThoughtsPage>();
+        mauiAppBuilder.Services.AddSingleton<ThoughtsPage>();
         mauiAppBuilder.Services.AddTransient<EditorView>();
+        mauiAppBuilder.Services.AddTransient<NewThoughtEditorView>();
         mauiAppBuilder.Services.AddTransient<ThoughtCollectionView>();
 
         return mauiAppBuilder;
