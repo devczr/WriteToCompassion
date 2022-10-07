@@ -18,7 +18,7 @@ public partial class EditorViewModel : BaseViewModel
     }
 
 	[RelayCommand]
-	async Task UpdateThoughtWithDatabase()
+	async Task UpdateDatabaseGoToCollection()
 	{
         await thoughtsService.UpdateThought(Thought);
         await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
@@ -38,7 +38,13 @@ public partial class EditorViewModel : BaseViewModel
 		else return;
     }
 
-	[RelayCommand]
+    [RelayCommand]
+    async Task CancelAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+    }
+
+    [RelayCommand]
 	async Task UpdateThoughtContent(string newText)
 	{
 		await Task.Run(()=>Thought.Content = newText);

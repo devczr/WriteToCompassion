@@ -23,6 +23,9 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         await Task.Run(()=>NewThought.Content = newText);
     }
 
+    
+
+
     [RelayCommand]
     async Task DeleteThoughtAsync()
     {
@@ -64,6 +67,12 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     async Task SaveAndNavigateToThoughts()
     {
         await AddThoughtAsync();
+        await Shell.Current.GoToAsync(nameof(ThoughtsPage));
+    }
+
+    [RelayCommand]
+    async Task CancelAsync()
+    {
         await Shell.Current.GoToAsync(nameof(ThoughtsPage));
     }
 

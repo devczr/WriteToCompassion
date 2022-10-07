@@ -49,11 +49,17 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\backarrow.png" />
+	  <None Remove="Resources\Images\cautionicon.png" />
+	  <None Remove="Resources\Images\checkicon.png" />
 	  <None Remove="Resources\Images\cloud.svg" />
 	  <None Remove="Resources\Images\cloudicon.png" />
+	  <None Remove="Resources\Images\contracticon.png" />
+	  <None Remove="Resources\Images\expandicon.png" />
+	  <None Remove="Resources\Images\infoicon.png" />
 	  <None Remove="Resources\Images\papericon.png" />
 	  <None Remove="Resources\Images\settingsicon.png" />
 	  <None Remove="Resources\Images\trashicon.png" />
+	  <None Remove="Resources\Images\xicon.png" />
 	  <None Remove="Resources\Raw\bigcloudlottie.json" />
 	  <None Remove="Resources\Raw\cloudlottie.json" />
 	</ItemGroup>

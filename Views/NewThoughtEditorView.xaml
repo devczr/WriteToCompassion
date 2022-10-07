@@ -17,14 +17,30 @@
         <Border BackgroundColor="Pink"
                 Grid.Row="0"
                 Grid.ColumnSpan="5"/>
-        <ImageButton
+        <VerticalStackLayout 
             Grid.Column="0"
+            IsClippedToBounds="True">
+            <ImageButton
                 Scale="0.5"
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
-                Source="backarrow.png"
-                Aspect="AspectFit"
+                Source="checkicon.png"
+                Aspect="Center"
                 Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
+            <Label Text="Save"
+                   TextColor="Purple"
+                   FontSize="Micro"
+                   FontAutoScalingEnabled="True"/>
+        </VerticalStackLayout>
+
+        <ImageButton
+            Grid.Column="3"
+            Grid.Row="0"
+            Source="xicon.png"
+            Scale="0.5"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            Command="{Binding CancelCommand}"/>
 
         <ImageButton
             Grid.Column="4"
