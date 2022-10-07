@@ -8,13 +8,34 @@
              x:Class="WriteToCompassion.Views.EditorView"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
-
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding UpdateThoughtWithDatabaseCommand}"/>
+        <BackButtonBehavior IsEnabled="False"
+                            IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
-    <Grid>
-        <Editor Margin="10"
+    <Grid RowDefinitions="50,*"
+          ColumnDefinitions="*,*,*,*,*">
+        <ImageButton
+            Grid.Column="0"
+                Scale="0.5"
+                VerticalOptions="Start"
+                HorizontalOptions="Start"
+                Source="backarrow.png"
+                Aspect="AspectFit"
+                Command="{Binding UpdateThoughtWithDatabaseCommand}"/>
+
+        <ImageButton
+            Grid.Column="4"
+            Source="trashicon.png"
+            Scale="0.5"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            Command="{Binding DeleteThoughtCommand}"/>
+
+        <Editor 
+            Grid.ColumnSpan="5"
+            Grid.Row="1"
+            Margin="10"
             x:Name="thoughtEditor"
             Text="{Binding Thought.Content}">
             <Editor.Behaviors>

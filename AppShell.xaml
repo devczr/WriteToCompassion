@@ -8,17 +8,17 @@
     FlyoutHeaderBehavior="Default">
 
 
-    <FlyoutItem Title="Home">
+    <FlyoutItem Title="Home" Icon="cloudicon.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtsPage}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="My Thought Collection">
+    <FlyoutItem Title="My Thought Collection" Icon="papericon.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Settings">
+    <FlyoutItem Title="Settings" Icon="settingsicon.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"/>
         </Tab>
