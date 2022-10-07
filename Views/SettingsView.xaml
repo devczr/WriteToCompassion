@@ -7,8 +7,8 @@
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="WriteToCompassion.Views.SettingsView">
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="True"
-                            IsVisible="True" />
+        <BackButtonBehavior IsEnabled="False"
+                            IsVisible="False" />
     </Shell.BackButtonBehavior>
 
     <Grid RowDefinitions="*,Auto"

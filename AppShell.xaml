@@ -4,24 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:WriteToCompassion.Views"
-    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-    FlyoutHeaderBehavior="Default">
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
 
-
-    <FlyoutItem Title="Home" Icon="cloudicon.png">
-        <Tab>
+    <TabBar>
+        <Tab Title="Home" Icon="cloudicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtsPage}"/>
         </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="My Thought Collection" Icon="papericon.png">
-        <Tab>
+        <Tab Title="Library" Icon="papericon.png">
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
         </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Settings" Icon="settingsicon.png">
-        <Tab>
+        <Tab Title="New" Icon="writeicon.png">
+            <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
+        </Tab>
+        <Tab Title="Settings" Icon="settingsicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"/>
         </Tab>
-    </FlyoutItem>
-
+    </TabBar>
 </Shell>

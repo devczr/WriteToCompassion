@@ -12,10 +12,10 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:ThoughtsViewModel"
-    Shell.TabBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     Title="Write To Compassion">
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="True"
+        <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
@@ -92,7 +92,7 @@
             CloudAnimation="{Binding Cloud5Animation}"
             ZIndex="2"/>
 
-        
+
 
         <skia:SKLottieView  x:Name="cloudlottie"
                             Grid.Row="1"
@@ -106,14 +106,6 @@
                             ZIndex="3"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
-
-
-        <!--Bottom Buttons-->
-        <Grid
-            Grid.Row="3">
-            <Button Text="+"
-                    Command="{Binding GoToNewThoughtEditorCommand}"/>
-        </Grid>
 
     </Grid>
 </ContentPage>
