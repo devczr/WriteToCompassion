@@ -23,7 +23,19 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         await Task.Run(()=>NewThought.Content = newText);
     }
 
+    [RelayCommand]
+    async Task DeleteThoughtAsync()
+    {
+        var result = await Shell.Current.DisplayAlert("Delete Thought?", "This cannot be undone.", "DELETE", "Cancel");
 
+        if (result)
+        {
+            int id = NewThought.Id;
+            await thoughtsService.DeleteThought(id);
+            await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+        }
+        else return;
+    }
     async Task AddThoughtAsync()
     {
         try

@@ -12,8 +12,8 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:ThoughtsViewModel"
-    Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="False">
+    Shell.TabBarIsVisible="False"
+    Title="Write To Compassion">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
                             IsVisible="False"/>

@@ -1,4 +1,5 @@
-﻿using WriteToCompassion.Services.Thoughts;
+﻿using CommunityToolkit.Maui.Alerts;
+using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
 namespace WriteToCompassion.ViewModels;
@@ -22,6 +23,20 @@ public partial class EditorViewModel : BaseViewModel
         await thoughtsService.UpdateThought(Thought);
         await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
 	}
+
+	[RelayCommand]
+	async Task DeleteThoughtAsync()
+	{
+		var result = await Shell.Current.DisplayAlert("Delete Thought?", "This cannot be undone.", "DELETE", "Cancel");
+
+		if (result)
+		{
+			int id = Thought.Id;
+			await thoughtsService.DeleteThought(id);
+			await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+		}
+		else return;
+    }
 
 	[RelayCommand]
 	async Task UpdateThoughtContent(string newText)

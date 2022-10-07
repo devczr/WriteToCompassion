@@ -7,11 +7,6 @@
              x:Class="WriteToCompassion.Views.ThoughtCollectionView"
              x:DataType="viewmodels:ThoughtCollectionViewModel"
              Title="My Thought Collection">
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior IsEnabled="True"
-                            IsVisible="False"/>
-    </Shell.BackButtonBehavior>
-
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
     </ContentPage.Behaviors>
@@ -31,25 +26,29 @@
             ItemsSource="{Binding Thoughts}"
             SelectionMode="None">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"
-                                     Span="2"/>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" SnapPointsAlignment="Center"></LinearItemsLayout>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Thought">
-                        <Border
-                            MinimumHeightRequest="75"
-                            MinimumWidthRequest="150"
-                            HorizontalOptions="Start">
+                        <Border Style="{StaticResource ThoughtCardView}">
+                            <Border.Shadow>
+                                <Shadow Brush="Teal"
+                                        Offset="5,5"
+                                        Radius="2"
+                                        Opacity="0.3"/>
+                            </Border.Shadow>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ThoughtCollectionViewModel}}, Path=GoToEditorCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
                             <Label Text="{Binding Content}" 
-                                       TextColor="White"
-                                       Grid.Row="0"
-                                       FontAttributes="Italic"
-                                       FontAutoScalingEnabled="True"
-                                       MaxLines="9"/>
+                                Padding="10"
+                                HorizontalOptions="Fill"
+                                TextColor="Black"
+                                FontAttributes="Italic"
+                                FontAutoScalingEnabled="True"
+                                MaxLines="2"
+                                LineBreakMode="MiddleTruncation"/>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

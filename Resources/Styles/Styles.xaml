@@ -382,13 +382,13 @@
     </Style>
 
 
-    <Style x:Key="CardView" TargetType="Frame">
-        <Setter Property="BorderColor" Value="#DDDDDD" />
-        <Setter Property="HasShadow" Value="True" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Background" Value="{StaticResource White}" />
-        <Setter Property="CornerRadius" Value="10" />
-        <Setter Property="IsClippedToBounds" Value="True"/>
+    <Style x:Key="ThoughtCardView" TargetType="Border">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Stroke" Value="Teal"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="WidthRequest" Value="300"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
     </Style>
 
 </ResourceDictionary>
