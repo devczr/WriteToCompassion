@@ -6,7 +6,7 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:Class="WriteToCompassion.Views.ThoughtCollectionView"
              x:DataType="viewmodels:ThoughtCollectionViewModel"
-             Title="My Thought Collection">
+             Title="Library of Thoughts">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False" />

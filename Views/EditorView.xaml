@@ -48,6 +48,7 @@
         <Editor 
             BackgroundColor="Purple"
             Grid.Row="1"
+            AutoSize="TextChanges"
             x:Name="thoughtEditor"
             Text="{Binding Thought.Content}">
             <Editor.Behaviors>

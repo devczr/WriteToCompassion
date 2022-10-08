@@ -22,16 +22,13 @@
             Grid.Column="0"
             IsClippedToBounds="True">
                 <ImageButton
+                    x:Name="savebutton"
                 Scale="0.5"
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
                 Source="checkicon.png"
                 Aspect="Center"
                 Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
-                <Label Text="Save"
-                   TextColor="Purple"
-                   FontSize="Micro"
-                   FontAutoScalingEnabled="True"/>
             </VerticalStackLayout>
 
             <ImageButton
@@ -53,8 +50,10 @@
         
         <Editor 
             x:Name="editor"
+            mct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference savebutton}"
             MaxLength="500"
             Grid.Row="1"
+            AutoSize="TextChanges"
             BackgroundColor="ForestGreen"
             Placeholder="{Binding PlaceholderText}">
             <Editor.Behaviors>

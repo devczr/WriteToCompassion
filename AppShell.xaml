@@ -6,18 +6,18 @@
     xmlns:views="clr-namespace:WriteToCompassion.Views"
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
 
-    <TabBar>
-        <Tab Title="Home" Icon="cloudicon.png">
+    <FlyoutItem Title="Home" Route="main">
+        <Tab Title="Home" Route="home" Icon="cloudicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtsPage}"/>
         </Tab>
-        <Tab Title="Library" Icon="papericon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
-        </Tab>
-        <Tab Title="New" Icon="writeicon.png">
+        <Tab Title="New" Route="newthought" Icon="writeicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
         </Tab>
-        <Tab Title="Settings" Icon="settingsicon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:SettingsView}"/>
+        <Tab Title="Library" Route="library" Icon="papericon.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
         </Tab>
-    </TabBar>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings">
+        
+    </FlyoutItem>
 </Shell>
