@@ -7,13 +7,12 @@
              x:Class="WriteToCompassion.Controls.CustomCloudControl">
 
 
-    <!--Min Height and Width set according to SVG pixel size-->
+
     <Border 
         BackgroundColor="Aquamarine"
         StrokeThickness="2"
-        x:Name="orange"
         AutomationId="25"
-            ZIndex="2">
+        ZIndex="2">
         <Border.Stroke>
             <LinearGradientBrush EndPoint="1,0">
                 <GradientStop Color="Purple"
@@ -29,7 +28,8 @@
         </Border.StrokeShape>
         <Border.GestureRecognizers>
             <TapGestureRecognizer Tapped="HandleDoubleTap"
-                                  NumberOfTapsRequired="2"/>
+                                  NumberOfTapsRequired="2"
+                                  Command="{Binding }"/>
         </Border.GestureRecognizers>
     </Border>
 </ContentView>

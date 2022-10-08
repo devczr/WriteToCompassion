@@ -14,16 +14,21 @@ public partial class HomeViewModel : BaseViewModel
 
     public ObservableCollection<Thought> AllThoughts { get; } = new();
 
+
     ThoughtsService thoughtsService;
 
-    [ObservableProperty]
-    string popText;
-
+    
     [ObservableProperty]
     bool animateCloudLottie = false;
 
     [ObservableProperty]
     double cloudScale = 0.5;
+
+    [ObservableProperty]
+    int maxClouds = 10;
+
+    [ObservableProperty]
+    bool unreadOnly = true;
 
     #region CloudAnimationTypes for MVVM Bindings
 
@@ -134,34 +139,37 @@ public partial class HomeViewModel : BaseViewModel
             foreach (var thought in thoughts)
                 UnreadThoughts.Add(thought);
 
-            PopulateCloudCollection();
         }
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error",
                 $"Unable to get your saved notes: {ex.Message}", "OK");
         }
-    }
-
-    private void PopulateCloudCollection()
-    {
-        for (int i = 0; i < 5; i++)
+        finally
         {
-            CustomCloudControl c = new();
-            c.CloudAnimation = CloudAnimationType.None;
-            CloudControls.Add(c);
+            await InitDriftAsync();
         }
-
     }
 
 
     [RelayCommand]
-    async Task InitUnreadDriftAsync()
+    async Task InitDriftAsync()
     {
-        var cloudCount = Math.Clamp(UnreadThoughts.Count,0,5);
- //       await Shell.Current.DisplayAlert("ok", InactiveClouds.Count.ToString(), "ok");
+        int cloudCount;
+
+        if (UnreadOnly)
+            cloudCount = Math.Clamp(UnreadThoughts.Count, 0, MaxClouds);
+        else
+            cloudCount = Math.Clamp(AllThoughts.Count, 0, MaxClouds);
+
+
         for (int i = 0; i < cloudCount; i++)
         {
+            CustomCloudControl c = new()
+            {
+                CloudAnimation = CloudAnimationType.Drift
+            };
+            CloudControls.Add(c);
         }
     }
 

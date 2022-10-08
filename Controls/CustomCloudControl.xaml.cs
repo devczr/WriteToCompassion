@@ -1,7 +1,4 @@
 
-using WriteToCompassion.Services;
-
-
 namespace WriteToCompassion.Controls;
 
 
@@ -29,12 +26,12 @@ public partial class CustomCloudControl : ContentView
         }
         else if (newCloudAnimationValue is CloudAnimationType.Drift)
         {
-            cloudReportingChange.DriftAround();
+            await cloudReportingChange.DriftAround();
 
         }
         else if (newCloudAnimationValue is CloudAnimationType.Hover)
         {
-            cloudReportingChange.LocalHover();
+            await cloudReportingChange.LocalHover();
         }
     }
 
@@ -80,7 +77,7 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
 
-    private void HandleDoubleTap(object sender, EventArgs e)
+    private async void HandleDoubleTap(object sender, EventArgs e)
     {
 
     }
