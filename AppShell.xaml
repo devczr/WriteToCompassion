@@ -6,7 +6,9 @@
     xmlns:views="clr-namespace:WriteToCompassion.Views"
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
 
-    <FlyoutItem Title="Home" Route="main">
+    
+    <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
+    <TabBar Title="Home" Route="root">
         <Tab Title="Home" Route="home" Icon="cloudicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:ThoughtsPage}"/>
         </Tab>
@@ -14,10 +16,8 @@
             <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
         </Tab>
         <Tab Title="Library" Route="library" Icon="papericon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:ThoughtCollectionView}"/>
+            <ShellContent ContentTemplate="{DataTemplate views:LibraryView}"/>
         </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Settings">
-        
-    </FlyoutItem>
+    </TabBar>
+
 </Shell>

@@ -4,9 +4,9 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:models="clr-namespace:WriteToCompassion.Models"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-             x:Class="WriteToCompassion.Views.ThoughtCollectionView"
-             x:DataType="viewmodels:ThoughtCollectionViewModel"
-             Title="Library of Thoughts">
+             x:DataType="viewmodels:LibraryViewModel"
+             x:Class="WriteToCompassion.Views.LibraryView"
+             Title="Thought Library">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False" />
@@ -41,7 +41,7 @@
                                         Opacity="0.3"/>
                             </Border.Shadow>
                             <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ThoughtCollectionViewModel}}, Path=GoToEditorCommand}"
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}, Path=GoToEditorCommand}"
                                         CommandParameter="{Binding .}"/>
                             </Border.GestureRecognizers>
                             <Label Text="{Binding Content}" 
