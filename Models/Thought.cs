@@ -15,5 +15,4 @@ public class Thought
 
     public DateTime TimeSaved { get; set; }
 
-
 }

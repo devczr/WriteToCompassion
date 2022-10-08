@@ -14,6 +14,10 @@ public partial class HomeView : ContentPage
         ScreenHelper.UpdateScreenXYValues(width, height);
     }
 
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
 
+    }
 
 }
