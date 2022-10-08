@@ -1,10 +1,11 @@
-﻿using WriteToCompassion.Views;
-using WriteToCompassion.Services.Thoughts;
+﻿
 using System.Collections.ObjectModel;
-
+using WriteToCompassion.Services.Thoughts;
+using WriteToCompassion.Views;
 
 namespace WriteToCompassion.ViewModels;
-public partial class ThoughtsViewModel : BaseViewModel
+
+public partial class HomeViewModel : BaseViewModel
 {
     ThoughtsService thoughtsService;
 
@@ -98,7 +99,7 @@ public partial class ThoughtsViewModel : BaseViewModel
     #endregion
 
 
-    public ThoughtsViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
+    public HomeViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
             : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
@@ -135,7 +136,7 @@ public partial class ThoughtsViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToNewThoughtEditorAsync()
     {
-        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
+        await Shell.Current.GoToAsync("//root/newthought");
     }
 
 
@@ -149,9 +150,9 @@ public partial class ThoughtsViewModel : BaseViewModel
     [RelayCommand]
     async Task HoverCloud()
     {
-/*        cloud1Animation = CloudAnimationType.Hover;
-        cloud2Animation = CloudAnimationType.Hover;
-        await Shell.Current.DisplaySnackbar("hover");*/
+        /*        cloud1Animation = CloudAnimationType.Hover;
+                cloud2Animation = CloudAnimationType.Hover;
+                await Shell.Current.DisplaySnackbar("hover");*/
     }
 
     [RelayCommand]
@@ -159,8 +160,7 @@ public partial class ThoughtsViewModel : BaseViewModel
     {
         CloudAnimation = CloudAnimationType.None;
         Cloud2Animation = CloudAnimationType.None;
-/*        cloud1Animation = CloudAnimationType.None;
-        cloud2Animation = CloudAnimationType.None;*/
+        /*        cloud1Animation = CloudAnimationType.None;
+                cloud2Animation = CloudAnimationType.None;*/
     }
 }
-
