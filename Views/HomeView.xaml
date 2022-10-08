@@ -90,9 +90,6 @@
             <Button
             Command="{Binding GetAllThoughtsCommand}"
             Text="GetThoughts"/>
-            <Button
-            Command="{Binding TestDriftingCommand}"
-            Text="test"/>
         </HorizontalStackLayout>
 
 

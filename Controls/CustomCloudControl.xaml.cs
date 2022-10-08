@@ -19,19 +19,23 @@ public partial class CustomCloudControl : ContentView
         if (bindable is null) return;
         var cloudReportingChange = (CustomCloudControl)bindable;
         var newCloudAnimationValue = (CloudAnimationType)newValue;
+        switch (newCloudAnimationValue)
+        {
+            case CloudAnimationType.None:
+                cloudReportingChange.CancelAnimations();
+                break;
 
-        if (newCloudAnimationValue is CloudAnimationType.None)
-        {
-            cloudReportingChange.CancelAnimations();
-        }
-        else if (newCloudAnimationValue is CloudAnimationType.Drift)
-        {
-            await cloudReportingChange.DriftAround();
+            case CloudAnimationType.Drift:
+                await cloudReportingChange.DriftAround();
+                break;
 
-        }
-        else if (newCloudAnimationValue is CloudAnimationType.Hover)
-        {
-            await cloudReportingChange.LocalHover();
+            case CloudAnimationType.Hover:
+                await cloudReportingChange.LocalHover();
+                break;
+
+            case CloudAnimationType.Dance:
+                await cloudReportingChange.Dance();
+                break;
         }
     }
 
@@ -63,6 +67,15 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Drift);
     }
 
+    public async Task Dance()
+    {
+        var startingScale = this.Scale;
+        await this.ScaleTo(startingScale * 1.5, 250, Easing.BounceOut);
+        await this.ScaleTo(startingScale / 2, 250, Easing.BounceIn);
+        await this.ScaleTo(startingScale, 100, Easing.SpringIn);
+        this.CloudAnimation = CloudAnimationType.Hover;
+    }
+
     public async Task LocalHover()
     {
         var startingX = this.TranslationX;
@@ -77,9 +90,10 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
 
-    private async void HandleDoubleTap(object sender, EventArgs e)
-    {
 
+    private async void ClickGestureRecognizer_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.DisplayAlert("click", "clack", "whack");
     }
 }
 /*    private int PanGestureTracker { get; set; }

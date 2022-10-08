@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
+using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
@@ -25,7 +26,7 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 10;
+    int maxClouds = 5;
 
     [ObservableProperty]
     bool unreadOnly = true;
@@ -174,14 +175,13 @@ public partial class HomeViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task TestDrifting()
+    async Task DanceAsync(CustomCloudControl customCloudControl)
     {
-        CloudControls[0].CloudAnimation = CloudAnimationType.Drift;
-        /*        Cloud1Animation = CloudAnimationType.Drift;
-                Cloud2Animation = CloudAnimationType.Drift;
-                Cloud3Animation = CloudAnimationType.Drift;
-                Cloud4Animation = CloudAnimationType.Drift;
-                Cloud5Animation = CloudAnimationType.Drift;*/
+        if (customCloudControl is null)
+            return;
+
+        int index = CloudControls.IndexOf(customCloudControl);
+        CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
     }
 
 
