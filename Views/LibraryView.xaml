@@ -28,7 +28,7 @@
             IsRefreshing="{Binding IsRefreshing}">
 
             <CollectionView
-                ItemsSource="{Binding Thoughts}"
+                ItemsSource="{Binding UnreadThoughts}"
                 SelectionMode="None"
                 ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
@@ -47,6 +47,7 @@
                             <Label Text="{Binding Content}" 
                                 Padding="10"
                                 TextColor="Black"
+                                MaxLines="1"
                                 FontAttributes="Italic"
                                 FontAutoScalingEnabled="True"
                                 LineBreakMode="TailTruncation"/>

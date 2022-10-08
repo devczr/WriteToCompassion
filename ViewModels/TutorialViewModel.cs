@@ -28,7 +28,7 @@ public partial class TutorialViewModel : BaseViewModel
     [RelayCommand]
 	private async Task SkipTutorial()
 	{
-		await Shell.Current.GoToAsync(nameof(ThoughtsPage));
+		await Shell.Current.GoToAsync("//root/home");
 	}
 
 }

@@ -1,4 +1,5 @@
 ﻿
+using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -7,10 +8,13 @@ namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {
-    ThoughtsService thoughtsService;
+    public ObservableCollection<CustomCloudControl> CloudControls { get; set; } = new();
 
-    [ObservableProperty]
-    ObservableCollection<Thought> thoughts;
+    public ObservableCollection<Thought> UnreadThoughts { get; } = new();
+
+    public ObservableCollection<Thought> AllThoughts { get; } = new();
+
+    ThoughtsService thoughtsService;
 
     [ObservableProperty]
     string popText;
@@ -22,16 +26,18 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     #region CloudAnimationTypes for MVVM Bindings
-    private CloudAnimationType _cloudAnimation;
-    public CloudAnimationType CloudAnimation
+
+    private CloudAnimationType _cloud1Animation;
+    public CloudAnimationType Cloud1Animation
     {
-        get => _cloudAnimation;
+        get => _cloud1Animation;
         set
         {
-            if (_cloudAnimation != value)
+            if (_cloud1Animation != value)
             {
-                _cloudAnimation = value;
+                _cloud1Animation = value;
                 OnPropertyChanged();
+
             }
 
         }
@@ -47,6 +53,7 @@ public partial class HomeViewModel : BaseViewModel
             {
                 _cloud2Animation = value;
                 OnPropertyChanged();
+
             }
 
         }
@@ -62,6 +69,7 @@ public partial class HomeViewModel : BaseViewModel
             {
                 _cloud3Animation = value;
                 OnPropertyChanged();
+
             }
 
         }
@@ -77,6 +85,7 @@ public partial class HomeViewModel : BaseViewModel
             {
                 _cloud4Animation = value;
                 OnPropertyChanged();
+
             }
 
         }
@@ -92,10 +101,12 @@ public partial class HomeViewModel : BaseViewModel
             {
                 _cloud5Animation = value;
                 OnPropertyChanged();
+
             }
 
         }
     }
+
     #endregion
 
 
@@ -103,7 +114,6 @@ public partial class HomeViewModel : BaseViewModel
             : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
-        Thoughts = new ObservableCollection<Thought>();
     }
 
     [RelayCommand]
@@ -114,10 +124,17 @@ public partial class HomeViewModel : BaseViewModel
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
             var thoughts = await thoughtsService.GetAllThoughts();
 
-            Thoughts.Clear();
-
             foreach (var thought in thoughts)
-                Thoughts.Add(thought);
+                AllThoughts.Add(thought);
+
+            thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
+            
+            UnreadThoughts.Clear();
+            
+            foreach (var thought in thoughts)
+                UnreadThoughts.Add(thought);
+
+            PopulateCloudCollection();
         }
         catch (Exception ex)
         {
@@ -126,9 +143,43 @@ public partial class HomeViewModel : BaseViewModel
         }
     }
 
+    private void PopulateCloudCollection()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            CustomCloudControl c = new();
+            c.CloudAnimation = CloudAnimationType.None;
+            CloudControls.Add(c);
+        }
+
+    }
+
 
     [RelayCommand]
-    async Task GoToSettings()
+    async Task InitUnreadDriftAsync()
+    {
+        var cloudCount = Math.Clamp(UnreadThoughts.Count,0,5);
+ //       await Shell.Current.DisplayAlert("ok", InactiveClouds.Count.ToString(), "ok");
+        for (int i = 0; i < cloudCount; i++)
+        {
+        }
+    }
+
+    [RelayCommand]
+    async Task TestDrifting()
+    {
+        CloudControls[0].CloudAnimation = CloudAnimationType.Drift;
+        /*        Cloud1Animation = CloudAnimationType.Drift;
+                Cloud2Animation = CloudAnimationType.Drift;
+                Cloud3Animation = CloudAnimationType.Drift;
+                Cloud4Animation = CloudAnimationType.Drift;
+                Cloud5Animation = CloudAnimationType.Drift;*/
+    }
+
+
+
+    [RelayCommand]
+    async Task GoToSettingsAsync()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
     }
@@ -139,28 +190,4 @@ public partial class HomeViewModel : BaseViewModel
         await Shell.Current.GoToAsync("//root/newthought");
     }
 
-
-    [RelayCommand]
-    async Task DriftCloud()
-    {
-        CloudAnimation = CloudAnimationType.Drift;
-        Cloud2Animation = CloudAnimationType.Drift;
-    }
-
-    [RelayCommand]
-    async Task HoverCloud()
-    {
-        /*        cloud1Animation = CloudAnimationType.Hover;
-                cloud2Animation = CloudAnimationType.Hover;
-                await Shell.Current.DisplaySnackbar("hover");*/
-    }
-
-    [RelayCommand]
-    async Task CancelCloud()
-    {
-        CloudAnimation = CloudAnimationType.None;
-        Cloud2Animation = CloudAnimationType.None;
-        /*        cloud1Animation = CloudAnimationType.None;
-                cloud2Animation = CloudAnimationType.None;*/
-    }
 }

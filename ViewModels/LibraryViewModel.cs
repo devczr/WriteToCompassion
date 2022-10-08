@@ -1,4 +1,5 @@
 ﻿
+using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -7,15 +8,17 @@ namespace WriteToCompassion.ViewModels;
 
 public partial class LibraryViewModel : BaseViewModel
 {
-    private readonly ThoughtsService thoughtService;
-    public ObservableCollection<Thought> Thoughts { get; } = new();
+    private readonly ThoughtsService thoughtsService;
+    public ObservableCollection<Thought> UnreadThoughts { get; } = new();
+
+    public ObservableCollection<Thought> AllThoughts { get; } = new();
 
     [ObservableProperty]
     bool isRefreshing;
 
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
-        this.thoughtService = thoughtsService;
+        this.thoughtsService = thoughtsService;
     }
 
     [RelayCommand]
@@ -37,12 +40,20 @@ public partial class LibraryViewModel : BaseViewModel
         {
             IsBusy = true;
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
-            var thoughts = await thoughtService.GetAllThoughts();
-
-            Thoughts.Clear();
+            var thoughts = await thoughtsService.GetAllThoughts();
 
             foreach (var thought in thoughts)
-                Thoughts.Add(thought);
+                AllThoughts.Add(thought);
+
+            thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
+
+            UnreadThoughts.Clear();
+
+            foreach (var thought in thoughts)
+                UnreadThoughts.Add(thought);
+
+
+            await Shell.Current.DisplaySnackbar(UnreadThoughts.Count.ToString());
         }
         catch (Exception ex)
         {
@@ -55,6 +66,5 @@ public partial class LibraryViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
-
 
 }

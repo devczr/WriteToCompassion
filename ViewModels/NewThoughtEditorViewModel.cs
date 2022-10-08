@@ -56,7 +56,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error",
-                $"Unable to get save note: {ex.Message}", "OK");
+                $"Unable to save thought: {ex.Message}", "OK");
         }
         finally
         {
