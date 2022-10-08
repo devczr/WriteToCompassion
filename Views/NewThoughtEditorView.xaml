@@ -50,11 +50,8 @@
         
         <Editor 
             x:Name="editor"
-            mct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference savebutton}"
-            MaxLength="500"
+            Style="{StaticResource ThoughtEditor}"
             Grid.Row="1"
-            AutoSize="TextChanges"
-            BackgroundColor="ForestGreen"
             Placeholder="{Binding PlaceholderText}">
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"

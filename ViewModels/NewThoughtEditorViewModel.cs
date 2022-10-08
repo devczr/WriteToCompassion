@@ -37,7 +37,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         {
             int id = NewThought.Id;
             await thoughtsService.DeleteThought(id);
-            await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+            await Shell.Current.GoToAsync("//root/home");
         }
         else return;
     }
@@ -69,13 +69,15 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     async Task SaveAndNavigateToThoughts()
     {
         await AddThoughtAsync();
-        await Shell.Current.GoToAsync("//main/home");
+        
+        //TODO: update with nameof() once MAUI shell TabBar correctly recognizes it as navigation 
+        await Shell.Current.GoToAsync("//root/home");
     }
 
     [RelayCommand]
     async Task CancelAsync()
     {
-        await Shell.Current.GoToAsync(nameof(ThoughtsPage));
+        await Shell.Current.GoToAsync("//root/home");
     }
 
 }

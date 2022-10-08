@@ -35,9 +35,6 @@ public partial class AppShell : Shell
 	// TODO: delete comment if relative routing refresh works
 	private static void InitializeRouting()
 	{
-/*        Routing.RegisterRoute("thoughtspage", typeof(ThoughtsPage));
-        Routing.RegisterRoute("newthoughteditorview", typeof(NewThoughtEditorView));
-        Routing.RegisterRoute("thoughtcollectionview", typeof(ThoughtCollectionView));*/
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));
         Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
         Routing.RegisterRoute(nameof(EditorView), typeof(EditorView));

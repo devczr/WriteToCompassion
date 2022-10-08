@@ -12,6 +12,8 @@ public partial class TutorialViewModel : BaseViewModel
 		_settingsService = settingsService;
 	}
 
+	//next next get started and            skip at top
+
     public override Task InitializeAsync()
     {
         return Task.CompletedTask;

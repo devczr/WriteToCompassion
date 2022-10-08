@@ -1,12 +1,11 @@
 ﻿
-using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
 namespace WriteToCompassion.ViewModels;
 
-public partial class ThoughtCollectionViewModel : BaseViewModel
+public partial class LibraryViewModel : BaseViewModel
 {
     private readonly ThoughtsService thoughtService;
     public ObservableCollection<Thought> Thoughts { get; } = new();
@@ -14,8 +13,8 @@ public partial class ThoughtCollectionViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
-    public ThoughtCollectionViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
-	{
+    public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
+    {
         this.thoughtService = thoughtsService;
     }
 
@@ -56,4 +55,6 @@ public partial class ThoughtCollectionViewModel : BaseViewModel
             IsRefreshing = false;
         }
     }
+
+
 }

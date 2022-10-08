@@ -21,7 +21,7 @@ public partial class EditorViewModel : BaseViewModel
 	async Task UpdateDatabaseGoToCollection()
 	{
         await thoughtsService.UpdateThought(Thought);
-        await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+        await Shell.Current.GoToAsync("//root/library");
 	}
 
 	[RelayCommand]
@@ -33,7 +33,7 @@ public partial class EditorViewModel : BaseViewModel
 		{
 			int id = Thought.Id;
 			await thoughtsService.DeleteThought(id);
-			await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+			await Shell.Current.GoToAsync("//root/library");
 		}
 		else return;
     }
@@ -41,7 +41,7 @@ public partial class EditorViewModel : BaseViewModel
     [RelayCommand]
     async Task CancelAsync()
     {
-        await Shell.Current.GoToAsync(nameof(ThoughtCollectionView));
+        await Shell.Current.GoToAsync("//root/library");
     }
 
     [RelayCommand]

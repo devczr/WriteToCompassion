@@ -390,4 +390,17 @@
         <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
     </Style>
 
+    <Style x:Key="ThoughtEditor" TargetType="Editor">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+        <Setter Property="AutoSize" Value="TextChanges" />
+        <Setter Property="FontAttributes" Value="Italic" />
+        <Setter Property="Margin" Value="8,15,8,0" />
+        <Setter Property="FontAutoScalingEnabled" Value="True" />
+
+    </Style>
+
 </ResourceDictionary>

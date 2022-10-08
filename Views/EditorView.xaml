@@ -45,11 +45,10 @@
         </Grid>
 
 
-        <Editor 
-            BackgroundColor="Purple"
-            Grid.Row="1"
-            AutoSize="TextChanges"
+        <Editor
             x:Name="thoughtEditor"
+            Style="{StaticResource ThoughtEditor}"
+            Grid.Row="1"
             Text="{Binding Thought.Content}">
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"
