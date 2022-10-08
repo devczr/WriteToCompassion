@@ -59,16 +59,19 @@ public partial class CustomCloudControl : ContentView
 
     public async Task DriftAround()
     {
+        this.CancelAnimations();
+        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
         do
         {
-            cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRnd);
-            await this.TranslateTo(x, y, durationRnd, easing: Easing.SinInOut);
+            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut);
+            cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
 
         } while (this.CloudAnimation == CloudAnimationType.Drift);
     }
 
     public async Task Dance()
     {
+        this.CancelAnimations();
         var startingScale = this.Scale;
         await this.ScaleTo(startingScale * 1.5, 250, Easing.BounceOut);
         await this.ScaleTo(startingScale / 2, 250, Easing.BounceIn);
@@ -80,9 +83,9 @@ public partial class CustomCloudControl : ContentView
     {
         var startingX = this.TranslationX;
         var startingY = this.TranslationY;
-
         do
         {
+            this.CancelAnimations();
             await this.TranslateTo(startingX - 5, startingY - 5, 1000);
             await this.TranslateTo(startingX - 5, startingY, 1000);
             await this.TranslateTo(startingX, startingY - 5, 1000);
@@ -90,6 +93,18 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
 
+    public async Task ShortHover()
+    {
+        var startingX = this.TranslationX;
+        var startingY = this.TranslationY;
+
+        await this.TranslateTo(startingX - 5, startingY - 5, 1000);
+        await this.TranslateTo(startingX - 5, startingY, 1000);
+        await this.TranslateTo(startingX, startingY - 5, 1000);
+        await this.TranslateTo(startingX, startingY, 1000);
+        
+
+    }
 
     private async void ClickGestureRecognizer_Clicked(object sender, EventArgs e)
     {
