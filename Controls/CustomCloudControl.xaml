@@ -4,16 +4,16 @@
              xmlns:triggers="clr-namespace:WriteToCompassion.Triggers"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             xmlns:controls="clr-namespace:WriteToCompassion.Controls"
              x:Class="WriteToCompassion.Controls.CustomCloudControl">
 
 
-    <!--Min Height and Width set according to SVG pixel size-->
+
     <Border 
         BackgroundColor="Aquamarine"
         StrokeThickness="2"
-        x:Name="orange"
         AutomationId="25"
-            ZIndex="2">
+        ZIndex="2">
         <Border.Stroke>
             <LinearGradientBrush EndPoint="1,0">
                 <GradientStop Color="Purple"
@@ -28,8 +28,10 @@
             </Path>
         </Border.StrokeShape>
         <Border.GestureRecognizers>
-            <TapGestureRecognizer Tapped="HandleDoubleTap"
-                                  NumberOfTapsRequired="2"/>
+            <TapGestureRecognizer x:DataType="controls:CustomCloudControl"
+                                  NumberOfTapsRequired="2"
+                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DanceCommand}"
+                 CommandParameter="{Binding .}"/>
         </Border.GestureRecognizers>
     </Border>
 </ContentView>

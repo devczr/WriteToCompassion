@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
+using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
@@ -14,16 +15,21 @@ public partial class HomeViewModel : BaseViewModel
 
     public ObservableCollection<Thought> AllThoughts { get; } = new();
 
+
     ThoughtsService thoughtsService;
 
-    [ObservableProperty]
-    string popText;
-
+    
     [ObservableProperty]
     bool animateCloudLottie = false;
 
     [ObservableProperty]
     double cloudScale = 0.5;
+
+    [ObservableProperty]
+    int maxClouds = 5;
+
+    [ObservableProperty]
+    bool unreadOnly = true;
 
     #region CloudAnimationTypes for MVVM Bindings
 
@@ -134,46 +140,48 @@ public partial class HomeViewModel : BaseViewModel
             foreach (var thought in thoughts)
                 UnreadThoughts.Add(thought);
 
-            PopulateCloudCollection();
         }
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error",
                 $"Unable to get your saved notes: {ex.Message}", "OK");
         }
-    }
-
-    private void PopulateCloudCollection()
-    {
-        for (int i = 0; i < 5; i++)
+        finally
         {
-            CustomCloudControl c = new();
-            c.CloudAnimation = CloudAnimationType.None;
-            CloudControls.Add(c);
+            await InitDriftAsync();
         }
-
     }
 
 
     [RelayCommand]
-    async Task InitUnreadDriftAsync()
+    async Task InitDriftAsync()
     {
-        var cloudCount = Math.Clamp(UnreadThoughts.Count,0,5);
- //       await Shell.Current.DisplayAlert("ok", InactiveClouds.Count.ToString(), "ok");
+        int cloudCount;
+
+        if (UnreadOnly)
+            cloudCount = Math.Clamp(UnreadThoughts.Count, 0, MaxClouds);
+        else
+            cloudCount = Math.Clamp(AllThoughts.Count, 0, MaxClouds);
+
+
         for (int i = 0; i < cloudCount; i++)
         {
+            CustomCloudControl c = new()
+            {
+                CloudAnimation = CloudAnimationType.Drift
+            };
+            CloudControls.Add(c);
         }
     }
 
     [RelayCommand]
-    async Task TestDrifting()
+    async Task DanceAsync(CustomCloudControl customCloudControl)
     {
-        CloudControls[0].CloudAnimation = CloudAnimationType.Drift;
-        /*        Cloud1Animation = CloudAnimationType.Drift;
-                Cloud2Animation = CloudAnimationType.Drift;
-                Cloud3Animation = CloudAnimationType.Drift;
-                Cloud4Animation = CloudAnimationType.Drift;
-                Cloud5Animation = CloudAnimationType.Drift;*/
+        if (customCloudControl is null)
+            return;
+
+        int index = CloudControls.IndexOf(customCloudControl);
+        CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
     }
 
 
