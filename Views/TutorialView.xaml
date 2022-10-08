@@ -4,9 +4,6 @@
              x:Class="WriteToCompassion.Views.TutorialView"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:TutorialViewModel"
-             Shell.FlyoutBehavior="Disabled"
-             Shell.NavBarIsVisible="False"
-             Shell.TabBarIsVisible="False"
              Title="Tutorial">
 
 

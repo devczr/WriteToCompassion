@@ -59,6 +59,7 @@
 	  <None Remove="Resources\Images\papericon.png" />
 	  <None Remove="Resources\Images\settingsicon.png" />
 	  <None Remove="Resources\Images\trashicon.png" />
+	  <None Remove="Resources\Images\writeicon.png" />
 	  <None Remove="Resources\Images\xicon.png" />
 	  <None Remove="Resources\Raw\bigcloudlottie.json" />
 	  <None Remove="Resources\Raw\cloudlottie.json" />

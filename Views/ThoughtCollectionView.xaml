@@ -6,7 +6,12 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:Class="WriteToCompassion.Views.ThoughtCollectionView"
              x:DataType="viewmodels:ThoughtCollectionViewModel"
-             Title="My Thought Collection">
+             Title="Library of Thoughts">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False"
+                            IsVisible="False" />
+    </Shell.BackButtonBehavior>
+
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
     </ContentPage.Behaviors>
@@ -23,11 +28,9 @@
             IsRefreshing="{Binding IsRefreshing}">
 
             <CollectionView
-            ItemsSource="{Binding Thoughts}"
-            SelectionMode="None">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" SnapPointsAlignment="Center"></LinearItemsLayout>
-                </CollectionView.ItemsLayout>
+                ItemsSource="{Binding Thoughts}"
+                SelectionMode="None"
+                ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Thought">
                         <Border Style="{StaticResource ThoughtCardView}">
@@ -43,12 +46,10 @@
                             </Border.GestureRecognizers>
                             <Label Text="{Binding Content}" 
                                 Padding="10"
-                                HorizontalOptions="Fill"
                                 TextColor="Black"
                                 FontAttributes="Italic"
                                 FontAutoScalingEnabled="True"
-                                MaxLines="2"
-                                LineBreakMode="MiddleTruncation"/>
+                                LineBreakMode="TailTruncation"/>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

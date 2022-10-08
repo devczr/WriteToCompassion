@@ -386,7 +386,6 @@
         <Setter Property="Margin" Value="2"/>
         <Setter Property="Stroke" Value="Teal"/>
         <Setter Property="BackgroundColor" Value="White"/>
-        <Setter Property="WidthRequest" Value="300"/>
         <Setter Property="HorizontalOptions" Value="Center"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
     </Style>

@@ -12,7 +12,7 @@ public partial class App : Application
 {
     private readonly ISettingsService _settingsService;
 
-    const int WindowWidth = 450;
+    const int WindowWidth = 700;
     const int WindowHeight = 800;
     public App(ISettingsService settingsService)
     {

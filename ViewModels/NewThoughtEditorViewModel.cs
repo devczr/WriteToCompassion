@@ -11,6 +11,8 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [ObservableProperty]
     Thought newThought = new();
 
+    //The large empty string in placeholder is used as a workaround for MAUI Editor bug on Android where the editor boundary is clipped to the length of the placeholder. The extra space ensures users can type across the length of the entire control
+    public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
 
     public NewThoughtEditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
@@ -67,7 +69,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     async Task SaveAndNavigateToThoughts()
     {
         await AddThoughtAsync();
-        await Shell.Current.GoToAsync(nameof(ThoughtsPage));
+        await Shell.Current.GoToAsync("//main/home");
     }
 
     [RelayCommand]

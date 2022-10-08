@@ -5,26 +5,16 @@
              xmlns:models="clr-namespace:WriteToCompassion.Models"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodels:SettingsViewModel"
-             x:Class="WriteToCompassion.Views.SettingsView">
+             x:Class="WriteToCompassion.Views.SettingsView"
+             Shell.TabBarIsVisible="False"
+             Title="Settings">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
                             IsVisible="True" />
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="*,Auto"
-             ColumnDefinitions="*,*"
-             ColumnSpacing="5"
-             RowSpacing="0"
-          Padding="5">
-
-        <VerticalStackLayout
-                Grid.Row="1"
-                Grid.ColumnSpan="2">
-            <Button Text="Show Tutorial On Start"
+    <VerticalStackLayout>
+        <Button Text="Show Tutorial On Start"
                 Command="{Binding ToggleDisplayTutorialCommand}"/>
-            <Button Text="Delete All Notes"
-                />
-        </VerticalStackLayout>
-    </Grid>
-
+    </VerticalStackLayout>
 </ContentPage>

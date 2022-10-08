@@ -5,56 +5,57 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
-             Title="New Thought"
-             Shell.FlyoutBehavior="Disabled">
+             Title="New Thought">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="50,*"
-          ColumnDefinitions="*,*,*,*,*">
-        <Border BackgroundColor="Pink"
+    <Grid RowDefinitions="50,*">
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="*,*,*,*,*">
+            <Border BackgroundColor="Pink"
                 Grid.Row="0"
                 Grid.ColumnSpan="5"/>
-        <VerticalStackLayout 
+            <VerticalStackLayout 
             Grid.Column="0"
             IsClippedToBounds="True">
-            <ImageButton
+                <ImageButton
+                    x:Name="savebutton"
                 Scale="0.5"
                 VerticalOptions="Start"
                 HorizontalOptions="Start"
                 Source="checkicon.png"
                 Aspect="Center"
                 Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
-            <Label Text="Save"
-                   TextColor="Purple"
-                   FontSize="Micro"
-                   FontAutoScalingEnabled="True"/>
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <ImageButton
+            <ImageButton
             Grid.Column="3"
-            Grid.Row="0"
             Source="xicon.png"
             Scale="0.5"
             VerticalOptions="Start"
             HorizontalOptions="End"
             Command="{Binding CancelCommand}"/>
 
-        <ImageButton
+            <ImageButton
             Grid.Column="4"
-            Grid.Row="0"
             Source="trashicon.png"
             Scale="0.5"
             VerticalOptions="Start"
             HorizontalOptions="End"
             Command="{Binding DeleteThoughtCommand}"/>
+        </Grid>
+        
         <Editor 
             x:Name="editor"
+            mct:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference savebutton}"
+            MaxLength="500"
             Grid.Row="1"
-            Grid.ColumnSpan="5"
-            Placeholder="Enter your new thought here">
+            AutoSize="TextChanges"
+            BackgroundColor="ForestGreen"
+            Placeholder="{Binding PlaceholderText}">
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"
                                             Command="{Binding UpdateThoughtContentCommand}"
