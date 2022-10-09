@@ -35,6 +35,10 @@
         </Border.GestureRecognizers>
     </Border>
     <ContentView.GestureRecognizers>
-        <DragGestureRecognizer CanDrag="True" DragStarting="DragGestureRecognizer_DragStarting"/>
+        <DragGestureRecognizer x:DataType="controls:CustomCloudControl"
+            CanDrag="True" 
+            DragStartingCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudDragStartedCommand}"
+            DragStartingCommandParameter="{Binding .}"
+            DropCompletedCommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DragText}"/>
     </ContentView.GestureRecognizers>
 </ContentView>

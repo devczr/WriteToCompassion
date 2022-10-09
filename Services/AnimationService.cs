@@ -6,8 +6,6 @@ namespace WriteToCompassion.Services;
 
 public partial class AnimationService : ObservableObject
 {
-    //TODO: do these need to be observable properties or can they be made private?
-    //leaving as observable for now for easy debugging
     [ObservableProperty]
     double topCloudBoundary = -200;
 
@@ -20,17 +18,12 @@ public partial class AnimationService : ObservableObject
     [ObservableProperty]
     double rightCloudBoundary = 200;
 
-
-
-
     private static readonly Random rnd = new();
 
-
-
-
-
-    async Task SetVerticalBoundaries()
+    private void SetVerticalBoundaries()
     {
+        //TODO: Redo math on boundaries now that grids have changed
+
         double yBoundary = ScreenHelper.ScreenYValue;
 
         //subtracting bottom grid cell set to 50 units
@@ -57,7 +50,7 @@ public partial class AnimationService : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Cloud Boundary Error",
+            Shell.Current.DisplayAlert("Cloud Boundary Error",
                 $"{ex.Message}", "OK");
         }
 
@@ -65,7 +58,7 @@ public partial class AnimationService : ObservableObject
     }
 
 
-    async Task SetHorizontalBoundaries()
+    private void SetHorizontalBoundaries()
     {
         //Clouds are set to HorizontalOptions Center, so the middle is 0, to the right border is half the width
 
@@ -83,7 +76,7 @@ public partial class AnimationService : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Cloud Boundary Error",
+            Shell.Current.DisplayAlert("Cloud Boundary Error",
                 $"{ex.Message}", "OK");
         }
 

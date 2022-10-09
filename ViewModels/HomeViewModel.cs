@@ -26,13 +26,16 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 1;
+    int maxClouds = 7;
 
     [ObservableProperty]
     bool unreadOnly = true;
 
     [ObservableProperty]
     string dragText = "";
+
+    [ObservableProperty]
+    bool cloudTextVisible;
 
     #region CloudAnimationTypes for MVVM Bindings
 
@@ -188,48 +191,35 @@ public partial class HomeViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task TenClouds()
+    async Task CloudDragStartedAsync(CustomCloudControl c)
     {
-        CloudControls.Clear();
-        MaxClouds = 10;
-        for (int i = 0; i < MaxClouds; i++)
+        var ix = await Task.Run(() => CloudControls.IndexOf(c));
+
+        if (UnreadOnly)
         {
-            CustomCloudControl c = new()
-            {
-                CloudAnimation = CloudAnimationType.Drift
-            };
-            CloudControls.Add(c);
+            var text = UnreadThoughts.ElementAtOrDefault(ix).Content;
+
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            DragText = text;
         }
+        else
+        {
+            var text = AllThoughts.ElementAtOrDefault(ix).Content;
+
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            DragText = text;
+        }
+        Shell.Current.DisplaySnackbar(DragText);
     }
 
     [RelayCommand]
-    async Task TwentyClouds()
+    async Task CloudDroppedAsync()
     {
-        CloudControls.Clear();
-        MaxClouds = 20;
-        for (int i = 0; i < MaxClouds; i++)
-        {
-            CustomCloudControl c = new()
-            {
-                CloudAnimation = CloudAnimationType.Drift
-            };
-            CloudControls.Add(c);
-        }
-    }
-
-    [RelayCommand]
-    async Task FiftyClouds()
-    {
-        CloudControls.Clear();
-        MaxClouds = 50;
-        for (int i = 0; i < MaxClouds; i++)
-        {
-            CustomCloudControl c = new()
-            {
-                CloudAnimation = CloudAnimationType.Drift
-            };
-            CloudControls.Add(c);
-        }
+        CloudTextVisible = true;
     }
 
     [RelayCommand]
