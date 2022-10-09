@@ -59,15 +59,32 @@ public partial class CustomCloudControl : ContentView
 
     public async Task DriftAround()
     {
+        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
+
+        await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut).ContinueWith(
+            async antecedent =>
+            {
+                await this.DriftAround();
+
+            }, TaskContinuationOptions.OnlyOnRanToCompletion);
+    }
+
+/*    public async Task DriftAround()
+    {
         this.CancelAnimations();
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
         do
         {
-            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut);
+            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut).ContinueWith(
+                async antecedent =>
+                {
+                    await this.DriftAround();
+
+                }, TaskContinuationOptions.OnlyOnRanToCompletion);
             cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
 
         } while (this.CloudAnimation == CloudAnimationType.Drift);
-    }
+    }*/
 
     public async Task Dance()
     {
