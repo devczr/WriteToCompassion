@@ -34,4 +34,7 @@
                  CommandParameter="{Binding .}"/>
         </Border.GestureRecognizers>
     </Border>
+    <ContentView.GestureRecognizers>
+        <DragGestureRecognizer CanDrag="True" DragStarting="DragGestureRecognizer_DragStarting"/>
+    </ContentView.GestureRecognizers>
 </ContentView>

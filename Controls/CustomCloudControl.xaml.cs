@@ -1,4 +1,6 @@
 
+using System.Threading.Tasks;
+
 namespace WriteToCompassion.Controls;
 
 
@@ -57,34 +59,30 @@ public partial class CustomCloudControl : ContentView
         cloudAnimationService = animationService;
     }
 
-    public async Task DriftAround()
-    {
-        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
 
-        await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut).ContinueWith(
-            async antecedent =>
-            {
-                await this.DriftAround();
-
-            }, TaskContinuationOptions.OnlyOnRanToCompletion);
-    }
-
-/*    public async Task DriftAround()
-    {
-        this.CancelAnimations();
-        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
-        do
+    /*    public async Task DriftAround()
         {
+            cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
+
             await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut).ContinueWith(
                 async antecedent =>
                 {
                     await this.DriftAround();
 
                 }, TaskContinuationOptions.OnlyOnRanToCompletion);
+        }*/
+
+    public async Task DriftAround()
+    {
+        this.CancelAnimations();
+        cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
+        do
+        {
+            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut);
             cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
 
         } while (this.CloudAnimation == CloudAnimationType.Drift);
-    }*/
+    }
 
     public async Task Dance()
     {
@@ -93,6 +91,7 @@ public partial class CustomCloudControl : ContentView
         await this.ScaleTo(startingScale * 1.5, 250, Easing.BounceOut);
         await this.ScaleTo(startingScale / 2, 250, Easing.BounceIn);
         await this.ScaleTo(startingScale, 100, Easing.SpringIn);
+        await Task.Delay(250);
         this.CloudAnimation = CloudAnimationType.Hover;
     }
 
@@ -110,22 +109,26 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
 
-    public async Task ShortHover()
-    {
-        var startingX = this.TranslationX;
-        var startingY = this.TranslationY;
 
-        await this.TranslateTo(startingX - 5, startingY - 5, 1000);
-        await this.TranslateTo(startingX - 5, startingY, 1000);
-        await this.TranslateTo(startingX, startingY - 5, 1000);
-        await this.TranslateTo(startingX, startingY, 1000);
-        
+    private async void viewclicked(object sender, EventArgs e)
+    {
+        await Shell.Current.DisplayAlert("click", "clack", "whack");
 
     }
 
-    private async void ClickGestureRecognizer_Clicked(object sender, EventArgs e)
+    private async void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
     {
-        await Shell.Current.DisplayAlert("click", "clack", "whack");
+        if(e.StatusType is GestureStatus.Started)
+        {
+            this.CloudAnimation = CloudAnimationType.None;
+        }
+
+    }
+
+    private void DragGestureRecognizer_DragStarting(object sender, DragStartingEventArgs e)
+    {
+        e.Data.Text = 
+    
     }
 }
 /*    private int PanGestureTracker { get; set; }

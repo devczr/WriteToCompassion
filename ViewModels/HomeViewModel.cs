@@ -31,6 +31,9 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     bool unreadOnly = true;
 
+    [ObservableProperty]
+    string dragText = "";
+
     #region CloudAnimationTypes for MVVM Bindings
 
     private CloudAnimationType _cloud1Animation;
@@ -184,7 +187,50 @@ public partial class HomeViewModel : BaseViewModel
         CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
     }
 
+    [RelayCommand]
+    async Task TenClouds()
+    {
+        CloudControls.Clear();
+        MaxClouds = 10;
+        for (int i = 0; i < MaxClouds; i++)
+        {
+            CustomCloudControl c = new()
+            {
+                CloudAnimation = CloudAnimationType.Drift
+            };
+            CloudControls.Add(c);
+        }
+    }
 
+    [RelayCommand]
+    async Task TwentyClouds()
+    {
+        CloudControls.Clear();
+        MaxClouds = 20;
+        for (int i = 0; i < MaxClouds; i++)
+        {
+            CustomCloudControl c = new()
+            {
+                CloudAnimation = CloudAnimationType.Drift
+            };
+            CloudControls.Add(c);
+        }
+    }
+
+    [RelayCommand]
+    async Task FiftyClouds()
+    {
+        CloudControls.Clear();
+        MaxClouds = 50;
+        for (int i = 0; i < MaxClouds; i++)
+        {
+            CustomCloudControl c = new()
+            {
+                CloudAnimation = CloudAnimationType.Drift
+            };
+            CloudControls.Add(c);
+        }
+    }
 
     [RelayCommand]
     async Task GoToSettingsAsync()
