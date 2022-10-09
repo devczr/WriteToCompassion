@@ -12,7 +12,7 @@
     x:Class="WriteToCompassion.Views.HomeView"
     Shell.TabBarIsVisible="True"
     Title="Home">
-    
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
@@ -49,22 +49,21 @@
 
         <Border 
             Grid.Row="0"
-            BackgroundColor="PaleGoldenrod">
+            BackgroundColor="Transparent"
+            ZIndex="4">
             <Label
-                IsVisible="{Binding CloudTextVisible}"
-                Text="{Binding DragText}"
+                x:Name="dropLabel"
+                IsVisible="True"
+                Text="no"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 FontSize="Large"
                 FontAttributes="Bold"
-                TextColor="Purple"
+                TextColor="HotPink"
                 ZIndex="5">
-                
+
             </Label>
             <Border.GestureRecognizers>
-                <DropGestureRecognizer 
-                    AllowDrop="True"
-                    DropCommand="{Binding CloudDroppedCommand}"/>
             </Border.GestureRecognizers>
         </Border>
 
@@ -85,7 +84,7 @@
                         BackgroundColor="Pink"
                         CloudAnimation="{Binding CloudAnimation, Mode=TwoWay}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
-                    </controls:CustomCloudControl>
+                        </controls:CustomCloudControl>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </Grid>
@@ -98,8 +97,8 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="false"
-                            IsVisible="True"
-                            ZIndex="3"
+                            IsVisible="False"
+                            ZIndex="0"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
         <HorizontalStackLayout>

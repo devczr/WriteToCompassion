@@ -8,7 +8,7 @@
              x:Class="WriteToCompassion.Controls.CustomCloudControl">
 
 
-
+    
     <Border 
         BackgroundColor="Aquamarine"
         StrokeThickness="2"
@@ -28,17 +28,16 @@
             </Path>
         </Border.StrokeShape>
         <Border.GestureRecognizers>
+            <!--Gesture Recognizers placed on Border due to Android not recognizing swipe gestures on ContentView-->
             <TapGestureRecognizer x:DataType="controls:CustomCloudControl"
                                   NumberOfTapsRequired="2"
                                   Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DanceCommand}"
                  CommandParameter="{Binding .}"/>
+            <SwipeGestureRecognizer
+                x:DataType="controls:CustomCloudControl"
+                Direction="Up"
+                CommandParameter="{Binding .}"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudSwipedCommand}"/>
         </Border.GestureRecognizers>
     </Border>
-    <ContentView.GestureRecognizers>
-        <DragGestureRecognizer x:DataType="controls:CustomCloudControl"
-            CanDrag="True" 
-            DragStartingCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudDragStartedCommand}"
-            DragStartingCommandParameter="{Binding .}"
-            DropCompletedCommandParameter="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DragText}"/>
-    </ContentView.GestureRecognizers>
 </ContentView>
