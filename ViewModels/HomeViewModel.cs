@@ -190,38 +190,21 @@ public partial class HomeViewModel : BaseViewModel
         CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
     }
 
-    [RelayCommand]
-    async Task CloudDragStartedAsync(CustomCloudControl c)
-    {
-        var ix = await Task.Run(() => CloudControls.IndexOf(c));
-
-        if (UnreadOnly)
-        {
-            var text = UnreadThoughts.ElementAtOrDefault(ix).Content;
-
-            if (string.IsNullOrEmpty(text))
-                return;
-
-            DragText = text;
-        }
-        else
-        {
-            var text = AllThoughts.ElementAtOrDefault(ix).Content;
-
-            if (string.IsNullOrEmpty(text))
-                return;
-
-            DragText = text;
-        }
-        Shell.Current.DisplaySnackbar(DragText);
-    }
 
     [RelayCommand]
-    async Task CloudDroppedAsync()
+    async Task CloudSwipedAsync(CustomCloudControl customCloudControl)
     {
-        CloudTextVisible = true;
+        if (customCloudControl is null)
+            return;
+
+        int index = CloudControls.IndexOf(customCloudControl);
+        await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");
     }
 
+
+
+
+    //navigation
     [RelayCommand]
     async Task GoToSettingsAsync()
     {

@@ -1,9 +1,10 @@
 ﻿
+using Microsoft.Maui.Devices;
+
 namespace WriteToCompassion.Helpers;
 
 public class PanHelper : ContentView
 {
-    double x, y;
 
     public PanHelper()
     {
@@ -14,21 +15,18 @@ public class PanHelper : ContentView
 
     void OnPanUpdated(object sender, PanUpdatedEventArgs e)
     {
-//        var myPanHelper = (sender as Element)?.Parent as PanHelper;
+        //        var myPanHelper = (sender as Element)?.Parent as PanHelper;
         //       Shell.Current.DisplayAlert("PanUpdated", "OK", "OK");
-        
         switch (e.StatusType)
         {
             case GestureStatus.Running:
-                // Translate and ensure we don't pan beyond the wrapped user interface element bounds.
-                Content.TranslationX = x + e.TotalX;
-                Content.TranslationY = y + e.TotalY;
+                Content.TranslationX = e.TotalX;
+                Content.TranslationY = e.TotalY;
                 break;
 
             case GestureStatus.Completed:
-                // Store the translation applied during the pan
-                x = Content.TranslationX;
-                y = Content.TranslationY;
+                Content.TranslationX += e.TotalX;
+                Content.TranslationY += e.TotalY;
                 break;
         }
 

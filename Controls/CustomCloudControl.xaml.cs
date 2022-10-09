@@ -69,7 +69,7 @@ public partial class CustomCloudControl : ContentView
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
         do
         {
-            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut);
+            await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
             cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
 
         } while (this.CloudAnimation == CloudAnimationType.Drift);
@@ -99,4 +99,5 @@ public partial class CustomCloudControl : ContentView
             await this.TranslateTo(startingX, startingY, 1000);
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
+
 }
