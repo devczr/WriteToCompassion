@@ -26,10 +26,16 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 1;
+    int maxClouds = 7;
 
     [ObservableProperty]
     bool unreadOnly = true;
+
+    [ObservableProperty]
+    string dragText = "";
+
+    [ObservableProperty]
+    bool cloudTextVisible;
 
     #region CloudAnimationTypes for MVVM Bindings
 
@@ -184,7 +190,37 @@ public partial class HomeViewModel : BaseViewModel
         CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
     }
 
+    [RelayCommand]
+    async Task CloudDragStartedAsync(CustomCloudControl c)
+    {
+        var ix = await Task.Run(() => CloudControls.IndexOf(c));
 
+        if (UnreadOnly)
+        {
+            var text = UnreadThoughts.ElementAtOrDefault(ix).Content;
+
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            DragText = text;
+        }
+        else
+        {
+            var text = AllThoughts.ElementAtOrDefault(ix).Content;
+
+            if (string.IsNullOrEmpty(text))
+                return;
+
+            DragText = text;
+        }
+        Shell.Current.DisplaySnackbar(DragText);
+    }
+
+    [RelayCommand]
+    async Task CloudDroppedAsync()
+    {
+        CloudTextVisible = true;
+    }
 
     [RelayCommand]
     async Task GoToSettingsAsync()

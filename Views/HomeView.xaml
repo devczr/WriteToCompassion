@@ -44,12 +44,29 @@
     <Grid x:Name="primaryGrid"
         BackgroundColor="Transparent"
         InputTransparent="False"
-        RowDefinitions="2*,3*,*,80"
+        RowDefinitions="*,3*"
         Padding="15">
 
         <Border 
             Grid.Row="0"
-            BackgroundColor="Yellow"/>
+            BackgroundColor="PaleGoldenrod">
+            <Label
+                IsVisible="{Binding CloudTextVisible}"
+                Text="{Binding DragText}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                FontSize="Large"
+                FontAttributes="Bold"
+                TextColor="Purple"
+                ZIndex="5">
+                
+            </Label>
+            <Border.GestureRecognizers>
+                <DropGestureRecognizer 
+                    AllowDrop="True"
+                    DropCommand="{Binding CloudDroppedCommand}"/>
+            </Border.GestureRecognizers>
+        </Border>
 
         <!--Custom Cloud Controls-->
         <!--Height and Width set according to SVG pixel dimensions-->
@@ -81,15 +98,12 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="false"
-                            IsVisible="False"
+                            IsVisible="True"
                             ZIndex="3"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
-        <HorizontalStackLayout
-            Grid.Row="3">
-            <Button
-            Command="{Binding GetAllThoughtsCommand}"
-            Text="GetThoughts"/>
+        <HorizontalStackLayout>
+
         </HorizontalStackLayout>
 
 
