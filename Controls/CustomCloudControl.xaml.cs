@@ -14,18 +14,18 @@ public partial class CustomCloudControl : ContentView
     public static readonly BindableProperty CloudAnimationProperty =
  BindableProperty.Create(nameof(CloudAnimation), typeof(CloudAnimationType), typeof(CustomCloudControl), CloudAnimationType.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnCloudAnimationChanged);
 
+    public static readonly BindableProperty CloudControlIDProperty = BindableProperty.Create(nameof(CloudControlID), typeof(Guid), typeof(CustomCloudControl));
+
+    public Guid CloudControlID
+    {
+        get => (Guid)GetValue(CloudControlIDProperty);
+        set => SetValue(CloudControlIDProperty, value);
+    }
 
     public CloudAnimationType CloudAnimation
     {
         get => (CloudAnimationType)GetValue(CloudAnimationProperty);
-        set
-        {
-/*            if (this.CloudAnimation == value)
-                return;
-*/
-            SetValue(CloudAnimationProperty, value);
-
-        }
+        set => SetValue(CloudAnimationProperty, value);
     }
 
     static async void OnCloudAnimationChanged(BindableObject bindable, object oldValue, object newValue)
@@ -40,11 +40,8 @@ public partial class CustomCloudControl : ContentView
                 break;
 
             case CloudAnimationType.Drift:
-                {
                     await cloudReportingChange.DriftAround();
                     break;
-                }
-
 
             case CloudAnimationType.Hover:
                 await cloudReportingChange.LocalHover();
@@ -64,24 +61,11 @@ public partial class CustomCloudControl : ContentView
         AnimationService animationService = new();
         InitializeComponent();
         cloudAnimationService = animationService;
+        
     }
-
-
-    /*    public async Task DriftAround()
-        {
-            cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
-
-            await this.TranslateTo(x, y, durationRandom, easing: Easing.SinInOut).ContinueWith(
-                async antecedent =>
-                {
-                    await this.DriftAround();
-
-                }, TaskContinuationOptions.OnlyOnRanToCompletion);
-        }*/
 
     public async Task DriftAround()
     {
-        bool colorBool = false;
         this.CancelAnimations();
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
         await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
@@ -94,11 +78,7 @@ public partial class CustomCloudControl : ContentView
             await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
             loopCounter++;
             loopLabel.Text = loopCounter.ToString();
-            if (colorBool)
-                this.BackgroundColor = Colors.BlueViolet;
-            else
-                this.BackgroundColor = Colors.Red;
-            colorBool = !colorBool;
+
             cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
 
         }

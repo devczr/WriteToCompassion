@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Maui.Alerts;
 using System.Collections.ObjectModel;
+using System.Linq;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -9,12 +10,7 @@ namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {
-    public ObservableCollection<CustomCloudControl> CloudControls { get; set; } = new();
-
-    public ObservableCollection<CloudAnimationType> Clouds { get; set; } = new();
-
-    [ObservableProperty]
-    public Cloud testCloud = new();
+    public ObservableCollection<Cloud> Clouds { get; set; } = new();
 
     public ObservableCollection<Thought> UnreadThoughts { get; } = new();
 
@@ -31,7 +27,7 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 1;
+    int maxClouds = 2;
 
     [ObservableProperty]
     bool unreadOnly = true;
@@ -92,9 +88,10 @@ public partial class HomeViewModel : BaseViewModel
 
         for (int i = 0; i < cloudCount; i++)
         {
-            CloudAnimationType c = new()
+            Cloud c = new()
             {
-
+                CloudAnimationType = CloudAnimationType.Drift,
+                CloudID = Guid.NewGuid()
             };
             Clouds.Add(c);
         }
@@ -103,29 +100,40 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task DanceAsync(CustomCloudControl customCloudControl)
     {
-        if (customCloudControl is null)
-            return;
-
-        int index = CloudControls.IndexOf(customCloudControl);
-        CloudControls[index].CloudAnimation = CloudAnimationType.Dance;
+        
+        int index = Clouds.IndexOf(await GetCloudById(customCloudControl));
+        await Shell.Current.DisplayAlert("index is", index.ToString(), "Ok");
+/*        int index = Clouds.IndexOf(cAT);
+        CloudControls[index].CloudAnimation = CloudAnimationType.Dance;*/
     }
 
+    private async Task<Cloud> GetCloudById(CustomCloudControl customCloudControl)
+    {
+        var result = await Task.Run(() => 
+        Clouds.Where(c => c.CloudID == customCloudControl.CloudControlID)
+        .FirstOrDefault());
+        return result;
+    }
 
     [RelayCommand]
     async Task CloudSwipedAsync(CustomCloudControl customCloudControl)
     {
-        if (customCloudControl is null)
+/*        if (customCloudControl is null)
             return;
 
         int index = CloudControls.IndexOf(customCloudControl);
-        await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");
+        await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");*/
     }
 
     [RelayCommand]
-    async Task CloudPropertyChange()
+    private void PopulateClouds()
     {
-        Clouds[0] = CloudAnimationType.Drift;
 
+        int count = Clouds.Count;
+        for(int i = 0; i < count; i++)
+        {
+            Clouds[i].CloudAnimationType = CloudAnimationType.Drift;
+        }
     }
 
 

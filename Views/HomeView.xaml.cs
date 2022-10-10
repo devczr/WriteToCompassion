@@ -47,13 +47,4 @@ public partial class HomeView : ContentPage
         sizeLabel.Text = sb.ToString();
     }
 
-    private void prop_Clicked(object sender, EventArgs e)
-    {
-    }
-
-    private void workButton_Clicked(object sender, EventArgs e)
-    {
-/*        testCloudControl.CloudAnimation = homeViewModel.Clouds[0];
-        testLabel.Text = testCloudControl.CloudAnimation.ToString();*/
-    }
 }
