@@ -1,13 +1,14 @@
-using Microsoft.Maui;
-
+using System.Text;
 namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage
 {
+    private readonly HomeViewModel homeViewModel;
 	public HomeView(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
 		BindingContext = homeViewModel;
+        this.homeViewModel = homeViewModel;
 	}
 
     protected override void OnSizeAllocated(double width, double height)
@@ -22,79 +23,37 @@ public partial class HomeView : ContentPage
     }
 
 
-/*    private async void AnimateBox()
+    private void OnMeasureClicked(object sender, EventArgs e)
     {
-        var startingX = box.TranslationX;
-        var startingY = box.TranslationY;
-        do
-        {
-            box.CancelAnimations();
-            await box.TranslateTo(startingX - 50, startingY - 50, 3000);
-            await box.TranslateTo(startingX - 50, startingY, 3000);
-            await box.TranslateTo(startingX, startingY - 50, 3000);
-            await box.TranslateTo(startingX, startingY, 3000);
-        } while (true);
-    }*/
-
-    private void OnBoxPanUpdated(object sender, PanUpdatedEventArgs e)
-    {
-
+        StringBuilder sb = new StringBuilder();
+        sb.Append("Base: ");
+        sb.Append("   w " + base.Width.ToString("F1"));
+        sb.AppendLine("   h " + base.Height.ToString("F1"));
+        sb.Append("pad: ");
+        sb.Append("   horiz   " + base.Padding.HorizontalThickness);
+        sb.AppendLine("   vert   " + base.Padding.VerticalThickness);
+        sb.Append("Grid 0: ");
+        sb.Append("   w " + contentBorder.Width.ToString("F1"));
+        sb.AppendLine("   h " + contentBorder.Height.ToString("F1"));
+        sb.Append("pad: ");
+        sb.Append("   horiz   " + contentBorder.Padding.HorizontalThickness);
+        sb.AppendLine("   vert   " + contentBorder.Padding.VerticalThickness);
+        sb.Append("Grid 1: ");
+        sb.Append("   w " + cloudGrid.Width.ToString("F1"));
+        sb.AppendLine("   h " + cloudGrid.Height.ToString("F1"));
+        sb.Append("pad: ");
+        sb.Append("   horiz   " + cloudGrid.Padding.HorizontalThickness);
+        sb.AppendLine("   vert   " + cloudGrid.Padding.VerticalThickness);
+        sizeLabel.Text = sb.ToString();
     }
 
-    private void OnSwiped(object sender, SwipedEventArgs e)
+    private void prop_Clicked(object sender, EventArgs e)
     {
-        Shell.Current.DisplayAlert("helper", e.Direction.ToString(), "ok");
     }
 
-    /*        switch (e.StatusType)
-        {
-            case GestureStatus.Running:
-                HandleTouch(e.TotalX, e.TotalY);
-                break;
-            case GestureStatus.Completed:
-                HandleTouchEnd(swipedDirection);
-                break;
-        }*/
-
-
-    /*    private void HandleTouch(double eTotalX, double eTotalY)
-        {
-            swipedDirection = null;
-            const int delta = 50;
-            if (eTotalX > delta)
-            {
-                swipedDirection = SwipeDirection.Right;
-            }
-            else if (eTotalX < -delta)
-            {
-                swipedDirection = SwipeDirection.Left;
-            }
-            else if (eTotalY > delta)
-            {
-                swipedDirection = SwipeDirection.Down;
-            }
-            else if (eTotalY < -delta)
-            {
-                swipedDirection = SwipeDirection.Up;
-            }
-        }
-
-        private void HandleTouchEnd(SwipeDirection? swiped)
-        {
-            if (swiped == null)
-            {
-                return;
-            }
-
-            switch (swiped)
-            {
-                case SwipeDirection.Right when Children.Count > 0:
-                    cards.Push(Children[^1]);
-                    Children.RemoveAt(Children.Count - 1);
-                    break;
-                case SwipeDirection.Left when cards.Count > 0:
-                    Children.Add(cards.Pop());
-                    break;
-            }
-        }*/
+    private void workButton_Clicked(object sender, EventArgs e)
+    {
+/*        testCloudControl.CloudAnimation = homeViewModel.Clouds[0];
+        testLabel.Text = testCloudControl.CloudAnimation.ToString();*/
+    }
 }

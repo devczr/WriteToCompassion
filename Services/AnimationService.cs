@@ -22,21 +22,11 @@ public partial class AnimationService : ObservableObject
 
     private void SetVerticalBoundaries()
     {
-        //TODO: Redo math on boundaries now that grids have changed
-
         double yBoundary = ScreenHelper.ScreenYValue;
 
-        //subtracting bottom grid cell set to 50 units
-        yBoundary -= 50;
+        // ratio of space for Grid.Row = 1
+        yBoundary *= .75;
 
-        // 5*, * grid sizes for first two cells means 6 total units
-        yBoundary /= 6;
-
-        // * units in the clouds grid cell (5)
-        yBoundary *= 5;
-
-        //subtracting aesthetic buffer
-        yBoundary -= 70;
 
 
 
