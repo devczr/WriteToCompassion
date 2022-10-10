@@ -68,28 +68,6 @@
             </Border.GestureRecognizers>
         </Border>
 
-
-        <controls:CustomCloudControl
-            Grid.Row="1"
-            IsVisible="false"
-            x:Name="testCloudControl"
-            HorizontalOptions="Center"
-            VerticalOptions="End"
-            WidthRequest="200"
-            HeightRequest="126"
-            ZIndex="2"
-            CloudAnimation="{Binding Clouds}">
-        </controls:CustomCloudControl>
-
-        <Label 
-            Text="starting text"
-            Grid.Row="1"
-            x:Name="testLabel"
-            FontSize="30"
-            TextColor="HotPink"
-            VerticalOptions="End"
-            HorizontalOptions="End"/>
-
         <!--Custom Cloud Controls-->
         <!--Height and Width set according to SVG pixel dimensions-->
         <!--TapGestureRecognizer inside CustomCloudControl xaml-->
@@ -98,7 +76,7 @@
             Grid.Row="1"
             BindableLayout.ItemsSource="{Binding Clouds}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="controls:CloudAnimationType">
+                <DataTemplate x:DataType="models:Cloud">
                     <controls:CustomCloudControl
                         IsVisible="true"
                         HorizontalOptions="Center"
@@ -106,7 +84,8 @@
                         WidthRequest="200"
                         HeightRequest="126"
                         ZIndex="2"
-                        CloudAnimation="{Binding .}"
+                        CloudControlID="{Binding CloudID}"
+                        CloudAnimation="{Binding CloudAnimationType}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
                     </controls:CustomCloudControl>
                 </DataTemplate>
@@ -150,15 +129,14 @@
                 Text="propchange"
                 FontSize="Micro"
                 TextColor="YellowGreen"
-                Command="{Binding CloudPropertyChangeCommand}"/>
+                Command="{Binding PopulateCloudsCommand}"/>
             <Button
                 HorizontalOptions="End"
                 x:Name="workButton"
                 FontAutoScalingEnabled="True"
                 Text="$"
                 FontSize="Micro"
-                TextColor="IndianRed"
-                Clicked="workButton_Clicked"/>
+                TextColor="IndianRed"/>
         </HorizontalStackLayout>
 
 
