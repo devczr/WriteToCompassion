@@ -11,6 +11,11 @@ public partial class HomeViewModel : BaseViewModel
 {
     public ObservableCollection<CustomCloudControl> CloudControls { get; set; } = new();
 
+    public ObservableCollection<CloudAnimationType> Clouds { get; set; } = new();
+
+    [ObservableProperty]
+    public Cloud testCloud = new();
+
     public ObservableCollection<Thought> UnreadThoughts { get; } = new();
 
     public ObservableCollection<Thought> AllThoughts { get; } = new();
@@ -26,7 +31,7 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 7;
+    int maxClouds = 1;
 
     [ObservableProperty]
     bool unreadOnly = true;
@@ -36,91 +41,6 @@ public partial class HomeViewModel : BaseViewModel
 
     [ObservableProperty]
     bool cloudTextVisible;
-
-    #region CloudAnimationTypes for MVVM Bindings
-
-    private CloudAnimationType _cloud1Animation;
-    public CloudAnimationType Cloud1Animation
-    {
-        get => _cloud1Animation;
-        set
-        {
-            if (_cloud1Animation != value)
-            {
-                _cloud1Animation = value;
-                OnPropertyChanged();
-
-            }
-
-        }
-    }
-
-    private CloudAnimationType _cloud2Animation;
-    public CloudAnimationType Cloud2Animation
-    {
-        get => _cloud2Animation;
-        set
-        {
-            if (_cloud2Animation != value)
-            {
-                _cloud2Animation = value;
-                OnPropertyChanged();
-
-            }
-
-        }
-    }
-
-    private CloudAnimationType _cloud3Animation;
-    public CloudAnimationType Cloud3Animation
-    {
-        get => _cloud3Animation;
-        set
-        {
-            if (_cloud3Animation != value)
-            {
-                _cloud3Animation = value;
-                OnPropertyChanged();
-
-            }
-
-        }
-    }
-
-    private CloudAnimationType _cloud4Animation;
-    public CloudAnimationType Cloud4Animation
-    {
-        get => _cloud4Animation;
-        set
-        {
-            if (_cloud4Animation != value)
-            {
-                _cloud4Animation = value;
-                OnPropertyChanged();
-
-            }
-
-        }
-    }
-
-    private CloudAnimationType _cloud5Animation;
-    public CloudAnimationType Cloud5Animation
-    {
-        get => _cloud5Animation;
-        set
-        {
-            if (_cloud5Animation != value)
-            {
-                _cloud5Animation = value;
-                OnPropertyChanged();
-
-            }
-
-        }
-    }
-
-    #endregion
-
 
     public HomeViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
             : base(settingsService)
@@ -172,11 +92,11 @@ public partial class HomeViewModel : BaseViewModel
 
         for (int i = 0; i < cloudCount; i++)
         {
-            CustomCloudControl c = new()
+            CloudAnimationType c = new()
             {
-                CloudAnimation = CloudAnimationType.Drift
+
             };
-            CloudControls.Add(c);
+            Clouds.Add(c);
         }
     }
 
@@ -201,7 +121,12 @@ public partial class HomeViewModel : BaseViewModel
         await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");
     }
 
+    [RelayCommand]
+    async Task CloudPropertyChange()
+    {
+        Clouds[0] = CloudAnimationType.Drift;
 
+    }
 
 
     //navigation

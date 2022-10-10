@@ -47,7 +47,8 @@
         RowDefinitions="*,3*"
         Padding="15">
 
-        <Border 
+        <Border
+            x:Name="contentBorder"
             Grid.Row="0"
             BackgroundColor="Transparent"
             ZIndex="4">
@@ -67,24 +68,47 @@
             </Border.GestureRecognizers>
         </Border>
 
+
+        <controls:CustomCloudControl
+            Grid.Row="1"
+            IsVisible="false"
+            x:Name="testCloudControl"
+            HorizontalOptions="Center"
+            VerticalOptions="End"
+            WidthRequest="200"
+            HeightRequest="126"
+            ZIndex="2"
+            CloudAnimation="{Binding Clouds}">
+        </controls:CustomCloudControl>
+
+        <Label 
+            Text="starting text"
+            Grid.Row="1"
+            x:Name="testLabel"
+            FontSize="30"
+            TextColor="HotPink"
+            VerticalOptions="End"
+            HorizontalOptions="End"/>
+
         <!--Custom Cloud Controls-->
         <!--Height and Width set according to SVG pixel dimensions-->
         <!--TapGestureRecognizer inside CustomCloudControl xaml-->
         <Grid
+            x:Name="cloudGrid"
             Grid.Row="1"
-            BindableLayout.ItemsSource="{Binding CloudControls}">
+            BindableLayout.ItemsSource="{Binding Clouds}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="controls:CustomCloudControl">
+                <DataTemplate x:DataType="controls:CloudAnimationType">
                     <controls:CustomCloudControl
+                        IsVisible="true"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
                         WidthRequest="200"
                         HeightRequest="126"
                         ZIndex="2"
-                        BackgroundColor="Pink"
-                        CloudAnimation="{Binding CloudAnimation, Mode=TwoWay}"
+                        CloudAnimation="{Binding .}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
-                        </controls:CustomCloudControl>
+                    </controls:CustomCloudControl>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </Grid>
@@ -101,8 +125,40 @@
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
-        <HorizontalStackLayout>
-
+        <HorizontalStackLayout
+            VerticalOptions="End"
+            Grid.Row="1">
+            <Label
+                Margin="10"
+                HorizontalTextAlignment="End"
+                x:Name="sizeLabel"
+                Text="initial"
+                FontSize="Micro"
+                TextColor="DarkOrange"/>
+            <Button
+                HorizontalOptions="End"
+                x:Name="sizeButton"
+                FontAutoScalingEnabled="True"
+                Text="measure"
+                FontSize="Micro"
+                TextColor="OrangeRed"
+                Clicked="OnMeasureClicked"/>
+            <Button
+                HorizontalOptions="End"
+                x:Name="prop"
+                FontAutoScalingEnabled="True"
+                Text="propchange"
+                FontSize="Micro"
+                TextColor="YellowGreen"
+                Command="{Binding CloudPropertyChangeCommand}"/>
+            <Button
+                HorizontalOptions="End"
+                x:Name="workButton"
+                FontAutoScalingEnabled="True"
+                Text="$"
+                FontSize="Micro"
+                TextColor="IndianRed"
+                Clicked="workButton_Clicked"/>
         </HorizontalStackLayout>
 
 
