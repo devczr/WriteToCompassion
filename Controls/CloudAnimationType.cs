@@ -6,5 +6,6 @@ public enum CloudAnimationType
     Drift,
     Hover,
     HoverToDrift,
-    Dance
+    Dance,
+    Display
 }

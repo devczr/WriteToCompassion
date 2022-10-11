@@ -42,10 +42,10 @@
     </ContentPage.Behaviors>
 
     <Grid x:Name="primaryGrid"
-        BackgroundColor="Transparent"
         InputTransparent="False"
         RowDefinitions="*,3*"
-        Padding="15">
+        Padding="15"
+          BackgroundColor="DarkSeaGreen">
 
         <Border
             x:Name="contentBorder"
@@ -73,6 +73,7 @@
         <!--TapGestureRecognizer inside CustomCloudControl xaml-->
         <Grid
             x:Name="cloudGrid"
+            BackgroundColor="Yellow"
             Grid.Row="1"
             BindableLayout.ItemsSource="{Binding Clouds}">
             <BindableLayout.ItemTemplate>
@@ -128,16 +129,14 @@
                 FontAutoScalingEnabled="True"
                 Text="propchange"
                 FontSize="Micro"
-                TextColor="YellowGreen"
-                Command="{Binding PopulateCloudsCommand}"/>
+                TextColor="YellowGreen"/>
             <Button
                 HorizontalOptions="End"
                 x:Name="workButton"
                 FontAutoScalingEnabled="True"
                 Text="$"
                 FontSize="Micro"
-                TextColor="IndianRed"
-                Command="{Binding TestCloudsPropertiesCommand}"/>
+                TextColor="IndianRed"/>
         </HorizontalStackLayout>
 
     </Grid>
