@@ -74,9 +74,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Controls\CloudPath.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\CustomCloudControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

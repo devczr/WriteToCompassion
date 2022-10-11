@@ -7,12 +7,9 @@ namespace WriteToCompassion.Controls;
 
 public partial class CustomCloudControl : ContentView
 {
-    public static int loopCounter = 0;
-
-
 
     public static readonly BindableProperty CloudAnimationProperty =
- BindableProperty.Create(nameof(CloudAnimation), typeof(CloudAnimationType), typeof(CustomCloudControl), CloudAnimationType.None, defaultBindingMode: BindingMode.TwoWay, propertyChanged: OnCloudAnimationChanged);
+ BindableProperty.Create(nameof(CloudAnimation), typeof(CloudAnimationType), typeof(CustomCloudControl), CloudAnimationType.None, propertyChanged: OnCloudAnimationChanged);
 
     public static readonly BindableProperty CloudControlIDProperty = BindableProperty.Create(nameof(CloudControlID), typeof(Guid), typeof(CustomCloudControl));
 
@@ -53,8 +50,6 @@ public partial class CustomCloudControl : ContentView
         }
     }
 
-
-
     AnimationService cloudAnimationService;
     public CustomCloudControl()
     {
@@ -68,43 +63,14 @@ public partial class CustomCloudControl : ContentView
     {
         this.CancelAnimations();
         cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
-        await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
+        await this.TranslateTo(x, y, 250, easing: Easing.SinInOut);
 
-        loopCounter++;
-        loopLabel.Text = loopCounter.ToString();
-        while (true)
+        while (this.CloudAnimation == CloudAnimationType.Drift)
         {
-
-            await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
-            loopCounter++;
-            loopLabel.Text = loopCounter.ToString();
-
+            await this.TranslateTo(x, y, 5000, easing: Easing.Linear);
             cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
-
         }
     }
-
-    /*    public async Task DriftAround()
-        {
-            bool colorBool = false;
-            this.CancelAnimations();
-            cloudAnimationService.SetRandomDriftTranslationTargets(out double x, out double y, out uint durationRandom);
-            loopCounter++;
-            loopLabel.Text = loopCounter.ToString();
-            do
-            {
-                loopCounter++;
-                loopLabel.Text = loopCounter.ToString();
-                await this.TranslateTo(x, y, 5000, easing: Easing.SinInOut);
-                if(colorBool)
-                    this.BackgroundColor = Colors.BlueViolet;
-                else
-                    this.BackgroundColor = Colors.Red;
-                colorBool = !colorBool;
-                cloudAnimationService.SetRandomDriftTranslationTargets(out x, out y, out durationRandom);
-
-            } while (this.CloudAnimation == CloudAnimationType.Drift);
-        }*/
 
     public async Task Dance()
     {
@@ -131,4 +97,9 @@ public partial class CustomCloudControl : ContentView
         } while (this.CloudAnimation == CloudAnimationType.Hover);
     }
 
+    private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+    {
+        Shell.Current.DisplayAlert("backing", "tapped", "Ok");
+
+    }
 }

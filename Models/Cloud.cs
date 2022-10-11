@@ -1,9 +1,15 @@
 ﻿
 namespace WriteToCompassion.Models;
 
-public class Cloud
+public class Cloud : ObservableObject
 {
-    public CloudAnimationType CloudAnimationType { get; set; }
+    private CloudAnimationType _animationType;
+    public CloudAnimationType AnimationType
+    {
+        get => _animationType;
+    
+        set => SetProperty(ref _animationType, value);
+    }
 
     public Guid CloudID { get; set; }
 
