@@ -14,38 +14,29 @@
     <Grid RowDefinitions="50,*">
         <Grid
             Grid.Row="0"
-            ColumnDefinitions="*,*,*,*,*">
-            <Border BackgroundColor="Pink"
+            ColumnDefinitions="*,*,*,*">
+            <Border BackgroundColor="Transparent"
                 Grid.Row="0"
                 Grid.ColumnSpan="5"/>
-            <VerticalStackLayout 
-            Grid.Column="0"
-            IsClippedToBounds="True">
-                <ImageButton
-                    x:Name="savebutton"
+
+            <ImageButton
+                Grid.Column="0"
+                BackgroundColor="Red"
+                Source="xicon.png"
                 Scale="0.5"
-                VerticalOptions="Start"
+                VerticalOptions="Center"
                 HorizontalOptions="Start"
-                Source="checkicon.png"
-                Aspect="Center"
+                Command="{Binding CancelCommand}"/>
+            
+            <Button
+                Text="Save"
+                Grid.Column="2"
+                Grid.ColumnSpan="2"
+                x:Name="savebutton"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
                 Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
-            </VerticalStackLayout>
 
-            <ImageButton
-            Grid.Column="3"
-            Source="xicon.png"
-            Scale="0.5"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            Command="{Binding CancelCommand}"/>
-
-            <ImageButton
-            Grid.Column="4"
-            Source="trashicon.png"
-            Scale="0.5"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            Command="{Binding DeleteThoughtCommand}"/>
         </Grid>
         
         <Editor 

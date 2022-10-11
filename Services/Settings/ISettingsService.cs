@@ -4,8 +4,10 @@ public interface ISettingsService
 {
     bool DisplayTutorial { get; set; }
 
+    bool UnreadOnly { get; set; }
+
     //TODO: Implement authentication
-/*    string AuthAccessToken { get; set; }
-    string AuthIdToken { get; set; }*/
+    /*    string AuthAccessToken { get; set; }
+        string AuthIdToken { get; set; }*/
 
 }

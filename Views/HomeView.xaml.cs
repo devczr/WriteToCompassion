@@ -46,7 +46,7 @@ public partial class HomeView : ContentPage
         sb.Append("pad: ");
         sb.Append("   horiz   " + cloudGrid.Padding.HorizontalThickness);
         sb.AppendLine("   vert   " + cloudGrid.Padding.VerticalThickness);
-        sizeLabel.Text = sb.ToString();
+        //sizeLabel.Text = sb.ToString();
     }
 
 }
