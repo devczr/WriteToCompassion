@@ -85,7 +85,7 @@
                         HeightRequest="126"
                         ZIndex="2"
                         CloudControlID="{Binding CloudID}"
-                        CloudAnimation="{Binding CloudAnimationType}"
+                        CloudAnimation="{Binding AnimationType}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
                     </controls:CustomCloudControl>
                 </DataTemplate>
@@ -136,7 +136,8 @@
                 FontAutoScalingEnabled="True"
                 Text="$"
                 FontSize="Micro"
-                TextColor="IndianRed"/>
+                TextColor="IndianRed"
+                Command="{Binding TestCloudsPropertiesCommand}"/>
         </HorizontalStackLayout>
 
 

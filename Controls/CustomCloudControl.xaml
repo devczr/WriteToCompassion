@@ -5,6 +5,7 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              xmlns:controls="clr-namespace:WriteToCompassion.Controls"
+             xmlns:models="clr-namespace:WriteToCompassion.Models"
              x:Class="WriteToCompassion.Controls.CustomCloudControl">
 
 
@@ -12,7 +13,6 @@
     <Border 
         BackgroundColor="Teal"
         StrokeThickness="2"
-        AutomationId="25"
         ZIndex="2">
         <Label
             x:Name="loopLabel"
@@ -39,10 +39,10 @@
         </Border.StrokeShape>
         <Border.GestureRecognizers>
             <!--Gesture Recognizers placed on Border due to Android not recognizing swipe gestures on ContentView-->
-            <TapGestureRecognizer x:DataType="controls:CustomCloudControl"
-                                  NumberOfTapsRequired="2"
-                                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DanceCommand}"
-                 CommandParameter="{Binding .}"/>
+            <TapGestureRecognizer x:DataType="models:Cloud"
+                NumberOfTapsRequired="2"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DanceCommand}"
+                CommandParameter="{Binding .}"/>
             <SwipeGestureRecognizer
                 x:DataType="controls:CustomCloudControl"
                 Direction="Up"
