@@ -13,9 +13,9 @@ public partial class HomeViewModel : BaseViewModel
 {
     public ObservableCollection<Cloud> Clouds { get; set; } = new();
 
-    public ObservableCollection<Thought> UnreadThoughts { get; } = new();
+    public List<Thought> UnreadThoughts { get; } = new();
 
-    public ObservableCollection<Thought> AllThoughts { get; } = new();
+    public List<Thought> AllThoughts { get; } = new();
 
 
     ThoughtsService thoughtsService;
@@ -28,7 +28,7 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 1;
+    int maxClouds = 30;
 
     [ObservableProperty]
     bool unreadOnly = true;
@@ -50,6 +50,9 @@ public partial class HomeViewModel : BaseViewModel
     {
         try
         {
+            //clear list that xaml clouds are bound to
+            Clouds.Clear();
+
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
             var thoughts = await thoughtsService.GetAllThoughts();
 
@@ -71,6 +74,9 @@ public partial class HomeViewModel : BaseViewModel
         }
         finally
         {
+            //delaying here due to OnSizeAllocated firing 3 times on app startup
+            //also gives time for the page to load in between NavigatedTo and actual page visiblity
+            await Task.Delay(1500);
             await InitDriftAsync();
         }
     }
@@ -103,8 +109,19 @@ public partial class HomeViewModel : BaseViewModel
     {
         var index = await Task.Run(() => Clouds.IndexOf(cloudToDance));
 
-        Clouds[index].AnimationType = CloudAnimationType.None;
+        Clouds[index].AnimationType = CloudAnimationType.Dance;
     }
+
+
+
+    [RelayCommand]
+    async Task HoverToDriftAsync(Cloud cloudToDance)
+    {
+        var index = await Task.Run(() => Clouds.IndexOf(cloudToDance));
+
+        Clouds[index].AnimationType = CloudAnimationType.HoverToDrift;
+    }
+
 
     [RelayCommand]
     async Task TestCloudsProperties()
@@ -113,13 +130,13 @@ public partial class HomeViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task CloudSwipedAsync(CustomCloudControl customCloudControl)
+    async Task CloudSwipedAsync(Cloud swipedCloud)
     {
-        /*        if (customCloudControl is null)
-                    return;
+        if (swipedCloud is null)
+            return;
 
-                int index = CloudControls.IndexOf(customCloudControl);
-                await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");*/
+        int index = Clouds.IndexOf(swipedCloud);
+        await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");
     }
 
     [RelayCommand]
@@ -131,6 +148,13 @@ public partial class HomeViewModel : BaseViewModel
         {
             Clouds[i].AnimationType = CloudAnimationType.Drift;
         }
+    }
+
+
+    [RelayCommand]
+    async Task SizeAlertAsync()
+    {
+        await Shell.Current.DisplaySnackbar("size allocated!");
     }
 
 
