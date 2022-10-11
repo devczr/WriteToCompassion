@@ -14,15 +14,6 @@
         BackgroundColor="Teal"
         StrokeThickness="2"
         ZIndex="2">
-        <Label
-            x:Name="loopLabel"
-            Text="start"
-            FontSize="90"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            TextColor="Yellow"
-            FontAttributes="Bold"
-            ZIndex="9"/>
         <Border.Stroke>
             <LinearGradientBrush EndPoint="1,0">
                 <GradientStop Color="Purple"
@@ -44,7 +35,7 @@
                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=DanceCommand}"
                 CommandParameter="{Binding .}"/>
             <SwipeGestureRecognizer
-                x:DataType="controls:CustomCloudControl"
+                x:DataType="models:Cloud"
                 Direction="Up"
                 CommandParameter="{Binding .}"
                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudSwipedCommand}"/>

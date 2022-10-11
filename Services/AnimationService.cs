@@ -7,41 +7,46 @@ namespace WriteToCompassion.Services;
 public partial class AnimationService : ObservableObject
 {
     [ObservableProperty]
-    double topCloudBoundary = -200;
+    int topCloudBoundary = -200;
 
     [ObservableProperty]
-    double bottomCloudBoundary = 0.1;
+    int bottomCloudBoundary = -10;
 
     [ObservableProperty]
-    double leftCloudBoundary = -200;
+    int leftCloudBoundary = -200;
 
     [ObservableProperty]
-    double rightCloudBoundary = 200;
+    int rightCloudBoundary = 200;
 
     private static readonly Random rnd = new();
 
     private void SetVerticalBoundaries()
     {
+
         double yBoundary = ScreenHelper.ScreenYValue;
-
-        // ratio of space for Grid.Row = 1
-        yBoundary *= .75;
-
-
-
 
         try
         {
-            //clouds should only translate upwards from starting position, so we need negative values only
-            TopCloudBoundary = Math.Round(yBoundary, 1, MidpointRounding.AwayFromZero) * -1;
+            // ratio of space for Grid.Row = 1
+            yBoundary *= .75;
+            //subtract 70 for aesthetic buffer
+            yBoundary -= 20;
 
-            //clouds are set to VerticalOptions "End" so 0 is the lowest they should go
-            //bottom boundary already set to 0 as default value
+ 
+
+            //clouds should only translate upwards from starting position, so we need negative values only
+            TopCloudBoundary = (int)Math.Round(yBoundary, 0, MidpointRounding.AwayFromZero) * -1;
+
+            //subtracting 50 from height of lottie to allow clouds to drift slighty under the top of the lottie
+            BottomCloudBoundary = ((int)ScreenHelper.LottieYValue - 50) * -1;
+
         }
         catch (Exception ex)
         {
             Shell.Current.DisplayAlert("Cloud Boundary Error",
                 $"{ex.Message}", "OK");
+            TopCloudBoundary = -200;
+            BottomCloudBoundary = -10;
         }
 
 
@@ -59,10 +64,10 @@ public partial class AnimationService : ObservableObject
 
         try
         {
-            RightCloudBoundary = Math.Round(xBoundary, 0, MidpointRounding.AwayFromZero);
+            RightCloudBoundary = (int)Math.Round(xBoundary, 0, MidpointRounding.AwayFromZero);
 
             //the left border is the negative value of the right border
-            LeftCloudBoundary = (Math.Round(xBoundary, 0, MidpointRounding.AwayFromZero) * -1);
+            LeftCloudBoundary = (int)(Math.Round(xBoundary, 0, MidpointRounding.AwayFromZero) * -1);
         }
         catch (Exception ex)
         {
@@ -79,8 +84,18 @@ public partial class AnimationService : ObservableObject
         SetHorizontalBoundaries();
         SetVerticalBoundaries();
 
-        x = rnd.NextDouble() * (RightCloudBoundary - LeftCloudBoundary) + LeftCloudBoundary;
-        y = rnd.NextDouble() * (TopCloudBoundary - BottomCloudBoundary) + BottomCloudBoundary;
+        //       x = rnd.NextDouble() * (RightCloudBoundary - LeftCloudBoundary) + LeftCloudBoundary;
+        //       y = rnd.NextDouble() * (TopCloudBoundary - BottomCloudBoundary) + BottomCloudBoundary;
+        if (RightCloudBoundary > LeftCloudBoundary)
+            x = rnd.Next(LeftCloudBoundary, RightCloudBoundary);
+        else
+            x = 0;
+
+        if (BottomCloudBoundary > TopCloudBoundary)
+            y = rnd.Next(TopCloudBoundary, BottomCloudBoundary);
+        else
+            y = -50;
+
         durationRnd = (uint)rnd.Next(5000, 7000);
         // TODO: add logic for more exciting cloud patterns
     }
