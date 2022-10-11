@@ -23,7 +23,7 @@ public partial class AnimationService : ObservableObject
     private void SetVerticalBoundaries()
     {
 
-        double yBoundary = ScreenHelper.ScreenYValue;
+        double yBoundary = ScreenHelper.CloudGridYValue;
 
         try
         {
@@ -57,7 +57,7 @@ public partial class AnimationService : ObservableObject
     {
         //Clouds are set to HorizontalOptions Center, so the middle is 0, to the right border is half the width
 
-        double xBoundary = ScreenHelper.ScreenXValue / 2;
+        double xBoundary = ScreenHelper.CloudGridXValue / 2;
 
         //subtracting aesthetic buffer
         xBoundary -= 50;

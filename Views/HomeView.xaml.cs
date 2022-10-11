@@ -15,8 +15,7 @@ public partial class HomeView : ContentPage
     {
         base.OnSizeAllocated(width, height);
 
-        //desired lower vertical boundary is just beneath the top of the lottie animation
-        ScreenHelper.UpdateScreenXYValues(cloudGrid.Width, cloudGrid.Height, cloudlottie.Height);
+        ScreenHelper.UpdateScreenXYValues(cloudGrid.Width, cloudGrid.Height, contentBorder.Width, contentBorder.Height, cloudlottie.Height);
      
     }
 

@@ -11,19 +11,20 @@ namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {
+    //HomeView grid bindable layout bound to this Clouds observable collection
+    //number of clouds visible = Clouds.Count
     public ObservableCollection<Cloud> Clouds { get; set; } = new();
 
+
+    //Read & unread thoughts retrieved from db via thoughtsservice
+    public List<Thought> AllThoughts { get; } = new();
     public List<Thought> UnreadThoughts { get; } = new();
 
-    public List<Thought> AllThoughts { get; } = new();
-
-
+    //handles database logic
     ThoughtsService thoughtsService;
 
 
-    [ObservableProperty]
-    bool animateCloudLottie = false;
-
+    //User can adjust in Settings
     [ObservableProperty]
     double cloudScale = 0.5;
 
@@ -33,8 +34,13 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     bool unreadOnly = true;
 
+
+    //general XAML Bindings
     [ObservableProperty]
-    string dragText = "";
+    bool animateCloudLottie = false;
+
+    [ObservableProperty]
+    string cloudContent = "";
 
     [ObservableProperty]
     bool cloudTextVisible;
@@ -44,12 +50,19 @@ public partial class HomeViewModel : BaseViewModel
     {
         this.thoughtsService = thoughtsService;
     }
+    
 
+    //mct:EventToCommand behavior on HomeView contentpage behavior calls this when "NavigatedTo" fires
     [RelayCommand]
     async Task GetAllThoughtsAsync()
     {
+        if (IsBusy)
+            return;
+
         try
         {
+            IsBusy = true;
+
             //clear list that xaml clouds are bound to
             Clouds.Clear();
 
@@ -78,20 +91,24 @@ public partial class HomeViewModel : BaseViewModel
             //also gives time for the page to load in between NavigatedTo and actual page visiblity
             await Task.Delay(1500);
             await InitDriftAsync();
+            IsBusy = false;
         }
     }
 
-
+    //Add to Clouds collection which signals bindable layout to spawn CustomCloudControls
     [RelayCommand]
     async Task InitDriftAsync()
     {
         int cloudCount;
 
+        //the number of clouds added to Clouds collection depends on:
+        // 1) how many thoughts the user has saved in database
+        // 2) their show only "Unread" or show "All" setting (a thought is considered Unread if it has never been swiped up and its content displayed)
+        // 3) and their MaxClouds setting
         if (UnreadOnly)
             cloudCount = Math.Clamp(UnreadThoughts.Count, 0, MaxClouds);
         else
             cloudCount = Math.Clamp(AllThoughts.Count, 0, MaxClouds);
-
 
         for (int i = 0; i < cloudCount; i++)
         {
@@ -104,6 +121,14 @@ public partial class HomeViewModel : BaseViewModel
         }
     }
 
+
+    //Cloud Animations
+
+    //CustomCloudControls have a CloudAnimation enum property bound to a matching type on the Clouds collection
+    //all UI changes in CustomCloudControl animations are based on changes to the BindableProperty CloudAnimationProperty
+    //animations and properties are defined in the CustomCloudControl codebehind
+    //Any change in animation must be made by changing the [ObservableProperty] animationType in the Cloud model
+    //changing animation without raising Cloud model inotifypropertychanged will desynch the relationship between View & ViewModel properties
     [RelayCommand]
     async Task DanceAsync(Cloud cloudToDance)
     {
@@ -111,8 +136,6 @@ public partial class HomeViewModel : BaseViewModel
 
         Clouds[index].AnimationType = CloudAnimationType.Dance;
     }
-
-
 
     [RelayCommand]
     async Task HoverToDriftAsync(Cloud cloudToDance)
@@ -123,48 +146,40 @@ public partial class HomeViewModel : BaseViewModel
     }
 
 
-    [RelayCommand]
-    async Task TestCloudsProperties()
-    {
-        Clouds[0].AnimationType = CloudAnimationType.None;
-    }
-
+    //Swipe Up
     [RelayCommand]
     async Task CloudSwipedAsync(Cloud swipedCloud)
     {
         if (swipedCloud is null)
             return;
 
-        int index = Clouds.IndexOf(swipedCloud);
-        await Shell.Current.DisplayAlert($"Swipe up--- {index}", "cloud command", "ok");
+        var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
+        Clouds[index].AnimationType = CloudAnimationType.Display;
+        await UpdateContentProperty(index);
     }
 
-    [RelayCommand]
-    private void PopulateClouds()
+    //View label is bound to the CloudContent.
+    //Content is chose simply by matching the index of the list with the collection
+    //TODO: Randomize how a Thought is chosen when cloud is swiped
+    private async Task UpdateContentProperty(int index)
     {
-
-        int count = Clouds.Count;
-        for (int i = 0; i < count; i++)
-        {
-            Clouds[i].AnimationType = CloudAnimationType.Drift;
-        }
+        if (UnreadOnly)
+            CloudContent = await Task.Run(()=>UnreadThoughts[index].Content);
+        else
+            CloudContent = await Task.Run(() => AllThoughts[index].Content);
     }
 
 
-    [RelayCommand]
-    async Task SizeAlertAsync()
-    {
-        await Shell.Current.DisplaySnackbar("size allocated!");
-    }
 
 
-    //navigation
+    //Navigation
     [RelayCommand]
     async Task GoToSettingsAsync()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
     }
 
+    //Hardcoded strings helping with TabBar failing to close the editors when using nameof
     [RelayCommand]
     async Task GoToNewThoughtEditorAsync()
     {

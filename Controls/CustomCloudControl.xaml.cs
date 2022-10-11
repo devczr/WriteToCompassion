@@ -55,6 +55,10 @@ public partial class CustomCloudControl : ContentView
             case CloudAnimationType.Dance:
                 await cloudReportingChange.Dance();
                 break;
+
+            case CloudAnimationType.Display:
+                await cloudReportingChange.MoveToContentArea();
+                break;
         }
     }
 
@@ -83,11 +87,47 @@ public partial class CustomCloudControl : ContentView
         var startingScale = this.Scale;
         await this.ScaleTo(startingScale * 1.5, 250, Easing.BounceOut);
         await this.ScaleTo(startingScale / 2, 250, Easing.BounceIn);
-        await this.ScaleTo(startingScale, 100, Easing.SpringIn).ContinueWith(antecedent => {
+        await this.ScaleTo(startingScale, 100, Easing.SpringIn).ContinueWith(antecedent =>
+        {
             this.ScaleTo(startingScale);
         });
 
     }
+
+
+
+
+    public async Task MoveToContentArea()
+    {
+        //x should be 0 as that's the middle of the view
+        //targetY set based on the HomeView xaml controls for cloudGrid and border that holds the text content. several factors causing cloud misalignment visually, so subtracting 65
+        var targetY = ((ScreenHelper.CloudGridYValue + (ScreenHelper.ContentYValue / 2)) - 65) * -1;
+
+
+        //different animations based on the control's horizontal position relative to center of the screen
+        if (this.TranslationX > 0)
+        {
+            await Task.WhenAll
+            (
+                this.TranslateTo(0, targetY, 1000),
+                this.FadeTo(0, 1100, Easing.BounceIn),
+                this.RotateTo(360, 1000, Easing.Linear),
+                this.ScaleTo(1.1, 1000, Easing.CubicIn)
+            );
+        }
+        else
+        {
+            await Task.WhenAll
+            (
+                this.TranslateTo(0, targetY, 1000),
+                this.FadeTo(0, 1100, Easing.BounceIn),
+                this.RotateTo(-360, 1000, Easing.Linear),
+                this.ScaleTo(1.1, 1000, Easing.CubicIn)
+            );
+        }
+
+    }
+
 
     public async Task LocalHover()
     {
