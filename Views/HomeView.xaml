@@ -44,36 +44,36 @@
     <Grid x:Name="primaryGrid"
         InputTransparent="False"
         RowDefinitions="*,3*"
-        Padding="15"
-          BackgroundColor="DarkSeaGreen">
+        Padding="15">
 
+        
         <Border
             x:Name="contentBorder"
             Grid.Row="0"
             BackgroundColor="Transparent"
-            ZIndex="4">
-            <Label
+            ZIndex="1">
+            <Border.GestureRecognizers>
+            </Border.GestureRecognizers>
+        </Border>
+
+        <Label
                 x:Name="contentLabel"
                 IsVisible="True"
-                Text="no"
+                Text="{Binding CloudContent}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
                 FontSize="Large"
                 FontAttributes="Bold"
-                TextColor="HotPink"
+                TextColor="WhiteSmoke"
                 ZIndex="5">
 
-            </Label>
-            <Border.GestureRecognizers>
-            </Border.GestureRecognizers>
-        </Border>
+        </Label>
 
         <!--Custom Cloud Controls-->
         <!--control Height and Width set according to SVG pixel dimensions-->
         <!--TapGestureRecognizer inside CustomCloudControl xaml-->
         <Grid
             x:Name="cloudGrid"
-            BackgroundColor="Yellow"
             Grid.Row="1"
             BindableLayout.ItemsSource="{Binding Clouds}">
             <BindableLayout.ItemTemplate>
@@ -105,39 +105,5 @@
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="bigcloudlottie.json"/>
-        <HorizontalStackLayout
-            VerticalOptions="End"
-            Grid.Row="1">
-            <Label
-                Margin="10"
-                HorizontalTextAlignment="End"
-                x:Name="sizeLabel"
-                Text="initial"
-                FontSize="Micro"
-                TextColor="DarkOrange"/>
-            <Button
-                HorizontalOptions="End"
-                x:Name="sizeButton"
-                FontAutoScalingEnabled="True"
-                Text="measure"
-                FontSize="Micro"
-                TextColor="OrangeRed"
-                Clicked="OnMeasureClicked"/>
-            <Button
-                HorizontalOptions="End"
-                x:Name="prop"
-                FontAutoScalingEnabled="True"
-                Text="propchange"
-                FontSize="Micro"
-                TextColor="YellowGreen"/>
-            <Button
-                HorizontalOptions="End"
-                x:Name="workButton"
-                FontAutoScalingEnabled="True"
-                Text="$"
-                FontSize="Micro"
-                TextColor="IndianRed"/>
-        </HorizontalStackLayout>
-
-    </Grid>
+     </Grid>
 </ContentPage>

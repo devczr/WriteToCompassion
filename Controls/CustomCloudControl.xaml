@@ -11,14 +11,14 @@
 
     
     <Border 
-        BackgroundColor="Teal"
         StrokeThickness="2"
+        BackgroundColor="FloralWhite"
         ZIndex="2">
         <Border.Stroke>
             <LinearGradientBrush EndPoint="1,0">
-                <GradientStop Color="Purple"
+                <GradientStop Color="Black"
                               Offset="0.1"/>
-                <GradientStop Color="PeachPuff"
+                <GradientStop Color="FloralWhite"
                               Offset="1.0"/>
             </LinearGradientBrush>
         </Border.Stroke>

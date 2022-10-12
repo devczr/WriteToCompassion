@@ -8,6 +8,8 @@ namespace WriteToCompassion.ViewModels;
 
 public partial class LibraryViewModel : BaseViewModel
 {
+    private readonly ISettingsService settingsService;
+
     private readonly ThoughtsService thoughtsService;
     public ObservableCollection<Thought> UnreadThoughts { get; } = new();
 
@@ -18,6 +20,7 @@ public partial class LibraryViewModel : BaseViewModel
 
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
+        this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
     }
 
@@ -39,21 +42,23 @@ public partial class LibraryViewModel : BaseViewModel
         try
         {
             IsBusy = true;
-            //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
-            var thoughts = await thoughtsService.GetAllThoughts();
-
-            foreach (var thought in thoughts)
-                AllThoughts.Add(thought);
-
-            thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
-
             UnreadThoughts.Clear();
+            AllThoughts.Clear();
 
-            foreach (var thought in thoughts)
-                UnreadThoughts.Add(thought);
+            var thoughts = await thoughtsService.GetAllThoughts();
+            
+            if (settingsService.UnreadOnly)
+            {
+                thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
+                foreach (var thought in thoughts)
+                    UnreadThoughts.Add(thought);
+            }
+            else
+            {
+                foreach (var thought in thoughts)
+                    AllThoughts.Add(thought);
+            }
 
-
-            await Shell.Current.DisplaySnackbar(UnreadThoughts.Count.ToString());
         }
         catch (Exception ex)
         {

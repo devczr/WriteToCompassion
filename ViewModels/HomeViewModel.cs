@@ -23,6 +23,10 @@ public partial class HomeViewModel : BaseViewModel
     //handles database logic
     ThoughtsService thoughtsService;
 
+    //holds user preferences
+    private readonly ISettingsService settingsService;
+
+
 
     //User can adjust in Settings
     [ObservableProperty]
@@ -48,6 +52,7 @@ public partial class HomeViewModel : BaseViewModel
     public HomeViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
             : base(settingsService)
     {
+        this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
     }
     
@@ -64,20 +69,25 @@ public partial class HomeViewModel : BaseViewModel
             IsBusy = true;
 
             //clear list that xaml clouds are bound to
+            CloudContent = "";
             Clouds.Clear();
+            UnreadThoughts.Clear();
+            AllThoughts.Clear();
 
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
             var thoughts = await thoughtsService.GetAllThoughts();
 
-            foreach (var thought in thoughts)
-                AllThoughts.Add(thought);
-
-            thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
-
-            UnreadThoughts.Clear();
-
-            foreach (var thought in thoughts)
-                UnreadThoughts.Add(thought);
+            if (settingsService.UnreadOnly)
+            {
+                thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
+                foreach (var thought in thoughts)
+                    UnreadThoughts.Add(thought);
+            }
+            else
+            {
+                foreach (var thought in thoughts)
+                    AllThoughts.Add(thought);
+            }
 
         }
         catch (Exception ex)
@@ -103,8 +113,11 @@ public partial class HomeViewModel : BaseViewModel
 
         //the number of clouds added to Clouds collection depends on:
         // 1) how many thoughts the user has saved in database
-        // 2) their show only "Unread" or show "All" setting (a thought is considered Unread if it has never been swiped up and its content displayed)
-        // 3) and their MaxClouds setting
+        // 2) their MaxClouds setting
+        // 3) their "show only unread" or "show all" setting
+        //    a thought is considered Unread if its content has never been displayed (swipe up gesture)
+
+
         if (UnreadOnly)
             cloudCount = Math.Clamp(UnreadThoughts.Count, 0, MaxClouds);
         else
@@ -128,7 +141,7 @@ public partial class HomeViewModel : BaseViewModel
     //all UI changes in CustomCloudControl animations are based on changes to the BindableProperty CloudAnimationProperty
     //animations and properties are defined in the CustomCloudControl codebehind
     //Any change in animation must be made by changing the [ObservableProperty] animationType in the Cloud model
-    //changing animation without raising Cloud model inotifypropertychanged will desynch the relationship between View & ViewModel properties
+    //changing animation without raising Cloud model inotifypropertychanged may desynch the relationship between View & ViewModel properties
     [RelayCommand]
     async Task DanceAsync(Cloud cloudToDance)
     {
@@ -158,8 +171,8 @@ public partial class HomeViewModel : BaseViewModel
         await UpdateContentProperty(index);
     }
 
-    //View label is bound to the CloudContent.
-    //Content is chose simply by matching the index of the list with the collection
+    //A HomeView label is bound to the CloudContent
+    //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
     private async Task UpdateContentProperty(int index)
     {
