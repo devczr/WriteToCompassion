@@ -4,6 +4,7 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              xmlns:views="clr-namespace:WriteToCompassion.Views"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
              Title="New Thought">
@@ -13,33 +14,20 @@
     </Shell.BackButtonBehavior>
 
     <ContentPage.Resources>
-        <Style x:Key="ValidButtonStyle" TargetType="Button">
-            <Setter Property="IsEnabled" Value="True"/>
-        </Style>
-        <Style x:Key="InvalidButtonStyle" TargetType="Button">
-            <Setter Property="IsEnabled" Value="False"/>
-        </Style>
-        <Style x:Key="ValidEditorStyle" TargetType="Editor">
-            <Setter Property="TextColor" Value="ForestGreen"/>
-        </Style>
-        <Style x:Key="InvalidEditorStyle" TargetType="Editor">
-            <Setter Property="TextColor" Value="PaleVioletRed"/>
-        </Style>
+
+        
     </ContentPage.Resources>
     
     <Grid RowDefinitions="50,*">
         <Grid
             Grid.Row="0"
             ColumnDefinitions="*,*,*,*">
-            <Border BackgroundColor="Transparent"
-                Grid.Row="0"
-                Grid.ColumnSpan="5"/>
 
-            <ImageButton
+            <Button
+                x:Name="cancelButton"
+                Text="x"
+                Style="{StaticResource XButton}"
                 Grid.Column="0"
-                BackgroundColor="Red"
-                Source="xicon.png"
-                Scale="0.5"
                 VerticalOptions="Center"
                 HorizontalOptions="Start"
                 Command="{Binding CancelCommand}"/>
@@ -51,8 +39,8 @@
                 Grid.ColumnSpan="2"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                Command="{Binding ButtonSaveCommand}">
-            </Button>
+                Command="{Binding ButtonSaveCommand}"/>
+
 
         </Grid>
         

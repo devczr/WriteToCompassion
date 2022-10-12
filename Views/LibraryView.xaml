@@ -6,7 +6,7 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:LibraryViewModel"
              x:Class="WriteToCompassion.Views.LibraryView"
-             Title="Thought Library">
+             Title="Thought Collection">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False" />
@@ -49,6 +49,7 @@
                                 TextColor="Black"
                                 MaxLines="1"
                                 FontAttributes="Italic"
+                                FontFamily="Josefin"
                                 FontAutoScalingEnabled="True"
                                 LineBreakMode="TailTruncation"/>
                         </Border>

@@ -39,15 +39,11 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [RelayCommand]
     async Task UpdateThoughtContent(string newText)
     {
-        /*        if (string.IsNullOrEmpty(newText) && (NewThought.Content.Length > 0))
-                    return;*/
 
-        await Task.Run(() => NewThought.Content = newText).ContinueWith(antecedent =>
-        {
 
-        }
-        );
-        //Call CanExecute defined in this class constructor for ButtonSaveCommand
+        await Task.Run(() => NewThought.Content = newText);
+
+        //Calls CanExecute defined in this class constructor to enable button if content is not null
         (ButtonSaveCommand as Command).ChangeCanExecute();
     }
 
@@ -100,25 +96,13 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
                 return;
         }
         await AddThoughtToDatabaseAsync();
-        await Shell.Current.GoToAsync("//root/home");
-
-/*        SaveCommand.CanExecute(NewThought.Content)
-            {
-            if (NewThought.Content is null)
-                return false;
-            else
-                return true;
-        }*/
-
+        await NavigateToThoughtsAsync();
     }
 
 
-    [RelayCommand]
-    async Task SaveAndNavigateToThoughts()
+    // Navigation
+    async Task NavigateToThoughtsAsync()
     {
-        await AddThoughtToDatabaseAsync();
-
-        //TODO: update with nameof() once MAUI shell TabBar correctly recognizes it as navigation 
         await Shell.Current.GoToAsync("//root/home");
     }
 
