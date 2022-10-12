@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+             xmlns:views="clr-namespace:WriteToCompassion.Views"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
              Title="New Thought">
@@ -11,6 +12,21 @@
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
+    <ContentPage.Resources>
+        <Style x:Key="ValidButtonStyle" TargetType="Button">
+            <Setter Property="IsEnabled" Value="True"/>
+        </Style>
+        <Style x:Key="InvalidButtonStyle" TargetType="Button">
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style x:Key="ValidEditorStyle" TargetType="Editor">
+            <Setter Property="TextColor" Value="ForestGreen"/>
+        </Style>
+        <Style x:Key="InvalidEditorStyle" TargetType="Editor">
+            <Setter Property="TextColor" Value="PaleVioletRed"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="50,*">
         <Grid
             Grid.Row="0"
@@ -27,15 +43,16 @@
                 VerticalOptions="Center"
                 HorizontalOptions="Start"
                 Command="{Binding CancelCommand}"/>
-            
+
             <Button
+                x:Name="saveButton"
                 Text="Save"
                 Grid.Column="2"
                 Grid.ColumnSpan="2"
-                x:Name="savebutton"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                Command="{Binding SaveAndNavigateToThoughtsCommand}"/>
+                Command="{Binding ButtonSaveCommand}">
+            </Button>
 
         </Grid>
         
@@ -45,11 +62,20 @@
             Grid.Row="1"
             Placeholder="{Binding PlaceholderText}">
             <Editor.Behaviors>
-                <mct:EventToCommandBehavior EventName="TextChanged"
-                                            Command="{Binding UpdateThoughtContentCommand}"
-                                            CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
+                <mct:EventToCommandBehavior 
+                    EventName="TextChanged"
+                    Command="{Binding UpdateThoughtContentCommand}"
+                    CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
+                <mct:TextValidationBehavior
+                    
+                    MinimumLength="10"
+                    MaximumLength="500"
+                    DecorationFlags="Trim"
+                    InvalidStyle="{StaticResource InvalidEditorStyle}"
+                    ValidStyle="{StaticResource ValidEditorStyle}"
+                    Flags="ValidateOnValueChanged">
+                </mct:TextValidationBehavior>
             </Editor.Behaviors>
-
         </Editor>
     </Grid>
 </ContentPage>

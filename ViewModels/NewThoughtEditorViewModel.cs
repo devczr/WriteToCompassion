@@ -1,4 +1,6 @@
 ﻿
+using CommunityToolkit.Maui.Alerts;
+using System.Windows.Input;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
 
@@ -11,21 +13,43 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [ObservableProperty]
     Thought newThought = new();
 
-    //The large empty string in placeholder is used as a workaround for MAUI Editor bug on Android where the editor boundary is clipped to the length of the placeholder. The extra space ensures users can type across the length of the entire control
+    public ICommand ButtonSaveCommand { get; private set; }
+
     public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
 
     public NewThoughtEditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
+        ButtonSaveCommand = new Command(
+            execute: async () =>
+            {
+                await SaveAsync();
+            },
+            canExecute: () =>
+            {
+                if (string.IsNullOrEmpty(newThought.Content))
+                {
+                    return false;
+                }
+                else
+                    return true;
+            });
     }
 
     [RelayCommand]
     async Task UpdateThoughtContent(string newText)
     {
-        await Task.Run(()=>NewThought.Content = newText);
-    }
+        /*        if (string.IsNullOrEmpty(newText) && (NewThought.Content.Length > 0))
+                    return;*/
 
-    
+        await Task.Run(() => NewThought.Content = newText).ContinueWith(antecedent =>
+        {
+
+        }
+        );
+        //Call CanExecute defined in this class constructor for ButtonSaveCommand
+        (ButtonSaveCommand as Command).ChangeCanExecute();
+    }
 
 
     [RelayCommand]
@@ -41,15 +65,15 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         }
         else return;
     }
-    async Task AddThoughtAsync()
+    async Task AddThoughtToDatabaseAsync()
     {
         try
         {
             IsBusy = true;
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
 
-            if (string.IsNullOrEmpty(NewThought.Content))
-                return;
+            if (NewThought.Content is null)
+                NewThought.Content = " ";
 
             await thoughtsService.AddThought(NewThought.Content);
         }
@@ -66,10 +90,34 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     }
 
     [RelayCommand]
+    async Task SaveAsync()
+    {
+        if (string.IsNullOrWhiteSpace(NewThought.Content))
+        {
+            var result = await Shell.Current.DisplayAlert("Save empty thought?", null, "Save", "Cancel");
+
+            if (!result)
+                return;
+        }
+        await AddThoughtToDatabaseAsync();
+        await Shell.Current.GoToAsync("//root/home");
+
+/*        SaveCommand.CanExecute(NewThought.Content)
+            {
+            if (NewThought.Content is null)
+                return false;
+            else
+                return true;
+        }*/
+
+    }
+
+
+    [RelayCommand]
     async Task SaveAndNavigateToThoughts()
     {
-        await AddThoughtAsync();
-        
+        await AddThoughtToDatabaseAsync();
+
         //TODO: update with nameof() once MAUI shell TabBar correctly recognizes it as navigation 
         await Shell.Current.GoToAsync("//root/home");
     }
