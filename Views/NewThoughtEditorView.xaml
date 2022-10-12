@@ -13,10 +13,17 @@
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
-    <ContentPage.Resources>
-
-        
-    </ContentPage.Resources>
+    <Shell.TitleView>
+        <Grid
+            HeightRequest="50"
+            ColumnDefinitions="5*,*">
+            <Label 
+                Style="{StaticResource TitleViewLabel}"
+                Text="New Thought" 
+                Grid.Column="0"
+                VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
     
     <Grid RowDefinitions="50,*">
         <Grid
