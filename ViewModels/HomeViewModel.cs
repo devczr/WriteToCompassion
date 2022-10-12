@@ -33,7 +33,7 @@ public partial class HomeViewModel : BaseViewModel
     double cloudScale = 0.5;
 
     [ObservableProperty]
-    int maxClouds = 30;
+    int maxClouds = 5;
 
     [ObservableProperty]
     bool unreadOnly = true;

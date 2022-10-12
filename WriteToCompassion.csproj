@@ -48,6 +48,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
+	  <None Remove="Resources\Fonts\JosefinSans-SemiBold.ttf" />
 	  <None Remove="Resources\Images\backarrow.png" />
 	  <None Remove="Resources\Images\cautionicon.png" />
 	  <None Remove="Resources\Images\checkicon.png" />
@@ -63,6 +65,8 @@
 	  <None Remove="Resources\Images\xicon.png" />
 	  <None Remove="Resources\Raw\bigcloudlottie.json" />
 	  <None Remove="Resources\Raw\cloudlottie.json" />
+	  <None Remove="Resources\Raw\xflip.json" />
+	  <None Remove="Resources\Raw\xspin.json" />
 	</ItemGroup>
 
 	<ItemGroup>

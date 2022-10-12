@@ -4,6 +4,7 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              xmlns:views="clr-namespace:WriteToCompassion.Views"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
              Title="New Thought">
@@ -35,11 +36,15 @@
                 Grid.Row="0"
                 Grid.ColumnSpan="5"/>
 
-            <ImageButton
+            <Button
+                x:Name="cancelButton"
+                Text="X"
+                FontSize="30"
+                BorderColor="Transparent"
+                FontAttributes="Bold"
+                TextColor="FloralWhite"
+                BackgroundColor="Transparent"
                 Grid.Column="0"
-                BackgroundColor="Red"
-                Source="xicon.png"
-                Scale="0.5"
                 VerticalOptions="Center"
                 HorizontalOptions="Start"
                 Command="{Binding CancelCommand}"/>
@@ -51,8 +56,8 @@
                 Grid.ColumnSpan="2"
                 VerticalOptions="Center"
                 HorizontalOptions="End"
-                Command="{Binding ButtonSaveCommand}">
-            </Button>
+                Command="{Binding ButtonSaveCommand}"/>
+
 
         </Grid>
         

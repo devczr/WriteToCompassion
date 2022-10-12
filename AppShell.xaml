@@ -4,8 +4,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:WriteToCompassion.Views"
-    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
-
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    Shell.TabBarBackgroundColor="Black"
+    Shell.TabBarTitleColor="FloralWhite"
+    Shell.TabBarUnselectedColor="DimGrey">
     
     <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
     <TabBar Title="Home" Route="root">

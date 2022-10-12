@@ -20,6 +20,8 @@ public static class MauiProgram
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
+                fonts.AddFont("JosefinSans-Regular.ttf", "Josefin");
+                fonts.AddFont("JosefinSans-SemiBold.ttf", "JosefinSemiBold");
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             })

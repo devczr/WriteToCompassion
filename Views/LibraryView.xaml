@@ -49,6 +49,7 @@
                                 TextColor="Black"
                                 MaxLines="1"
                                 FontAttributes="Italic"
+                                FontFamily="Josefin"
                                 FontAutoScalingEnabled="True"
                                 LineBreakMode="TailTruncation"/>
                         </Border>
