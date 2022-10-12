@@ -14,36 +14,19 @@
     </Shell.BackButtonBehavior>
 
     <ContentPage.Resources>
-        <Style x:Key="ValidButtonStyle" TargetType="Button">
-            <Setter Property="IsEnabled" Value="True"/>
-        </Style>
-        <Style x:Key="InvalidButtonStyle" TargetType="Button">
-            <Setter Property="IsEnabled" Value="False"/>
-        </Style>
-        <Style x:Key="ValidEditorStyle" TargetType="Editor">
-            <Setter Property="TextColor" Value="ForestGreen"/>
-        </Style>
-        <Style x:Key="InvalidEditorStyle" TargetType="Editor">
-            <Setter Property="TextColor" Value="PaleVioletRed"/>
-        </Style>
+
+        
     </ContentPage.Resources>
     
     <Grid RowDefinitions="50,*">
         <Grid
             Grid.Row="0"
             ColumnDefinitions="*,*,*,*">
-            <Border BackgroundColor="Transparent"
-                Grid.Row="0"
-                Grid.ColumnSpan="5"/>
 
             <Button
                 x:Name="cancelButton"
-                Text="X"
-                FontSize="30"
-                BorderColor="Transparent"
-                FontAttributes="Bold"
-                TextColor="FloralWhite"
-                BackgroundColor="Transparent"
+                Text="x"
+                Style="{StaticResource XButton}"
                 Grid.Column="0"
                 VerticalOptions="Center"
                 HorizontalOptions="Start"

@@ -20,13 +20,12 @@
     <Shell.TitleView>
         <Grid
             HeightRequest="50"
-            Padding="5"
             ColumnDefinitions="5*,*">
             <Label 
                 Text="Home" 
                 Grid.Column="0"
                 VerticalOptions="Center"
-                FontSize="Title"
+                FontSize="Large"
                 FontAttributes="Bold"
                 TextColor="White"/>
             <ImageButton 
@@ -101,9 +100,9 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="false"
-                            IsVisible="true"
+                            IsVisible="false"
                             ZIndex="0"
                             RepeatCount="-1"
-                            Source="bigcloudlottie.json"/>
+                            Source="yellowcloudlottie.json"/>
      </Grid>
 </ContentPage>

@@ -10,14 +10,14 @@
     Shell.TabBarUnselectedColor="DimGrey">
     
     <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
-    <TabBar Title="Home" Route="root">
-        <Tab Title="Home" Route="home" Icon="cloudicon.png">
+    <TabBar Title="HOME"  Route="root">
+        <Tab Title="HOME" Route="home" Icon="cloudicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomeView}"/>
         </Tab>
-        <Tab Title="New" Route="newthought" Icon="writeicon.png">
+        <Tab Title="NEW" Route="newthought" Icon="writeicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
         </Tab>
-        <Tab Title="Library" Route="library" Icon="papericon.png">
+        <Tab Title="LIBRARY" Route="library" Icon="papericon.png">
             <ShellContent ContentTemplate="{DataTemplate views:LibraryView}"/>
         </Tab>
     </TabBar>
