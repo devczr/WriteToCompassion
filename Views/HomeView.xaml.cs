@@ -1,15 +1,16 @@
+using CommunityToolkit.Maui.Behaviors;
 using System.Text;
 namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage
 {
-    private readonly HomeViewModel homeViewModel;
 	public HomeView(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
 		BindingContext = homeViewModel;
-        this.homeViewModel = homeViewModel;
-	}
+        
+
+    }
 
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -22,6 +23,7 @@ public partial class HomeView : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
+
     }
 
 

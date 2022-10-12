@@ -22,17 +22,22 @@
             HeightRequest="50"
             ColumnDefinitions="5*,*">
             <Label 
+                Style="{StaticResource TitleViewLabel}"
                 Text="Home" 
                 Grid.Column="0"
                 VerticalOptions="Center"
                 FontSize="Large"
-                FontAttributes="Bold"
-                TextColor="White"/>
-            <ImageButton 
+                FontAttributes="Bold"/>
+            <ImageButton
+                x:Name="settingsGearButton"
                 Source="settingsicon.png"
                 Grid.Column="1"
                 Scale="0.5"
-                Command="{Binding GoToSettingsCommand}"/>
+                Command="{Binding GoToSettingsCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
         </Grid>
     </Shell.TitleView>
 

@@ -5,12 +5,23 @@
              xmlns:models="clr-namespace:WriteToCompassion.Models"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:LibraryViewModel"
-             x:Class="WriteToCompassion.Views.LibraryView"
-             Title="Thought Collection">
+             x:Class="WriteToCompassion.Views.LibraryView">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False" />
     </Shell.BackButtonBehavior>
+
+    <Shell.TitleView>
+        <Grid
+            HeightRequest="50"
+            ColumnDefinitions="5*,*">
+            <Label 
+                Style="{StaticResource TitleViewLabel}"
+                Text="Thought Library" 
+                Grid.Column="0"
+                VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
