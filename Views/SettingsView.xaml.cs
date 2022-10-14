@@ -21,11 +21,4 @@ public partial class SettingsView : ContentPage
         await this.ShowPopupAsync(buttonPopup);
     }
 
-
-    /*    public async Task DisplayPopup()
-        {
-            var editThoughtPopup = new EditThoughtPopup();
-            var result = await this.ShowPopupAsync(editThoughtPopup);
-        }*/
-
 }
