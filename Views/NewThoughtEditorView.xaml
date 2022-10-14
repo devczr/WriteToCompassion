@@ -55,7 +55,15 @@
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="1"
-            Placeholder="{Binding PlaceholderText}">
+            Placeholder="{Binding PlaceholderText}"
+            FontAttributes="{Binding EditorFontAttribute}">
+            <FlyoutBase.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Bold" Command="{Binding BoldCommand}"/>
+                    <MenuFlyoutItem Text="Italicized" Command="{Binding ItalicisedCommand}"/>
+                    <MenuFlyoutItem Text="Default" Command="{Binding DefaultCommand}"/>
+                </MenuFlyout>
+            </FlyoutBase.ContextFlyout>
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior 
                     EventName="TextChanged"
