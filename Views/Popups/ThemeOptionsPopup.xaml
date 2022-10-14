@@ -31,15 +31,15 @@
                 RadioButtonGroup.GroupName="Theme Options"
                 RadioButtonGroup.SelectedValue="{Binding ThemeChoice}">
                 <RadioButton
-                    Value="light"
+                    Value="Light"
                     Content="Light"
                     Style="{StaticResource RadioButtonSecondary}"/>
                 <RadioButton
-                    Value="dark"
+                    Value="Dark"
                     Content="Dark"
                     Style="{StaticResource RadioButtonSecondary}"/>
                 <RadioButton
-                    Value="default"
+                    Value="System Default"
                     Content="System Default"
                     Style="{StaticResource RadioButtonSecondary}"/>
             </VerticalStackLayout>

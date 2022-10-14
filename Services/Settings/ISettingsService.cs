@@ -7,10 +7,5 @@ public interface ISettingsService
     bool UnreadOnly { get; set; }
 
     string ThemeChoice { get; set; }
-
 }
-
-//TODO: Implement authentication
-/*    string AuthAccessToken { get; set; }
-    string AuthIdToken { get; set; }*/
 

@@ -44,14 +44,18 @@ public class SettingsService : ISettingsService
     {
         switch (theme)
         {
-            case "light":
+            case "Light":
                 Application.Current.UserAppTheme = AppTheme.Light;
                 break;
 
-            case "dark":
+            case "Dark":
                 Application.Current.UserAppTheme = AppTheme.Dark;
                 break;
-            
+
+            case "System Default":
+                Application.Current.UserAppTheme = AppTheme.Unspecified;
+                break;
+
             default:
                 Application.Current.UserAppTheme = AppTheme.Unspecified;
                 break;

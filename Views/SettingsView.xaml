@@ -7,6 +7,7 @@
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="WriteToCompassion.Views.SettingsView"
              Shell.TabBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource light_background}, Dark={StaticResource dark_background}}"
              Title="Settings">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
@@ -28,18 +29,24 @@
 
     <VerticalStackLayout
         Padding="5">
-        <Border Padding="10">
-            <VerticalStackLayout>
+        <Border 
+            Padding="10"
+            StrokeThickness="0"
+            BackgroundColor="Transparent">
+            <VerticalStackLayout
+                Padding="5">
                 <Label
-                    TextColor="Black"
+                    Text="Display"
+                    Style="{StaticResource CategoryLabelPrimary}"/>
+                <Label
                     Text="Theme"
-                    FontSize="Large"
-                    Padding="0,0,0,10"
-                    FontAttributes="Bold" />
+                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                    Padding="2.5"/>
                 <Label 
-                    TextColor="Black"
+                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Text="{Binding ThemeChoice}"
-                    FontSize="Medium"/>
+                    FontSize="16"
+                    Padding="2.5"/>
             </VerticalStackLayout>
             <Border.GestureRecognizers>
                 <TapGestureRecognizer
