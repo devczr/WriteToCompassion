@@ -59,15 +59,6 @@
                     EventName="TextChanged"
                     Command="{Binding UpdateThoughtContentCommand}"
                     CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
-                <mct:TextValidationBehavior
-                    
-                    MinimumLength="10"
-                    MaximumLength="500"
-                    DecorationFlags="Trim"
-                    InvalidStyle="{StaticResource InvalidEditorStyle}"
-                    ValidStyle="{StaticResource ValidEditorStyle}"
-                    Flags="ValidateOnValueChanged">
-                </mct:TextValidationBehavior>
             </Editor.Behaviors>
         </Editor>
     </Grid>

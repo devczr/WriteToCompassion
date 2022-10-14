@@ -72,4 +72,12 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
+    async Task ClearCollectionsAsync()
+    {
+        await Shell.Current.DisplayAlert("clearing",
+    $"collections", "OK");
+        UnreadThoughts.Clear();
+        AllThoughts.Clear();
+    }
 }
