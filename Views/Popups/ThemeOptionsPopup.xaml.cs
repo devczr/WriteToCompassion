@@ -9,10 +9,6 @@ public partial class ThemeOptionsPopup : Popup
 	{
 		InitializeComponent();
     }
-
-    void OKClicked(object? sender, EventArgs e) => Close();
-    void CancelClicked(object? sender, EventArgs e) => Close();
-
-    private void OnThemeChosen(object sender, EventArgs e) => Close();
+	void OnClickClosePopup(object? sender, EventArgs e) => Close();
 
 }

@@ -11,7 +11,9 @@
         StrokeThickness="0"
         StrokeShape="RoundRectangle 10"
         Padding="10"
-        Background="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark={StaticResource dark_secondaryContainer}}">
+        Background="{AppThemeBinding 
+        Light={StaticResource light_secondaryContainer}, 
+        Dark={StaticResource dark_secondaryContainer}}">
         <Grid
             RowDefinitions="50,*,Auto"
             ColumnDefinitions="*,*,*"
@@ -44,13 +46,17 @@
             <Button 
                 Text="Cancel"
                 Style="{StaticResource TransparentBackgroundTertiary}"
+                Clicked="OnClickClosePopup"
                 Grid.Row="2"
                 Grid.Column="1"/>
             <Button 
+                x:DataType="viewmodels:SettingsViewModel"
                 Text="OK"
                 Style="{StaticResource TransparentBackgroundTertiary}"
                 Grid.Row="2"
-                Grid.Column="2"/>
+                Grid.Column="2"
+                Clicked="OnClickClosePopup"
+                Command="{Binding ChangeThemeCommand}"/>
 
         </Grid>
     </Border>
