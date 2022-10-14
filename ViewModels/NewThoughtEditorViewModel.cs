@@ -13,6 +13,8 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [ObservableProperty]
     Thought newThought = new();
 
+    [ObservableProperty]
+    FontAttributes editorFontAttribute;
     public ICommand ButtonSaveCommand { get; private set; }
 
     public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
@@ -99,6 +101,26 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         await NavigateToThoughtsAsync();
     }
 
+
+
+    // Editor Context Menu Flyouts
+    [RelayCommand]
+    async Task BoldAsync()
+    {
+        await Task.Run(() => EditorFontAttribute = FontAttributes.Bold);
+    }
+
+    [RelayCommand]
+    async Task ItalicisedAsync()
+    {
+        await Task.Run(() => EditorFontAttribute = FontAttributes.Italic);
+    }
+
+    [RelayCommand]
+    async Task DefaultAsync()
+    {
+        await Task.Run(() => EditorFontAttribute = FontAttributes.None);
+    }
 
     // Navigation
     async Task NavigateToThoughtsAsync()
