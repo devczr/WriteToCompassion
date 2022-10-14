@@ -13,7 +13,40 @@
                             IsVisible="True" />
     </Shell.BackButtonBehavior>
 
-    <VerticalStackLayout>
+    <Shell.TitleView>
+        <Grid
+            HeightRequest="50"
+            ColumnDefinitions="5*,*">
+            <Label 
+                Style="{StaticResource TitleViewLabel}"
+                Text="Settings" 
+                Grid.Column="0"
+                VerticalOptions="Center"/>
+        </Grid>
+    </Shell.TitleView>
+
+
+    <VerticalStackLayout
+        Padding="5">
+        <Border Padding="10">
+            <VerticalStackLayout>
+                <Label
+                    TextColor="Black"
+                    Text="Theme"
+                    FontSize="Large"
+                    Padding="0,0,0,10"
+                    FontAttributes="Bold" />
+                <Label 
+                    TextColor="Black"
+                    Text="{Binding ThemeChoice}"
+                    FontSize="Medium"/>
+            </VerticalStackLayout>
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="HandleButtonPopupButtonClicked"/>
+            </Border.GestureRecognizers>
+        </Border>
+        <BoxView Style="{StaticResource Divider}"/>
         <Button Text="Show Tutorial On Start"
                 Command="{Binding ToggleDisplayTutorialCommand}"/>
     </VerticalStackLayout>

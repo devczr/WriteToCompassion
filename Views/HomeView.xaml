@@ -25,9 +25,7 @@
                 Style="{StaticResource TitleViewLabel}"
                 Text="Home" 
                 Grid.Column="0"
-                VerticalOptions="Center"
-                FontSize="Large"
-                FontAttributes="Bold"/>
+                VerticalOptions="Center"/>
             <ImageButton
                 x:Name="settingsGearButton"
                 Source="primarysettingsicon.png"

@@ -39,6 +39,14 @@ public partial class SettingsView : ContentPage
 
     }
 
+
+    async void HandleButtonPopupButtonClicked(object sender, EventArgs e)
+    {
+        var buttonPopup = new ThemeOptionsPopup();
+        await this.ShowPopupAsync(buttonPopup);
+    }
+
+
     /*    public async Task DisplayPopup()
         {
             var editThoughtPopup = new EditThoughtPopup();

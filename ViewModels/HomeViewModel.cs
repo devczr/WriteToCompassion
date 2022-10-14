@@ -135,13 +135,13 @@ public partial class HomeViewModel : BaseViewModel
     }
 
 
-    //Cloud Animations
+    // Cloud Animations
 
-    //CustomCloudControls have a CloudAnimation enum property bound to a matching type on the Clouds collection
-    //all UI changes in CustomCloudControl animations are based on changes to the BindableProperty CloudAnimationProperty
-    //animations and properties are defined in the CustomCloudControl codebehind
-    //Any change in animation must be made by changing the [ObservableProperty] animationType in the Cloud model
-    //changing animation without raising Cloud model inotifypropertychanged may desynch the relationship between View & ViewModel properties
+    /* CustomCloudControls have a CloudAnimation enum property bound to a matching type on the Clouds collection
+     all UI changes in CustomCloudControl animations are based on changes to the BindableProperty CloudAnimationProperty
+     animations and properties are defined in the CustomCloudControl codebehind
+     Any change in animation must be made by changing the [ObservableProperty] animationType in the Cloud model
+     changing animation without raising Cloud model inotifypropertychanged may desynch the relationship between View & ViewModel properties*/
     [RelayCommand]
     async Task DanceAsync(Cloud cloudToDance)
     {
@@ -159,7 +159,7 @@ public partial class HomeViewModel : BaseViewModel
     }
 
 
-    //Swipe Up
+    // Swipe Up
     [RelayCommand]
     async Task CloudSwipedAsync(Cloud swipedCloud)
     {
@@ -171,13 +171,13 @@ public partial class HomeViewModel : BaseViewModel
         await UpdateContentProperty(index);
     }
 
-    //A HomeView label is bound to the CloudContent
+    // Updates xaml label
     //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
     private async Task UpdateContentProperty(int index)
     {
         if (UnreadOnly)
-            CloudContent = await Task.Run(()=>UnreadThoughts[index].Content);
+            CloudContent = await Task.Run(() => UnreadThoughts[index].Content);
         else
             CloudContent = await Task.Run(() => AllThoughts[index].Content);
     }
