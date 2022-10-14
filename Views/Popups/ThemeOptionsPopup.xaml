@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="WriteToCompassion.Views.Popups.ThemeOptionsPopup"
+    Color="Transparent">
+
+    <Border
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 10"
+        Padding="10"
+        Background="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark={StaticResource dark_secondaryContainer}}">
+        <Grid
+            RowDefinitions="50,*,Auto"
+            ColumnDefinitions="*,*,*"
+            MinimumWidthRequest="300">
+            <Label
+                Text="Choose Theme"
+                Grid.ColumnSpan="3"
+                TextColor="{StaticResource light_onSecondaryContainer}"
+                FontSize="28"/>
+            <VerticalStackLayout
+                x:DataType="viewmodels:SettingsViewModel"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Padding="5,5,5,5"
+                RadioButtonGroup.GroupName="Theme Options"
+                RadioButtonGroup.SelectedValue="{Binding ThemeChoice}">
+                <RadioButton
+                    Value="light"
+                    Content="Light"
+                    Style="{StaticResource RadioButtonSecondary}"/>
+                <RadioButton
+                    Value="dark"
+                    Content="Dark"
+                    Style="{StaticResource RadioButtonSecondary}"/>
+                <RadioButton
+                    Value="default"
+                    Content="System Default"
+                    Style="{StaticResource RadioButtonSecondary}"/>
+            </VerticalStackLayout>
+            <Button 
+                Text="Cancel"
+                Style="{StaticResource TransparentBackgroundTertiary}"
+                Grid.Row="2"
+                Grid.Column="1"/>
+            <Button 
+                Text="OK"
+                Style="{StaticResource TransparentBackgroundTertiary}"
+                Grid.Row="2"
+                Grid.Column="2"/>
+
+        </Grid>
+    </Border>
+</mct:Popup>
