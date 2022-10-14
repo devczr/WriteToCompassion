@@ -15,42 +15,10 @@ public partial class SettingsView : ContentPage
 		BindingContext = settingsViewModel;
 	}
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-    }
-
-    async void HandleEditClicked(object sender, EventArgs e)
-    {
-        var editThoughtPopup = new EditThoughtPopup();
-
-        var result = await this.ShowPopupAsync(editThoughtPopup);
-        if (result is bool boolResult)
-        {
-            if (boolResult)
-            {
-                Shell.Current.DisplaySnackbar("codebehind yes");
-            }
-            else
-            {
-                Shell.Current.DisplaySnackbar("codebehind no");
-            }
-        }
-
-    }
-
-
     async void HandleButtonPopupButtonClicked(object sender, EventArgs e)
     {
         var buttonPopup = new ThemeOptionsPopup();
         await this.ShowPopupAsync(buttonPopup);
     }
-
-
-    /*    public async Task DisplayPopup()
-        {
-            var editThoughtPopup = new EditThoughtPopup();
-            var result = await this.ShowPopupAsync(editThoughtPopup);
-        }*/
 
 }

@@ -7,7 +7,7 @@
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
-             Title="New Thought">
+             Shell.TabBarIsVisible="False">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
@@ -16,41 +16,31 @@
     <Shell.TitleView>
         <Grid
             HeightRequest="50"
-            ColumnDefinitions="5*,*">
-            <Label 
-                Style="{StaticResource TitleViewLabel}"
-                Text="New Thought" 
-                Grid.Column="0"
-                VerticalOptions="Center"/>
-        </Grid>
-    </Shell.TitleView>
-    
-    <Grid RowDefinitions="50,*">
-        <Grid
-            Grid.Row="0"
-            ColumnDefinitions="*,*,*,*">
-
-            <Button
-                x:Name="cancelButton"
+            HorizontalOptions="Fill"
+            ColumnDefinitions="*,*"
+            Padding="0,0,20,0">
+            <Label
                 Text="x"
-                Style="{StaticResource XButton}"
-                Grid.Column="0"
-                VerticalOptions="Center"
+                Style="{StaticResource XLabel}"
+                WidthRequest="50"
                 HorizontalOptions="Start"
-                Command="{Binding CancelCommand}"/>
-
+                VerticalOptions="Fill"
+                VerticalTextAlignment="Start">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
+                </Label.GestureRecognizers>
+            </Label>
             <Button
                 x:Name="saveButton"
                 Text="Save"
-                Grid.Column="2"
-                Grid.ColumnSpan="2"
-                VerticalOptions="Center"
+                Grid.Column="1"
+                VerticalOptions="End"
                 HorizontalOptions="End"
                 Command="{Binding ButtonSaveCommand}"/>
-
-
         </Grid>
-        
+    </Shell.TitleView>
+
+    <Grid>
         <Editor 
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
@@ -69,15 +59,6 @@
                     EventName="TextChanged"
                     Command="{Binding UpdateThoughtContentCommand}"
                     CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
-                <mct:TextValidationBehavior
-                    
-                    MinimumLength="10"
-                    MaximumLength="500"
-                    DecorationFlags="Trim"
-                    InvalidStyle="{StaticResource InvalidEditorStyle}"
-                    ValidStyle="{StaticResource ValidEditorStyle}"
-                    Flags="ValidateOnValueChanged">
-                </mct:TextValidationBehavior>
             </Editor.Behaviors>
         </Editor>
     </Grid>

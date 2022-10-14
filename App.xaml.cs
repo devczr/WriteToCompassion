@@ -1,23 +1,24 @@
-﻿#if WINDOWS
-using Microsoft.UI;
-using Microsoft.UI.Windowing;
-using Windows.Graphics;
-#endif
-using WriteToCompassion.Services.Settings;
-
-
-namespace WriteToCompassion;
+﻿namespace WriteToCompassion;
 
 public partial class App : Application
 {
-    private readonly ISettingsService _settingsService;
+    private readonly ISettingsService settingsService;
 
 
     public App(ISettingsService settingsService)
     {
-        _settingsService = settingsService;
+        this.settingsService = settingsService;
+
         InitializeComponent();
+
+        InitApp();
+
         MainPage = new AppShell();
+    }
+
+    private void InitApp()
+    { 
+        settingsService.ThemeChoice = settingsService.ThemeChoice;
     }
 }
 

@@ -32,7 +32,6 @@ public partial class AppShell : Shell
         }
     }
 
-	// TODO: delete comment if relative routing refresh works
 	private static void InitializeRouting()
 	{
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));

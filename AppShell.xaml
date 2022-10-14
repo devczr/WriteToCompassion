@@ -4,20 +4,17 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:WriteToCompassion.Views"
-    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-    Shell.TabBarBackgroundColor="Black"
-    Shell.TabBarTitleColor="FloralWhite"
-    Shell.TabBarUnselectedColor="DimGrey">
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
     
     <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
-    <TabBar Title="HOME"  Route="root">
-        <Tab Title="HOME" Route="home" Icon="cloudicon.png">
+    <TabBar Title="Home"  Route="root">
+        <Tab Title="Home" Route="home" Icon="cloudicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomeView}"/>
         </Tab>
-        <Tab Title="NEW" Route="newthought" Icon="writeicon.png">
+        <Tab Title="New" Route="newthought" Icon="writeicon.png">
             <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
         </Tab>
-        <Tab Title="LIBRARY" Route="library" Icon="papericon.png">
+        <Tab Title="Library" Route="library" Icon="papericon.png">
             <ShellContent ContentTemplate="{DataTemplate views:LibraryView}"/>
         </Tab>
     </TabBar>

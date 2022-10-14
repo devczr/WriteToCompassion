@@ -12,7 +12,6 @@ public partial class SettingsViewModel : BaseViewModel
         set
         {
             SetProperty(ref _themeChoice, value);
-            ChangeTheme();
         }
     }
 
@@ -24,7 +23,7 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
 
-
+    [RelayCommand]
     private void ChangeTheme()
     {
         settingsService.ThemeChoice = _themeChoice;

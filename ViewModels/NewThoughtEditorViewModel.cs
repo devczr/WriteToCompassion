@@ -43,7 +43,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     {
 
 
-        await Task.Run(() => NewThought.Content = newText);
+        NewThought.Content = newText;
 
         //Calls CanExecute defined in this class constructor to enable button if content is not null
         (ButtonSaveCommand as Command).ChangeCanExecute();

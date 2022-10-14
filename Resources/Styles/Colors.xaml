@@ -10,12 +10,12 @@
     <Color x:Key="Secondary">#ffea20</Color>
     <Color x:Key="SecondaryLight">#ffff60</Color>
     <Color x:Key="SecondaryDark">#c8b800</Color>
-    <Color x:Key="LightGray">#f5f5f6</Color>
-    <Color x:Key="MidGray">#e1e2e1</Color>
+
     <Color x:Key="PrimaryTextColor">#000000</Color>
 
-    <Color x:Key="CrazyPink">#ff004f</Color>
-
+    <Color x:Key="LightGray">#e5e2da</Color>
+    <Color x:Key="MidGray">#e1e2e1</Color>
+    <Color x:Key="DarkGray">#e5e2da</Color>
 
     <Color x:Key="light_primary">#5A6400</Color>
     <Color x:Key="light_onPrimary">#FFFFFF</Color>

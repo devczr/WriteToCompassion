@@ -199,4 +199,13 @@ public partial class HomeViewModel : BaseViewModel
         await Shell.Current.GoToAsync("//root/newthought");
     }
 
+
+    [RelayCommand]
+    async Task ClearCloudsAsync()
+    {
+        await Shell.Current.DisplayAlert("clearing",
+    $"ok", "OK");
+        Clouds.Clear();
+    }
+
 }

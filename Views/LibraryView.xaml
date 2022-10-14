@@ -25,6 +25,8 @@
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
+        <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCollectionsCommand}" />
+
     </ContentPage.Behaviors>
 
     <Grid RowDefinitions="*,Auto"
