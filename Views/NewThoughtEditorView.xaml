@@ -5,6 +5,7 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              xmlns:views="clr-namespace:WriteToCompassion.Views"
              xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             xmlns:animations="clr-namespace:WriteToCompassion.Animations"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
              Shell.TabBarIsVisible="False">
@@ -17,15 +18,12 @@
         <Grid
             HeightRequest="50"
             HorizontalOptions="Fill"
-            ColumnDefinitions="*,*"
-            Padding="0,0,20,0">
+            ColumnDefinitions="*,*">
             <Label
-                Text="x"
+                Text="X"
                 Style="{StaticResource XLabel}"
-                WidthRequest="50"
-                HorizontalOptions="Start"
-                VerticalOptions="Fill"
-                VerticalTextAlignment="Start">
+                VerticalOptions="Center"
+                HorizontalOptions="Start">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
                 </Label.GestureRecognizers>
@@ -34,13 +32,18 @@
                 x:Name="saveButton"
                 Text="Save"
                 Grid.Column="1"
+                MinimumHeightRequest="50"
+                MinimumWidthRequest="50"
                 VerticalOptions="End"
                 HorizontalOptions="End"
-                Command="{Binding ButtonSaveCommand}"/>
+                Style="{StaticResource TransparentBackgroundPrimary}"
+                Command="{Binding SaveCommand}">
+            </Button>
         </Grid>
     </Shell.TitleView>
 
-    <Grid>
+    <Grid
+        Padding="15">
         <Editor 
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
@@ -49,9 +52,7 @@
             FontAttributes="{Binding EditorFontAttribute}">
             <FlyoutBase.ContextFlyout>
                 <MenuFlyout>
-                    <MenuFlyoutItem Text="Bold" Command="{Binding BoldCommand}"/>
-                    <MenuFlyoutItem Text="Italicized" Command="{Binding ItalicisedCommand}"/>
-                    <MenuFlyoutItem Text="Default" Command="{Binding DefaultCommand}"/>
+                    <MenuFlyoutItem Text="Go Home" Command="{Binding NavigateToThoughtsCommand}"/>
                 </MenuFlyout>
             </FlyoutBase.ContextFlyout>
             <Editor.Behaviors>
@@ -60,6 +61,10 @@
                     Command="{Binding UpdateThoughtContentCommand}"
                     CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
             </Editor.Behaviors>
+
+
         </Editor>
+
     </Grid>
+    
 </ContentPage>

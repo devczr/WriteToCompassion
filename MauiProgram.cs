@@ -66,8 +66,6 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterPopups(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<PopupSizeConstants>();
-        mauiAppBuilder.Services.AddTransient<AddThoughtPopupView>();
-        mauiAppBuilder.Services.AddTransient<EditThoughtPopup>();
         return mauiAppBuilder;
     }
 

@@ -4,51 +4,51 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:EditorViewModel"
-             x:Class="WriteToCompassion.Views.EditorView"
-             Title="Edit">
+             x:Class="WriteToCompassion.Views.EditorView">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
 
-    <Grid RowDefinitions="50,*">
+    <Shell.TitleView>
         <Grid
-            Grid.Row="0"
-            ColumnDefinitions="*,*,*,*,*">
-            <Border BackgroundColor="Pink"
-                Grid.Row="0"
-                Grid.ColumnSpan="5"/>
-            <ImageButton
-            Grid.Column="0"
-            Scale="0.5"
-            VerticalOptions="Start"
-            HorizontalOptions="Start"
-            Source="checkicon.png"
-            Aspect="AspectFit"
-            Command="{Binding UpdateDatabaseGoToCollectionCommand}"/>
-
-            <ImageButton
-            Grid.Column="3"
-            Source="xicon.png"
-            Scale="0.5"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            Command="{Binding CancelCommand}"/>
-
-            <ImageButton
-            Grid.Column="4"
-            Source="trashicon.png"
-            Scale="0.5"
-            VerticalOptions="Start"
-            HorizontalOptions="End"
-            Command="{Binding DeleteThoughtCommand}"/>
+            HeightRequest="50"
+            HorizontalOptions="Fill"
+            ColumnDefinitions="*,*">
+            <Label
+                Text="X"
+                Style="{StaticResource XLabel}"
+                VerticalOptions="Center"
+                HorizontalOptions="Start">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
+                </Label.GestureRecognizers>
+            </Label>
+            <Button
+                x:Name="saveButton"
+                Text="Save"
+                Grid.Column="1"
+                MinimumHeightRequest="50"
+                MinimumWidthRequest="50"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Style="{StaticResource TransparentBackgroundPrimary}"
+                Command="{Binding SaveCommand}">
+            </Button>
         </Grid>
-
-
+    </Shell.TitleView>
+    
+    
+    <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding SetOriginalContentCommand}" />
+    </ContentPage.Behaviors>
+    
+    
+    <Grid RowDefinitions="*,50">
         <Editor
             x:Name="thoughtEditor"
             Style="{StaticResource ThoughtEditor}"
-            Grid.Row="1"
+            Grid.Row="0"
             Text="{Binding Thought.Content}">
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"

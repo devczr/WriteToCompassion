@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="WriteToCompassion.Views.Popups.DiscardOrSavePopup"
+    Color="Transparent"
+    CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <Grid
+        ColumnDefinitions="*,*"
+        RowDefinitions="*,*">
+        <Label
+            Text="Save Thought?"
+            Grid.Row="0"
+            Grid.Column="0"
+            FontSize="25"
+            TextColor="HotPink"/>
+        <Button 
+            Text="Discard"
+            BackgroundColor="DimGrey"
+            Clicked="OnDiscardClicked"
+            Grid.Row="1"
+            Grid.Column="0"/>
+        <Button 
+            Text="Save"
+            BackgroundColor="{StaticResource light_primary}"
+            TextColor="{StaticResource light_onPrimary}"
+            Clicked="OnSaveClicked"
+            Grid.Row="1"
+            Grid.Column="1"/>
+    </Grid>
+</mct:Popup>

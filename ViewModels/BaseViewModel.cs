@@ -1,4 +1,6 @@
 ﻿
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using WriteToCompassion.Services.Settings;
 
@@ -39,6 +41,19 @@ namespace WriteToCompassion.ViewModels
             return Task.CompletedTask;
         }
 
+        // Toast
+        public virtual async Task ShortToast(string message)
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            ToastDuration duration = ToastDuration.Short;
+
+            double fontSize = 14;
+
+            var toast = Toast.Make(message, duration, fontSize);
+
+            await toast.Show(cts.Token);
+        }
 
     }
 }
