@@ -203,9 +203,12 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task ClearCloudsAsync()
     {
-        await Shell.Current.DisplayAlert("clearing",
-    $"ok", "OK");
+        for (int i = 0; i < Clouds.Count; i++)
+        {
+            Clouds[i].AnimationType = CloudAnimationType.None;
+        }
         Clouds.Clear();
+        GetAllThoughtsAsync();
     }
 
 }

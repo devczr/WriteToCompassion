@@ -46,12 +46,15 @@
                 ItemsLayout="VerticalGrid, 2">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Thought">
-                        <Border Style="{StaticResource ThoughtCardView}">
+                        <Border 
+                            StrokeShape="RoundRectangle 10">
                             <Border.Shadow>
-                                <Shadow Brush="Teal"
-                                        Offset="5,5"
-                                        Radius="2"
-                                        Opacity="0.3"/>
+                                <Shadow 
+                                    
+                                    Brush="Teal"
+                                    Offset="0,1"
+                                    Radius="1"
+                                    Opacity="0.2"/>
                             </Border.Shadow>
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}, Path=GoToEditorCommand}"

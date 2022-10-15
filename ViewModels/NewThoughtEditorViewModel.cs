@@ -1,5 +1,7 @@
 ﻿
 using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using System.Threading;
 using System.Windows.Input;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -15,27 +17,14 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
 
     [ObservableProperty]
     FontAttributes editorFontAttribute;
-    public ICommand ButtonSaveCommand { get; private set; }
 
+    [ObservableProperty]
+    bool saveShowing= false;
     public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
 
     public NewThoughtEditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
-        ButtonSaveCommand = new Command(
-            execute: async () =>
-            {
-                await SaveAsync();
-            },
-            canExecute: () =>
-            {
-                if (string.IsNullOrEmpty(newThought.Content))
-                {
-                    return false;
-                }
-                else
-                    return true;
-            });
     }
 
     [RelayCommand]
@@ -44,10 +33,19 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
 
 
         NewThought.Content = newText;
-
+        if(string.IsNullOrEmpty(NewThought.Content))
+        {
+            SaveShowing = false;
+        }
+        else
+        {
+            SaveShowing = true;
+        }
         //Calls CanExecute defined in this class constructor to enable button if content is not null
-        (ButtonSaveCommand as Command).ChangeCanExecute();
+        //        (ButtonSaveCommand as Command).ChangeCanExecute();
     }
+
+
 
 
     [RelayCommand]
@@ -63,6 +61,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         }
         else return;
     }
+
     async Task AddThoughtToDatabaseAsync()
     {
         try
@@ -90,6 +89,19 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [RelayCommand]
     async Task SaveAsync()
     {
+        if (string.IsNullOrEmpty(NewThought.Content))
+        {
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            string text = "Please enter a message before saving.";
+            ToastDuration duration = ToastDuration.Short;
+            double fontSize = 14;
+            var toast = Toast.Make(text, duration, fontSize);
+
+            await toast.Show(cts.Token);
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(NewThought.Content))
         {
             var result = await Shell.Current.DisplayAlert("Save empty thought?", null, "Save", "Cancel");
@@ -100,6 +112,20 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         await AddThoughtToDatabaseAsync();
         await NavigateToThoughtsAsync();
     }
+
+
+/*    async void SaveThoughtAsync()
+    {
+        if (string.IsNullOrWhiteSpace(NewThought.Content))
+        {
+            var result = await Shell.Current.DisplayAlert("Save empty thought?", null, "Save", "Cancel");
+
+            if (!result)
+                return;
+        }
+        await AddThoughtToDatabaseAsync();
+        await NavigateToThoughtsAsync();
+    }*/
 
 
 
@@ -123,6 +149,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     }
 
     // Navigation
+    [RelayCommand]
     async Task NavigateToThoughtsAsync()
     {
         await Shell.Current.GoToAsync("//root/home");
