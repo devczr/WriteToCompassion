@@ -29,8 +29,6 @@ public partial class SettingsViewModel : BaseViewModel
         settingsService.ThemeChoice = _themeChoice;
     }
 
-
-
     [RelayCommand]
     private void ToggleDisplayTutorial()
     {
