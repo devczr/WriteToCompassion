@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:mg="clr-namespace:MauiGestures;assembly=MauiGestures"
              xmlns:models="clr-namespace:WriteToCompassion.Models"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-             x:DataType="viewmodels:LibraryViewModel"
              x:Class="WriteToCompassion.Views.LibraryView">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
@@ -13,6 +13,11 @@
 
     <Shell.TitleView>
         <Grid
+           RowDefinitions="*"
+            ColumnDefinitions="*">
+        <Grid
+            Grid.Row="0"
+            IsVisible="true"
             HeightRequest="50"
             ColumnDefinitions="5*,*">
             <Label 
@@ -21,57 +26,69 @@
                 Grid.Column="0"
                 VerticalOptions="Center"/>
         </Grid>
+        </Grid>
     </Shell.TitleView>
 
     <ContentPage.Behaviors>
-        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
+
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCollectionsCommand}" />
 
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="*,Auto"
-             ColumnSpacing="5"
-             RowSpacing="0"
-             Padding="1">
+    <Grid>
+        <CollectionView
+            Margin="8"
+            x:Name="ThoughtsCV"
+            SelectionMode="{Binding SelectionMode}"
+            SelectedItems="{Binding SelectedThoughts}"
+            ItemsSource="{Binding AllThoughts}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                Orientation="Vertical"
+                Span="2"
+                HorizontalItemSpacing="8"
+                VerticalItemSpacing="8"/>
+            </CollectionView.ItemsLayout>            
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border
+                    HeightRequest="120"
+                    Padding="0">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter
+                                        Property="Padding"
+                                        Value="0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter
+                                        Property="Padding"
+                                        Value="8"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid
+                            mg:Gesture.CommandParameter="{Binding .}"
+                            mg:Gesture.TapCommand="{Binding TappedCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
+                            mg:Gesture.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                            
+                            <BoxView
+                                Color="{StaticResource light_primaryContainer}"/>
+                            <Label
+                                Text="{Binding Content}"
+                                FontSize="Large"
+                                TextColor="{StaticResource light_onPrimaryContainer}"/>
 
-        <RefreshView
-            Grid.Row="0"
-            Grid.ColumnSpan="2"
-            Command="{Binding GetAllThoughtsCommand}"
-            IsRefreshing="{Binding IsRefreshing}">
+                        </Grid>
 
-            <CollectionView
-                ItemsSource="{Binding UnreadThoughts}"
-                SelectionMode="None"
-                ItemsLayout="VerticalGrid, 2">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Thought">
-                        <Border 
-                            StrokeShape="RoundRectangle 10">
-                            <Border.Shadow>
-                                <Shadow 
-                                    
-                                    Brush="Teal"
-                                    Offset="0,1"
-                                    Radius="1"
-                                    Opacity="0.2"/>
-                            </Border.Shadow>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}, Path=GoToEditorCommand}"
-                                        CommandParameter="{Binding .}"/>
-                            </Border.GestureRecognizers>
-                            <Label Text="{Binding Content}" 
-                                Padding="10"
-                                TextColor="Black"
-                                MaxLines="1"
-                                FontAttributes="Italic"
-                                FontFamily="Josefin"
-                                FontAutoScalingEnabled="True"
-                                LineBreakMode="TailTruncation"/>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>

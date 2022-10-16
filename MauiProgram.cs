@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MauiGestures;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using WriteToCompassion.Models.Popups;
 using WriteToCompassion.Services;
@@ -18,6 +19,7 @@ public static class MauiProgram
             .UseMauiApp<App>()
             .UseSkiaSharp()
             .UseMauiCommunityToolkit()
+            .AddAdvancedGestures()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("JosefinSans-Regular.ttf", "Josefin");
@@ -55,7 +57,7 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<TutorialView>();
         mauiAppBuilder.Services.AddTransient<SettingsView>();
-        mauiAppBuilder.Services.AddSingleton<HomeView>();
+        mauiAppBuilder.Services.AddTransient<HomeView>();
         mauiAppBuilder.Services.AddTransient<EditorView>();
         mauiAppBuilder.Services.AddTransient<NewThoughtEditorView>();
         mauiAppBuilder.Services.AddTransient<LibraryView>();

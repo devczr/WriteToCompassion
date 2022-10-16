@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using SQLite;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using WriteToCompassion.Models;
@@ -98,5 +99,13 @@ public class ThoughtsService
         return thoughtList;
     }
 
+    public async Task<ObservableCollection<Thought>> GetThoughtCollection()
+    {
+        await Init();
+
+        var t = await dbAsyncConn.Table<Thought>().ToListAsync();
+        ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
+        return thoughtCollection;
+    }
 
 }
