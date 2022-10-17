@@ -45,23 +45,26 @@
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
-
-    <Grid x:Name="primaryGrid"
+    <Grid
+    RowDefinitions="*,50">
+        <Grid 
+        Grid.Row="0"
+        x:Name="primaryGrid"
         InputTransparent="False"
         RowDefinitions="*,3*"
         Padding="15">
 
-        
-        <Border
+
+            <Border
             x:Name="contentBorder"
             Grid.Row="0"
             BackgroundColor="Transparent"
             ZIndex="1">
-            <Border.GestureRecognizers>
-            </Border.GestureRecognizers>
-        </Border>
+                <Border.GestureRecognizers>
+                </Border.GestureRecognizers>
+            </Border>
 
-        <Label
+            <Label
                 x:Name="contentLabel"
                 IsVisible="True"
                 Text="{Binding CloudContent}"
@@ -72,18 +75,18 @@
                 TextColor="WhiteSmoke"
                 ZIndex="5">
 
-        </Label>
+            </Label>
 
-        <!--Custom Cloud Controls-->
-        <!--control Height and Width set according to SVG pixel dimensions-->
-        <!--TapGestureRecognizer inside CustomCloudControl xaml-->
-        <Grid
+            <!--Custom Cloud Controls-->
+            <!--control Height and Width set according to SVG pixel dimensions-->
+            <!--TapGestureRecognizer inside CustomCloudControl xaml-->
+            <Grid
             x:Name="cloudGrid"
             Grid.Row="1"
             BindableLayout.ItemsSource="{Binding Clouds}">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="models:Cloud">
-                    <controls:CustomCloudControl
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:Cloud">
+                        <controls:CustomCloudControl
                         IsVisible="true"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
@@ -93,12 +96,12 @@
                         CloudControlID="{Binding CloudID}"
                         CloudAnimation="{Binding AnimationType}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
-                    </controls:CustomCloudControl>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </Grid>
+                        </controls:CustomCloudControl>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </Grid>
 
-        <skia:SKLottieView  x:Name="cloudlottie"
+            <skia:SKLottieView  x:Name="cloudlottie"
                             Grid.Row="1"
                             VerticalOptions="EndAndExpand"
                             HorizontalOptions="Center"
@@ -110,5 +113,39 @@
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
-     </Grid>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*,*">
+
+            <ImageButton
+                Grid.Column="0"
+                Source="writeicon.png"
+                MaximumHeightRequest="50"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                Command="{Binding GoToNewThoughtEditorCommand}"/>
+
+            <Border
+                Stroke="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
+                StrokeShape="Ellipse"
+                StrokeThickness="4"
+                WidthRequest="50"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Column="1">
+            </Border>
+
+            <ImageButton
+                Grid.Column="2"
+                Source="papericon.png"
+                MaximumHeightRequest="50"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                BackgroundColor="Transparent"
+                Command="{Binding GoToLibraryCommand}"/>
+        </Grid>
+    </Grid>
 </ContentPage>

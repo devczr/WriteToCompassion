@@ -16,18 +16,4 @@ public partial class NewThoughtEditorView : ContentPage
 		editor.Text = "";
 	}
 
-    private void saveButton_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
-		editor.Focus();
-    }
-
-    private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
-    {
-
-    }
 }

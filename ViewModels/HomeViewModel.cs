@@ -192,13 +192,17 @@ public partial class HomeViewModel : BaseViewModel
         await Shell.Current.GoToAsync(nameof(SettingsView));
     }
 
-    //Hardcoded strings helping with TabBar failing to close the editors when using nameof
     [RelayCommand]
     async Task GoToNewThoughtEditorAsync()
     {
-        await Shell.Current.GoToAsync("//root/newthought");
+        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
     }
 
+    [RelayCommand]
+    async Task GoToLibraryAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(LibraryView));
+    }
 
     [RelayCommand]
     async Task ClearCloudsAsync()

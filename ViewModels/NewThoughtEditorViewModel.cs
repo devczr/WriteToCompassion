@@ -131,7 +131,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [RelayCommand]
     async Task NavigateToThoughtsAsync()
     {
-        await Shell.Current.GoToAsync("//root/home");
+        await Shell.Current.GoToAsync(nameof(HomeView));
     }
 
 }

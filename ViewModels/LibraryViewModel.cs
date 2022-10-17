@@ -268,4 +268,20 @@ public partial class LibraryViewModel : BaseViewModel
         await Task.Run(() => UnreadThoughts.Clear());
         await Task.Run(() => AllThoughts.Clear());
     }
+
+
+
+    // Navigation
+    [RelayCommand]
+    async Task GoToNewThoughtEditorAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
+    }
+
+    [RelayCommand]
+    async Task GoToLibraryAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(LibraryView));
+    }
+
 }

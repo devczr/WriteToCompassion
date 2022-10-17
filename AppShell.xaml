@@ -7,16 +7,10 @@
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
     
     <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
-    <TabBar Title="Home"  Route="root">
-        <Tab Title="Home" Route="home" Icon="cloudicon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:HomeView}"/>
-        </Tab>
-        <Tab Title="New" Route="newthought" Icon="writeicon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:NewThoughtEditorView}"/>
-        </Tab>
-        <Tab Title="Library" Route="library" Icon="papericon.png">
-            <ShellContent ContentTemplate="{DataTemplate views:LibraryView}"/>
-        </Tab>
-    </TabBar>
+    <ShellContent
+        Shell.NavBarIsVisible="True"
+        Title="Home"
+        ContentTemplate="{DataTemplate views:HomeView}"
+        Route="MainPage"/>
 
 </Shell>
