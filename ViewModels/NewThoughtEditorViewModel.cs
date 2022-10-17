@@ -144,19 +144,23 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
 
     // Navigation
 
+
+
     [RelayCommand]
     async Task GoToThoughtsAsync()
     {
-        await Shell.Current.GoToAsync(nameof(HomeView));
+        await Shell.Current.GoToAsync("..");
     }
 
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView));
+        await Shell.Current.GoToAsync(nameof(LibraryView), true);
     }
 
-    [RelayCommand]
+
+    // needed for bottom tab bar navigation once softkeyboard dismissal fixed
+   /* [RelayCommand]
     async Task CheckForSaveThenGoToThoughtsAsync()
     {
         if (!string.IsNullOrWhiteSpace(NewThought.Content))
@@ -175,7 +179,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         }
         else
             await Shell.Current.GoToAsync(nameof(LibraryView));
-    }
+    }*/
 
 
 
