@@ -195,13 +195,13 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToNewThoughtEditorAsync()
     {
-        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
+        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView), true);
     }
 
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView));
+        await Shell.Current.GoToAsync(nameof(LibraryView), true);
     }
 
     [RelayCommand]

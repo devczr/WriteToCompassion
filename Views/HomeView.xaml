@@ -9,9 +9,7 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:HomeViewModel"
-    x:Class="WriteToCompassion.Views.HomeView"
-    Shell.TabBarIsVisible="True"
-    Title="Home">
+    x:Class="WriteToCompassion.Views.HomeView">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
@@ -46,7 +44,7 @@
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
     <Grid
-    RowDefinitions="*,50">
+        RowDefinitions="*,40">
         <Grid 
         Grid.Row="0"
         x:Name="primaryGrid"
@@ -108,44 +106,58 @@
                             WidthRequest="600"
                             HeightRequest="140"
                             Opacity="1"
-                            IsAnimationEnabled="false"
-                            IsVisible="false"
+                            IsAnimationEnabled="true"
+                            IsVisible="true"
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
         </Grid>
         <Grid
             Grid.Row="1"
-            ColumnDefinitions="*,*,*">
+            ColumnDefinitions="*,*,*"
+            Padding="0"
+            VerticalOptions="Center">
 
             <ImageButton
                 Grid.Column="0"
                 Source="writeicon.png"
-                MaximumHeightRequest="50"
-                VerticalOptions="Center"
                 HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding GoToNewThoughtEditorCommand}"/>
+                VerticalOptions="Center"
+                WidthRequest="52"
+                HeightRequest="52"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToNewThoughtEditorCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
-            <Border
-                Stroke="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
-                StrokeShape="Ellipse"
-                StrokeThickness="4"
-                WidthRequest="50"
-                HeightRequest="50"
+            <ImageButton
+                Grid.Column="1"
+                Source="thoughticon.png"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                Grid.Column="1">
-            </Border>
+                WidthRequest="56"
+                HeightRequest="51"
+                Style="{StaticResource CustomTabBar}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
             <ImageButton
                 Grid.Column="2"
-                Source="papericon.png"
-                MaximumHeightRequest="50"
-                VerticalOptions="Center"
+                Source="scrollicon.png"
                 HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding GoToLibraryCommand}"/>
+                VerticalOptions="Center"
+                WidthRequest="54"
+                HeightRequest="50"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToLibraryCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
         </Grid>
     </Grid>
 </ContentPage>

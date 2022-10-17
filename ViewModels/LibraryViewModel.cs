@@ -279,9 +279,9 @@ public partial class LibraryViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task GoToLibraryAsync()
+    async Task GoToHomeAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView));
+        await Shell.Current.GoToAsync(nameof(HomeView));
     }
 
 }

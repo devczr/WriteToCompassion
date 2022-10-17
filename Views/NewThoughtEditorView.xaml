@@ -41,30 +41,82 @@
             </Button>
         </Grid>
     </Shell.TitleView>
-
     <Grid
-        Padding="15">
-        <Editor 
+        RowDefinitions="*,40">
+        <Grid
+            Padding="15">
+            <Editor 
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="1"
             Placeholder="{Binding PlaceholderText}"
             FontAttributes="{Binding EditorFontAttribute}">
-            <FlyoutBase.ContextFlyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="Go Home" Command="{Binding NavigateToThoughtsCommand}"/>
-                </MenuFlyout>
-            </FlyoutBase.ContextFlyout>
-            <Editor.Behaviors>
-                <mct:EventToCommandBehavior 
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Home" Command="{Binding CheckForSaveThenGoToThoughtsCommand}"/>
+                        <MenuFlyoutItem Text="Library" Command="{Binding CheckForSaveThenGoToLibraryCommand}"/>
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+                <Editor.Behaviors>
+                    <mct:EventToCommandBehavior 
                     EventName="TextChanged"
                     Command="{Binding UpdateThoughtContentCommand}"
                     CommandParameter="{Binding Source={x:Reference editor}, Path=Text}"/>
-            </Editor.Behaviors>
+                </Editor.Behaviors>
+            </Editor>
+            <ActivityIndicator
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"/>
+        </Grid>
+        
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*,*"
+            Padding="0"
+            VerticalOptions="Center">
 
+            <ImageButton
+                Grid.Column="0"
+                Source="writeicon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="52"
+                HeightRequest="52"
+                Style="{StaticResource CustomTabBar}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
-        </Editor>
+            <ImageButton
+                Grid.Column="1"
+                Source="thoughticon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="56"
+                HeightRequest="51"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding CheckForSaveThenGoToThoughtsCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
 
+            <ImageButton
+                Grid.Column="2"
+                Source="scrollicon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="54"
+                HeightRequest="50"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding CheckForSaveThenGoToLibraryCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+        </Grid>
     </Grid>
-    
 </ContentPage>

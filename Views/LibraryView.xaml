@@ -35,7 +35,7 @@
 
     </ContentPage.Behaviors>
     <Grid
-       RowDefinitions="*,50">
+       RowDefinitions="*,40">
         <Grid>
             <CollectionView
             Margin="8"
@@ -94,24 +94,50 @@
         </Grid>
         <Grid
             Grid.Row="1"
-            ColumnDefinitions="*,*,*">
+            ColumnDefinitions="*,*,*"
+            Padding="0"
+            VerticalOptions="Center">
 
             <ImageButton
                 Grid.Column="0"
                 Source="writeicon.png"
-                MaximumHeightRequest="50"
-                VerticalOptions="Center"
                 HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding GoToNewThoughtEditorCommand}"/>
+                VerticalOptions="Center"
+                WidthRequest="52"
+                HeightRequest="52"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToNewThoughtEditorCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <ImageButton
+                Grid.Column="1"
+                Source="thoughticon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="56"
+                HeightRequest="51"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToHomeCommand,Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
             <ImageButton
                 Grid.Column="2"
-                Source="papericon.png"
-                MaximumHeightRequest="50"
-                VerticalOptions="Center"
+                Source="scrollicon.png"
                 HorizontalOptions="Center"
-                BackgroundColor="Transparent"
-                Command="{Binding GoToLibraryCommand}"/>
+                VerticalOptions="Center"
+                WidthRequest="54"
+                HeightRequest="50"
+                Style="{StaticResource CustomTabBar}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
         </Grid>
     </Grid>
 </ContentPage>
