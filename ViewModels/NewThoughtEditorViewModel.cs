@@ -18,8 +18,6 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [ObservableProperty]
     FontAttributes editorFontAttribute;
 
-    [ObservableProperty]
-    bool saveShowing= false;
     public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
 
     public NewThoughtEditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
@@ -27,57 +25,47 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
         this.thoughtsService = thoughtsService;
     }
 
-
-    [RelayCommand]
-    async Task UpdateThoughtContent(string newText)
-    {
-        NewThought.Content = newText;
-    }
-
+    // Buttons
     [RelayCommand]
     async Task CancelAsync()
     {
         if (!string.IsNullOrWhiteSpace(NewThought.Content))
-            await DiscardOrSaveAsync();
-        else
-            await NavigateToThoughtsAsync();
-    }
-
-    async Task DiscardOrSaveAsync()
-    {
-        var result = await Shell.Current.DisplayAlert("Save your thought?", null, "Save", "Discard");
-
-        if (result)
         {
-            await AddThoughtToDatabaseAsync();
-            await NavigateToThoughtsAsync();
-            await ShortToast("Thought saved.");
+            await DiscardOrSaveAsync("..");
         }
         else
-        {
-            await NavigateToThoughtsAsync();
-        }
-
+            await Shell.Current.GoToAsync("..");
     }
-
 
 
     [RelayCommand]
-    async Task DeleteThoughtAsync()
+    async Task SaveAsync()
     {
-        var result = await Shell.Current.DisplayAlert("Delete Thought?", "This cannot be undone.", "DELETE", "Cancel");
-
-        if (result)
+        if (string.IsNullOrEmpty(NewThought.Content))
         {
-            int id = NewThought.Id;
-            await thoughtsService.DeleteThought(id);
-            await NavigateToThoughtsAsync();
+            await ShortToast("Please enter a message before saving.");
+            return;
         }
-        else return;
+
+        if (string.IsNullOrWhiteSpace(NewThought.Content))
+        {
+            var result = await Shell.Current.DisplayAlert("Save empty thought?", null, "Save", "Cancel");
+
+            if (!result)
+                return;
+        }
+        await AddThoughtToDatabaseAsync();
+        await GoToThoughtsAsync();
+        await ShortToast("Thought saved.");
     }
 
+
+    // Database
     async Task AddThoughtToDatabaseAsync()
     {
+        if (IsBusy)
+            return;
+
         try
         {
             IsBusy = true;
@@ -98,40 +86,97 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task SaveAsync()
+    async Task DeleteThoughtAsync()
     {
-        if (string.IsNullOrEmpty(NewThought.Content))
+        var result = await Shell.Current.DisplayAlert("Delete Thought?", "This cannot be undone.", "DELETE", "Cancel");
+
+        if (result)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            string text = "Please enter a message before saving.";
-            ToastDuration duration = ToastDuration.Short;
-            double fontSize = 14;
-            var toast = Toast.Make(text, duration, fontSize);
-
-            await toast.Show(cts.Token);
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(NewThought.Content))
-        {
-            var result = await Shell.Current.DisplayAlert("Save empty thought?", null, "Save", "Cancel");
-
-            if (!result)
+            if (IsBusy)
                 return;
+            
+            try
+            {
+                IsBusy = true;
+                int id = NewThought.Id;
+                await thoughtsService.DeleteThought(id);
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error",
+                    $"Unable to delete thought: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+            await GoToThoughtsAsync();
         }
-        await AddThoughtToDatabaseAsync();
-        await NavigateToThoughtsAsync();
+        else return;
+    }
+
+
+    // Utility
+    async Task DiscardOrSaveAsync(ShellNavigationState state)
+    {
+        var result = await Shell.Current.DisplayAlert("Save your thought?", null, "Save", "Discard");
+
+        if (result)
+        {
+            await AddThoughtToDatabaseAsync();
+            await Shell.Current.GoToAsync(state);
+            await ShortToast("Thought saved.");
+        }
+        else
+            await Shell.Current.GoToAsync(state);
+    }
+
+
+    [RelayCommand]
+    private void UpdateThoughtContent(string newText)
+    {
+        NewThought.Content = newText;
     }
 
 
 
 
     // Navigation
+
     [RelayCommand]
-    async Task NavigateToThoughtsAsync()
+    async Task GoToThoughtsAsync()
     {
-        await Shell.Current.GoToAsync("//root/home");
+        await Shell.Current.GoToAsync(nameof(HomeView));
     }
+
+    [RelayCommand]
+    async Task GoToLibraryAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(LibraryView));
+    }
+
+    [RelayCommand]
+    async Task CheckForSaveThenGoToThoughtsAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(NewThought.Content))
+        {
+            await DiscardOrSaveAsync(nameof(HomeView));
+        }
+        else
+            await Shell.Current.GoToAsync(nameof(HomeView));
+    }
+    [RelayCommand]
+    async Task CheckForSaveThenGoToLibraryAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(NewThought.Content))
+        {
+            await DiscardOrSaveAsync(nameof(LibraryView));
+        }
+        else
+            await Shell.Current.GoToAsync(nameof(LibraryView));
+    }
+
+
 
 }

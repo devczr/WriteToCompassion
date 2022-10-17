@@ -9,9 +9,7 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:HomeViewModel"
-    x:Class="WriteToCompassion.Views.HomeView"
-    Shell.TabBarIsVisible="True"
-    Title="Home">
+    x:Class="WriteToCompassion.Views.HomeView">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
@@ -45,23 +43,26 @@
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
-
-    <Grid x:Name="primaryGrid"
+    <Grid
+        RowDefinitions="*,40">
+        <Grid 
+        Grid.Row="0"
+        x:Name="primaryGrid"
         InputTransparent="False"
         RowDefinitions="*,3*"
         Padding="15">
 
-        
-        <Border
+
+            <Border
             x:Name="contentBorder"
             Grid.Row="0"
             BackgroundColor="Transparent"
             ZIndex="1">
-            <Border.GestureRecognizers>
-            </Border.GestureRecognizers>
-        </Border>
+                <Border.GestureRecognizers>
+                </Border.GestureRecognizers>
+            </Border>
 
-        <Label
+            <Label
                 x:Name="contentLabel"
                 IsVisible="True"
                 Text="{Binding CloudContent}"
@@ -72,18 +73,18 @@
                 TextColor="WhiteSmoke"
                 ZIndex="5">
 
-        </Label>
+            </Label>
 
-        <!--Custom Cloud Controls-->
-        <!--control Height and Width set according to SVG pixel dimensions-->
-        <!--TapGestureRecognizer inside CustomCloudControl xaml-->
-        <Grid
+            <!--Custom Cloud Controls-->
+            <!--control Height and Width set according to SVG pixel dimensions-->
+            <!--TapGestureRecognizer inside CustomCloudControl xaml-->
+            <Grid
             x:Name="cloudGrid"
             Grid.Row="1"
             BindableLayout.ItemsSource="{Binding Clouds}">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="models:Cloud">
-                    <controls:CustomCloudControl
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:Cloud">
+                        <controls:CustomCloudControl
                         IsVisible="true"
                         HorizontalOptions="Center"
                         VerticalOptions="End"
@@ -93,22 +94,70 @@
                         CloudControlID="{Binding CloudID}"
                         CloudAnimation="{Binding AnimationType}"
                         Scale="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=CloudScale}">
-                    </controls:CustomCloudControl>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </Grid>
+                        </controls:CustomCloudControl>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </Grid>
 
-        <skia:SKLottieView  x:Name="cloudlottie"
+            <skia:SKLottieView  x:Name="cloudlottie"
                             Grid.Row="1"
                             VerticalOptions="EndAndExpand"
                             HorizontalOptions="Center"
                             WidthRequest="600"
                             HeightRequest="140"
                             Opacity="1"
-                            IsAnimationEnabled="false"
-                            IsVisible="false"
+                            IsAnimationEnabled="true"
+                            IsVisible="true"
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
-     </Grid>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*,*"
+            Padding="0"
+            VerticalOptions="Center">
+
+            <ImageButton
+                Grid.Column="0"
+                Source="writeicon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="52"
+                HeightRequest="52"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToNewThoughtEditorCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <ImageButton
+                Grid.Column="1"
+                Source="thoughticon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="56"
+                HeightRequest="51"
+                Style="{StaticResource CustomTabBar}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <ImageButton
+                Grid.Column="2"
+                Source="scrollicon.png"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="54"
+                HeightRequest="50"
+                Style="{StaticResource CustomTabBar}"
+                Command="{Binding GoToLibraryCommand}">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+        </Grid>
+    </Grid>
 </ContentPage>
