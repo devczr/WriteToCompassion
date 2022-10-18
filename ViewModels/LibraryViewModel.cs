@@ -13,6 +13,9 @@ public partial class LibraryViewModel : BaseViewModel
     private readonly ISettingsService settingsService;
 
     private readonly ThoughtsService thoughtsService;
+
+    private bool initialized;
+
     public ObservableCollection<Thought> UnreadThoughts { get; } = new();
 
     public ObservableCollection<Thought> AllThoughts { get; } = new();
@@ -32,18 +35,15 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     int countSelected;
 
-    private ObservableCollection<Thought> _thoughts;
 
     private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
     private SelectionMode _selectionMode = SelectionMode.None;
     public Thought SelectedItem { get; set; }
     public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
-    public ObservableCollection<Thought> Thoughts { get => _thoughts; set => _thoughts = value; }
+
     public ObservableCollection<object> SelectedThoughts { get => _selectedThoughts; set => _selectedThoughts = value; }
 
     public Command<Thought> LongPressCommand { get; private set; }
-
-    public Command ClearCommand { get; private set; }
 
     public Command<Thought> TappedCommand { get; private set; }
 
@@ -53,10 +53,11 @@ public partial class LibraryViewModel : BaseViewModel
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
 
-        InitThoughtsAsync();
+        RefreshThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
         TappedCommand = new Command<Thought>(OnTapped);
     }
+
 
     private async void OnTapped(Thought thought)
     {
@@ -66,22 +67,7 @@ public partial class LibraryViewModel : BaseViewModel
 
         if (_selectionMode != SelectionMode.None)
         {
-            if (_selectedThoughts.Contains(thought))
-            {
-                SelectedThoughts.Remove(thought);
-
-                if(SelectedThoughts.Count <= 0)
-                    MultiSelectCancel();
-                else
-                    CountSelected -= 1;
-            }
-
-            else
-            {
-                SelectedThoughts.Add(thought);
-                CountSelected += 1;
-            }
-                
+            AddOrRemoveThought(thought);
         }
         else
         {
@@ -92,20 +78,45 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }
 
-
-    private void OnLongPress(Thought obj)
+    private void OnLongPress(Thought thought)
     {
+        if (thought is null)
+            return;
         
         if (_selectionMode == SelectionMode.None)
         {
             IsMultiSelect = true;
             CanRefresh = false;
             SelectionMode = SelectionMode.Multiple;
-            SelectedThoughts.Add(obj);
-            CountSelected = 1;
-            
+            AddOrRemoveThought(thought);
+        }
+        else if(_selectionMode == SelectionMode.Multiple)
+        {
+            AddOrRemoveThought(thought); 
         }
     }
+
+    // Add/Remove thought from Selected collection. If removing makes the selection count = 0, cancel multiselection
+    private void AddOrRemoveThought(Thought thought)
+    {
+        if (_selectedThoughts.Contains(thought))
+        {
+            SelectedThoughts.Remove(thought);
+
+            if (SelectedThoughts.Count <= 0)
+                MultiSelectCancel();
+            else
+                CountSelected -= 1;
+        }
+
+        else
+        {
+            SelectedThoughts.Add(thought);
+            CountSelected += 1;
+        }
+
+    }
+
 
     // Multi Select
     [RelayCommand]
@@ -152,7 +163,7 @@ public partial class LibraryViewModel : BaseViewModel
             {
                 IsBusy = false;
                 MultiSelectCancel();
-                RefreshTrue();
+                await RefreshThoughtsAsync();
             }
 
         }
@@ -161,35 +172,6 @@ public partial class LibraryViewModel : BaseViewModel
 
 
     // Collection
-    [RelayCommand]
-    async Task InitThoughtsAsync()
-    {
-        if (IsBusy)
-            return;
-
-        try
-        {
-            IsBusy = true;
-
-            var thoughts = await thoughtsService.GetThoughtCollection();
-
-            foreach (var thought in thoughts)
-                AllThoughts.Add(thought);
-
-
-        }
-        catch (Exception ex)
-        {
-            await Shell.Current.DisplayAlert("Error",
-                $"Unable to load thought library: {ex.Message}", "OK");
-        }
-        finally
-        {
-            OnPropertyChanged(nameof(AllThoughts));
-            IsBusy = false;
-        }
-    }
-
     [RelayCommand]
     async Task RefreshThoughtsAsync()
     {
@@ -216,17 +198,11 @@ public partial class LibraryViewModel : BaseViewModel
         }
         finally
         {
+            OnPropertyChanged(nameof(AllThoughts));
             IsBusy = false;
             IsRefreshing = false;
         }
     }
-
-    [RelayCommand]
-    private void RefreshTrue()
-    {
-        IsRefreshing = true;
-    }
-
 
     // Navigation
     [RelayCommand]
