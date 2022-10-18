@@ -4,7 +4,9 @@
              xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:EditorViewModel"
-             x:Class="WriteToCompassion.Views.EditorView">
+             x:Class="WriteToCompassion.Views.EditorView"
+             Shell.TabBarIsVisible="False">
+    
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
@@ -24,6 +26,7 @@
                     <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
                 </Label.GestureRecognizers>
             </Label>
+
             <Button
                 x:Name="saveButton"
                 Text="Save"
@@ -38,13 +41,13 @@
         </Grid>
     </Shell.TitleView>
     
-    
+
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding SetOriginalContentCommand}" />
     </ContentPage.Behaviors>
     
     
-    <Grid RowDefinitions="*,50">
+    <Grid>
         <Editor
             x:Name="thoughtEditor"
             Style="{StaticResource ThoughtEditor}"
@@ -55,7 +58,11 @@
                                             Command="{Binding UpdateThoughtContentCommand}"
                                             CommandParameter="{Binding Source={x:Reference thoughtEditor}, Path=Text}"/>
             </Editor.Behaviors>
-
         </Editor>
+        <ActivityIndicator
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="StartAndExpand"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"/>
     </Grid>
 </ContentPage>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
+using Microsoft.Maui.Networking;
 
 namespace WriteToCompassion.ViewModels;
 
@@ -19,6 +20,9 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
+    [ObservableProperty]
+    bool exists;
+
     /*    [ObservableProperty]
         SelectionMode selectionMode = SelectionMode.Multiple;*/
 
@@ -30,7 +34,7 @@ public partial class LibraryViewModel : BaseViewModel
 
     private ObservableCollection<Thought> _thoughts;
 
-    private ObservableCollection<object> _selectedThoughts;
+    private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
     private SelectionMode _selectionMode = SelectionMode.None;
     public Thought SelectedItem { get; set; }
     public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
@@ -46,33 +50,37 @@ public partial class LibraryViewModel : BaseViewModel
     public Command<Thought> TappedCommand { get; private set; }
 
 
-
-
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
 
-        InitData();
         InitThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
         ClearCommand = new Command(OnClear);
         TappedCommand = new Command<Thought>(OnTapped);
     }
 
-    private void OnTapped(Thought obj)
+    private async void OnTapped(Thought thought)
     {
+
+        if (thought is null)
+            return;
+
         if (_selectionMode != SelectionMode.None)
         {
-            Debug.WriteLine($"Added {obj.Content}");
-            if (_selectedThoughts.Contains(obj))
-                SelectedThoughts.Remove(obj);
+            Debug.WriteLine($"Added {thought.Content}");
+            if (_selectedThoughts.Contains(thought))
+                SelectedThoughts.Remove(thought);
             else
-                SelectedThoughts.Add(obj);
+                SelectedThoughts.Add(thought);
         }
         else
         {
-            Shell.Current.DisplayAlert("navigation triggered", "inside 'on pressed'", "Ok");
+            await Shell.Current.GoToAsync(nameof(EditorView), true, new Dictionary<string, object>
+            {
+                {"Thought", thought }
+            });
         }
     }
 
@@ -80,6 +88,7 @@ public partial class LibraryViewModel : BaseViewModel
     {
         SelectionMode = SelectionMode.None;
     }
+
 
     private void OnLongPress(Thought obj)
     {
@@ -92,57 +101,69 @@ public partial class LibraryViewModel : BaseViewModel
     }
 
 
-    private void InitData()
-    {
-        _selectedThoughts = new ObservableCollection<object>();
-
-        _thoughts = new ObservableCollection<Thought>();
-        for (int i = 0; i < 15; i++)
-        {
-            _thoughts.Add(
-                new Thought
-                {
-                    Content = $"test thought #:{i}{i}{i}"
-                }
-            );
-        }
-
-        OnPropertyChanged(nameof(Thoughts));
-    }
-
     [RelayCommand]
     async Task InitThoughtsAsync()
     {
-        UnreadThoughts.Clear();
-        AllThoughts.Clear();
-        var thoughts = await thoughtsService.GetThoughtCollection();
+        if (IsBusy)
+            return;
 
-        foreach (var thought in thoughts)
-            AllThoughts.Add(thought);
+        try
+        {
+            IsBusy = true;
 
-        OnPropertyChanged(nameof(AllThoughts));
+//           _selectedThoughts = new ObservableCollection<object>();
+
+//            UnreadThoughts.Clear();
+//            AllThoughts.Clear();
+            var thoughts = await thoughtsService.GetThoughtCollection();
+
+            foreach (var thought in thoughts)
+                AllThoughts.Add(thought);
+
+
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error",
+                $"Unable to load thought library: {ex.Message}", "OK");
+        }
+        finally
+        {
+            OnPropertyChanged(nameof(AllThoughts));
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]
     async Task RefreshThoughtsAsync()
     {
+        if (IsBusy)
+            return;
 
+        try
+        {
+
+            IsBusy = true;
+            var thoughts = await thoughtsService.GetThoughtCollection();
+
+            if (AllThoughts.Count != 0)
+                AllThoughts.Clear();
+
+            foreach (var thought in thoughts)
+                AllThoughts.Add(thought);
+
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error",
+                $"Unable to load thought library: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+            IsRefreshing = false;
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     [RelayCommand]
@@ -209,12 +230,7 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }*/
 
-    [RelayCommand]
-    async Task EventTestAsync()
-    {
-        await Shell.Current.DisplayAlert("event", "selection changed", "Ok");
 
-    }
 
 /*    [RelayCommand]
     async Task TapTestAsync(Thought thought)
@@ -269,6 +285,11 @@ public partial class LibraryViewModel : BaseViewModel
         await Task.Run(() => AllThoughts.Clear());
     }
 
+    [RelayCommand]
+    async Task RefreshTrueAsync()
+    {
+        IsRefreshing = true;
+    }
 
 
     // Navigation

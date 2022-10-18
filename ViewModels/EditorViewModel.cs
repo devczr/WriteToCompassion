@@ -29,9 +29,25 @@ public partial class EditorViewModel : BaseViewModel
 
         if (result)
         {
-            int id = Thought.Id;
-            await thoughtsService.DeleteThought(id);
-            await Shell.Current.GoToAsync("//root/library");
+            if (IsBusy)
+                return;
+
+            try
+            {
+                IsBusy = true;
+                int id = Thought.Id;
+                await thoughtsService.DeleteThought(id);
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error",
+                    $"Unable to delete thought: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                await NavigateToLibraryAsync();
+            }
         }
         else return;
     }
@@ -43,7 +59,7 @@ public partial class EditorViewModel : BaseViewModel
             await DiscardOrSaveAsync();
 
         else
-            await Shell.Current.GoToAsync("//root/library");
+            await NavigateToLibraryAsync();
     }
 
     async Task DiscardOrSaveAsync()
@@ -104,6 +120,6 @@ public partial class EditorViewModel : BaseViewModel
     // Navigation
     async Task NavigateToLibraryAsync()
     {
-        await Shell.Current.GoToAsync("//root/library");
+        await Shell.Current.GoToAsync("..");
     }
 }

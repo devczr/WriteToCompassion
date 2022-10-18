@@ -15,15 +15,14 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     [ObservableProperty]
     Thought newThought = new();
 
-    [ObservableProperty]
-    FontAttributes editorFontAttribute;
-
+    
     public string PlaceholderText { get; set; } = "Leave a kind note for yourself here...";
 
     public NewThoughtEditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
     }
+
 
     // Buttons
     [RelayCommand]
@@ -109,9 +108,9 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
             finally
             {
                 IsBusy = false;
+                await GoToThoughtsAsync();
             }
 
-            await GoToThoughtsAsync();
         }
         else return;
     }
@@ -140,11 +139,7 @@ public partial class NewThoughtEditorViewModel : BaseViewModel
     }
 
 
-
-
     // Navigation
-
-
 
     [RelayCommand]
     async Task GoToThoughtsAsync()

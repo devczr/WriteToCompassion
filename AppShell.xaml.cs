@@ -36,7 +36,7 @@ public partial class AppShell : Shell
 	{
         Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
         Routing.RegisterRoute(nameof(NewThoughtEditorView), typeof(NewThoughtEditorView));
-        Routing.RegisterRoute("library", typeof(LibraryView));
+        Routing.RegisterRoute(nameof(LibraryView), typeof(LibraryView));
         Routing.RegisterRoute(nameof(TutorialView), typeof(TutorialView));
         Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
         Routing.RegisterRoute(nameof(EditorView), typeof(EditorView));
