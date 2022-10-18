@@ -45,7 +45,7 @@
                 BackgroundColor="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark= {StaticResource dark_secondaryContainer}}"
                 IsVisible="{Binding IsMultiSelect}"
                 StrokeShape="RoundRectangle 10"
-                Margin="0,0,17.5,0">
+                Margin="0,0,15,0">
                 <Grid
                     x:DataType="viewmodels:LibraryViewModel"
                     HeightRequest="50"
@@ -58,7 +58,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
                         BackgroundColor="Transparent"
-                        Command="{Binding CancelMultiSelectCommand}"/>
+                        Command="{Binding MultiSelectCancelCommand}"/>
                     <Label
                         Grid.Column="1"
                         Text="{Binding CountSelected}"
@@ -74,7 +74,7 @@
                         VerticalOptions="Center"
                         WidthRequest="51"
                         HeightRequest="51"
-                        Clicked="ImageButton_Clicked"
+                        Command="{Binding MultiSelectDeleteCommand}"
                         Style="{StaticResource CustomTopTabBar}">
                         <ImageButton.Behaviors>
                             <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>

@@ -71,7 +71,7 @@ public partial class LibraryViewModel : BaseViewModel
                 SelectedThoughts.Remove(thought);
 
                 if(SelectedThoughts.Count <= 0)
-                    CancelMultiSelect();
+                    MultiSelectCancel();
                 else
                     CountSelected -= 1;
             }
@@ -107,8 +107,9 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }
 
+    // Multi Select
     [RelayCommand]
-    private void CancelMultiSelect()
+    private void MultiSelectCancel()
     {
         SelectionMode = SelectionMode.None;
         IsMultiSelect = false;
@@ -117,6 +118,46 @@ public partial class LibraryViewModel : BaseViewModel
         CanRefresh = true;
     }
 
+    [RelayCommand]
+    async Task MultiSelectDeleteAsync()
+    {
+        if (CountSelected <= 0)
+            return;
+
+        string warningText = CountSelected == 1 ? "Delete Thought?" : $"Delete {CountSelected} Thoughts?";
+
+        var result = await Shell.Current.DisplayAlert(warningText, "This cannot be undone.", "DELETE", "Cancel");
+
+        if (result)
+        {
+            if (IsBusy)
+                return;
+
+            try
+            {
+                IsBusy = true;
+                for(int i = 0; i < SelectedThoughts.Count; i++)
+                {
+                    int id = (SelectedThoughts[i] as Thought).Id;
+                    await thoughtsService.DeleteThought(id);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("Error",
+                    $"Unable to delete thought: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+                MultiSelectCancel();
+                RefreshTrue();
+            }
+
+        }
+        else return;
+    }
 
 
     // Collection
