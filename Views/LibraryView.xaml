@@ -61,7 +61,7 @@
         <Grid>
             <RefreshView
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
-                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"/>
+                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
             <CollectionView
             Margin="8"
             x:Name="ThoughtsCV"
@@ -117,6 +117,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+            </RefreshView>
         </Grid>
         <Grid
             Grid.Row="1"

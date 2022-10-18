@@ -12,10 +12,4 @@ public partial class LibraryView : ContentPage
 	}
 
 
-    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
-    {
-        base.OnNavigatedFrom(args);
-
-    }
-
 }
