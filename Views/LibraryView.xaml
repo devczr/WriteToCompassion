@@ -45,28 +45,35 @@
                 BackgroundColor="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark= {StaticResource dark_secondaryContainer}}"
                 IsVisible="{Binding IsMultiSelect}"
                 StrokeShape="RoundRectangle 10"
-                Margin="0,0,15,0">
+                Margin="0,0,17.5,0">
                 <Grid
                     x:DataType="viewmodels:LibraryViewModel"
                     HeightRequest="50"
-                    ColumnDefinitions="5*,*">
+                    ColumnDefinitions="*,*,*,*">
                     <Button
-                            Text="X"
-                            TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
-                            FontSize="Large"
-                            VerticalOptions="Center"
-                            HorizontalOptions="Start"
-                            BackgroundColor="Transparent"
-                            Command="{Binding CancelCommand}"/>
+                        Grid.Column="0"
+                        Text="X"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        FontSize="Large"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Command="{Binding CancelCommand}"/>
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding CountSelected}"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        FontAttributes="Bold"
+                        FontSize="Large"/>
                     <ImageButton
-                            Grid.Column="1"
-                            Source="trashicon.png"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"
-                            WidthRequest="51"
-                            HeightRequest="51"
-                            Clicked="ImageButton_Clicked"
-                            Style="{StaticResource CustomTopTabBar}">
+                        Grid.Column="3"
+                        Source="trashicon.png"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="51"
+                        HeightRequest="51"
+                        Clicked="ImageButton_Clicked"
+                        Style="{StaticResource CustomTopTabBar}">
                         <ImageButton.Behaviors>
                             <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
                         </ImageButton.Behaviors>

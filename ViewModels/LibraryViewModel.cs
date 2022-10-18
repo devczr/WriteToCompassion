@@ -26,7 +26,8 @@ public partial class LibraryViewModel : BaseViewModel
     bool isMultiSelect;
     public bool IsNotMultiSelect => !isMultiSelect;
 
-
+    [ObservableProperty]
+    int countSelected;
 
     private ObservableCollection<Thought> _thoughts;
 
@@ -51,7 +52,6 @@ public partial class LibraryViewModel : BaseViewModel
 
         InitThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
-        ClearCommand = new Command(OnClear);
         TappedCommand = new Command<Thought>(OnTapped);
     }
 
@@ -63,11 +63,26 @@ public partial class LibraryViewModel : BaseViewModel
 
         if (_selectionMode != SelectionMode.None)
         {
-            Debug.WriteLine($"Added {thought.Content}");
             if (_selectedThoughts.Contains(thought))
+            {
                 SelectedThoughts.Remove(thought);
+                var count = SelectedThoughts.Count;
+                if(count <= 0)
+                {
+                    Cancel();
+                }
+                else
+                {
+                    CountSelected = count;
+                }
+            }
+
             else
+            {
                 SelectedThoughts.Add(thought);
+                CountSelected = SelectedThoughts.Count;
+            }
+                
         }
         else
         {
@@ -76,11 +91,6 @@ public partial class LibraryViewModel : BaseViewModel
                 {"Thought", thought }
             });
         }
-    }
-
-    private void OnClear()
-    {
-        SelectionMode = SelectionMode.None;
     }
 
 
