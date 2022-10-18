@@ -544,13 +544,13 @@
                     <VisualState x:Name="Normal">
                         <VisualState.Setters>
                             <Setter Property="Scale"
-                                    Value="0.8" />
+                                    Value="0.5" />
                         </VisualState.Setters>
                     </VisualState>
                     <VisualState x:Name="Pressed">
                         <VisualState.Setters>
                             <Setter Property="Scale"
-                                    Value="0.7" />
+                                    Value="0.4" />
                         </VisualState.Setters>
                     </VisualState>
                 </VisualStateGroup>

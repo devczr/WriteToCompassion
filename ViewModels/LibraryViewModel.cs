@@ -20,15 +20,11 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
+
     [ObservableProperty]
-    bool exists;
-
-    /*    [ObservableProperty]
-        SelectionMode selectionMode = SelectionMode.Multiple;*/
-
-    /*    [ObservableProperty]
-        public ObservableCollection<Thought> selectedThoughts = new();*/
-
+    [NotifyPropertyChangedFor(nameof(IsNotMultiSelect))]
+    bool isMultiSelect;
+    public bool IsNotMultiSelect => !isMultiSelect;
 
 
 
@@ -40,8 +36,6 @@ public partial class LibraryViewModel : BaseViewModel
     public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
     public ObservableCollection<Thought> Thoughts { get => _thoughts; set => _thoughts = value; }
     public ObservableCollection<object> SelectedThoughts { get => _selectedThoughts; set => _selectedThoughts = value; }
-
-    public Command ShareCommand { get; set; }
 
     public Command<Thought> LongPressCommand { get; private set; }
 
@@ -92,15 +86,26 @@ public partial class LibraryViewModel : BaseViewModel
 
     private void OnLongPress(Thought obj)
     {
-        Debug.WriteLine("LongPressed");
+        
         if (_selectionMode == SelectionMode.None)
         {
             SelectionMode = SelectionMode.Multiple;
             SelectedThoughts.Add(obj);
+            IsMultiSelect = true;
         }
     }
 
+    [RelayCommand]
+    private void Cancel()
+    {
+        SelectionMode = SelectionMode.None;
+        IsMultiSelect = false;
+        SelectedThoughts.Clear();
+    }
 
+
+
+    // Collection
     [RelayCommand]
     async Task InitThoughtsAsync()
     {
@@ -111,10 +116,6 @@ public partial class LibraryViewModel : BaseViewModel
         {
             IsBusy = true;
 
-//           _selectedThoughts = new ObservableCollection<object>();
-
-//            UnreadThoughts.Clear();
-//            AllThoughts.Clear();
             var thoughts = await thoughtsService.GetThoughtCollection();
 
             foreach (var thought in thoughts)
@@ -165,9 +166,22 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
+    private void RefreshTrue()
+    {
+        IsRefreshing = true;
+    }
+
+
+    // Navigation
+    [RelayCommand]
+    async Task GoToNewThoughtEditorAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
+    }
 
     [RelayCommand]
-    async Task GoToEditor(Thought thought)
+    async Task GoToEditorAsync(Thought thought)
     {
         if (thought is null)
             return;
@@ -179,43 +193,20 @@ public partial class LibraryViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task GetAllThoughtsAsync()
+    async Task GoToHomeAsync()
     {
-/*        try
-        {
-            IsBusy = true;
-            UnreadThoughts.Clear();
-            AllThoughts.Clear();
-
-            var thoughts = await thoughtsService.GetAllThoughts();
-
-            foreach (var thought in thoughts)
-                AllThoughts.Add(thought);
-
-            *//*            if (settingsService.UnreadOnly)
-                        {
-                            thoughts = thoughts.Where(t => t.ReadCount <= 0).ToList();
-                            foreach (var thought in thoughts)
-                                UnreadThoughts.Add(thought);
-                        }
-                        else
-                        {
-                            foreach (var thought in thoughts)
-                                AllThoughts.Add(thought);
-                        }*//*
-
-        }
-        catch (Exception ex)
-        {
-            await Shell.Current.DisplayAlert("Error",
-                $"Unable to get your saved thoughts: {ex.Message}", "OK");
-        }
-        finally
-        {
-            IsBusy = false;
-            IsRefreshing = false;
-        }*/
+        await Shell.Current.GoToAsync(nameof(HomeView));
     }
+
+}
+
+
+/*[RelayCommand]
+async Task ClearCollectionsAsync()
+{
+    await Task.Run(() => UnreadThoughts.Clear());
+    await Task.Run(() => AllThoughts.Clear());
+}*/
 
 /*    [RelayCommand]
     async Task LongPressAsync(object thought)
@@ -247,62 +238,34 @@ public partial class LibraryViewModel : BaseViewModel
         }
     }*/
 
-        /*[RelayCommand]
-    async Task TapAsync(Thought thought)
+/*[RelayCommand]
+async Task TapAsync(Thought thought)
+{
+if (thought is null)
+    return;
+
+if(SelectionMode is not SelectionMode.None)
+{
+    if (SelectedThoughts.Contains(thought))
     {
-        if (thought is null)
-            return;
-
-        if(SelectionMode is not SelectionMode.None)
-        {
-            if (SelectedThoughts.Contains(thought))
-            {
-                SelectedThoughts.Remove(thought);
-            }
-            else
-            {
-                SelectedThoughts.Add(thought);
-            }
-        }
-        else
-        {
-
-            await Shell.Current.DisplaySnackbar("off to editor now");
-        }
-
-
-        if (selectionMode is SelectionMode.None)
-        {
-            SelectionMode = SelectionMode.Multiple;
-            SelectedThoughts.Add(thought);
-        }
-    }*/
-
-    [RelayCommand]
-    async Task ClearCollectionsAsync()
-    {
-        await Task.Run(() => UnreadThoughts.Clear());
-        await Task.Run(() => AllThoughts.Clear());
+        SelectedThoughts.Remove(thought);
     }
-
-    [RelayCommand]
-    async Task RefreshTrueAsync()
+    else
     {
-        IsRefreshing = true;
+        SelectedThoughts.Add(thought);
     }
-
-
-    // Navigation
-    [RelayCommand]
-    async Task GoToNewThoughtEditorAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(NewThoughtEditorView));
-    }
-
-    [RelayCommand]
-    async Task GoToHomeAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(HomeView));
-    }
-
 }
+else
+{
+
+    await Shell.Current.DisplaySnackbar("off to editor now");
+}
+
+
+if (selectionMode is SelectionMode.None)
+{
+    SelectionMode = SelectionMode.Multiple;
+    SelectedThoughts.Add(thought);
+}
+}*/
+

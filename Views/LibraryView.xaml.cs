@@ -11,5 +11,8 @@ public partial class LibraryView : ContentPage
         this.libraryViewModel = libraryViewModel;
 	}
 
-
+    private void ImageButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.DisplayAlert("ALERT", "ALERT", "OK");
+    }
 }

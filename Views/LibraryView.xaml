@@ -16,36 +16,52 @@
            RowDefinitions="*"
             ColumnDefinitions="*">
             <Grid
-            Grid.Row="0"
-            HeightRequest="50"
-            ColumnDefinitions="2*,*,*,*,*">
+                Grid.Row="0"
+                HeightRequest="50"
+                ColumnDefinitions="5*,*"
+                IsVisible="{Binding IsNotMultiSelect}">
                 <Label 
                 Style="{StaticResource TitleViewLabel}"
-                Text="Library" 
+                Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
                 <ImageButton
-                    Grid.Column="2"
-                    Source="refreshicon.png"
+                    Grid.Column="1"
+                    Source="searchicon.png"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    WidthRequest="46"
-                    HeightRequest="52"
-                    Style="{StaticResource CustomTopTabBar}"
-                    Command="{Binding RefreshTrueCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                    WidthRequest="51"
+                    HeightRequest="51"
+                    Style="{StaticResource CustomTopTabBar}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
+            </Grid>
+            <!--Multi Select Top Bar-->
+            <Grid
+                x:DataType="viewmodels:LibraryViewModel"
+                Grid.Row="0"
+                HeightRequest="50"
+                ColumnDefinitions="5*,*"
+                IsVisible="{Binding IsMultiSelect}">
+                <Button
+                    Text="X"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    Command="{Binding CancelCommand}">
+                    
+                </Button>
                 <ImageButton
-                    Grid.Column="4"
-                    Source="trashicon.png"
+                    Grid.Column="1"
+                    Source="searchicon.png"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
-                    WidthRequest="48"
-                    HeightRequest="54"
-                    Style="{StaticResource CustomTopTabBar}"
-                    Command="{Binding RefreshTrueCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                    WidthRequest="51"
+                    HeightRequest="51"
+                    Clicked="ImageButton_Clicked"
+                    Style="{StaticResource CustomTopTabBar}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
                     </ImageButton.Behaviors>
@@ -53,9 +69,11 @@
             </Grid>
         </Grid>
     </Shell.TitleView>
-
+<!--
     <ContentPage.Behaviors>
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding RefreshTrueCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"/>
     </ContentPage.Behaviors>
+    -->
     <Grid
        RowDefinitions="*,40">
         <Grid>
