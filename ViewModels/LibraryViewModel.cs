@@ -69,21 +69,17 @@ public partial class LibraryViewModel : BaseViewModel
             if (_selectedThoughts.Contains(thought))
             {
                 SelectedThoughts.Remove(thought);
-                var count = SelectedThoughts.Count;
-                if(count <= 0)
-                {
+
+                if(SelectedThoughts.Count <= 0)
                     CancelMultiSelect();
-                }
                 else
-                {
-                    CountSelected = count;
-                }
+                    CountSelected -= 1;
             }
 
             else
             {
                 SelectedThoughts.Add(thought);
-                CountSelected = SelectedThoughts.Count;
+                CountSelected += 1;
             }
                 
         }
@@ -106,6 +102,7 @@ public partial class LibraryViewModel : BaseViewModel
             CanRefresh = false;
             SelectionMode = SelectionMode.Multiple;
             SelectedThoughts.Add(obj);
+            CountSelected = 1;
             
         }
     }
@@ -116,6 +113,7 @@ public partial class LibraryViewModel : BaseViewModel
         SelectionMode = SelectionMode.None;
         IsMultiSelect = false;
         SelectedThoughts.Clear();
+        CountSelected = 0;
         CanRefresh = true;
     }
 

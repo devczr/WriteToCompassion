@@ -64,7 +64,9 @@
                         Text="{Binding CountSelected}"
                         TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
                         FontAttributes="Bold"
-                        FontSize="Large"/>
+                        FontSize="Large"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
                     <ImageButton
                         Grid.Column="3"
                         Source="trashicon.png"
