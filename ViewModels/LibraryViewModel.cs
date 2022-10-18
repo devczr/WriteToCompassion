@@ -20,6 +20,9 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     bool isRefreshing;
 
+    [ObservableProperty]
+    bool canRefresh = true;
+
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotMultiSelect))]
@@ -69,7 +72,7 @@ public partial class LibraryViewModel : BaseViewModel
                 var count = SelectedThoughts.Count;
                 if(count <= 0)
                 {
-                    Cancel();
+                    CancelMultiSelect();
                 }
                 else
                 {
@@ -99,18 +102,21 @@ public partial class LibraryViewModel : BaseViewModel
         
         if (_selectionMode == SelectionMode.None)
         {
+            IsMultiSelect = true;
+            CanRefresh = false;
             SelectionMode = SelectionMode.Multiple;
             SelectedThoughts.Add(obj);
-            IsMultiSelect = true;
+            
         }
     }
 
     [RelayCommand]
-    private void Cancel()
+    private void CancelMultiSelect()
     {
         SelectionMode = SelectionMode.None;
         IsMultiSelect = false;
         SelectedThoughts.Clear();
+        CanRefresh = true;
     }
 
 

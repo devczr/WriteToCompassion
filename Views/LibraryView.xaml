@@ -58,7 +58,7 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
                         BackgroundColor="Transparent"
-                        Command="{Binding CancelCommand}"/>
+                        Command="{Binding CancelMultiSelectCommand}"/>
                     <Label
                         Grid.Column="1"
                         Text="{Binding CountSelected}"
@@ -92,6 +92,7 @@
        RowDefinitions="*,40">
         <Grid>
             <RefreshView
+                IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                 <CollectionView
