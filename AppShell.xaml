@@ -6,7 +6,6 @@
     xmlns:views="clr-namespace:WriteToCompassion.Views"
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
     
-    <!--Routes hardcoded as strings due to MAUI not recognizing nameof() navigation correctly with TabBar-->
     <ShellContent
         Shell.NavBarIsVisible="True"
         Title="Home"

@@ -13,6 +13,7 @@
 
     <Shell.TitleView>
         <Grid
+            Margin="0,0,0,0"
            RowDefinitions="*"
             ColumnDefinitions="*">
             <Grid
@@ -39,37 +40,43 @@
                 </ImageButton>
             </Grid>
             <!--Multi Select Top Bar-->
-            <Grid
-                x:DataType="viewmodels:LibraryViewModel"
+            <Border
                 Grid.Row="0"
-                HeightRequest="50"
-                ColumnDefinitions="5*,*"
-                IsVisible="{Binding IsMultiSelect}">
-                <Button
-                    Text="X"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Start"
-                    BackgroundColor="Transparent"
-                    Command="{Binding CancelCommand}">
-                    
-                </Button>
-                <ImageButton
-                    Grid.Column="1"
-                    Source="searchicon.png"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="51"
-                    HeightRequest="51"
-                    Clicked="ImageButton_Clicked"
-                    Style="{StaticResource CustomTopTabBar}">
-                    <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
-                    </ImageButton.Behaviors>
-                </ImageButton>
-            </Grid>
+                BackgroundColor="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark= {StaticResource dark_secondaryContainer}}"
+                IsVisible="{Binding IsMultiSelect}"
+                StrokeShape="RoundRectangle 10"
+                Margin="0,0,15,0">
+                <Grid
+                    x:DataType="viewmodels:LibraryViewModel"
+                    HeightRequest="50"
+                    ColumnDefinitions="5*,*">
+                    <Button
+                            Text="X"
+                            TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                            FontSize="Large"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Start"
+                            BackgroundColor="Transparent"
+                            Command="{Binding CancelCommand}"/>
+                    <ImageButton
+                            Grid.Column="1"
+                            Source="trashicon.png"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="51"
+                            HeightRequest="51"
+                            Clicked="ImageButton_Clicked"
+                            Style="{StaticResource CustomTopTabBar}">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+            </Border>
+
         </Grid>
     </Shell.TitleView>
-<!--
+    <!--
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding RefreshTrueCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"/>
     </ContentPage.Behaviors>
@@ -80,7 +87,7 @@
             <RefreshView
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
-            <CollectionView
+                <CollectionView
             Margin="8"
             x:Name="ThoughtsCV"
             SelectionMode="{Binding SelectionMode}"
