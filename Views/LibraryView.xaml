@@ -26,18 +26,6 @@
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
-                <ImageButton
-                    Grid.Column="1"
-                    Source="searchicon.png"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"
-                    WidthRequest="51"
-                    HeightRequest="51"
-                    Style="{StaticResource CustomTopTabBar}">
-                    <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
-                    </ImageButton.Behaviors>
-                </ImageButton>
             </Grid>
             <!--Multi Select Top Bar-->
             <Border

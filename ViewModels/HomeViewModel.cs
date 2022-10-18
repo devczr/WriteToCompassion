@@ -183,8 +183,6 @@ public partial class HomeViewModel : BaseViewModel
     }
 
 
-
-
     //Navigation
     [RelayCommand]
     async Task GoToSettingsAsync()
