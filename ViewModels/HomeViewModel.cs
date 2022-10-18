@@ -201,7 +201,7 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView), true);
+        await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 
     [RelayCommand]

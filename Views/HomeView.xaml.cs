@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Behaviors;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using System.Text;
 namespace WriteToCompassion.Views;
 
@@ -23,7 +24,6 @@ public partial class HomeView : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-
     }
 
 

@@ -13,84 +13,146 @@
 
     <Shell.TitleView>
         <Grid
+            Margin="0,0,0,0"
            RowDefinitions="*"
             ColumnDefinitions="*">
             <Grid
-            Grid.Row="0"
-            IsVisible="true"
-            HeightRequest="50"
-            ColumnDefinitions="5*,*">
+                Grid.Row="0"
+                HeightRequest="50"
+                ColumnDefinitions="5*,*"
+                IsVisible="{Binding IsNotMultiSelect}">
                 <Label 
                 Style="{StaticResource TitleViewLabel}"
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
+                <ImageButton
+                    Grid.Column="1"
+                    Source="searchicon.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="51"
+                    HeightRequest="51"
+                    Style="{StaticResource CustomTopTabBar}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
             </Grid>
+            <!--Multi Select Top Bar-->
+            <Border
+                Grid.Row="0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark= {StaticResource dark_secondaryContainer}}"
+                IsVisible="{Binding IsMultiSelect}"
+                StrokeShape="RoundRectangle 10"
+                Margin="0,0,15,0">
+                <Grid
+                    x:DataType="viewmodels:LibraryViewModel"
+                    HeightRequest="50"
+                    ColumnDefinitions="*,*,*,*">
+                    <Button
+                        Grid.Column="0"
+                        Text="X"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        FontSize="Large"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Command="{Binding MultiSelectCancelCommand}"/>
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding CountSelected}"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+                    <ImageButton
+                        Grid.Column="3"
+                        Source="trashicon.png"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="51"
+                        HeightRequest="51"
+                        Command="{Binding MultiSelectDeleteCommand}"
+                        Style="{StaticResource CustomTopTabBar}">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+            </Border>
+
         </Grid>
     </Shell.TitleView>
-
+    <!--
     <ContentPage.Behaviors>
-
-        <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCollectionsCommand}" />
-
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding RefreshTrueCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"/>
     </ContentPage.Behaviors>
+    -->
     <Grid
        RowDefinitions="*,40">
         <Grid>
-            <CollectionView
+            <RefreshView
+                IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
+                Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
+                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                <CollectionView
             Margin="8"
             x:Name="ThoughtsCV"
             SelectionMode="{Binding SelectionMode}"
             SelectedItems="{Binding SelectedThoughts}"
             ItemsSource="{Binding AllThoughts}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
                 Orientation="Vertical"
                 Span="2"
                 HorizontalItemSpacing="8"
                 VerticalItemSpacing="8"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
                     HeightRequest="120"
                     Padding="0">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter
                                         Property="Padding"
                                         Value="0"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Selected">
-                                        <VisualState.Setters>
-                                            <Setter
-                                        Property="Padding"
-                                        Value="8"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Grid
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter
+                                                    Property="Padding"
+                                                    Value="8"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid
                             mg:Gesture.CommandParameter="{Binding .}"
+                            mg:Gesture.SwipeBottomCommand="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                             mg:Gesture.TapCommand="{Binding TappedCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                             mg:Gesture.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
 
-                                <BoxView
+                                    <BoxView
                                 Color="{StaticResource light_primaryContainer}"/>
-                                <Label
+                                    <Label
                                 Text="{Binding Content}"
                                 FontSize="Large"
                                 TextColor="{StaticResource light_onPrimaryContainer}"/>
 
-                            </Grid>
+                                </Grid>
 
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </Grid>
         <Grid
             Grid.Row="1"

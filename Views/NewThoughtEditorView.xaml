@@ -28,6 +28,7 @@
                     <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
                 </Label.GestureRecognizers>
             </Label>
+            
             <Button
                 x:Name="saveButton"
                 Text="Save"
@@ -41,22 +42,15 @@
             </Button>
         </Grid>
     </Shell.TitleView>
-    <Grid
-        RowDefinitions="*,40">
+    <Grid>
         <Grid
             Padding="15">
             <Editor 
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="1"
-            Placeholder="{Binding PlaceholderText}"
-            FontAttributes="{Binding EditorFontAttribute}">
-                <FlyoutBase.ContextFlyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="Home" Command="{Binding CheckForSaveThenGoToThoughtsCommand}"/>
-                        <MenuFlyoutItem Text="Library" Command="{Binding CheckForSaveThenGoToLibraryCommand}"/>
-                    </MenuFlyout>
-                </FlyoutBase.ContextFlyout>
+            Completed="editor_Completed"
+            Placeholder="{Binding PlaceholderText}">
                 <Editor.Behaviors>
                     <mct:EventToCommandBehavior 
                     EventName="TextChanged"
@@ -70,7 +64,10 @@
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"/>
         </Grid>
-        
+      <!--
+     DISABLED bottom tab bar due to issue with Android soft keyboard not being dismissed on navigation
+     This means the only way to leave the editor page is through the cancel or save button, which call the backbutton behavior
+     Having no bottom tabbar is a common UI layout found on popular android app pages that consist primarily of an editor
         <Grid
             Grid.Row="1"
             ColumnDefinitions="*,*,*"
@@ -117,6 +114,6 @@
                     <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
                 </ImageButton.Behaviors>
             </ImageButton>
-        </Grid>
+        </Grid>     -->
     </Grid>
 </ContentPage>

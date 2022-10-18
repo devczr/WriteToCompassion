@@ -11,11 +11,8 @@ public partial class LibraryView : ContentPage
         this.libraryViewModel = libraryViewModel;
 	}
 
-
-    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    private void ImageButton_Clicked(object sender, EventArgs e)
     {
-        base.OnNavigatedFrom(args);
-
+        Shell.Current.DisplayAlert("ALERT", "ALERT", "OK");
     }
-
 }
