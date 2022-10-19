@@ -8,8 +8,9 @@
     
     <ShellContent
         Shell.NavBarIsVisible="True"
-        Title="Home"
+        Title=""
         ContentTemplate="{DataTemplate views:HomeView}"
-        Route="MainPage"/>
+        Route="MainPage"
+        FlyoutItemIsVisible="False"/>
 
 </Shell>

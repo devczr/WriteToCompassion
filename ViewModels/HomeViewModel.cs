@@ -99,7 +99,7 @@ public partial class HomeViewModel : BaseViewModel
         {
             //delaying here due to OnSizeAllocated firing 3 times on app startup
             //also gives time for the page to load in between NavigatedTo and actual page visiblity
-            await Task.Delay(1500);
+//            await Task.Delay(1500);
             await InitDriftAsync();
             IsBusy = false;
         }
