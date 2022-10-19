@@ -86,7 +86,7 @@
 
 
 
-    <LinearGradientBrush x:Key="contentBox" StartPoint="0,0"
+    <LinearGradientBrush x:Key="contentBoxDiagonalStrokes1" StartPoint="0,0"
                          EndPoint="1,1">
         <GradientStop Color="{StaticResource dark_errorContainer}"
                       Offset="0.0"/>
@@ -99,5 +99,52 @@
         <GradientStop Color="{StaticResource dark_errorContainer}"
                       Offset="1"/>
     </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="contentBoxVerticalInterpolation1" 
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                      Offset="0.1"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush 
+        x:Key="contentBoxVerticalInterpolation2" 
+        StartPoint="0,0"
+        EndPoint="0,1">
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                      Offset="1.0"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.1"/>
+    </LinearGradientBrush>
+    
+    <RadialGradientBrush
+        x:Key="contentBoxCornerVariation1"
+        Center="1.0,1.0">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBoxCornerVariation2"
+        Center="1.0,0.5">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                  Offset="0.9" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBoxCornerVariation3"
+        Center="0.0,0.5">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                  Offset="0.9" />
+    </RadialGradientBrush>
+
 
 </ResourceDictionary>

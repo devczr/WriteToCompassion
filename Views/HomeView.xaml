@@ -41,9 +41,39 @@
                 <Grid>
                     <Border
                         StrokeThickness="0"
-                        StrokeShape="RoundRectangle 30,2,15,9"
-                        Opacity="0.5"
-                        Background="{StaticResource contentBox}"
+                        StrokeShape="RoundRectangle 30,28,32,29"
+                        Opacity="0.1"
+                        Background="{StaticResource contentBoxVerticalInterpolation1}"
+                        ZIndex="0"/>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 15,20,10,29"
+                        Opacity="0.1"
+                        Background="{StaticResource contentBoxVerticalInterpolation2}"
+                        ZIndex="0"/>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 50,30,10,40"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBoxCornerVariation1}"
+                        ZIndex="0"/>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 35,38,24,32"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBoxCornerVariation2}"
+                        ZIndex="0"/>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 35,38,24,32"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBoxCornerVariation3}"
+                        ZIndex="0"/>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Opacity="0.2"
+                        Background="{StaticResource contentBoxDiagonalStrokes1}"
                         ZIndex="0"/>
 
 
