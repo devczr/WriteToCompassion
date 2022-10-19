@@ -16,6 +16,7 @@
            RowDefinitions="*"
             ColumnDefinitions="*">
             <Grid
+                x:DataType="viewmodels:LibraryViewModel"
                 Grid.Row="0"
                 HeightRequest="50"
                 ColumnDefinitions="5*,*"
@@ -25,6 +26,16 @@
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
+                <ImageButton
+                x:Name="settingsGearButton"
+                Source="settingsicon.png"
+                Grid.Column="1"
+                Scale="0.5"
+                Command="{Binding GoToSettingsCommand}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
             </Grid>
 
             <!--Multi Select Active-->

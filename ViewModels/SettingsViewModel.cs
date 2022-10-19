@@ -1,4 +1,6 @@
-﻿namespace WriteToCompassion.ViewModels;
+﻿using WriteToCompassion.Views;
+
+namespace WriteToCompassion.ViewModels;
 
 public partial class SettingsViewModel : BaseViewModel
 {
@@ -43,6 +45,14 @@ public partial class SettingsViewModel : BaseViewModel
             settingsService.DisplayTutorial = true;
             Shell.Current.DisplayAlert("Tutorial Enabled", "Preference saved. Tutorial will show on next app startup.", "OK");
         }
+    }
+
+
+    // Navigation
+    [RelayCommand]
+    async Task GoToLibraryAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 
 }

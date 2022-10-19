@@ -12,7 +12,8 @@
              Shell.ForegroundColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
-                            IsVisible="True" />
+                            IsVisible="True"
+                             Command="{Binding GoToLibraryCommand}"/>
     </Shell.BackButtonBehavior>
 
     <Shell.TitleView>

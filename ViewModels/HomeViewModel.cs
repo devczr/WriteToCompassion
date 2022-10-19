@@ -185,12 +185,6 @@ public partial class HomeViewModel : BaseViewModel
 
     //Navigation
     [RelayCommand]
-    async Task GoToSettingsAsync()
-    {
-        await Shell.Current.GoToAsync(nameof(SettingsView));
-    }
-
-    [RelayCommand]
     async Task GoToNewThoughtEditorAsync()
     {
         await Shell.Current.GoToAsync(nameof(NewThoughtEditorView), true);

@@ -229,6 +229,12 @@ public partial class LibraryViewModel : BaseViewModel
         await Shell.Current.GoToAsync(nameof(HomeView));
     }
 
+    [RelayCommand]
+    async Task GoToSettingsAsync()
+    {
+        await Shell.Current.GoToAsync(nameof(SettingsView));
+    }
+
 }
 
 

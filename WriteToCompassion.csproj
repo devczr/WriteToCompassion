@@ -55,6 +55,7 @@
 	  <None Remove="Resources\Images\refreshicon.svg" />
 	  <None Remove="Resources\Images\scrollicon.svg" />
 	  <None Remove="Resources\Images\searchicon.svg" />
+	  <None Remove="Resources\Images\settingsicon.svg" />
 	  <None Remove="Resources\Images\thoughticon.svg" />
 	  <None Remove="Resources\Images\trashicon.svg" />
 	  <None Remove="Resources\Images\writeicon.svg" />

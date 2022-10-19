@@ -9,34 +9,14 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:HomeViewModel"
-    x:Class="WriteToCompassion.Views.HomeView">
+    x:Class="WriteToCompassion.Views.HomeView"
+    BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
-    <Shell.TitleView>
-        <Grid
-            HeightRequest="50"
-            ColumnDefinitions="5*,*">
-            <Label 
-                Style="{StaticResource TitleViewLabel}"
-                Text="Home" 
-                Grid.Column="0"
-                VerticalOptions="Center"/>
-            <ImageButton
-                x:Name="settingsGearButton"
-                Source="primarysettingsicon.png"
-                BackgroundColor="HotPink"
-                Grid.Column="1"
-                Scale="0.5"
-                Command="{Binding GoToSettingsCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-        </Grid>
-    </Shell.TitleView>
+
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
@@ -106,7 +86,7 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="true"
-                            IsVisible="true"
+                            IsVisible="false"
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
