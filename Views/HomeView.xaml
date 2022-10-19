@@ -36,31 +36,41 @@
                 x:Name="contentBorder"
                 Grid.Row="0"
                 BackgroundColor="Transparent"
-                ZIndex="1">
-                <Border.GestureRecognizers>
-                </Border.GestureRecognizers>
+                StrokeThickness="0"
+                ZIndex="0">
+                <Grid>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 30,2,15,9"
+                        Opacity="0.5"
+                        Background="{StaticResource contentBox}"
+                        ZIndex="0"/>
+
+
+                    <Label
+                    x:Name="contentLabel"
+                    IsVisible="True"
+                    Text="{Binding CloudContent}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onErrorContainer}, Dark={StaticResource dark_onErrorContainer}}"
+                    ZIndex="0"/>
+                </Grid>
             </Border>
 
-            <Label
-                x:Name="contentLabel"
-                IsVisible="True"
-                Text="{Binding CloudContent}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                FontSize="Large"
-                FontAttributes="Bold"
-                TextColor="WhiteSmoke"
-                ZIndex="5">
 
-            </Label>
+
+
 
             <!--Custom Cloud Controls-->
             <!--Control's Height and Width set according to SVG pixel dimensions-->
             <!--TapGestureRecognizer inside CustomCloudControl xaml-->
             <Grid
-            x:Name="cloudGrid"
-            Grid.Row="1"
-            BindableLayout.ItemsSource="{Binding Clouds}">
+                x:Name="cloudGrid"
+                Grid.Row="1"
+                BindableLayout.ItemsSource="{Binding Clouds}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Cloud">
                         <controls:CustomCloudControl

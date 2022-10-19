@@ -8,7 +8,9 @@
              xmlns:animations="clr-namespace:WriteToCompassion.Animations"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}">
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>

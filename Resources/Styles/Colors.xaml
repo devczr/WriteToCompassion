@@ -85,4 +85,19 @@
     <SolidColorBrush x:Key="MidGrayBrush" Color="{StaticResource MidGray}"/>
 
 
+
+    <LinearGradientBrush x:Key="contentBox" StartPoint="0,0"
+                         EndPoint="1,1">
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                      Offset="0.0"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.25"/>
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                      Offset="0.5"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.75"/>
+        <GradientStop Color="{StaticResource dark_errorContainer}"
+                      Offset="1"/>
+    </LinearGradientBrush>
+
 </ResourceDictionary>
