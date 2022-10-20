@@ -23,6 +23,7 @@
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
     <Grid
+        x:Name="backgroundGrid"
         RowDefinitions="*,75"
         Margin="0">
         <Border
@@ -319,10 +320,10 @@
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
-            BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiary}, Dark={StaticResource dark_tertiary}}"
-            StrokeShape="RoundRectangle 5"
+            Background="Transparent"
+            StrokeShape="RoundRectangle 20"
             Stroke="Transparent"
-            Margin="30,0">
+            Margin="35,0">
             <Grid
                 ColumnDefinitions="*,*,*"
                 Padding="0">

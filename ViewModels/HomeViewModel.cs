@@ -30,7 +30,7 @@ public partial class HomeViewModel : BaseViewModel
 
     //User can adjust in Settings
     [ObservableProperty]
-    double cloudScale = 0.5;
+    double cloudScale = 1.5;
 
     [ObservableProperty]
     int maxClouds = 5;
