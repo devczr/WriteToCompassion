@@ -86,65 +86,161 @@
 
 
 
-    <LinearGradientBrush x:Key="contentBoxDiagonalStrokes1" StartPoint="0,0"
+    <LinearGradientBrush x:Key="contentBrush1" StartPoint="0,0"
                          EndPoint="1,1">
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
                       Offset="0.0"/>
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                       Offset="0.25"/>
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
                       Offset="0.5"/>
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                       Offset="0.75"/>
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
                       Offset="1"/>
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="contentBoxVerticalInterpolation1" 
+    <LinearGradientBrush x:Key="contentBrush2" 
                          StartPoint="0,0"
                          EndPoint="0,1">
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
                       Offset="0.1"/>
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                       Offset="1.0"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush 
-        x:Key="contentBoxVerticalInterpolation2" 
+        x:Key="contentBrush3" 
         StartPoint="0,0"
         EndPoint="0,1">
-        <GradientStop Color="{StaticResource dark_errorContainer}"
-                      Offset="1.0"/>
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                       Offset="0.1"/>
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="1.0"/>
+
     </LinearGradientBrush>
     
     <RadialGradientBrush
-        x:Key="contentBoxCornerVariation1"
-        Center="1.0,1.0">
+        x:Key="contentBrush4"
+        Center="0.5,0.5">
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                   Offset="0.1" />
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
-        x:Key="contentBoxCornerVariation2"
-        Center="1.0,0.5">
+        x:Key="contentBrush5"
+        Center="0.0,0.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.9" />
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                   Offset="1.0" />
-        <GradientStop Color="{StaticResource dark_errorContainer}"
+
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush6"
+        Center="0.0,0.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush7"
+        Center="0.1, 0.9">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.2" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.4" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.8" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush8"
+        Center="0.9, 0.2">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.2" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.4" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.6" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                   Offset="0.9" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
-        x:Key="contentBoxCornerVariation3"
-        Center="0.0,0.5">
+        x:Key="contentBrush9"
+        Center="0.5, 0.1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
-                  Offset="1.0" />
-        <GradientStop Color="{StaticResource dark_errorContainer}"
-                  Offset="0.9" />
+                  Offset="0.5" />
     </RadialGradientBrush>
 
+    <RadialGradientBrush
+        x:Key="contentBrush10"
+        Center="0.5, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
 
+    <RadialGradientBrush
+        x:Key="contentBrush11"
+        Center="1, 1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.2" />
+
+    </RadialGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="contentBrush12"
+        EndPoint="1.0, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.5" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush13"
+        Center="0.5, 0.1">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush14"
+        Center="0.3, 0.9">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush15"
+        Center="0.5, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+    
 </ResourceDictionary>
