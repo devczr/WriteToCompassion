@@ -72,6 +72,17 @@
                 StrokeThickness="0"
                 ZIndex="0">
                 <Grid>
+                    <Label
+                        x:Name="contentLabel"
+                        Padding="20"
+                        IsVisible="True"
+                        Text="{Binding CloudContent}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        ZIndex="9"/>
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 30,28,32,29"
@@ -265,18 +276,6 @@
                             Opacity="0.5" />
                         </Border.Shadow>
                     </Border>
-
-
-                    <Label
-                    x:Name="contentLabel"
-                    IsVisible="True"
-                    Text="{Binding CloudContent}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"
-                    TextColor="{AppThemeBinding Light={StaticResource light_onErrorContainer}, Dark={StaticResource dark_onErrorContainer}}"
-                    ZIndex="0"/>
                 </Grid>
             </Border>
 
@@ -360,7 +359,7 @@
                     VerticalOptions="Center"
                     WidthRequest="52"
                     HeightRequest="52"
-                    Opacity="0.6"
+                    Opacity="0.7"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToNewThoughtEditorCommand}">
@@ -376,7 +375,7 @@
                     VerticalOptions="Center"
                     WidthRequest="54"
                     HeightRequest="50"
-                    Opacity="0.6"
+                    Opacity="0.7"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToLibraryCommand}">
@@ -477,9 +476,9 @@
             </Grid>
             <Border.Shadow>
                 <Shadow Brush="{StaticResource dark_shadow}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.5" />
+                            Offset="0,20"
+                            Radius="50"
+                            Opacity="1" />
             </Border.Shadow>
         </Border>
     </Grid>
