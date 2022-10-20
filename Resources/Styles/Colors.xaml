@@ -242,5 +242,41 @@
         <GradientStop Color="{StaticResource light_onPrimaryContainer}"
                   Offset="1.0" />
     </RadialGradientBrush>
+
+
+    <LinearGradientBrush
+        x:Key="backgroundBrush1"
+        StartPoint="0,0"
+        EndPoint="0,1">
+        <GradientStop Color="{StaticResource dark_background}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </LinearGradientBrush>
     
+    <LinearGradientBrush
+        x:Key="backgroundBrush2"
+        StartPoint="0,1"
+        EndPoint="0,0">
+        <GradientStop Color="{StaticResource dark_background}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="backgroundBrush3"
+        StartPoint="1,0"
+        EndPoint="0,1">
+        <GradientStop Color="{StaticResource dark_onTertiaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_tertiary}"
+                  Offset="0.3" />
+        <GradientStop Color="{StaticResource dark_onTertiaryContainer}"
+                  Offset="0.6" />
+        <GradientStop Color="{StaticResource dark_tertiary}"
+                  Offset="1.0" />
+    </LinearGradientBrush>
+
+
 </ResourceDictionary>

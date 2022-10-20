@@ -25,6 +25,38 @@
     <Grid
         RowDefinitions="*,75"
         Margin="0">
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 5,5,5,5"
+            Opacity="0.2"
+            Background="{StaticResource backgroundBrush1}"
+            ZIndex="0">
+        </Border>
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="5"
+            StrokeShape="RoundRectangle 10"
+            Stroke="{AppThemeBinding Light={StaticResource light_background}, Dark={StaticResource dark_background}}"
+            Opacity="0.2"
+            Background="{StaticResource backgroundBrush2}"
+            ZIndex="0">
+            <Border.Shadow>
+                <Shadow  Brush="{StaticResource dark_background}"
+                            Offset="2,2"
+                            Radius="5"
+                            Opacity="1" />
+            </Border.Shadow>
+        </Border>
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="0"
+            Opacity="0.05"
+            Background="{StaticResource backgroundBrush3}"
+            ZIndex="0">
+        </Border>
+
+
         <Grid 
             Grid.Row="0"
             x:Name="primaryGrid"
@@ -246,10 +278,6 @@
                     ZIndex="0"/>
                 </Grid>
             </Border>
-
-
-
-
 
             <!--Custom Cloud Controls-->
             <!--Control's Height and Width set according to SVG pixel dimensions-->
