@@ -7,12 +7,13 @@
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="WriteToCompassion.Views.SettingsView"
              Shell.TabBarIsVisible="False"
-             BackgroundColor="{AppThemeBinding Light={StaticResource light_background}, Dark={StaticResource dark_background}}"
-             Title="Settings"
+    BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"
+    Title="Settings"
              Shell.ForegroundColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
-                            IsVisible="True" />
+                            IsVisible="True"
+                             Command="{Binding GoToLibraryCommand}"/>
     </Shell.BackButtonBehavior>
 
     <Shell.TitleView>

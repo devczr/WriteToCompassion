@@ -6,7 +6,7 @@
              x:DataType="viewmodels:EditorViewModel"
              x:Class="WriteToCompassion.Views.EditorView"
              Shell.TabBarIsVisible="False">
-    
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
@@ -17,15 +17,15 @@
             HeightRequest="50"
             HorizontalOptions="Fill"
             ColumnDefinitions="*,*">
-            <Label
+            <Button
+                Grid.Column="0"
                 Text="X"
-                Style="{StaticResource XLabel}"
+                TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                FontSize="Large"
                 VerticalOptions="Center"
-                HorizontalOptions="Start">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
-                </Label.GestureRecognizers>
-            </Label>
+                HorizontalOptions="Start"
+                BackgroundColor="Transparent"
+                Command="{Binding CancelCommand}"/>
 
             <Button
                 x:Name="saveButton"
@@ -40,13 +40,13 @@
             </Button>
         </Grid>
     </Shell.TitleView>
-    
+
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding SetOriginalContentCommand}" />
     </ContentPage.Behaviors>
-    
-    
+
+
     <Grid>
         <Editor
             x:Name="thoughtEditor"

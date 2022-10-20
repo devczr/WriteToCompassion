@@ -17,65 +17,65 @@
     <Color x:Key="MidGray">#e1e2e1</Color>
     <Color x:Key="DarkGray">#e5e2da</Color>
 
-    <Color x:Key="light_primary">#5A6400</Color>
+    <Color x:Key="light_primary">#924274</Color>
     <Color x:Key="light_onPrimary">#FFFFFF</Color>
-    <Color x:Key="light_primaryContainer">#DEEB77</Color>
-    <Color x:Key="light_onPrimaryContainer">#1A1E00</Color>
-    <Color x:Key="light_secondary">#5E6044</Color>
+    <Color x:Key="light_primaryContainer">#FFD8EB</Color>
+    <Color x:Key="light_onPrimaryContainer">#3C002B</Color>
+    <Color x:Key="light_secondary">#715764</Color>
     <Color x:Key="light_onSecondary">#FFFFFF</Color>
-    <Color x:Key="light_secondaryContainer">#E3E5C1</Color>
-    <Color x:Key="light_onSecondaryContainer">#1B1D07</Color>
-    <Color x:Key="light_tertiary">#3B665A</Color>
+    <Color x:Key="light_secondaryContainer">#FCD9E9</Color>
+    <Color x:Key="light_onSecondaryContainer">#291521</Color>
+    <Color x:Key="light_tertiary">#80543C</Color>
     <Color x:Key="light_onTertiary">#FFFFFF</Color>
-    <Color x:Key="light_tertiaryContainer">#BEECDD</Color>
-    <Color x:Key="light_onTertiaryContainer">#002019</Color>
+    <Color x:Key="light_tertiaryContainer">#FFDBCA</Color>
+    <Color x:Key="light_onTertiaryContainer">#311303</Color>
     <Color x:Key="light_error">#BA1A1A</Color>
     <Color x:Key="light_errorContainer">#FFDAD6</Color>
     <Color x:Key="light_onError">#FFFFFF</Color>
     <Color x:Key="light_onErrorContainer">#410002</Color>
-    <Color x:Key="light_background">#FDFFD9</Color>
-    <Color x:Key="light_onBackground">#1C1C17</Color>
-    <Color x:Key="light_surface">#FDFFD9</Color>
-    <Color x:Key="light_onSurface">#1C1C17</Color>
-    <Color x:Key="light_surfaceVariant">#E4E3D2</Color>
-    <Color x:Key="light_onSurfaceVariant">#47483B</Color>
-    <Color x:Key="light_outline">#78786A</Color>
-    <Color x:Key="light_inverseOnSurface">#F3F1E8</Color>
-    <Color x:Key="light_inverseSurface">#31312B</Color>
-    <Color x:Key="light_inversePrimary">#C2CE5E</Color>
+    <Color x:Key="light_background">#FFFBFF</Color>
+    <Color x:Key="light_onBackground">#1F1A1C</Color>
+    <Color x:Key="light_surface">#FFFBFF</Color>
+    <Color x:Key="light_onSurface">#1F1A1C</Color>
+    <Color x:Key="light_surfaceVariant">#F0DEE5</Color>
+    <Color x:Key="light_onSurfaceVariant">#504349</Color>
+    <Color x:Key="light_outline">#827379</Color>
+    <Color x:Key="light_inverseOnSurface">#F9EEF1</Color>
+    <Color x:Key="light_inverseSurface">#352F31</Color>
+    <Color x:Key="light_inversePrimary">#FFAEDB</Color>
     <Color x:Key="light_shadow">#000000</Color>
-    <Color x:Key="light_surfaceTint">#5A6400</Color>
-    <Color x:Key="light_surfaceTintColor">#5A6400</Color>
-    <Color x:Key="dark_primary">#C2CE5E</Color>
-    <Color x:Key="dark_onPrimary">#2E3300</Color>
-    <Color x:Key="dark_primaryContainer">#444B00</Color>
-    <Color x:Key="dark_onPrimaryContainer">#DEEB77</Color>
-    <Color x:Key="dark_secondary">#C7C9A7</Color>
-    <Color x:Key="dark_onSecondary">#30321A</Color>
-    <Color x:Key="dark_secondaryContainer">#46492E</Color>
-    <Color x:Key="dark_onSecondaryContainer">#E3E5C1</Color>
-    <Color x:Key="dark_tertiary">#A2D0C1</Color>
-    <Color x:Key="dark_onTertiary">#07372D</Color>
-    <Color x:Key="dark_tertiaryContainer">#234E43</Color>
-    <Color x:Key="dark_onTertiaryContainer">#BEECDD</Color>
+    <Color x:Key="light_surfaceTint">#924274</Color>
+    <Color x:Key="light_surfaceTintColor">#924274</Color>
+    <Color x:Key="dark_primary">#FFAEDB</Color>
+    <Color x:Key="dark_onPrimary">#5A1144</Color>
+    <Color x:Key="dark_primaryContainer">#762A5C</Color>
+    <Color x:Key="dark_onPrimaryContainer">#FFD8EB</Color>
+    <Color x:Key="dark_secondary">#DEBECD</Color>
+    <Color x:Key="dark_onSecondary">#402A36</Color>
+    <Color x:Key="dark_secondaryContainer">#58404C</Color>
+    <Color x:Key="dark_onSecondaryContainer">#FCD9E9</Color>
+    <Color x:Key="dark_tertiary">#F3BA9D</Color>
+    <Color x:Key="dark_onTertiary">#4A2713</Color>
+    <Color x:Key="dark_tertiaryContainer">#653D27</Color>
+    <Color x:Key="dark_onTertiaryContainer">#FFDBCA</Color>
     <Color x:Key="dark_error">#FFB4AB</Color>
     <Color x:Key="dark_errorContainer">#93000A</Color>
     <Color x:Key="dark_onError">#690005</Color>
     <Color x:Key="dark_onErrorContainer">#FFDAD6</Color>
-    <Color x:Key="dark_background">#1C1C17</Color>
-    <Color x:Key="dark_onBackground">#E5E2DA</Color>
-    <Color x:Key="dark_surface">#1C1C17</Color>
-    <Color x:Key="dark_onSurface">#E5E2DA</Color>
-    <Color x:Key="dark_surfaceVariant">#47483B</Color>
-    <Color x:Key="dark_onSurfaceVariant">#C8C7B7</Color>
-    <Color x:Key="dark_outline">#929282</Color>
-    <Color x:Key="dark_inverseOnSurface">#1C1C17</Color>
-    <Color x:Key="dark_inverseSurface">#E5E2DA</Color>
-    <Color x:Key="dark_inversePrimary">#5A6400</Color>
+    <Color x:Key="dark_background">#1F1A1C</Color>
+    <Color x:Key="dark_onBackground">#EAE0E3</Color>
+    <Color x:Key="dark_surface">#1F1A1C</Color>
+    <Color x:Key="dark_onSurface">#EAE0E3</Color>
+    <Color x:Key="dark_surfaceVariant">#504349</Color>
+    <Color x:Key="dark_onSurfaceVariant">#D3C2C9</Color>
+    <Color x:Key="dark_outline">#9C8D93</Color>
+    <Color x:Key="dark_inverseOnSurface">#1F1A1C</Color>
+    <Color x:Key="dark_inverseSurface">#EAE0E3</Color>
+    <Color x:Key="dark_inversePrimary">#924274</Color>
     <Color x:Key="dark_shadow">#000000</Color>
-    <Color x:Key="dark_surfaceTint">#C2CE5E</Color>
-    <Color x:Key="dark_surfaceTintColor">#C2CE5E</Color>
-
+    <Color x:Key="dark_surfaceTint">#FFAEDB</Color>
+    <Color x:Key="dark_surfaceTintColor">#FFAEDB</Color>
+    
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
 
@@ -85,4 +85,162 @@
     <SolidColorBrush x:Key="MidGrayBrush" Color="{StaticResource MidGray}"/>
 
 
+
+    <LinearGradientBrush x:Key="contentBrush1" StartPoint="0,0"
+                         EndPoint="1,1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="0.0"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.25"/>
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="0.5"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.75"/>
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="contentBrush2" 
+                         StartPoint="0,0"
+                         EndPoint="0,1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="0.1"/>
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush 
+        x:Key="contentBrush3" 
+        StartPoint="0,0"
+        EndPoint="0,1">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                      Offset="0.1"/>
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                      Offset="1.0"/>
+
+    </LinearGradientBrush>
+    
+    <RadialGradientBrush
+        x:Key="contentBrush4"
+        Center="0.5,0.5">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush5"
+        Center="0.0,0.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.9" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush6"
+        Center="0.0,0.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush7"
+        Center="0.1, 0.9">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.2" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.4" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.8" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush8"
+        Center="0.9, 0.2">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.2" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.4" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.6" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.9" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush9"
+        Center="0.5, 0.1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.5" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush10"
+        Center="0.5, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush11"
+        Center="1, 1">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.2" />
+
+    </RadialGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="contentBrush12"
+        EndPoint="1.0, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.5" />
+    </LinearGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush13"
+        Center="0.5, 0.1">
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.1" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush14"
+        Center="0.3, 0.9">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+
+    <RadialGradientBrush
+        x:Key="contentBrush15"
+        Center="0.5, 1.0">
+        <GradientStop Color="{StaticResource dark_primaryContainer}"
+                  Offset="0.0" />
+        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+                  Offset="1.0" />
+    </RadialGradientBrush>
+    
 </ResourceDictionary>

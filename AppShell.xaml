@@ -7,9 +7,10 @@
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels">
     
     <ShellContent
-        Shell.NavBarIsVisible="True"
-        Title="Home"
+        Shell.NavBarIsVisible="False"
+        Title=""
         ContentTemplate="{DataTemplate views:HomeView}"
-        Route="MainPage"/>
+        Route="MainPage"
+        FlyoutItemIsVisible="False"/>
 
 </Shell>

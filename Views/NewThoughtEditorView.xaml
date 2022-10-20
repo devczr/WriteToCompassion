@@ -8,7 +8,9 @@
              xmlns:animations="clr-namespace:WriteToCompassion.Animations"
              x:DataType="viewmodels:NewThoughtEditorViewModel"
              x:Class="WriteToCompassion.Views.NewThoughtEditorView"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}">
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
@@ -19,27 +21,26 @@
             HeightRequest="50"
             HorizontalOptions="Fill"
             ColumnDefinitions="*,*">
-            <Label
+            <Button
+                Grid.Column="0"
                 Text="X"
-                Style="{StaticResource XLabel}"
+                TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                FontSize="Medium"
                 VerticalOptions="Center"
-                HorizontalOptions="Start">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CancelCommand}" NumberOfTapsRequired="1"/>
-                </Label.GestureRecognizers>
-            </Label>
-            
+                HorizontalOptions="Start"
+                BackgroundColor="Transparent"
+                Command="{Binding CancelCommand}"/>
+
             <Button
                 x:Name="saveButton"
                 Text="Save"
                 Grid.Column="1"
-                MinimumHeightRequest="50"
-                MinimumWidthRequest="50"
+                FontSize="Medium"
                 VerticalOptions="End"
                 HorizontalOptions="End"
                 Style="{StaticResource TransparentBackgroundPrimary}"
-                Command="{Binding SaveCommand}">
-            </Button>
+                Command="{Binding SaveCommand}"/>
+
         </Grid>
     </Shell.TitleView>
     <Grid>

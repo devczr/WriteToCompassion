@@ -9,79 +9,255 @@
     xmlns:helpers="clr-namespace:WriteToCompassion.Helpers"
     xmlns:controls="clr-namespace:WriteToCompassion.Controls"
     x:DataType="viewmodels:HomeViewModel"
-    x:Class="WriteToCompassion.Views.HomeView">
+    x:Class="WriteToCompassion.Views.HomeView"
+    BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
                             IsVisible="False"/>
     </Shell.BackButtonBehavior>
-    <Shell.TitleView>
-        <Grid
-            HeightRequest="50"
-            ColumnDefinitions="5*,*">
-            <Label 
-                Style="{StaticResource TitleViewLabel}"
-                Text="Home" 
-                Grid.Column="0"
-                VerticalOptions="Center"/>
-            <ImageButton
-                x:Name="settingsGearButton"
-                Source="primarysettingsicon.png"
-                BackgroundColor="Transparent"
-                BorderColor="Transparent"
-                Grid.Column="1"
-                Scale="0.5"
-                Command="{Binding GoToSettingsCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-        </Grid>
-    </Shell.TitleView>
+
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
     <Grid
-        RowDefinitions="*,40">
+        RowDefinitions="*,75"
+        Margin="0">
         <Grid 
-        Grid.Row="0"
-        x:Name="primaryGrid"
-        InputTransparent="False"
-        RowDefinitions="*,3*"
-        Padding="15">
-
+            Grid.Row="0"
+            x:Name="primaryGrid"
+            InputTransparent="False"
+            RowDefinitions="*,3*"
+            Padding="15">
 
             <Border
-            x:Name="contentBorder"
-            Grid.Row="0"
-            BackgroundColor="Transparent"
-            ZIndex="1">
-                <Border.GestureRecognizers>
-                </Border.GestureRecognizers>
+                x:Name="contentBorder"
+                Grid.Row="0"
+                BackgroundColor="Transparent"
+                StrokeThickness="0"
+                ZIndex="0">
+                <Grid>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 30,28,32,29"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush1}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="40"
+                            Opacity="0.1" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 15,20,10,29"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush2}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="0,-10"
+                            Radius="40"
+                            Opacity="0.1" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 50,30,10,40"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush3}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 35,38,24,32"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush4}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 35,38,24,32"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush5}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush6}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 50,50,50,50"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush7}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        Opacity="0.05"
+                        StrokeShape="Ellipse 12,45"
+                        Background="{StaticResource contentBrush8}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="20,20"
+                            Radius="20"
+                            Opacity="0.2" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        Opacity="0.05"
+                        StrokeShape="RoundRectangle 90,35,47,62"                        
+                        Background="{StaticResource contentBrush9}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="5,5"
+                            Radius="10"
+                            Opacity="0.3" />
+                        </Border.Shadow>
+                    </Border>
+                    <Border
+                        StrokeThickness="0"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush10}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="10,10"
+                            Radius="5"
+                            Opacity="0.1" />
+                        </Border.Shadow>
+                    </Border>
+
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 5"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush11}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="15,15"
+                            Radius="40"
+                            Opacity="0.1" />
+                        </Border.Shadow>
+                    </Border>
+
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 5"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush12}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="15,15"
+                            Radius="40"
+                            Opacity="1" />
+                        </Border.Shadow>
+                    </Border>
+
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 20"
+                        Opacity="0.02"
+                        Background="{StaticResource contentBrush13}"
+                        ZIndex="0">
+                    </Border>
+
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 19"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush14}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="15,15"
+                            Radius="40"
+                            Opacity="0.5" />
+                        </Border.Shadow>
+                    </Border>
+
+                    <Border
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10"
+                        Opacity="0.05"
+                        Background="{StaticResource contentBrush15}"
+                        ZIndex="0">
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource dark_primaryContainer}"
+                            Offset="15,15"
+                            Radius="40"
+                            Opacity="0.5" />
+                        </Border.Shadow>
+                    </Border>
+
+
+                    <Label
+                    x:Name="contentLabel"
+                    IsVisible="True"
+                    Text="{Binding CloudContent}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onErrorContainer}, Dark={StaticResource dark_onErrorContainer}}"
+                    ZIndex="0"/>
+                </Grid>
             </Border>
 
-            <Label
-                x:Name="contentLabel"
-                IsVisible="True"
-                Text="{Binding CloudContent}"
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                FontSize="Large"
-                FontAttributes="Bold"
-                TextColor="WhiteSmoke"
-                ZIndex="5">
 
-            </Label>
+
+
 
             <!--Custom Cloud Controls-->
-            <!--control Height and Width set according to SVG pixel dimensions-->
+            <!--Control's Height and Width set according to SVG pixel dimensions-->
             <!--TapGestureRecognizer inside CustomCloudControl xaml-->
             <Grid
-            x:Name="cloudGrid"
-            Grid.Row="1"
-            BindableLayout.ItemsSource="{Binding Clouds}">
+                x:Name="cloudGrid"
+                Grid.Row="1"
+                BindableLayout.ItemsSource="{Binding Clouds}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="models:Cloud">
                         <controls:CustomCloudControl
@@ -107,57 +283,74 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="true"
-                            IsVisible="true"
+                            IsVisible="false"
                             ZIndex="0"
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
         </Grid>
-        <Grid
+        <Border
             Grid.Row="1"
-            ColumnDefinitions="*,*,*"
-            Padding="0"
-            VerticalOptions="Center">
-
-            <ImageButton
-                Grid.Column="0"
+            VerticalOptions="Start"
+            BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiary}, Dark={StaticResource dark_tertiary}}"
+            StrokeShape="RoundRectangle 5"
+            Stroke="Transparent"
+            Margin="30,0">
+            <Grid
+                ColumnDefinitions="*,*,*"
+                Padding="0">
+                <Border
+                    Grid.Column="0"
+                    Stroke="{AppThemeBinding Light={StaticResource light_outline}, Dark={StaticResource dark_outline}}"
+                    StrokeShape="RoundRectangle 20"
+                    StrokeThickness="1"
+                    WidthRequest="75"
+                    HeightRequest="53"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource light_onTertiaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
+                </Border>
+                <ImageButton
+                    Grid.Column="0"
+                        Source="thoughticon.png"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="56"
+                    Opacity="1"
+                        HeightRequest="51"
+                        Style="{StaticResource CustomTabBar}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
+                
+                <ImageButton
+                Grid.Column="1"
                 Source="writeicon.png"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 WidthRequest="52"
                 HeightRequest="52"
+                Opacity="0.6"
                 Style="{StaticResource CustomTabBar}"
                 Command="{Binding GoToNewThoughtEditorCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
 
-            <ImageButton
-                Grid.Column="1"
-                Source="thoughticon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="56"
-                HeightRequest="51"
-                Style="{StaticResource CustomTabBar}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-
-            <ImageButton
-                Grid.Column="2"
-                Source="scrollicon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="54"
-                HeightRequest="50"
-                Style="{StaticResource CustomTabBar}"
-                Command="{Binding GoToLibraryCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-        </Grid>
+                <ImageButton
+                    Grid.Column="2"
+                    Source="scrollicon.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="54"
+                    HeightRequest="50"
+                    Opacity="0.6"
+                    Style="{StaticResource CustomTabBar}"
+                    Command="{Binding GoToLibraryCommand}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior  TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>
