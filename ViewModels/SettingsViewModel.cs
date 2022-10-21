@@ -21,11 +21,18 @@ public partial class SettingsViewModel : BaseViewModel
     [ObservableProperty]
     private double cloudScaleSlider;
 
+    [ObservableProperty]
+    private int maxClouds;
+
+    [ObservableProperty]
+    private bool instantText;
     public SettingsViewModel(ISettingsService settingsService) : base(settingsService)
     {
         this.settingsService = settingsService;
         _themeChoice = settingsService.ThemeChoice;
         cloudScaleSlider = settingsService.CloudScale;
+        maxClouds = settingsService.MaxClouds;
+        instantText = settingsService.InstantText;
         Title = "Settings";
     }
 
@@ -52,12 +59,18 @@ public partial class SettingsViewModel : BaseViewModel
         }
     }
 
+    private void UpdateSettings()
+    {
+        settingsService.CloudScale = CloudScaleSlider;
+        settingsService.MaxClouds = MaxClouds;
+        settingsService.InstantText = InstantText;
+    }
 
     // Navigation
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        settingsService.CloudScale = CloudScaleSlider;
+        UpdateSettings();
         await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 

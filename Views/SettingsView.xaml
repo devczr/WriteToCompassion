@@ -100,15 +100,30 @@
                     Text="Max Clouds"
                     Style="{StaticResource CategoryLabelPrimary}"/>
                 <Label
-                    Text=""
+                    Text="{Binding MaxClouds, StringFormat='Count = {0}'}"
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Padding="2.5"/>
-                <Slider
-                    Value="{Binding CloudScaleSlider}"
-                    Maximum="2"
-                    Minimum="0.5"
-                    Margin="20,0,20,0"
-                    MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
+                <Stepper
+                    Value="{Binding MaxClouds}"
+                    Maximum="30"
+                    Minimum="1"
+                    HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+        <BoxView Style="{StaticResource Divider}"/>
+        <Border
+            Padding="10"
+            StrokeThickness="0"
+            BackgroundColor="Transparent">
+            <VerticalStackLayout
+                Padding="5">
+                <Label
+                    Text="Instant Cloud Text"
+                    Style="{StaticResource CategoryLabelPrimary}"/>
+                <Switch
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    IsToggled="{Binding InstantText}"/>
             </VerticalStackLayout>
         </Border>
         <BoxView Style="{StaticResource Divider}"/>

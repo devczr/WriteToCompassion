@@ -19,6 +19,14 @@ public class SettingsService : ISettingsService
     private const string IdCloudScale = "cloud_scale";
     private readonly double CloudScaleDefault = 1.1;
 
+    // Max Clouds on HomeView
+    private const string IdMaxClouds = "max_clouds";
+    private readonly int MaxCloudsDefault = 5;
+
+    // Instantly show cloud text or print by characters
+    private const string IdInstantText = "instant_text";
+    private readonly bool InstantTextDefault = false;
+
 
     public bool DisplayTutorial
     {
@@ -46,6 +54,18 @@ public class SettingsService : ISettingsService
     {
         get => Preferences.Get(IdCloudScale, CloudScaleDefault);
         set => Preferences.Set(IdCloudScale, value);
+    }
+
+    public int MaxClouds
+    {
+        get => Preferences.Get(IdMaxClouds, MaxCloudsDefault);
+        set => Preferences.Set(IdMaxClouds, value);
+    }
+
+    public bool InstantText
+    {
+        get => Preferences.Get(IdInstantText, InstantTextDefault);
+        set => Preferences.Set(IdInstantText, value);
     }
 
     private void SetAppTheme(string theme)

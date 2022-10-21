@@ -40,6 +40,7 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     bool unreadOnly = true;
 
+    private bool instantText = false;
 
     //general XAML Bindings
     [ObservableProperty]
@@ -57,6 +58,8 @@ public partial class HomeViewModel : BaseViewModel
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
         cloudScale = settingsService.CloudScale;
+        maxClouds = settingsService.MaxClouds;
+        instantText = settingsService.InstantText;
     }
 
 
@@ -175,7 +178,10 @@ public partial class HomeViewModel : BaseViewModel
             ContentBoxBusy = true;
             var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
             Clouds[index].AnimationType = CloudAnimationType.Display;
-            await UpdateContent(index);
+            if (instantText)
+                await UpdateContentInstantly(index);
+            else
+                await UpdateContent(index);
         }
         catch (Exception ex)
         {
@@ -207,6 +213,14 @@ public partial class HomeViewModel : BaseViewModel
             await Task.Delay(25);
             CloudContent = sb.ToString();
         }
+    }
+
+    private async Task UpdateContentInstantly(int index)
+    {
+        if (UnreadOnly)
+            CloudContent = await Task.Run(() => UnreadThoughts[index].Content);
+        else
+            CloudContent = await Task.Run(() => AllThoughts[index].Content);
     }
 
     //Navigation
