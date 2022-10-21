@@ -99,11 +99,41 @@ public class ThoughtsService
         return thoughtList;
     }
 
-    public async Task<ObservableCollection<Thought>> GetThoughtCollection()
+
+    // LibraryView Observable Collection Sorting
+    public async Task<ObservableCollection<Thought>> GetThoughtCollection(string sort = "newest to oldest")
     {
         await Init();
 
-        var t = await dbAsyncConn.Table<Thought>().ToListAsync();
+        return sort switch
+        {
+
+            "oldest to newest" => await GetThoughtsOrderByTimeSaved(),
+
+            "newest to oldest" or _ => await GetThoughtsOrderByTimeSavedDescending(),
+
+        };
+    }
+
+    public async Task<ObservableCollection<Thought>> GetThoughtsOrderByTimeSavedDescending()
+    {
+        var t = await dbAsyncConn.Table<Thought>().OrderByDescending(v => v.TimeSaved).ToListAsync();
+        ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
+        return thoughtCollection;
+    }
+
+    public async Task<ObservableCollection<Thought>> GetThoughtsOrderByTimeSaved()
+    {
+        var t = await dbAsyncConn.Table<Thought>().OrderBy(v => v.TimeSaved).ToListAsync();
+        ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
+        return thoughtCollection;
+    }
+
+    public async Task<ObservableCollection<Thought>> GetThoughtCollectionUnreadOnly()
+    {
+        await Init();
+
+        var t = await dbAsyncConn.Table<Thought>().Where(v => v.ReadCount.Equals(0)).ToListAsync();
         ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
         return thoughtCollection;
     }

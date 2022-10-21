@@ -59,6 +59,7 @@ public partial class SettingsViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
     private void UpdateSettings()
     {
         settingsService.CloudScale = CloudScaleSlider;
@@ -70,7 +71,6 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        UpdateSettings();
         await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 

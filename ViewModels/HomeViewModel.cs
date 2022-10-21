@@ -22,6 +22,9 @@ public partial class HomeViewModel : BaseViewModel
     public List<Thought> AllThoughts { get; } = new();
     public List<Thought> UnreadThoughts { get; } = new();
 
+    public List<Thought> SortedThoughts { get; } = new();
+
+
     //handles database logic
     ThoughtsService thoughtsService;
 

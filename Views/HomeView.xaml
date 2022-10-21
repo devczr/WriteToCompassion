@@ -335,7 +335,8 @@
                     StrokeThickness="1"
                     WidthRequest="75"
                     HeightRequest="53"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource light_onTertiaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
+                    ZIndex="8"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
                 </Border>
                 <ImageButton
                     Grid.Column="0"
@@ -346,10 +347,9 @@
                     Opacity="1"
                     HeightRequest="51"
                     ZIndex="9"
-                    IsEnabled="True"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onTertiary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
                 
@@ -360,7 +360,7 @@
                     VerticalOptions="Center"
                     WidthRequest="52"
                     HeightRequest="52"
-                    Opacity="0.7"
+                    Opacity="0.6"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToNewThoughtEditorCommand}">
@@ -376,7 +376,7 @@
                     VerticalOptions="Center"
                     WidthRequest="54"
                     HeightRequest="50"
-                    Opacity="0.7"
+                    Opacity="0.6"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToLibraryCommand}">

@@ -89,6 +89,7 @@
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedTo" Command="{Binding RefreshThoughtsCommand}"/>
+        <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedFrom" Command="{Binding MultiSelectCancelCommand}"/>
     </ContentPage.Behaviors>
     <ContentPage.Resources>
         <Style TargetType="Border">
@@ -183,7 +184,8 @@
                     StrokeThickness="1"
                     WidthRequest="75"
                     HeightRequest="53"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource light_onTertiaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
+                    ZIndex="8"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
                 </Border>
                 <ImageButton
                     Grid.Column="0"
@@ -191,10 +193,9 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     WidthRequest="56"
-                    Opacity="0.7"
+                    Opacity="0.6"
                     HeightRequest="51"
                     ZIndex="9"
-                    IsEnabled="True"
                     Command="{Binding GoToHomeCommand,Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
@@ -209,7 +210,7 @@
                     VerticalOptions="Center"
                     WidthRequest="52"
                     HeightRequest="52"
-                    Opacity="0.7"
+                    Opacity="0.6"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToNewThoughtEditorCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
@@ -229,7 +230,7 @@
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior  TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onTertiary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
 
