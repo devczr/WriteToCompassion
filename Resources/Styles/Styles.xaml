@@ -438,7 +438,7 @@
     <Style x:Key="ItemUnderCategoryLabelPrimary" TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding 
             Light={StaticResource light_secondary}, 
-            Dark={StaticResource light_secondary}}" />
+            Dark={StaticResource dark_secondary}}" />
         <Setter Property="FontFamily" Value="Josefin" />
         <Setter Property="FontSize" Value="18" />
     </Style>
@@ -447,7 +447,7 @@
     
     <Style x:Key="Divider" TargetType="BoxView">
         <Setter Property="HeightRequest" Value="1" />
-        <Setter Property="Margin" Value="0, 20, 0, 20" />
+        <Setter Property="Margin" Value="0, 5, 0, 5" />
         <Setter Property="Color" Value="{AppThemeBinding 
             Light={StaticResource light_surfaceVariant}, 
             Dark={StaticResource dark_surfaceVariant}}" />

@@ -23,8 +23,41 @@
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
     <Grid
+        x:Name="backgroundGrid"
         RowDefinitions="*,75"
         Margin="0">
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 5,5,5,5"
+            Opacity="0.2"
+            Background="{StaticResource backgroundBrush1}"
+            ZIndex="0">
+        </Border>
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="5"
+            StrokeShape="RoundRectangle 10"
+            Stroke="{AppThemeBinding Light={StaticResource light_background}, Dark={StaticResource dark_background}}"
+            Opacity="0.2"
+            Background="{StaticResource backgroundBrush2}"
+            ZIndex="0">
+            <Border.Shadow>
+                <Shadow  Brush="{StaticResource dark_background}"
+                            Offset="2,2"
+                            Radius="5"
+                            Opacity="1" />
+            </Border.Shadow>
+        </Border>
+        <Border
+            Grid.RowSpan="2"
+            StrokeThickness="0"
+            Opacity="0.05"
+            Background="{StaticResource backgroundBrush3}"
+            ZIndex="0">
+        </Border>
+
+
         <Grid 
             Grid.Row="0"
             x:Name="primaryGrid"
@@ -39,6 +72,18 @@
                 StrokeThickness="0"
                 ZIndex="0">
                 <Grid>
+                    <Label
+                        x:Name="contentLabel"
+                        Padding="20"
+                        IsVisible="True"
+                        Text="{Binding CloudContent}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        FontSize="Large"
+                        FontAttributes="Bold"
+                        TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                        ZIndex="9">
+                    </Label>
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 30,28,32,29"
@@ -232,24 +277,8 @@
                             Opacity="0.5" />
                         </Border.Shadow>
                     </Border>
-
-
-                    <Label
-                    x:Name="contentLabel"
-                    IsVisible="True"
-                    Text="{Binding CloudContent}"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    FontSize="Large"
-                    FontAttributes="Bold"
-                    TextColor="{AppThemeBinding Light={StaticResource light_onErrorContainer}, Dark={StaticResource dark_onErrorContainer}}"
-                    ZIndex="0"/>
                 </Grid>
             </Border>
-
-
-
-
 
             <!--Custom Cloud Controls-->
             <!--Control's Height and Width set according to SVG pixel dimensions-->
@@ -291,14 +320,15 @@
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
-            BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiary}, Dark={StaticResource dark_tertiary}}"
-            StrokeShape="RoundRectangle 5"
+            Background="Transparent"
+            HeightRequest="65"
             Stroke="Transparent"
-            Margin="30,0">
+            Margin="35,0,35,5">
             <Grid
                 ColumnDefinitions="*,*,*"
                 Padding="0">
                 <Border
+                    x:Name="selectedIconBorder"
                     Grid.Column="0"
                     Stroke="{AppThemeBinding Light={StaticResource light_outline}, Dark={StaticResource dark_outline}}"
                     StrokeShape="RoundRectangle 20"
@@ -309,28 +339,31 @@
                 </Border>
                 <ImageButton
                     Grid.Column="0"
-                        Source="thoughticon.png"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        WidthRequest="56"
+                    Source="thoughticon.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="56"
                     Opacity="1"
-                        HeightRequest="51"
-                        Style="{StaticResource CustomTabBar}">
+                    HeightRequest="51"
+                    ZIndex="9"
+                    IsEnabled="True"
+                    Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
                 
                 <ImageButton
-                Grid.Column="1"
-                Source="writeicon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="52"
-                HeightRequest="52"
-                Opacity="0.6"
-                Style="{StaticResource CustomTabBar}"
-                Command="{Binding GoToNewThoughtEditorCommand}">
+                    Grid.Column="1"
+                    Source="writeicon.png"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="52"
+                    HeightRequest="52"
+                    Opacity="0.7"
+                    ZIndex="9"
+                    Style="{StaticResource CustomTabBar}"
+                    Command="{Binding GoToNewThoughtEditorCommand}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
                     </ImageButton.Behaviors>
@@ -343,14 +376,111 @@
                     VerticalOptions="Center"
                     WidthRequest="54"
                     HeightRequest="50"
-                    Opacity="0.6"
+                    Opacity="0.7"
+                    ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToLibraryCommand}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior  TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
+
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.15"
+                    StrokeShape="RoundRectangle 10,5,10,5"
+                    Background="{StaticResource tabBrush1}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    StrokeShape="RoundRectangle 5,10,5,10"
+                    Background="{StaticResource tabBrush2}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    Background="{StaticResource tabBrush3}"
+                    StrokeShape="RoundRectangle 14,8,14,8"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    StrokeShape="RoundRectangle 8,14,8,14"
+                    Background="{StaticResource tabBrush4}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    StrokeShape="RoundRectangle 13,7,13,7"
+                    Background="{StaticResource tabBrush5}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    StrokeShape="RoundRectangle 7,13,7,13"
+                    Background="{StaticResource tabBrush6}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.075"
+                    StrokeShape="RoundRectangle 10"
+                    Background="{StaticResource tabBrush7}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.1"
+                    StrokeShape="RoundRectangle 10"
+                    Background="{StaticResource tabBrush8}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.1"
+                    StrokeShape="RoundRectangle 10"
+                    Background="{StaticResource tabBrush9}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.1"
+                    StrokeShape="RoundRectangle 10"
+                    Background="{StaticResource tabBrush10}"
+                    ZIndex="0"/>
+
+                <Border
+                    Grid.ColumnSpan="3"
+                    StrokeThickness="0"
+                    Opacity="0.2"
+                    StrokeShape="RoundRectangle 10"
+                    Background="{AppThemeBinding Light={StaticResource light_tertiary},Dark={StaticResource dark_tertiary}}"
+                    ZIndex="0"/>
+
             </Grid>
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource dark_shadow}"
+                            Offset="0,20"
+                            Radius="50"
+                            Opacity="1" />
+            </Border.Shadow>
         </Border>
     </Grid>
 </ContentPage>

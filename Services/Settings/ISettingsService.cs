@@ -6,6 +6,12 @@ public interface ISettingsService
 
     bool UnreadOnly { get; set; }
 
+    bool InstantText { get; set; }
+
     string ThemeChoice { get; set; }
+
+    double CloudScale { get; set; }
+
+    int MaxClouds { get; set; }
 }
 

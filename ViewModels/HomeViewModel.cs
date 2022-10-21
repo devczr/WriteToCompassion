@@ -3,6 +3,8 @@ using CommunityToolkit.Maui.Alerts;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
+using System.Windows.Input;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
@@ -30,7 +32,7 @@ public partial class HomeViewModel : BaseViewModel
 
     //User can adjust in Settings
     [ObservableProperty]
-    double cloudScale = 0.5;
+    double cloudScale = 1;
 
     [ObservableProperty]
     int maxClouds = 5;
@@ -38,6 +40,7 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     bool unreadOnly = true;
 
+    private bool instantText = false;
 
     //general XAML Bindings
     [ObservableProperty]
@@ -47,15 +50,18 @@ public partial class HomeViewModel : BaseViewModel
     string cloudContent = "";
 
     [ObservableProperty]
-    bool cloudTextVisible;
+    bool contentBoxBusy;
 
     public HomeViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
             : base(settingsService)
     {
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
+        cloudScale = settingsService.CloudScale;
+        maxClouds = settingsService.MaxClouds;
+        instantText = settingsService.InstantText;
     }
-    
+
 
     //mct:EventToCommand behavior on HomeView contentpage behavior calls this when "NavigatedTo" fires
     [RelayCommand]
@@ -99,7 +105,7 @@ public partial class HomeViewModel : BaseViewModel
         {
             //delaying here due to OnSizeAllocated firing 3 times on app startup
             //also gives time for the page to load in between NavigatedTo and actual page visiblity
-//            await Task.Delay(1500);
+            //            await Task.Delay(1500);
             await InitDriftAsync();
             IsBusy = false;
         }
@@ -109,6 +115,8 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task InitDriftAsync()
     {
+        await Task.Delay(500);
+        
         int cloudCount;
 
         //the number of clouds added to Clouds collection depends on:
@@ -163,25 +171,57 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task CloudSwipedAsync(Cloud swipedCloud)
     {
-        if (swipedCloud is null)
+        if ((swipedCloud is null) || (ContentBoxBusy))
             return;
-
-        var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
-        Clouds[index].AnimationType = CloudAnimationType.Display;
-        await UpdateContentProperty(index);
+        try
+        {
+            ContentBoxBusy = true;
+            var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
+            Clouds[index].AnimationType = CloudAnimationType.Display;
+            if (instantText)
+                await UpdateContentInstantly(index);
+            else
+                await UpdateContent(index);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error",
+                $"Unable to display your thought: {ex.Message}", "OK");
+        }
+        finally
+        {
+            ContentBoxBusy = false;
+        }
     }
 
     // Updates xaml label
     //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
-    private async Task UpdateContentProperty(int index)
+    private async Task UpdateContent(int index)
+    {
+        StringBuilder sb = new();
+        string content;
+        if (UnreadOnly)
+            content = await Task.Run(() => UnreadThoughts[index].Content);
+        else
+            content = await Task.Run(() => AllThoughts[index].Content);
+
+        var charArray = content.ToCharArray();
+        for(int i = 0; i < charArray.Length; i++)
+        {
+            sb.Append(charArray[i]);
+            await Task.Delay(25);
+            CloudContent = sb.ToString();
+        }
+    }
+
+    private async Task UpdateContentInstantly(int index)
     {
         if (UnreadOnly)
             CloudContent = await Task.Run(() => UnreadThoughts[index].Content);
         else
             CloudContent = await Task.Run(() => AllThoughts[index].Content);
     }
-
 
     //Navigation
     [RelayCommand]

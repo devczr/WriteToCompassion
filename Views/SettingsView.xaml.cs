@@ -15,7 +15,7 @@ public partial class SettingsView : ContentPage
 		BindingContext = settingsViewModel;
 	}
 
-    async void HandleButtonPopupButtonClicked(object sender, EventArgs e)
+    async void HandleThemeTapped(object sender, EventArgs e)
     {
         var buttonPopup = new ThemeOptionsPopup();
         await this.ShowPopupAsync(buttonPopup);
