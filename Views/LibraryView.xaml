@@ -89,6 +89,7 @@
 
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedTo" Command="{Binding RefreshThoughtsCommand}"/>
+        <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedFrom" Command="{Binding MultiSelectCancelCommand}"/>
     </ContentPage.Behaviors>
     <ContentPage.Resources>
         <Style TargetType="Border">
