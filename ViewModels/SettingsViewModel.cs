@@ -5,6 +5,7 @@ namespace WriteToCompassion.ViewModels;
 public partial class SettingsViewModel : BaseViewModel
 {
     private readonly ISettingsService settingsService;
+    private readonly HomeViewModel homeViewModel;
 
     private string _themeChoice;
 
@@ -17,11 +18,16 @@ public partial class SettingsViewModel : BaseViewModel
         }
     }
 
-    public SettingsViewModel(ISettingsService settingsService) : base(settingsService)
+    [ObservableProperty]
+    private double cloudScaleSlider;
+
+    public SettingsViewModel(ISettingsService settingsService, HomeViewModel homeViewModel) : base(settingsService)
     {
         this.settingsService = settingsService;
         _themeChoice = settingsService.ThemeChoice;
+        this.homeViewModel = homeViewModel;
         Title = "Settings";
+        cloudScaleSlider = homeViewModel.CloudScale;
     }
 
 

@@ -51,9 +51,6 @@ public partial class HomeViewModel : BaseViewModel
     [ObservableProperty]
     bool contentBoxBusy;
 
-    public ICommand TriggerAnimationCommand { get; set; }
-
-
     public HomeViewModel(ThoughtsService thoughtsService, ISettingsService settingsService)
             : base(settingsService)
     {

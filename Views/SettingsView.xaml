@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
-             xmlns:models="clr-namespace:WriteToCompassion.Models"
-             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:DataType="viewmodels:SettingsViewModel"
-             x:Class="WriteToCompassion.Views.SettingsView"
-             Shell.TabBarIsVisible="False"
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    xmlns:models="clr-namespace:WriteToCompassion.Models"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:controls="clr-namespace:WriteToCompassion.Controls"
+    x:DataType="viewmodels:SettingsViewModel"
+    x:Class="WriteToCompassion.Views.SettingsView"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"
     Title="Settings"
-             Shell.ForegroundColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
+    
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
                             IsVisible="True"
@@ -52,12 +55,43 @@
             </VerticalStackLayout>
             <Border.GestureRecognizers>
                 <TapGestureRecognizer
-                    Tapped="HandleButtonPopupButtonClicked"/>
+                    Tapped="HandleThemeTapped"/>
             </Border.GestureRecognizers>
         </Border>
         <BoxView Style="{StaticResource Divider}"/>
+        <Border 
+            Padding="10"
+            StrokeThickness="0"
+            BackgroundColor="Transparent">
+            <VerticalStackLayout
+                Padding="5">
+                <Label
+                    Text="Cloud Size"
+                    Style="{StaticResource CategoryLabelPrimary}"/>
+                <Label
+                    Text="{Binding CloudScaleSlider, StringFormat='Scale = {0:F2}'}"
+                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                    Padding="2.5"/>
+                <Slider
+                    Value="{Binding CloudScaleSlider}"
+                    Maximum="2"
+                    Minimum="0.5"
+                    Margin="20,0,20,0" />
+                <controls:CustomCloudControl
+                    Margin="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="200"
+                    HeightRequest="126"
+                    ZIndex="2"
+                    Scale="{Binding CloudScaleSlider}"
+                    BackgroundColor="Transparent"/>
+
+            </VerticalStackLayout>
+        </Border>
+        <BoxView Style="{StaticResource Divider}"/>
         <Button 
-            Text="Show Tutorial On Start"
+            Text="Toggle Tutorial On Start"
             Command="{Binding ToggleDisplayTutorialCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

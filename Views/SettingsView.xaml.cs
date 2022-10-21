@@ -9,13 +9,15 @@ namespace WriteToCompassion.Views;
 
 public partial class SettingsView : ContentPage
 {
-	public SettingsView(SettingsViewModel settingsViewModel)
+    HomeViewModel homeViewModel;
+	public SettingsView(SettingsViewModel settingsViewModel, HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
 		BindingContext = settingsViewModel;
+        this.homeViewModel = homeViewModel;
 	}
 
-    async void HandleButtonPopupButtonClicked(object sender, EventArgs e)
+    async void HandleThemeTapped(object sender, EventArgs e)
     {
         var buttonPopup = new ThemeOptionsPopup();
         await this.ShowPopupAsync(buttonPopup);
