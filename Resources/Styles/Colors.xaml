@@ -88,24 +88,24 @@
 
     <LinearGradientBrush x:Key="contentBrush1" StartPoint="0,0"
                          EndPoint="1,1">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                       Offset="0.0"/>
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                       Offset="0.25"/>
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                       Offset="0.5"/>
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                       Offset="0.75"/>
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                       Offset="1"/>
     </LinearGradientBrush>
 
     <LinearGradientBrush x:Key="contentBrush2" 
                          StartPoint="0,0"
                          EndPoint="0,1">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                       Offset="0.1"/>
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                       Offset="1.0"/>
     </LinearGradientBrush>
 
@@ -113,9 +113,9 @@
         x:Key="contentBrush3" 
         StartPoint="0,0"
         EndPoint="0,1">
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                       Offset="0.1"/>
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                       Offset="1.0"/>
 
     </LinearGradientBrush>
@@ -123,18 +123,18 @@
     <RadialGradientBrush
         x:Key="contentBrush4"
         Center="0.5,0.5">
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.1" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush5"
         Center="0.0,0.0">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.9" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
 
     </RadialGradientBrush>
@@ -142,9 +142,9 @@
     <RadialGradientBrush
         x:Key="contentBrush6"
         Center="0.0,0.0">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
 
     </RadialGradientBrush>
@@ -152,57 +152,57 @@
     <RadialGradientBrush
         x:Key="contentBrush7"
         Center="0.1, 0.9">
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.2" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.4" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.8" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush8"
         Center="0.9, 0.2">
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.2" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.4" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.6" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.9" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush9"
         Center="0.5, 0.1">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.5" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush10"
         Center="0.5, 1.0">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.1" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush11"
         Center="1, 1">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.1" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.2" />
 
     </RadialGradientBrush>
@@ -210,36 +210,36 @@
     <LinearGradientBrush
         x:Key="contentBrush12"
         EndPoint="1.0, 1.0">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.1" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.5" />
     </LinearGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush13"
         Center="0.5, 0.1">
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.1" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush14"
         Center="0.3, 0.9">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
     <RadialGradientBrush
         x:Key="contentBrush15"
         Center="0.5, 1.0">
-        <GradientStop Color="{StaticResource dark_primaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer},Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </RadialGradientBrush>
 
@@ -248,9 +248,9 @@
         x:Key="backgroundBrush1"
         StartPoint="0,0"
         EndPoint="0,1">
-        <GradientStop Color="{StaticResource dark_background}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_background},Dark={StaticResource dark_background}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </LinearGradientBrush>
     
@@ -258,9 +258,9 @@
         x:Key="backgroundBrush2"
         StartPoint="0,1"
         EndPoint="0,0">
-        <GradientStop Color="{StaticResource dark_background}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_background},Dark={StaticResource dark_background}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource light_onPrimaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"
                   Offset="1.0" />
     </LinearGradientBrush>
 
@@ -268,13 +268,13 @@
         x:Key="backgroundBrush3"
         StartPoint="1,0"
         EndPoint="0,1">
-        <GradientStop Color="{StaticResource dark_onTertiaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_onTertiaryContainer},Dark={StaticResource dark_onTertiaryContainer}}"
                   Offset="0.0" />
-        <GradientStop Color="{StaticResource dark_tertiary}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_tertiary}, Dark={StaticResource dark_tertiary}}"
                   Offset="0.3" />
-        <GradientStop Color="{StaticResource dark_onTertiaryContainer}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_onTertiaryContainer},Dark={StaticResource dark_onTertiaryContainer}}"
                   Offset="0.6" />
-        <GradientStop Color="{StaticResource dark_tertiary}"
+        <GradientStop Color="{AppThemeBinding Light={StaticResource light_tertiary}, Dark={StaticResource dark_tertiary}}"
                   Offset="1.0" />
     </LinearGradientBrush>
 
