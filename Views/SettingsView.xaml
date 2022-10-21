@@ -123,7 +123,17 @@
                 <Switch
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
-                    IsToggled="{Binding InstantText}"/>
+                    IsToggled="{Binding InstantText}"
+                    OnColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"                  
+                    ThumbColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"
+                    >
+                    <Switch.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
+                            Offset="5,0"
+                            Radius="30"
+                            Opacity="0.1"/>
+                    </Switch.Shadow>
+                </Switch>
             </VerticalStackLayout>
         </Border>
         <BoxView Style="{StaticResource Divider}"/>
