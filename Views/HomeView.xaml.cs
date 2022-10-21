@@ -9,8 +9,6 @@ public partial class HomeView : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = homeViewModel;
-        
-
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -26,4 +24,8 @@ public partial class HomeView : ContentPage
         base.OnNavigatedTo(args);
     }
 
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+    }
 }

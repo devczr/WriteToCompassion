@@ -78,11 +78,12 @@
                         IsVisible="True"
                         Text="{Binding CloudContent}"
                         VerticalOptions="Center"
-                        HorizontalOptions="Center"
-                        FontSize="Medium"
+                        HorizontalOptions="Start"
+                        FontSize="Large"
                         FontAttributes="Bold"
                         TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
-                        ZIndex="9"/>
+                        ZIndex="9">
+                    </Label>
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 30,28,32,29"
