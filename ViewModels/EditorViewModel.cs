@@ -40,8 +40,7 @@ public partial class EditorViewModel : BaseViewModel
             }
             catch (Exception ex)
             {
-                await Shell.Current.DisplayAlert("Error",
-                    $"Unable to delete thought: {ex.Message}", "OK");
+                await Shell.Current.DisplayAlert("Error", $"Unable to delete thought: {ex.Message}", "OK");
             }
             finally
             {
@@ -102,7 +101,7 @@ public partial class EditorViewModel : BaseViewModel
         if (string.IsNullOrEmpty(Thought.Content))
         {
             await ShortToast("Please enter a message before saving.");
-
+            
             return;
         }
 
