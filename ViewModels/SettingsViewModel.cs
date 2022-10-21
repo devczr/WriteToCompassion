@@ -21,13 +21,12 @@ public partial class SettingsViewModel : BaseViewModel
     [ObservableProperty]
     private double cloudScaleSlider;
 
-    public SettingsViewModel(ISettingsService settingsService, HomeViewModel homeViewModel) : base(settingsService)
+    public SettingsViewModel(ISettingsService settingsService) : base(settingsService)
     {
         this.settingsService = settingsService;
         _themeChoice = settingsService.ThemeChoice;
-        this.homeViewModel = homeViewModel;
+        cloudScaleSlider = settingsService.CloudScale;
         Title = "Settings";
-        cloudScaleSlider = homeViewModel.CloudScale;
     }
 
 
@@ -58,7 +57,7 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        homeViewModel.CloudScale = CloudScaleSlider;
+        settingsService.CloudScale = CloudScaleSlider;
         await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 

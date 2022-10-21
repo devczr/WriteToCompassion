@@ -32,7 +32,7 @@ public partial class HomeViewModel : BaseViewModel
 
     //User can adjust in Settings
     [ObservableProperty]
-    double cloudScale = 1.1;
+    double cloudScale = 1;
 
     [ObservableProperty]
     int maxClouds = 5;
@@ -56,6 +56,7 @@ public partial class HomeViewModel : BaseViewModel
     {
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
+        cloudScale = settingsService.CloudScale;
     }
 
 

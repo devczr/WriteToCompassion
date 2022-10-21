@@ -438,7 +438,7 @@
     <Style x:Key="ItemUnderCategoryLabelPrimary" TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding 
             Light={StaticResource light_secondary}, 
-            Dark={StaticResource light_secondary}}" />
+            Dark={StaticResource dark_secondary}}" />
         <Setter Property="FontFamily" Value="Josefin" />
         <Setter Property="FontSize" Value="18" />
     </Style>

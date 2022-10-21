@@ -76,7 +76,7 @@
                         x:Name="contentLabel"
                         Padding="20"
                         IsVisible="True"
-                        Text="{Binding CloudScale}"
+                        Text="{Binding CloudContent}"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"
                         FontSize="Large"

@@ -68,15 +68,6 @@
                 <Label
                     Text="Cloud Size"
                     Style="{StaticResource CategoryLabelPrimary}"/>
-                <Label
-                    Text="{Binding CloudScaleSlider, StringFormat='Scale = {0:F2}'}"
-                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
-                    Padding="2.5"/>
-                <Slider
-                    Value="{Binding CloudScaleSlider}"
-                    Maximum="2"
-                    Minimum="0.5"
-                    Margin="20,0,20,0" />
                 <controls:CustomCloudControl
                     Margin="10"
                     HorizontalOptions="Center"
@@ -86,7 +77,38 @@
                     ZIndex="2"
                     Scale="{Binding CloudScaleSlider}"
                     BackgroundColor="Transparent"/>
-
+                <Label
+                    Text="{Binding CloudScaleSlider, StringFormat='Scale = {0:F2}'}"
+                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                    Padding="2.5"/>
+                <Slider
+                    Value="{Binding CloudScaleSlider}"
+                    Maximum="2"
+                    Minimum="0.5"
+                    Margin="20,0,20,0"
+                    MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
+            </VerticalStackLayout>
+        </Border>
+        <BoxView Style="{StaticResource Divider}"/>
+        <Border 
+            Padding="10"
+            StrokeThickness="0"
+            BackgroundColor="Transparent">
+            <VerticalStackLayout
+                Padding="5">
+                <Label
+                    Text="Max Clouds"
+                    Style="{StaticResource CategoryLabelPrimary}"/>
+                <Label
+                    Text=""
+                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                    Padding="2.5"/>
+                <Slider
+                    Value="{Binding CloudScaleSlider}"
+                    Maximum="2"
+                    Minimum="0.5"
+                    Margin="20,0,20,0"
+                    MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
             </VerticalStackLayout>
         </Border>
         <BoxView Style="{StaticResource Divider}"/>
