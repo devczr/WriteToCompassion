@@ -6,16 +6,18 @@ public class SettingsService : ISettingsService
     private const string IdDisplayTutorial = "display_tutorial";
     private readonly bool DisplayTutorialDefault = true;
 
-    //Intro tutorial to be displayed just on initial app start
+    // Only display unread thoughts
     private const string IdUnreadOnly = "unread_only";
     private readonly bool UnreadOnlyDefault = true;
 
 
-    //Intro tutorial to be displayed just on initial app start
+    // Light / Dark Themes (HomeView designed primarily for Dark theme)
     private const string IdThemeChoice = "theme_choice";
-    private readonly string ThemeChoiceDefault = "default";
+    private readonly string ThemeChoiceDefault = "Dark";
 
-
+    // Size of Clouds on HomeView
+    private const string IdCloudScale = "cloud_scale";
+    private readonly double CloudScaleDefault = 1.1;
 
 
     public bool DisplayTutorial
@@ -38,6 +40,12 @@ public class SettingsService : ISettingsService
             Preferences.Set(IdThemeChoice, value);
             SetAppTheme(ThemeChoice);
         } 
+    }
+
+    public double CloudScale
+    {
+        get => Preferences.Get(IdCloudScale, CloudScaleDefault);
+        set => Preferences.Set(IdCloudScale, value);
     }
 
     private void SetAppTheme(string theme)

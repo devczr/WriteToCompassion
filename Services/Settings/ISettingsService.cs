@@ -7,5 +7,7 @@ public interface ISettingsService
     bool UnreadOnly { get; set; }
 
     string ThemeChoice { get; set; }
+
+    double CloudScale { get; set; }
 }
 

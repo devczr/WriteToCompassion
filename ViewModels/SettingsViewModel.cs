@@ -5,7 +5,7 @@ namespace WriteToCompassion.ViewModels;
 public partial class SettingsViewModel : BaseViewModel
 {
     private readonly ISettingsService settingsService;
-    private readonly HomeViewModel homeViewModel;
+    private HomeViewModel homeViewModel;
 
     private string _themeChoice;
 
@@ -58,6 +58,7 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
+        homeViewModel.CloudScale = CloudScaleSlider;
         await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 

@@ -16,7 +16,7 @@
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
                             IsVisible="True"
-                             Command="{Binding GoToLibraryCommand}"/>
+                            Command="{Binding GoToLibraryCommand}"/>
     </Shell.BackButtonBehavior>
 
     <Shell.TitleView>

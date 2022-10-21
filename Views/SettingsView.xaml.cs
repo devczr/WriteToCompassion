@@ -9,12 +9,10 @@ namespace WriteToCompassion.Views;
 
 public partial class SettingsView : ContentPage
 {
-    HomeViewModel homeViewModel;
-	public SettingsView(SettingsViewModel settingsViewModel, HomeViewModel homeViewModel)
+	public SettingsView(SettingsViewModel settingsViewModel)
 	{
 		InitializeComponent();
 		BindingContext = settingsViewModel;
-        this.homeViewModel = homeViewModel;
 	}
 
     async void HandleThemeTapped(object sender, EventArgs e)
