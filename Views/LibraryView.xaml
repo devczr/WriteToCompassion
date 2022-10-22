@@ -21,21 +21,33 @@
                 x:DataType="viewmodels:LibraryViewModel"
                 Grid.Row="0"
                 HeightRequest="50"
-                ColumnDefinitions="5*,*"
+                ColumnDefinitions="5*,*,*"
                 IsVisible="{Binding IsNotMultiSelect}">
                 <Label 
                 Style="{StaticResource TitleViewLabel}"
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
+                
+                <ImageButton
+                Source="sorticon.png"
+                Grid.Column="1"
+                Scale="0.5"
+                Clicked="SortClicked"
+                Command="{Binding DrawerCommand}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
+                
                 <ImageButton
                 x:Name="settingsGearButton"
                 Source="settingsicon.png"
-                Grid.Column="1"
+                Grid.Column="2"
                 Scale="0.5"
                 Command="{Binding GoToSettingsCommand}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
             </Grid>
@@ -91,6 +103,7 @@
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedTo" Command="{Binding RefreshThoughtsCommand}"/>
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedFrom" Command="{Binding MultiSelectCancelCommand}"/>
     </ContentPage.Behaviors>
+    
     <ContentPage.Resources>
         <Style TargetType="Border">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -115,10 +128,43 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
+    
     <Grid
        RowDefinitions="*,75">
-        <Grid>
-            <RefreshView
+        <Grid
+            RowDefinitions="50,*">
+                <Grid
+                    Grid.Row="0"
+                    x:DataType="viewmodels:LibraryViewModel"
+                    HeightRequest="50"
+                    ColumnDefinitions="*,*"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+
+                    <ImageButton
+                        x:Name="sortButton"
+                        Source="sorticon.png"
+                        Grid.Column="0"
+                        Scale="0.5"
+                        Clicked="SortClicked"
+                        Command="{Binding DrawerCommand}">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+
+                    <ImageButton
+                        x:Name="layoutButton"
+                        Source="foursquares.png"
+                        Grid.Column="1"
+                        Scale="0.5">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+                <RefreshView
+                Grid.Row="1"
                 IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
@@ -165,7 +211,9 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
+            
         </Grid>
+        
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
@@ -331,5 +379,44 @@
                             Opacity="1" />
             </Border.Shadow>
         </Border>
+
+        <!--Sort/Filter Drawer-->
+        <BoxView
+            Background="{StaticResource dark_background}"
+            IsVisible="False"
+            InputTransparent="True"
+            x:Name="backdrop"
+            Grid.RowSpan="2"
+            ZIndex="10">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Border
+            x:Name="bottomDrawer"
+            HeightRequest="350"
+            VerticalOptions="End"
+            BackgroundColor="{AppThemeBinding Light={StaticResource light_background}, Dark={StaticResource dark_background}}"
+            StrokeShape="RoundRectangle 20,20,0,0"
+            TranslationY="425"
+            Padding="15,6"
+            StrokeThickness="0"
+            ZIndex="11">
+            <StackLayout Orientation="Vertical">
+                <BoxView 
+                    Style="{StaticResource DrawerDivider}"
+                    HorizontalOptions="Center"
+                    WidthRequest="50"/>
+                <Label
+                    Text="Sort / Filter"
+                    FontSize="Large"/>
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
+            </Border.GestureRecognizers>
+        </Border>
+
     </Grid>
+    
 </ContentPage>

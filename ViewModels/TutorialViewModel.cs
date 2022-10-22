@@ -12,9 +12,7 @@ public partial class TutorialViewModel : BaseViewModel
 		_settingsService = settingsService;
 	}
 
-	//next next get started and            skip at top
-
-    public override Task InitializeAsync()
+	public override Task InitializeAsync()
     {
         return Task.CompletedTask;
     }
@@ -23,12 +21,4 @@ public partial class TutorialViewModel : BaseViewModel
 	{
 		_settingsService.DisplayTutorial = false;
 	}
-
-
-    [RelayCommand]
-	private async Task SkipTutorial()
-	{
-		await Shell.Current.GoToAsync("//root/home");
-	}
-
 }

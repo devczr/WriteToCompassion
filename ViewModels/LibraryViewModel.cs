@@ -26,6 +26,12 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     bool canRefresh = true;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BackdropInputTransparent))]
+    bool sortDrawerOpen;
+
+    public bool BackdropInputTransparent => !sortDrawerOpen;
+
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotMultiSelect))]
@@ -56,7 +62,9 @@ public partial class LibraryViewModel : BaseViewModel
         RefreshThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
         TappedCommand = new Command<Thought>(OnTapped);
+        sortDrawerOpen = false;
     }
+
 
 
     private async void OnTapped(Thought thought)
@@ -182,7 +190,7 @@ public partial class LibraryViewModel : BaseViewModel
         {
 
             IsBusy = true;
-            var thoughts = await thoughtsService.GetThoughtCollection("delicious");
+            var thoughts = await thoughtsService.GetThoughtCollection("");
 
             if (AllThoughts.Count != 0)
                 AllThoughts.Clear();
@@ -233,6 +241,13 @@ public partial class LibraryViewModel : BaseViewModel
     async Task GoToSettingsAsync()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
+    }
+
+
+    [RelayCommand]
+    async Task DrawerAsync()
+    {
+        SortDrawerOpen = !SortDrawerOpen;
     }
 
 }
