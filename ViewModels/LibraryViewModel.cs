@@ -27,13 +27,6 @@ public partial class LibraryViewModel : BaseViewModel
     bool canRefresh = true;
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(BackdropInputTransparent))]
-    bool sortDrawerOpen;
-
-    public bool BackdropInputTransparent => !sortDrawerOpen;
-
-
-    [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotMultiSelect))]
     bool isMultiSelect;
     public bool IsNotMultiSelect => !isMultiSelect;
@@ -41,6 +34,13 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     int countSelected;
 
+    [ObservableProperty]
+    int collectionSpan = 2;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNotOneColumn))]
+    bool isOneColumn = false;
+    public bool IsNotOneColumn => !isOneColumn;
 
     private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
     private SelectionMode _selectionMode = SelectionMode.None;
@@ -62,7 +62,7 @@ public partial class LibraryViewModel : BaseViewModel
         RefreshThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
         TappedCommand = new Command<Thought>(OnTapped);
-        sortDrawerOpen = false;
+        IsOneColumn = false;
     }
 
 
@@ -178,6 +178,21 @@ public partial class LibraryViewModel : BaseViewModel
         else return;
     }
 
+    [RelayCommand]
+    async Task ChangeLayoutAsync()
+    {
+        if (CollectionSpan is 1)
+        {
+            IsOneColumn = false;
+            await Task.Run(() => CollectionSpan = 2);
+        }
+        else
+        {
+            IsOneColumn = true;
+            await Task.Run(() => CollectionSpan = 1);
+        }
+
+    }
 
     // Collection
     [RelayCommand]
@@ -241,13 +256,6 @@ public partial class LibraryViewModel : BaseViewModel
     async Task GoToSettingsAsync()
     {
         await Shell.Current.GoToAsync(nameof(SettingsView));
-    }
-
-
-    [RelayCommand]
-    async Task DrawerAsync()
-    {
-        SortDrawerOpen = !SortDrawerOpen;
     }
 
 }

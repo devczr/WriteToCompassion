@@ -18,7 +18,7 @@ public partial class LibraryView : ContentPage
         backdrop.IsVisible = true;
         backdrop.IsVisible = false;
         backdrop.Opacity = 0;
-        backdrop.Opacity = 0.7;
+        backdrop.Opacity = 0.4;
     }
     async void SortClicked(object sender, EventArgs e)
     {
@@ -31,7 +31,7 @@ public partial class LibraryView : ContentPage
             await OpenDrawer();
         }
     }
-    async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    async void BackdropTapped(object sender, TappedEventArgs e)
     {
         if (drawerOpen)
             await CloseDrawer();
