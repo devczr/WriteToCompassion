@@ -42,6 +42,9 @@ public partial class LibraryViewModel : BaseViewModel
     bool isOneColumn = false;
     public bool IsNotOneColumn => !isOneColumn;
 
+    [ObservableProperty]
+    string sortBy = "Newest to Oldest";
+
     private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
     private SelectionMode _selectionMode = SelectionMode.None;
     public Thought SelectedItem { get; set; }
@@ -53,7 +56,7 @@ public partial class LibraryViewModel : BaseViewModel
 
     public Command<Thought> TappedCommand { get; private set; }
 
-
+    
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.settingsService = settingsService;
@@ -191,6 +194,7 @@ public partial class LibraryViewModel : BaseViewModel
             IsOneColumn = true;
             await Task.Run(() => CollectionSpan = 1);
         }
+        await Shell.Current.DisplayAlert("Ok", SortBy, "Ok");
 
     }
 

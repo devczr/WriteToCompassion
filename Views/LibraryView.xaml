@@ -146,7 +146,7 @@
                         Grid.Column="1"
                         Scale="0.5"
                         Command="{Binding ChangeLayoutCommand}"
-                        IsVisible="{Binding IsNotOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                        IsVisible="{Binding IsOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                         <ImageButton.Behaviors>
                             <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
                         </ImageButton.Behaviors>
@@ -156,7 +156,7 @@
                         Grid.Column="1"
                         Scale="0.5"
                         Command="{Binding ChangeLayoutCommand}"
-                        IsVisible="{Binding IsOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                        IsVisible="{Binding IsNotOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
                     </ImageButton.Behaviors>
@@ -402,16 +402,33 @@
             Padding="15,6"
             StrokeThickness="0"
             ZIndex="11">
-            <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Vertical"
+                         Margin="10"
+                         Spacing="5">
                 <BoxView 
                     Style="{StaticResource DrawerDivider}"
                     HorizontalOptions="Center"
                     WidthRequest="50"/>
                 <Label
-                    Padding="9"
-                    Text="Sort / Filter"
+                    Text="Sort:"
                     TextColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
-                    FontSize="Large"/>
+                    FontSize="Large"
+                    HorizontalTextAlignment="Start"/>
+                <Picker
+                    x:DataType="viewmodels:LibraryViewModel"
+                    Title="Sort:"
+                    TitleColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
+                    FontSize="Medium"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
+                    SelectedItem="{Binding SortBy, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Newest to Oldest</x:String>
+                            <x:String>Oldest to Newest</x:String>
+                            <x:String>Last Modified</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
             </StackLayout>
             <Border.GestureRecognizers>
                 <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
