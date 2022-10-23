@@ -26,6 +26,13 @@ public partial class SettingsViewModel : BaseViewModel
 
     [ObservableProperty]
     private bool instantText;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(UseAll))]
+    bool useUnreadOnly;
+
+    public bool UseAll => !useUnreadOnly;
+
     public SettingsViewModel(ISettingsService settingsService) : base(settingsService)
     {
         this.settingsService = settingsService;
@@ -33,8 +40,11 @@ public partial class SettingsViewModel : BaseViewModel
         cloudScaleSlider = settingsService.CloudScale;
         maxClouds = settingsService.MaxClouds;
         instantText = settingsService.InstantText;
+        useUnreadOnly = settingsService.UnreadOnly;
         Title = "Settings";
     }
+
+
 
 
     [RelayCommand]
@@ -65,6 +75,7 @@ public partial class SettingsViewModel : BaseViewModel
         settingsService.CloudScale = CloudScaleSlider;
         settingsService.MaxClouds = MaxClouds;
         settingsService.InstantText = InstantText;
+        settingsService.UnreadOnly = UseUnreadOnly;
     }
 
     // Navigation

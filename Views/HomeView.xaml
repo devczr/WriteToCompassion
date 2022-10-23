@@ -19,7 +19,7 @@
 
 
     <ContentPage.Behaviors>
-        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetAllThoughtsCommand}" />
+        <mct:EventToCommandBehavior EventName="NavigatedTo" Command="{Binding GetUserThoughtsCommand}" />
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding ClearCloudsCommand}"/>
     </ContentPage.Behaviors>
     <Grid

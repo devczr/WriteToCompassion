@@ -8,7 +8,7 @@ public class SettingsService : ISettingsService
 
     // Only display unread thoughts
     private const string IdUnreadOnly = "unread_only";
-    private readonly bool UnreadOnlyDefault = true;
+    private readonly bool UnreadOnlyDefault = false;
 
 
     // Light / Dark Themes (HomeView designed primarily for Dark theme)

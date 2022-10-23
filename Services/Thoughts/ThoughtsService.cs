@@ -4,14 +4,17 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using WriteToCompassion.Models;
+using WriteToCompassion.Services.Settings;
 
 namespace WriteToCompassion.Services.Thoughts;
 
 public class ThoughtsService
 {
-	public ThoughtsService()
-	{
+    private readonly ISettingsService settingsService;
 
+    public ThoughtsService(ISettingsService settingsService)
+	{
+        this.settingsService = settingsService;
 	}
 
     private SQLiteAsyncConnection dbAsyncConn;
@@ -89,14 +92,27 @@ public class ThoughtsService
         }
     }
 
+
+    // GET THOUGHTS
+
     List<Thought> thoughtList = new();
-    public async Task<List<Thought>> GetAllThoughts()
+    public async Task<List<Thought>> GetThoughts()
     {
         await Init();
 
-        thoughtList = await dbAsyncConn.Table<Thought>().ToListAsync();
+        if (settingsService.UnreadOnly)
+        {
+            thoughtList = await dbAsyncConn.Table<Thought>().Where(t => t.ReadCount == 0).ToListAsync();
+        }
+        else
+        {
+            thoughtList = await dbAsyncConn.Table<Thought>().ToListAsync();
+        }
+
         return thoughtList;
     }
+
+
 
 
     // LibraryView Observable Collection Sorting

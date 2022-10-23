@@ -19,8 +19,7 @@ public partial class HomeViewModel : BaseViewModel
 
 
     //Read & unread thoughts retrieved from db via thoughtsservice
-    public List<Thought> AllThoughts { get; } = new();
-    public List<Thought> UnreadThoughts { get; } = new();
+    public List<Thought> UserThoughts { get; } = new();
 
     public List<Thought> SortedThoughts { get; } = new();
 
@@ -39,9 +38,6 @@ public partial class HomeViewModel : BaseViewModel
 
     [ObservableProperty]
     int maxClouds = 5;
-
-    [ObservableProperty]
-    bool unreadOnly = true;
 
     private bool instantText = false;
 
@@ -68,7 +64,7 @@ public partial class HomeViewModel : BaseViewModel
 
     //mct:EventToCommand behavior on HomeView contentpage behavior calls this when "NavigatedTo" fires
     [RelayCommand]
-    async Task GetAllThoughtsAsync()
+    async Task GetUserThoughtsAsync()
     {
         if (IsBusy)
             return;
@@ -80,23 +76,13 @@ public partial class HomeViewModel : BaseViewModel
             //clear list that xaml clouds are bound to
             CloudContent = "";
             Clouds.Clear();
-            UnreadThoughts.Clear();
-            AllThoughts.Clear();
+            UserThoughts.Clear();
 
             //viewmodel calls into Service so our Database Logic isn't locked into our ViewModel
-            var thoughts = await thoughtsService.GetAllThoughts();
+            var thoughts = await thoughtsService.GetThoughts();
 
-            if (settingsService.UnreadOnly)
-            {
-                thoughts = thoughts.Where(t => t.ReadCount == 0).ToList();
                 foreach (var thought in thoughts)
-                    UnreadThoughts.Add(thought);
-            }
-            else
-            {
-                foreach (var thought in thoughts)
-                    AllThoughts.Add(thought);
-            }
+                    UserThoughts.Add(thought);
 
         }
         catch (Exception ex)
@@ -120,19 +106,14 @@ public partial class HomeViewModel : BaseViewModel
     {
         await Task.Delay(500);
         
-        int cloudCount;
 
         //the number of clouds added to Clouds collection depends on:
         // 1) how many thoughts the user has saved in database
         // 2) their MaxClouds setting
-        // 3) their "show only unread" or "show all" setting
+        // 3) their "Unread Only" or "All" setting
         //    a thought is considered Unread if its content has never been displayed (swipe up gesture)
 
-
-        if (UnreadOnly)
-            cloudCount = Math.Clamp(UnreadThoughts.Count, 0, MaxClouds);
-        else
-            cloudCount = Math.Clamp(AllThoughts.Count, 0, MaxClouds);
+        int cloudCount = Math.Clamp(UserThoughts.Count, 0, MaxClouds);
 
         for (int i = 0; i < cloudCount; i++)
         {
@@ -179,8 +160,11 @@ public partial class HomeViewModel : BaseViewModel
         try
         {
             ContentBoxBusy = true;
+
             var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
+            
             Clouds[index].AnimationType = CloudAnimationType.Display;
+            
             if (instantText)
                 await UpdateContentInstantly(index);
             else
@@ -221,13 +205,9 @@ public partial class HomeViewModel : BaseViewModel
     private async Task UpdateContent(int index)
     {
         StringBuilder sb = new();
-        Thought thought;
-        if (UnreadOnly)
-            thought = await Task.Run(() => UnreadThoughts[index]);
-        else
-            thought = await Task.Run(() => AllThoughts[index]);
 
-        var charArray = thought.Content.ToCharArray();
+        var charArray = await Task.Run(() => UserThoughts[index].Content.ToCharArray());
+
         for(int i = 0; i < charArray.Length; i++)
         {
             sb.Append(charArray[i]);
@@ -235,21 +215,16 @@ public partial class HomeViewModel : BaseViewModel
             CloudContent = sb.ToString();
         }
 
-        await UpdateReadCount(thought);
+        await UpdateReadCount(UserThoughts[index]);
 
     }
 
     private async Task UpdateContentInstantly(int index)
     {
-        Thought thought;
-        if (UnreadOnly)
-            thought = await Task.Run(() => UnreadThoughts[index]);
-        else
-            thought = await Task.Run(() => AllThoughts[index]);
 
-        CloudContent = thought.Content;
+        CloudContent = await Task.Run(() => UserThoughts[index].Content);
 
-        await UpdateReadCount(thought);
+        await UpdateReadCount(UserThoughts[index]);
     }
 
     //Navigation
@@ -273,7 +248,7 @@ public partial class HomeViewModel : BaseViewModel
             Clouds[i].AnimationType = CloudAnimationType.None;
         }
         Clouds.Clear();
-        GetAllThoughtsAsync();
+        GetUserThoughtsAsync();
     }
 
 }

@@ -12,7 +12,7 @@
     BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"
     Title="Settings"
     Shell.ForegroundColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
-    
+
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="True"
                             IsVisible="True"
@@ -34,44 +34,136 @@
     <ContentPage.Behaviors>
         <mct:EventToCommandBehavior EventName="NavigatedFrom" Command="{Binding UpdateSettingsCommand}"/>
     </ContentPage.Behaviors>
-    
-    <VerticalStackLayout
-        Padding="5">
-        <Border 
-            Padding="10"
-            StrokeThickness="0"
-            BackgroundColor="Transparent">
-            <VerticalStackLayout
-                Padding="5">
-                <Label
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="5">
+            
+            <!--#region Display - Theme-->
+            <Border 
+                Padding="10"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+                <VerticalStackLayout>
+                    <Label
                     Text="Display"
                     Style="{StaticResource CategoryLabelPrimary}"/>
-                <Label
+                    <Label
                     Text="Theme"
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Padding="2.5"/>
-                <Label 
+                    <Label 
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Text="{Binding ThemeChoice}"
                     FontSize="16"
                     Padding="2.5"/>
-            </VerticalStackLayout>
-            <Border.GestureRecognizers>
-                <TapGestureRecognizer
+                </VerticalStackLayout>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
                     Tapped="HandleThemeTapped"/>
-            </Border.GestureRecognizers>
-        </Border>
-        <BoxView Style="{StaticResource Divider}"/>
-        <Border 
-            Padding="10"
-            StrokeThickness="0"
-            BackgroundColor="Transparent">
-            <VerticalStackLayout
-                Padding="5">
-                <Label
-                    Text="Cloud Size"
-                    Style="{StaticResource CategoryLabelPrimary}"/>
-                <controls:CustomCloudControl
+                </Border.GestureRecognizers>
+            </Border>
+            <!--#endregion-->
+            
+            <BoxView Style="{StaticResource Divider}"/>
+            
+            <Border 
+                Padding="10"
+                StrokeThickness="0"
+                BackgroundColor="Transparent">
+                <VerticalStackLayout>
+
+                    <Grid
+                        RowDefinitions="*,*,*">
+                        <Label
+                            Grid.Row="0"
+                            Text="Useable Thoughts"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center"
+                            Style="{StaticResource CategoryLabelPrimary}"/>
+
+                        <HorizontalStackLayout
+                            Grid.Row="1"
+                            VerticalOptions="Center"
+                            RadioButtonGroup.GroupName="UseableThoughts">
+                            <Border
+                                WidthRequest="100"
+                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                StrokeShape="RoundRectangle 5">
+                                <RadioButton Content="All"
+                                             IsChecked="{Binding UseAll}"/>
+                            </Border>
+                            <Border
+                                WidthRequest="100"
+                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                StrokeShape="RoundRectangle 5">
+                                <RadioButton Content="Unread Only"
+                                             IsChecked="{Binding UseUnreadOnly}"/>
+                            </Border>
+                        </HorizontalStackLayout>
+                        
+                        <Label
+                            Grid.Row="2"
+                            Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                            FontSize="Small"
+                            Text="Only populate clouds with unread thoughts. Warning: if there are 0 unread thoughts then there will be 0 clouds!"/>
+                    </Grid>
+
+                    <BoxView Style="{StaticResource Divider}"/>
+                    
+                    <Label
+
+                        Text="Max Clouds"
+                        Style="{StaticResource CategoryLabelPrimary}"/>
+                    <Label
+
+                        Text="{Binding MaxClouds, StringFormat='Count = {0}'}"
+                        Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                        Padding="2.5"/>
+                    <Stepper
+
+                        Value="{Binding MaxClouds}"
+                        Maximum="30"
+                        Minimum="1"
+                        HorizontalOptions="Center"/>
+
+                    <BoxView Style="{StaticResource Divider}"/>
+
+
+                    <Grid
+                        RowDefinitions="*,*"
+                        ColumnDefinitions="5*,*">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="Instant Cloud Text"
+                            Style="{StaticResource CategoryLabelPrimary}"/>
+                        <Switch
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Start"
+                        IsToggled="{Binding InstantText}"
+                        OnColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"                  
+                        ThumbColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
+                            <Switch.Shadow>
+                                <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
+                        Offset="5,0"
+                        Radius="30"
+                        Opacity="0.1"/>
+                            </Switch.Shadow>
+                        </Switch>
+                    </Grid>
+
+
+
+
+                    <BoxView Style="{StaticResource Divider}"/>
+                    
+                    <Label
+                        Text="Cloud Size"
+                        Style="{StaticResource CategoryLabelPrimary}"/>
+                    <controls:CustomCloudControl
                     Margin="10"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
@@ -80,67 +172,34 @@
                     ZIndex="2"
                     Scale="{Binding CloudScaleSlider}"
                     BackgroundColor="Transparent"/>
-                <Label
+                    <Label
                     Text="{Binding CloudScaleSlider, StringFormat='Scale = {0:F2}'}"
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Padding="2.5"/>
-                <Slider
+                    <Slider
                     Value="{Binding CloudScaleSlider}"
                     Maximum="2"
                     Minimum="0.5"
                     Margin="20,0,20,0"
                     MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
-            </VerticalStackLayout>
-        </Border>
-        <BoxView Style="{StaticResource Divider}"/>
-        <Border 
+                </VerticalStackLayout>
+            </Border>
+
+
+            <BoxView Style="{StaticResource Divider}"/>
+            <Border
             Padding="10"
             StrokeThickness="0"
             BackgroundColor="Transparent">
-            <VerticalStackLayout
+                <VerticalStackLayout
                 Padding="5">
-                <Label
-                    Text="Max Clouds"
-                    Style="{StaticResource CategoryLabelPrimary}"/>
-                <Label
-                    Text="{Binding MaxClouds, StringFormat='Count = {0}'}"
-                    Style="{StaticResource ItemUnderCategoryLabelPrimary}"
-                    Padding="2.5"/>
-                <Stepper
-                    Value="{Binding MaxClouds}"
-                    Maximum="30"
-                    Minimum="1"
-                    HorizontalOptions="Center"/>
-            </VerticalStackLayout>
-        </Border>
-        <BoxView Style="{StaticResource Divider}"/>
-        <Border
-            Padding="10"
-            StrokeThickness="0"
-            BackgroundColor="Transparent">
-            <VerticalStackLayout
-                Padding="5">
-                <Label
-                    Text="Instant Cloud Text"
-                    Style="{StaticResource CategoryLabelPrimary}"/>
-                <Switch
-                    HorizontalOptions="Start"
-                    VerticalOptions="Start"
-                    IsToggled="{Binding InstantText}"
-                    OnColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"                  
-                    ThumbColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
-                    <Switch.Shadow>
-                        <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
-                            Offset="5,0"
-                            Radius="30"
-                            Opacity="0.1"/>
-                    </Switch.Shadow>
-                </Switch>
-            </VerticalStackLayout>
-        </Border>
-        <BoxView Style="{StaticResource Divider}"/>
-        <Button 
+
+                </VerticalStackLayout>
+            </Border>
+            <BoxView Style="{StaticResource Divider}"/>
+            <Button 
             Text="Toggle Tutorial On Start"
             Command="{Binding ToggleDisplayTutorialCommand}"/>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
