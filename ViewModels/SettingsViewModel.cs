@@ -19,6 +19,10 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
     [ObservableProperty]
+    string currentTheme;
+
+
+    [ObservableProperty]
     private double cloudScaleSlider;
 
     [ObservableProperty]
@@ -37,11 +41,11 @@ public partial class SettingsViewModel : BaseViewModel
     {
         this.settingsService = settingsService;
         _themeChoice = settingsService.ThemeChoice;
+        currentTheme = _themeChoice;
         cloudScaleSlider = settingsService.CloudScale;
         maxClouds = settingsService.MaxClouds;
         instantText = settingsService.InstantText;
         useUnreadOnly = settingsService.UnreadOnly;
-        Title = "Settings";
     }
 
 
@@ -50,7 +54,8 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     private void ChangeTheme()
     {
-        settingsService.ThemeChoice = _themeChoice;
+        settingsService.ThemeChoice = ThemeChoice;
+        CurrentTheme = ThemeChoice;
     }
 
     [RelayCommand]

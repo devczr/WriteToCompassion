@@ -53,7 +53,7 @@
                     Padding="2.5"/>
                     <Label 
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
-                    Text="{Binding ThemeChoice}"
+                    Text="{Binding CurrentTheme}"
                     FontSize="16"
                     Padding="2.5"/>
                 </VerticalStackLayout>
@@ -102,10 +102,11 @@
                         </HorizontalStackLayout>
                         
                         <Label
+                            Padding="5"
                             Grid.Row="2"
                             Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                             FontSize="Small"
-                            Text="Only populate clouds with unread thoughts. Warning: if there are 0 unread thoughts then there will be 0 clouds!"/>
+                            Text="Choose which thoughts are allowed to populate the clouds on the home page: unread thoughts only, or all thoughts. Warning: Unread Only can result in 0 clouds if there are 0 unread thoughts."/>
                     </Grid>
 
                     <BoxView Style="{StaticResource Divider}"/>
@@ -120,11 +121,10 @@
                         Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                         Padding="2.5"/>
                     <Stepper
-
+                        
                         Value="{Binding MaxClouds}"
                         Maximum="30"
-                        Minimum="1"
-                        HorizontalOptions="Center"/>
+                        Minimum="1"/>
 
                     <BoxView Style="{StaticResource Divider}"/>
 
@@ -137,20 +137,26 @@
                             Grid.Column="0"
                             Text="Instant Cloud Text"
                             Style="{StaticResource CategoryLabelPrimary}"/>
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource ItemUnderCategoryLabelPrimary}"
+                            FontSize="Small"
+                            Text="Disable typing animation so thoughts show up instantly when swiped."/>
                         <Switch
                             Grid.Row="0"
                             Grid.RowSpan="2"
                             Grid.Column="1"
-                        HorizontalOptions="Start"
-                        VerticalOptions="Start"
-                        IsToggled="{Binding InstantText}"
-                        OnColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"                  
-                        ThumbColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            IsToggled="{Binding InstantText}"
+                            OnColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"                  
+                            ThumbColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}">
                             <Switch.Shadow>
                                 <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
-                        Offset="5,0"
-                        Radius="30"
-                        Opacity="0.1"/>
+                            Offset="5,0"
+                            Radius="30"
+                            Opacity="0.1"/>
                             </Switch.Shadow>
                         </Switch>
                     </Grid>
@@ -187,18 +193,10 @@
 
 
             <BoxView Style="{StaticResource Divider}"/>
-            <Border
-            Padding="10"
-            StrokeThickness="0"
-            BackgroundColor="Transparent">
-                <VerticalStackLayout
-                Padding="5">
 
-                </VerticalStackLayout>
-            </Border>
-            <BoxView Style="{StaticResource Divider}"/>
             <Button 
-            Text="Toggle Tutorial On Start"
+                Margin="10"
+                Text="Toggle Tutorial On Start"
             Command="{Binding ToggleDisplayTutorialCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
