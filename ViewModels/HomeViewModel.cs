@@ -185,6 +185,8 @@ public partial class HomeViewModel : BaseViewModel
                 await UpdateContentInstantly(index);
             else
                 await UpdateContent(index);
+
+
         }
         catch (Exception ex)
         {
@@ -197,33 +199,57 @@ public partial class HomeViewModel : BaseViewModel
         }
     }
 
+    private async Task UpdateReadCount(Thought thought)
+    {
+        try
+        {
+            thought.ReadCount++;
+            await thoughtsService.UpdateThought(thought);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error",
+                $"Trouble updating read count with database {ex.Message}", "OK");
+        }
+        await Shell.Current.DisplayAlert("read count", $"{thought.ReadCount}", "OK");
+    }
+
+
     // Updates xaml label
     //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
     private async Task UpdateContent(int index)
     {
         StringBuilder sb = new();
-        string content;
+        Thought thought;
         if (UnreadOnly)
-            content = await Task.Run(() => UnreadThoughts[index].Content);
+            thought = await Task.Run(() => UnreadThoughts[index]);
         else
-            content = await Task.Run(() => AllThoughts[index].Content);
+            thought = await Task.Run(() => AllThoughts[index]);
 
-        var charArray = content.ToCharArray();
+        var charArray = thought.Content.ToCharArray();
         for(int i = 0; i < charArray.Length; i++)
         {
             sb.Append(charArray[i]);
             await Task.Delay(25);
             CloudContent = sb.ToString();
         }
+
+        await UpdateReadCount(thought);
+
     }
 
     private async Task UpdateContentInstantly(int index)
     {
+        Thought thought;
         if (UnreadOnly)
-            CloudContent = await Task.Run(() => UnreadThoughts[index].Content);
+            thought = await Task.Run(() => UnreadThoughts[index]);
         else
-            CloudContent = await Task.Run(() => AllThoughts[index].Content);
+            thought = await Task.Run(() => AllThoughts[index]);
+
+        CloudContent = thought.Content;
+
+        await UpdateReadCount(thought);
     }
 
     //Navigation

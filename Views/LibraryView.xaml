@@ -425,13 +425,13 @@
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Newest to Oldest</x:String>
                             <x:String>Oldest to Newest</x:String>
-                            <x:String>Last Modified</x:String>
+                            <x:String>Times Read</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
             </StackLayout>
             <Border.GestureRecognizers>
-                <PanGestureRecognizer PanUpdated="PanGestureRecognizer_PanUpdated"/>
+                <PanGestureRecognizer PanUpdated="DrawerPan"/>
             </Border.GestureRecognizers>
         </Border>
 

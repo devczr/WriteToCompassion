@@ -209,7 +209,7 @@ public partial class LibraryViewModel : BaseViewModel
         {
 
             IsBusy = true;
-            var thoughts = await thoughtsService.GetThoughtCollection("");
+            var thoughts = await thoughtsService.GetThoughtCollection(SortBy);
 
             if (AllThoughts.Count != 0)
                 AllThoughts.Clear();

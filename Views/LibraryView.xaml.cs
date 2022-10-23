@@ -37,7 +37,7 @@ public partial class LibraryView : ContentPage
             await CloseDrawer();
     }
 
-    async void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
+    async void DrawerPan(object sender, PanUpdatedEventArgs e)
     {
         if (e.StatusType == GestureStatus.Running)
         {

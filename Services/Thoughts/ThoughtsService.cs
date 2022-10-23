@@ -89,7 +89,6 @@ public class ThoughtsService
         }
     }
 
-
     List<Thought> thoughtList = new();
     public async Task<List<Thought>> GetAllThoughts()
     {
@@ -101,16 +100,16 @@ public class ThoughtsService
 
 
     // LibraryView Observable Collection Sorting
-    public async Task<ObservableCollection<Thought>> GetThoughtCollection(string sort = "newest to oldest")
+    public async Task<ObservableCollection<Thought>> GetThoughtCollection(string sort = "Newest to Oldest")
     {
         await Init();
 
         return sort switch
         {
 
-            "oldest to newest" => await GetThoughtsOrderByTimeSaved(),
+            "Oldest to Newest" => await GetThoughtsOrderByTimeSaved(),
 
-            "newest to oldest" or _ => await GetThoughtsOrderByTimeSavedDescending(),
+            "Newest to Oldest" or _ => await GetThoughtsOrderByTimeSavedDescending(),
 
         };
     }

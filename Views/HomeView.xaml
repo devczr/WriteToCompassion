@@ -26,6 +26,8 @@
         x:Name="backgroundGrid"
         RowDefinitions="*,75"
         Margin="0">
+
+        <!--#region Page Background Colors-->
         <Border
             Grid.RowSpan="2"
             StrokeThickness="0"
@@ -56,7 +58,7 @@
             Background="{StaticResource backgroundBrush3}"
             ZIndex="0">
         </Border>
-
+        <!--#endregion-->
 
         <Grid 
             Grid.Row="0"
@@ -84,6 +86,8 @@
                         TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
                         ZIndex="9">
                     </Label>
+
+                    <!--#region Content Box Colors-->
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 30,28,32,29"
@@ -277,12 +281,14 @@
                             Opacity="0.5" />
                         </Border.Shadow>
                     </Border>
+                    <!--#endregion-->
+                    
                 </Grid>
             </Border>
 
             <!--Custom Cloud Controls-->
             <!--Control's Height and Width set according to SVG pixel dimensions-->
-            <!--TapGestureRecognizer inside CustomCloudControl xaml-->
+            <!--GestureRecognizer inside CustomCloudControl xaml-->
             <Grid
                 x:Name="cloudGrid"
                 Grid.Row="1"
@@ -317,6 +323,9 @@
                             RepeatCount="-1"
                             Source="yellowcloudlottie.json"/>
         </Grid>
+
+
+        <!--#region Bottom Tab Bar-->
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
@@ -385,7 +394,7 @@
                     </ImageButton.Behaviors>
                 </ImageButton>
 
-
+                <!--#region Tab Bar Colors-->
                 <Border
                     Grid.ColumnSpan="3"
                     StrokeThickness="0"
@@ -473,14 +482,22 @@
                     StrokeShape="RoundRectangle 10"
                     Background="{AppThemeBinding Light={StaticResource light_tertiary},Dark={StaticResource dark_tertiary}}"
                     ZIndex="0"/>
+                <!--#endregion-->
 
             </Grid>
+
             <Border.Shadow>
-                <Shadow Brush="{StaticResource dark_shadow}"
-                            Offset="0,20"
-                            Radius="50"
-                            Opacity="1" />
+                <Shadow 
+                    x:Name="tabBarShadow"
+                    Brush="{StaticResource dark_shadow}"
+                    Offset="0,20"
+                    Radius="50"
+                    Opacity="1" />
             </Border.Shadow>
+            
         </Border>
+        <!--#endregion-->
+        
     </Grid>
+    
 </ContentPage>
