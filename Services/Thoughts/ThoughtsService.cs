@@ -4,14 +4,17 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using WriteToCompassion.Models;
+using WriteToCompassion.Services.Settings;
 
 namespace WriteToCompassion.Services.Thoughts;
 
 public class ThoughtsService
 {
-	public ThoughtsService()
-	{
+    private readonly ISettingsService settingsService;
 
+    public ThoughtsService(ISettingsService settingsService)
+	{
+        this.settingsService = settingsService;
 	}
 
     private SQLiteAsyncConnection dbAsyncConn;
@@ -90,27 +93,42 @@ public class ThoughtsService
     }
 
 
+    // GET THOUGHTS
+
     List<Thought> thoughtList = new();
-    public async Task<List<Thought>> GetAllThoughts()
+    public async Task<List<Thought>> GetThoughts()
     {
         await Init();
 
-        thoughtList = await dbAsyncConn.Table<Thought>().ToListAsync();
+        if (settingsService.UnreadOnly)
+        {
+            thoughtList = await dbAsyncConn.Table<Thought>().Where(t => t.ReadCount == 0).ToListAsync();
+        }
+        else
+        {
+            thoughtList = await dbAsyncConn.Table<Thought>().ToListAsync();
+        }
+
         return thoughtList;
     }
 
 
+
+
     // LibraryView Observable Collection Sorting
-    public async Task<ObservableCollection<Thought>> GetThoughtCollection(string sort = "newest to oldest")
+    public async Task<ObservableCollection<Thought>> GetThoughtCollection(string sort = "Creation Date (Newest First)")
     {
         await Init();
 
         return sort switch
         {
+            "# Times Read (Ascending)" => await GetThoughtsOrderByReadCount(),
 
-            "oldest to newest" => await GetThoughtsOrderByTimeSaved(),
+            "# Times Read (Descending)" => await GetThoughtsOrderByReadCountDescending(),
 
-            "newest to oldest" or _ => await GetThoughtsOrderByTimeSavedDescending(),
+            "Creation Date (Oldest First)" => await GetThoughtsOrderByTimeSaved(),
+
+            "Creation Date (Newest First)" or _ => await GetThoughtsOrderByTimeSavedDescending(),
 
         };
     }
@@ -134,6 +152,20 @@ public class ThoughtsService
         await Init();
 
         var t = await dbAsyncConn.Table<Thought>().Where(v => v.ReadCount.Equals(0)).ToListAsync();
+        ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
+        return thoughtCollection;
+    }
+
+    public async Task<ObservableCollection<Thought>> GetThoughtsOrderByReadCount()
+    {
+        var t = await dbAsyncConn.Table<Thought>().OrderBy(v => v.ReadCount).ToListAsync();
+        ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
+        return thoughtCollection;
+    }
+
+    public async Task<ObservableCollection<Thought>> GetThoughtsOrderByReadCountDescending()
+    {
+        var t = await dbAsyncConn.Table<Thought>().OrderByDescending(v => v.ReadCount).ToListAsync();
         ObservableCollection<Thought> thoughtCollection = new ObservableCollection<Thought>(t);
         return thoughtCollection;
     }

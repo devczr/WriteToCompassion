@@ -431,7 +431,7 @@
         <Setter Property="FontFamily" Value="Josefin" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="Padding" Value="0,0,0,20"/>
+        <Setter Property="Padding" Value="0,0,0,10"/>
     </Style>
 
 
@@ -453,7 +453,14 @@
             Dark={StaticResource dark_surfaceVariant}}" />
     </Style>
 
-    
+    <Style x:Key="DrawerDivider" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="4" />
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Color" Value="{AppThemeBinding 
+            Light={StaticResource light_onBackground}, 
+            Dark={StaticResource dark_onBackground}}" />
+    </Style>
+
     <Style x:Key="RadioButtonSecondary" TargetType="RadioButton">
         <Setter Property="FontSize" Value="24" />
         <Setter Property="VerticalOptions" Value="Start"/>

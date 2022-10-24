@@ -19,6 +19,10 @@ public partial class SettingsViewModel : BaseViewModel
     }
 
     [ObservableProperty]
+    string currentTheme;
+
+
+    [ObservableProperty]
     private double cloudScaleSlider;
 
     [ObservableProperty]
@@ -26,21 +30,32 @@ public partial class SettingsViewModel : BaseViewModel
 
     [ObservableProperty]
     private bool instantText;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(UseAll))]
+    bool useUnreadOnly;
+
+    public bool UseAll => !useUnreadOnly;
+
     public SettingsViewModel(ISettingsService settingsService) : base(settingsService)
     {
         this.settingsService = settingsService;
         _themeChoice = settingsService.ThemeChoice;
+        currentTheme = _themeChoice;
         cloudScaleSlider = settingsService.CloudScale;
         maxClouds = settingsService.MaxClouds;
         instantText = settingsService.InstantText;
-        Title = "Settings";
+        useUnreadOnly = settingsService.UnreadOnly;
     }
+
+
 
 
     [RelayCommand]
     private void ChangeTheme()
     {
-        settingsService.ThemeChoice = _themeChoice;
+        settingsService.ThemeChoice = ThemeChoice;
+        CurrentTheme = ThemeChoice;
     }
 
     [RelayCommand]
@@ -65,6 +80,7 @@ public partial class SettingsViewModel : BaseViewModel
         settingsService.CloudScale = CloudScaleSlider;
         settingsService.MaxClouds = MaxClouds;
         settingsService.InstantText = InstantText;
+        settingsService.UnreadOnly = UseUnreadOnly;
     }
 
     // Navigation

@@ -16,7 +16,7 @@
         <Grid
             HeightRequest="50"
             HorizontalOptions="Fill"
-            ColumnDefinitions="*,*">
+            ColumnDefinitions="*,*,50">
             <Button
                 Grid.Column="0"
                 Text="X"
@@ -28,16 +28,37 @@
                 Command="{Binding CancelCommand}"/>
 
             <Button
+                Padding="5"
                 x:Name="saveButton"
                 Text="Save"
+                FontSize="Medium"
+                WidthRequest="100"
                 Grid.Column="1"
-                MinimumHeightRequest="50"
-                MinimumWidthRequest="50"
-                VerticalOptions="End"
-                HorizontalOptions="End"
-                Style="{StaticResource TransparentBackgroundPrimary}"
+                CornerRadius="5"
+                Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
+                TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
                 Command="{Binding SaveCommand}">
             </Button>
+
+            <ImageButton
+                    Source="moreicon.png"
+                    Rotation="90"
+                    HorizontalOptions="End"
+                    Grid.Column="2"
+                    HeightRequest="18"
+                    WidthRequest="75"
+                    Scale="0.3">
+                <ImageButton.Behaviors>
+                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
+                </ImageButton.Behaviors>
+            </ImageButton>
+
+            <HorizontalStackLayout>
+
+
+            </HorizontalStackLayout>
+            
+
         </Grid>
     </Shell.TitleView>
 
@@ -52,7 +73,9 @@
             x:Name="thoughtEditor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="0"
-            Text="{Binding Thought.Content}">
+            Text="{Binding Thought.Content}"
+            TextColor="HotPink"
+            >
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"
                                             Command="{Binding UpdateThoughtContentCommand}"

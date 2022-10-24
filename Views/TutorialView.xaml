@@ -22,11 +22,6 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center"
                    FontSize="30"/>
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer
-                    Command="{Binding SkipTutorialCommand}"
-                    NumberOfTapsRequired="1"/>
-            </Grid.GestureRecognizers>
         </Grid>
     </Grid>
 </ContentPage>

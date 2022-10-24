@@ -1,4 +1,6 @@
-﻿namespace WriteToCompassion.Services.Settings;
+﻿using static Android.Content.Res.Resources;
+
+namespace WriteToCompassion.Services.Settings;
 
 public class SettingsService : ISettingsService
 {
@@ -8,7 +10,7 @@ public class SettingsService : ISettingsService
 
     // Only display unread thoughts
     private const string IdUnreadOnly = "unread_only";
-    private readonly bool UnreadOnlyDefault = true;
+    private readonly bool UnreadOnlyDefault = false;
 
 
     // Light / Dark Themes (HomeView designed primarily for Dark theme)
@@ -46,7 +48,25 @@ public class SettingsService : ISettingsService
         set 
         {
             Preferences.Set(IdThemeChoice, value);
-            SetAppTheme(ThemeChoice);
+            switch (value)
+            {
+                case "Light":
+                    Application.Current.UserAppTheme = AppTheme.Light;
+                    break;
+
+                case "Dark":
+                    Application.Current.UserAppTheme = AppTheme.Dark;
+                    break;
+
+                case "System Default":
+                    Application.Current.UserAppTheme = AppTheme.Unspecified;
+                    break;
+
+                default:
+                    Application.Current.UserAppTheme = AppTheme.Unspecified;
+                    break;
+
+            };
         } 
     }
 

@@ -26,7 +26,6 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     bool canRefresh = true;
 
-
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsNotMultiSelect))]
     bool isMultiSelect;
@@ -35,6 +34,16 @@ public partial class LibraryViewModel : BaseViewModel
     [ObservableProperty]
     int countSelected;
 
+    [ObservableProperty]
+    int collectionSpan = 2;
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNotOneColumn))]
+    bool isOneColumn = false;
+    public bool IsNotOneColumn => !isOneColumn;
+
+    [ObservableProperty]
+    string sortBy = "Newest to Oldest";
 
     private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
     private SelectionMode _selectionMode = SelectionMode.None;
@@ -47,7 +56,7 @@ public partial class LibraryViewModel : BaseViewModel
 
     public Command<Thought> TappedCommand { get; private set; }
 
-
+    
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.settingsService = settingsService;
@@ -56,7 +65,9 @@ public partial class LibraryViewModel : BaseViewModel
         RefreshThoughtsAsync();
         LongPressCommand = new Command<Thought>(OnLongPress);
         TappedCommand = new Command<Thought>(OnTapped);
+        IsOneColumn = false;
     }
+
 
 
     private async void OnTapped(Thought thought)
@@ -170,6 +181,22 @@ public partial class LibraryViewModel : BaseViewModel
         else return;
     }
 
+    [RelayCommand]
+    async Task ChangeLayoutAsync()
+    {
+        if (CollectionSpan is 1)
+        {
+            IsOneColumn = false;
+            await Task.Run(() => CollectionSpan = 2);
+        }
+        else
+        {
+            IsOneColumn = true;
+            await Task.Run(() => CollectionSpan = 1);
+        }
+        await Shell.Current.DisplayAlert("Ok", SortBy, "Ok");
+
+    }
 
     // Collection
     [RelayCommand]
@@ -182,7 +209,7 @@ public partial class LibraryViewModel : BaseViewModel
         {
 
             IsBusy = true;
-            var thoughts = await thoughtsService.GetThoughtCollection("delicious");
+            var thoughts = await thoughtsService.GetThoughtCollection(SortBy);
 
             if (AllThoughts.Count != 0)
                 AllThoughts.Clear();

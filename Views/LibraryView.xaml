@@ -21,21 +21,22 @@
                 x:DataType="viewmodels:LibraryViewModel"
                 Grid.Row="0"
                 HeightRequest="50"
-                ColumnDefinitions="5*,*"
+                ColumnDefinitions="5*,*,*"
                 IsVisible="{Binding IsNotMultiSelect}">
                 <Label 
                 Style="{StaticResource TitleViewLabel}"
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
+                              
                 <ImageButton
                 x:Name="settingsGearButton"
                 Source="settingsicon.png"
-                Grid.Column="1"
+                Grid.Column="2"
                 Scale="0.5"
                 Command="{Binding GoToSettingsCommand}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
             </Grid>
@@ -91,6 +92,7 @@
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedTo" Command="{Binding RefreshThoughtsCommand}"/>
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedFrom" Command="{Binding MultiSelectCancelCommand}"/>
     </ContentPage.Behaviors>
+    
     <ContentPage.Resources>
         <Style TargetType="Border">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -115,10 +117,53 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
+    
     <Grid
        RowDefinitions="*,75">
-        <Grid>
-            <RefreshView
+        <Grid
+            RowDefinitions="50,*">
+                <Grid
+                    Grid.Row="0"
+                    x:DataType="viewmodels:LibraryViewModel"
+                    HeightRequest="50"
+                    ColumnDefinitions="*,*"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center">
+
+                    <ImageButton
+                        x:Name="sortButton"
+                        Source="sorticon.png"
+                        Grid.Column="0"
+                        Scale="0.5"
+                        Clicked="SortClicked">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+
+                    <ImageButton
+                        Source="foursquares.png"
+                        Grid.Column="1"
+                        Scale="0.5"
+                        Command="{Binding ChangeLayoutCommand}"
+                        IsVisible="{Binding IsOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                        <ImageButton.Behaviors>
+                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                <ImageButton
+                        Source="flatbars.png"
+                        Grid.Column="1"
+                        Scale="0.5"
+                        Command="{Binding ChangeLayoutCommand}"
+                        IsVisible="{Binding IsNotOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
+            </Grid>
+                <RefreshView
+                Grid.Row="1"
                 IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
@@ -131,7 +176,7 @@
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout
                             Orientation="Vertical"
-                            Span="2"
+                            Span="{Binding CollectionSpan}"
                             HorizontalItemSpacing="8"
                             VerticalItemSpacing="8"/>
                     </CollectionView.ItemsLayout>
@@ -139,7 +184,7 @@
                         <DataTemplate>
                             <Border
                                 StrokeShape="RoundRectangle 10"
-                                HeightRequest="120"
+                                HeightRequest="100"
                                 StrokeThickness="2"
                                 Stroke="{AppThemeBinding Light={StaticResource light_outline}, Dark={StaticResource dark_outline}}">
                                 <Grid
@@ -165,7 +210,9 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
+            
         </Grid>
+        
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
@@ -331,5 +378,64 @@
                             Opacity="1" />
             </Border.Shadow>
         </Border>
+
+        <!--Sort/Filter Drawer-->
+        <BoxView
+            x:Name="backdrop"
+            Background="{StaticResource dark_background}"
+            IsVisible="False"
+            InputTransparent="True"
+            Grid.RowSpan="2"
+            ZIndex="10">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="BackdropTapped"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Border
+            x:Name="bottomDrawer"
+            HeightRequest="350"
+            VerticalOptions="End"
+            BackgroundColor="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark={StaticResource dark_secondaryContainer}}"
+            StrokeShape="RoundRectangle 20,20,0,0"
+            TranslationY="425"
+            Padding="15,6"
+            StrokeThickness="0"
+            ZIndex="11">
+            <StackLayout Orientation="Vertical"
+                         Margin="10"
+                         Spacing="5">
+                <BoxView 
+                    Style="{StaticResource DrawerDivider}"
+                    HorizontalOptions="Center"
+                    WidthRequest="50"/>
+                <Label
+                    Text="Sort:"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
+                    FontSize="Large"
+                    HorizontalTextAlignment="Start"/>
+                <Picker
+                    x:DataType="viewmodels:LibraryViewModel"
+                    Title="Sort:"
+                    TitleColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
+                    FontSize="Medium"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"
+                    SelectedItem="{Binding SortBy, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Creation Date (Newest First)</x:String>
+                            <x:String>Creation Date (Oldest First)</x:String>
+                            <x:String># Times Read (Ascending)</x:String>
+                            <x:String># Times Read (Descending)</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </StackLayout>
+            <Border.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="DrawerPan"/>
+            </Border.GestureRecognizers>
+        </Border>
+
     </Grid>
+    
 </ContentPage>
