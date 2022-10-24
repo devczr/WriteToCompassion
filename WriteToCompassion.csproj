@@ -54,6 +54,7 @@
 	  <None Remove="Resources\Fonts\JosefinSans-Regular.ttf" />
 	  <None Remove="Resources\Images\flatbars.svg" />
 	  <None Remove="Resources\Images\foursquares.svg" />
+	  <None Remove="Resources\Images\moreicon.svg" />
 	  <None Remove="Resources\Images\refreshicon.svg" />
 	  <None Remove="Resources\Images\scrollicon.svg" />
 	  <None Remove="Resources\Images\searchicon.svg" />

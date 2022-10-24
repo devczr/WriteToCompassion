@@ -423,9 +423,10 @@
                     SelectedItem="{Binding SortBy, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
-                            <x:String>Newest to Oldest</x:String>
-                            <x:String>Oldest to Newest</x:String>
-                            <x:String>Times Read</x:String>
+                            <x:String>Creation Date (Newest First)</x:String>
+                            <x:String>Creation Date (Oldest First)</x:String>
+                            <x:String># Times Read (Ascending)</x:String>
+                            <x:String># Times Read (Descending)</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
