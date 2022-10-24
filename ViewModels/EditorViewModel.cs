@@ -18,7 +18,7 @@ public partial class EditorViewModel : BaseViewModel
     private string originalContent;
 
     [ObservableProperty]
-    bool moreGridVisible = false;
+    bool moreStackVisible = false;
 
     public EditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
@@ -83,9 +83,9 @@ public partial class EditorViewModel : BaseViewModel
     }
 
     [RelayCommand]
-    async Task MoreOptionsAsync()
+    async Task MoreButtonStackAsync()
     {
-        MoreGridVisible = !MoreGridVisible;
+        MoreStackVisible = !MoreStackVisible;
     }
 
     [RelayCommand]

@@ -48,13 +48,15 @@
                 VerticalOptions="Center"
                 HorizontalOptions="End"
                 Grid.Column="2"
-                Command="{Binding MoreOptionsCommand}">
+                Command="{Binding MoreButtonStackCommand}"
+                Clicked="FadeOnMoreButtonClicked">
                 <ImageButton.Behaviors>
                     <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
                 </ImageButton.Behaviors>
             </ImageButton>
-            
+
         </Grid>
+
     </Shell.TitleView>
 
 
@@ -64,38 +66,61 @@
 
 
     <Grid>
-        
-        <Grid
-            WidthRequest="100"
-            HeightRequest="150"
+        <Border
+            x:Name="moreButtonStack"        
             VerticalOptions="Start"
             HorizontalOptions="End"
-            IsVisible="{Binding MoreGridVisible}"
-            RowDefinitions="50,50"
-            BackgroundColor="HotPink"
-            ZIndex="3">
-            <Button
-                VerticalOptions="Fill"
-                HorizontalOptions="Fill"
-                Text="Details"
-                FontSize="Medium"
-                Grid.Row="0"
-                CornerRadius="0"/>
-            <Button
-                VerticalOptions="Center"
-                HorizontalOptions="Center"
-                Text="Delete"
-                FontSize="Medium"
-                Grid.Row="1"
-                CornerRadius="0"/>
-        </Grid>
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 1"
+            ZIndex="5">
+            <VerticalStackLayout
+                Background="Transparent"
+                ZIndex="5">
+
+                <Button
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="90"
+                    Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                    Text="Info"
+                    FontSize="Medium"
+                    CornerRadius="1"
+                    ZIndex="6"
+                    Margin="0,0,0,1">
+                    <Button.Shadow>
+                        <Shadow
+                            Brush="{StaticResource dark_background}"
+                            Offset="10,10"
+                            Radius="40"
+                            Opacity="0.2"/>
+                    </Button.Shadow>
+                </Button>
+
+
+                <Button
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    WidthRequest="90"
+                    Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
+                    TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
+                    Text="Delete"
+                    FontSize="Medium"
+                    CornerRadius="1"
+                    ZIndex="7"
+                    Command="{Binding DeleteThoughtCommand}">
+                </Button>
+
+            </VerticalStackLayout>
+        </Border>
+
 
         <Grid
             BackgroundColor="Transparent"
             ZIndex="2"
-            IsVisible="{Binding MoreGridVisible}">
+            IsVisible="{Binding MoreStackVisible}">
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding MoreOptionsCommand}" />
+                <TapGestureRecognizer Command="{Binding MoreButtonStackCommand}" Tapped="HandleOutOfMoreButtonStackBoundsTapped" />
             </Grid.GestureRecognizers>
         </Grid>
 
