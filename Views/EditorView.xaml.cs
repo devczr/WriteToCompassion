@@ -18,5 +18,4 @@ public partial class EditorView : ContentPage
 #endif
         });
     }
-
 }

@@ -14,7 +14,7 @@
 
     <Shell.TitleView>
         <Grid
-            HeightRequest="50"
+            HeightRequest="60"
             HorizontalOptions="Fill"
             ColumnDefinitions="*,*,50">
             <Button
@@ -22,18 +22,18 @@
                 Text="X"
                 TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
                 FontSize="Large"
-                VerticalOptions="Center"
                 HorizontalOptions="Start"
                 BackgroundColor="Transparent"
                 Command="{Binding CancelCommand}"/>
 
             <Button
-                Padding="5"
+                Grid.Column="1"
                 x:Name="saveButton"
                 Text="Save"
                 FontSize="Medium"
+                Padding="5"
+                HeightRequest="35"
                 WidthRequest="100"
-                Grid.Column="1"
                 CornerRadius="5"
                 Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                 TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
@@ -41,24 +41,19 @@
             </Button>
 
             <ImageButton
-                    Source="moreicon.png"
-                    Rotation="90"
-                    HorizontalOptions="End"
-                    Grid.Column="2"
-                    HeightRequest="18"
-                    WidthRequest="75"
-                    Scale="0.3">
+                Source="moreicon.png"
+                Aspect="Center"                
+                WidthRequest="50"
+                HeightRequest="45"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                Grid.Column="2"
+                Command="{Binding MoreOptionsCommand}">
                 <ImageButton.Behaviors>
                     <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
                 </ImageButton.Behaviors>
             </ImageButton>
-
-            <HorizontalStackLayout>
-
-
-            </HorizontalStackLayout>
             
-
         </Grid>
     </Shell.TitleView>
 
@@ -69,23 +64,61 @@
 
 
     <Grid>
+        
+        <Grid
+            WidthRequest="100"
+            HeightRequest="150"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            IsVisible="{Binding MoreGridVisible}"
+            RowDefinitions="50,50"
+            BackgroundColor="HotPink"
+            ZIndex="3">
+            <Button
+                VerticalOptions="Fill"
+                HorizontalOptions="Fill"
+                Text="Details"
+                FontSize="Medium"
+                Grid.Row="0"
+                CornerRadius="0"/>
+            <Button
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Text="Delete"
+                FontSize="Medium"
+                Grid.Row="1"
+                CornerRadius="0"/>
+        </Grid>
+
+        <Grid
+            BackgroundColor="Transparent"
+            ZIndex="2"
+            IsVisible="{Binding MoreGridVisible}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding MoreOptionsCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
         <Editor
             x:Name="thoughtEditor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="0"
             Text="{Binding Thought.Content}"
-            TextColor="HotPink"
-            >
+            TextColor="HotPink">
+            
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"
                                             Command="{Binding UpdateThoughtContentCommand}"
                                             CommandParameter="{Binding Source={x:Reference thoughtEditor}, Path=Text}"/>
             </Editor.Behaviors>
         </Editor>
+        
         <ActivityIndicator
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="StartAndExpand"
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"/>
+    
     </Grid>
+
 </ContentPage>

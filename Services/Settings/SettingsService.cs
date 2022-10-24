@@ -1,6 +1,4 @@
-﻿using static Android.Content.Res.Resources;
-
-namespace WriteToCompassion.Services.Settings;
+﻿namespace WriteToCompassion.Services.Settings;
 
 public class SettingsService : ISettingsService
 {
