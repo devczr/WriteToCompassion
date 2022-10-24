@@ -17,6 +17,9 @@ public partial class EditorViewModel : BaseViewModel
 
     private string originalContent;
 
+    [ObservableProperty]
+    bool moreStackVisible = false;
+
     public EditorViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
         this.thoughtsService = thoughtsService;
@@ -79,6 +82,11 @@ public partial class EditorViewModel : BaseViewModel
 
     }
 
+    [RelayCommand]
+    async Task MoreButtonStackAsync()
+    {
+        MoreStackVisible = !MoreStackVisible;
+    }
 
     [RelayCommand]
     async Task UpdateThoughtContent(string newText)

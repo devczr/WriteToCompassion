@@ -176,7 +176,6 @@ public partial class LibraryViewModel : BaseViewModel
                 MultiSelectCancel();
                 await RefreshThoughtsAsync();
             }
-
         }
         else return;
     }
@@ -194,8 +193,6 @@ public partial class LibraryViewModel : BaseViewModel
             IsOneColumn = true;
             await Task.Run(() => CollectionSpan = 1);
         }
-        await Shell.Current.DisplayAlert("Ok", SortBy, "Ok");
-
     }
 
     // Collection
