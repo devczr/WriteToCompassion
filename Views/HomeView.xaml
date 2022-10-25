@@ -93,158 +93,86 @@
                         StrokeShape="RoundRectangle 30,28,32,29"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush1}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="40"
-                            Opacity="0.1" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 15,20,10,29"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush2}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="0,-10"
-                            Radius="40"
-                            Opacity="0.1" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 50,30,10,40"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush3}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 35,38,24,32"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush4}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 35,38,24,32"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush5}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 20"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush6}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 50,50,50,50"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush7}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         Opacity="0.05"
                         StrokeShape="Ellipse 12,45"
                         Background="{StaticResource contentBrush8}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="20,20"
-                            Radius="20"
-                            Opacity="0.2" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         Opacity="0.05"
                         StrokeShape="RoundRectangle 90,35,47,62"                        
                         Background="{StaticResource contentBrush9}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="5,5"
-                            Radius="10"
-                            Opacity="0.3" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <Border
                         StrokeThickness="0"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush10}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="10,10"
-                            Radius="5"
-                            Opacity="0.1" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
 
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 5"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush11}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="15,15"
-                            Radius="40"
-                            Opacity="0.1" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
 
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 5"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush12}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="15,15"
-                            Radius="40"
-                            Opacity="1" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
 
                     <Border
                         StrokeThickness="0"
@@ -259,28 +187,16 @@
                         StrokeShape="RoundRectangle 19"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush14}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="15,15"
-                            Radius="40"
-                            Opacity="0.5" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
 
                     <Border
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 10"
                         Opacity="0.05"
                         Background="{StaticResource contentBrush15}"
-                        ZIndex="0">
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource dark_primaryContainer}"
-                            Offset="15,15"
-                            Radius="40"
-                            Opacity="0.5" />
-                        </Border.Shadow>
-                    </Border>
+                        ZIndex="0"/>
+
                     <!--#endregion-->
                     
                 </Grid>
