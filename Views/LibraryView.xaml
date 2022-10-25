@@ -28,7 +28,7 @@
                 Text="Thought Library" 
                 Grid.Column="0"
                 VerticalOptions="Center"/>
-                              
+
                 <ImageButton
                 x:Name="settingsGearButton"
                 Source="settingsicon.png"
@@ -92,7 +92,7 @@
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedTo" Command="{Binding RefreshThoughtsCommand}"/>
         <mct:EventToCommandBehavior x:DataType="viewmodels:LibraryViewModel" EventName="NavigatedFrom" Command="{Binding MultiSelectCancelCommand}"/>
     </ContentPage.Behaviors>
-    
+
     <ContentPage.Resources>
         <Style TargetType="Border">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -117,40 +117,42 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    
+
     <Grid
        RowDefinitions="*,75">
         <Grid
             RowDefinitions="50,*">
-                <Grid
-                    Grid.Row="0"
-                    x:DataType="viewmodels:LibraryViewModel"
-                    HeightRequest="50"
-                    ColumnDefinitions="*,*"
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center">
+            <!--#region Sort & Layout Buttons-->
+            <Grid
+                Grid.Row="0"
+                x:DataType="viewmodels:LibraryViewModel"
+                HeightRequest="50"
+                ColumnDefinitions="*,*"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
 
-                    <ImageButton
-                        x:Name="sortButton"
-                        Source="sorticon.png"
-                        Grid.Column="0"
-                        Scale="0.5"
-                        Clicked="SortClicked">
-                        <ImageButton.Behaviors>
-                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
-                        </ImageButton.Behaviors>
-                    </ImageButton>
+                <ImageButton
+                    x:Name="sortButton"
+                    Source="sorticon.png"
+                    Grid.Column="0"
+                    Scale="0.5"
+                    Clicked="SortClicked">
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
 
-                    <ImageButton
+                <ImageButton
                         Source="foursquares.png"
                         Grid.Column="1"
                         Scale="0.5"
                         Command="{Binding ChangeLayoutCommand}"
                         IsVisible="{Binding IsOneColumn, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
-                        <ImageButton.Behaviors>
-                            <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
-                        </ImageButton.Behaviors>
-                    </ImageButton>
+                    <ImageButton.Behaviors>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"/>
+                    </ImageButton.Behaviors>
+                </ImageButton>
+
                 <ImageButton
                         Source="flatbars.png"
                         Grid.Column="1"
@@ -162,11 +164,14 @@
                     </ImageButton.Behaviors>
                 </ImageButton>
             </Grid>
-                <RefreshView
+            <!--#endregion-->
+
+            <RefreshView
                 Grid.Row="1"
                 IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
-                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
+                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
+                >
                 <CollectionView
                     Margin="8"
                     x:Name="ThoughtsCV"
@@ -210,9 +215,9 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            
         </Grid>
-        
+
+        <!--#region Bottom Tab Bar-->
         <Border
             Grid.Row="1"
             VerticalOptions="Start"
@@ -379,7 +384,9 @@
             </Border.Shadow>
         </Border>
 
-        <!--Sort/Filter Drawer-->
+        <!--#endregion-->
+
+        <!--#region Sort/Filter Drawer-->
         <BoxView
             x:Name="backdrop"
             Background="{StaticResource dark_background}"
@@ -436,6 +443,7 @@
             </Border.GestureRecognizers>
         </Border>
 
+        <!--#endregion-->
+
     </Grid>
-    
 </ContentPage>

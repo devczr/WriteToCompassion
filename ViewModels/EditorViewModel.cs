@@ -64,6 +64,15 @@ public partial class EditorViewModel : BaseViewModel
             await NavigateToLibraryAsync();
     }
 
+    [RelayCommand]
+    async Task DisplayThoughtInfoAsync()
+    {
+        await Shell.Current.DisplayAlert("Thought Info:", 
+            $"Times Read: {Thought.ReadCount} \n" +
+            $"Date Created: {Thought.TimeSaved}", "OK");
+    }
+
+
     async Task DiscardOrSaveAsync()
     {
         var result = await Shell.Current.DisplayAlert("Save your changes?", null, "Save", "Discard");
