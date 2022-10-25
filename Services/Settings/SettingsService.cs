@@ -27,7 +27,6 @@ public class SettingsService : ISettingsService
     private const string IdInstantText = "instant_text";
     private readonly bool InstantTextDefault = false;
 
-
     public bool DisplayTutorial
     {
         get => Preferences.Get(IdDisplayTutorial, DisplayTutorialDefault);

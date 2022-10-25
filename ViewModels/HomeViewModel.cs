@@ -188,6 +188,7 @@ public partial class HomeViewModel : BaseViewModel
         try
         {
             thought.ReadCount++;
+            thought.MostRecentReadSessionID = SessionService.SessionID;
             await thoughtsService.UpdateThought(thought);
         }
         catch (Exception ex)
