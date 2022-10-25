@@ -328,9 +328,10 @@
         <!--#region Bottom Tab Bar-->
         <Border
             Grid.Row="1"
-            VerticalOptions="Start"
-            Background="Transparent"
             HeightRequest="65"
+            VerticalOptions="Start"
+            Background="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark={StaticResource dark_secondaryContainer}}"
+            StrokeShape="RoundRectangle 20"
             Stroke="Transparent"
             Margin="35,0,35,5">
             <Grid
@@ -345,7 +346,7 @@
                     WidthRequest="75"
                     HeightRequest="53"
                     ZIndex="8"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiaryContainer}, Dark={StaticResource dark_primaryContainer}}">
                 </Border>
                 <ImageButton
                     Grid.Column="0"
@@ -353,15 +354,15 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     WidthRequest="56"
-                    Opacity="1"
                     HeightRequest="51"
+                    Opacity="1"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
-                
+
                 <ImageButton
                     Grid.Column="1"
                     Source="writeicon.png"
@@ -369,12 +370,12 @@
                     VerticalOptions="Center"
                     WidthRequest="52"
                     HeightRequest="52"
-                    Opacity="0.6"
+                    Opacity="0.8"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToNewThoughtEditorCommand}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
 
@@ -385,116 +386,21 @@
                     VerticalOptions="Center"
                     WidthRequest="54"
                     HeightRequest="50"
-                    Opacity="0.6"
+                    Opacity="0.8"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToLibraryCommand}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior  TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
-
-                <!--#region Tab Bar Colors-->
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.15"
-                    StrokeShape="RoundRectangle 10,5,10,5"
-                    Background="{StaticResource tabBrush1}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 5,10,5,10"
-                    Background="{StaticResource tabBrush2}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    Background="{StaticResource tabBrush3}"
-                    StrokeShape="RoundRectangle 14,8,14,8"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 8,14,8,14"
-                    Background="{StaticResource tabBrush4}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 13,7,13,7"
-                    Background="{StaticResource tabBrush5}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 7,13,7,13"
-                    Background="{StaticResource tabBrush6}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush7}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush8}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush9}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush10}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.2"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{AppThemeBinding Light={StaticResource light_tertiary},Dark={StaticResource dark_tertiary}}"
-                    ZIndex="0"/>
-                <!--#endregion-->
-
             </Grid>
-
             <Border.Shadow>
-                <Shadow 
-                    x:Name="tabBarShadow"
-                    Brush="{StaticResource dark_shadow}"
-                    Offset="0,20"
-                    Radius="50"
-                    Opacity="1" />
+                <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
+                            Offset="0,0"
+                            Radius="10"
+                            Opacity="0.5" />
             </Border.Shadow>
-            
         </Border>
         <!--#endregion-->
         

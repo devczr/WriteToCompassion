@@ -10,6 +10,7 @@ public partial class EditorView : ContentPage
         BindingContext = editorViewModel;
         ModifyEditor();
         moreButtonStack.Opacity = 0;
+        moreButtonStack.InputTransparent = true;
         showMore = false;
         showMoreBusy = false;
     }
@@ -33,6 +34,7 @@ public partial class EditorView : ContentPage
                 moreButtonStack.TranslateTo(-10, 0, 50, Easing.SinIn),
                 moreButtonStack.FadeTo(1, 100, Easing.SinIn)
             );
+            moreButtonStack.InputTransparent = false;
             showMore = true;
             showMoreBusy = false;
         }
@@ -44,6 +46,7 @@ public partial class EditorView : ContentPage
                 moreButtonStack.FadeTo(0, 50, Easing.SinIn),
                 moreButtonStack.TranslateTo(0, 0, 20, Easing.SinIn)
             );
+            moreButtonStack.InputTransparent = true;
             showMore = false;
             showMoreBusy = false;
         }

@@ -195,7 +195,6 @@ public partial class HomeViewModel : BaseViewModel
             await Shell.Current.DisplayAlert("Error",
                 $"Trouble updating read count with database {ex.Message}", "OK");
         }
-        await Shell.Current.DisplayAlert("read count", $"{thought.ReadCount}", "OK");
     }
 
 

@@ -120,6 +120,7 @@
 
     <Grid
        RowDefinitions="*,75">
+
         <Grid
             RowDefinitions="50,*">
             <!--#region Sort & Layout Buttons-->
@@ -170,8 +171,7 @@
                 Grid.Row="1"
                 IsEnabled="{Binding CanRefresh, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                 Command="{Binding RefreshThoughtsCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
-                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
-                >
+                IsRefreshing="{Binding IsRefreshing, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                 <CollectionView
                     Margin="8"
                     x:Name="ThoughtsCV"
@@ -220,9 +220,10 @@
         <!--#region Bottom Tab Bar-->
         <Border
             Grid.Row="1"
-            VerticalOptions="Start"
-            Background="Transparent"
             HeightRequest="65"
+            VerticalOptions="Start"
+            Background="{AppThemeBinding Light={StaticResource light_secondaryContainer}, Dark={StaticResource dark_secondaryContainer}}"
+            StrokeShape="RoundRectangle 20"
             Stroke="Transparent"
             Margin="35,0,35,5">
             <Grid
@@ -237,7 +238,7 @@
                     WidthRequest="75"
                     HeightRequest="53"
                     ZIndex="8"
-                    BackgroundColor="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_onTertiaryContainer}}">
+                    BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiaryContainer}, Dark={StaticResource dark_primaryContainer}}">
                 </Border>
                 <ImageButton
                     Grid.Column="0"
@@ -245,13 +246,13 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"
                     WidthRequest="56"
-                    Opacity="0.6"
                     HeightRequest="51"
+                    Opacity="0.8"
                     ZIndex="9"
                     Command="{Binding GoToHomeCommand,Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
 
@@ -262,12 +263,12 @@
                     VerticalOptions="Center"
                     WidthRequest="52"
                     HeightRequest="52"
-                    Opacity="0.6"
+                    Opacity="0.8"
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}"
                     Command="{Binding GoToNewThoughtEditorCommand, Source={RelativeSource AncestorType={x:Type viewmodels:LibraryViewModel}}}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onTertiary}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSecondaryContainer}, Dark={StaticResource dark_onSecondaryContainer}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
 
@@ -282,105 +283,15 @@
                     ZIndex="9"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
-                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onTertiary}}"/>
+                        <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
                     </ImageButton.Behaviors>
                 </ImageButton>
-
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.15"
-                    StrokeShape="RoundRectangle 10,5,10,5"
-                    Background="{StaticResource tabBrush1}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 5,10,5,10"
-                    Background="{StaticResource tabBrush2}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    Background="{StaticResource tabBrush3}"
-                    StrokeShape="RoundRectangle 14,8,14,8"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 8,14,8,14"
-                    Background="{StaticResource tabBrush4}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 13,7,13,7"
-                    Background="{StaticResource tabBrush5}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 7,13,7,13"
-                    Background="{StaticResource tabBrush6}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.075"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush7}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush8}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush9}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.1"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{StaticResource tabBrush10}"
-                    ZIndex="0"/>
-
-                <Border
-                    Grid.ColumnSpan="3"
-                    StrokeThickness="0"
-                    Opacity="0.2"
-                    StrokeShape="RoundRectangle 10"
-                    Background="{AppThemeBinding Light={StaticResource light_tertiary},Dark={StaticResource dark_tertiary}}"
-                    ZIndex="0"/>
-
             </Grid>
             <Border.Shadow>
-                <Shadow Brush="{StaticResource dark_shadow}"
-                            Offset="0,20"
-                            Radius="50"
-                            Opacity="1" />
+                <Shadow Brush="{AppThemeBinding Light={StaticResource light_primary},Dark={StaticResource dark_primary}}"
+                            Offset="0,0"
+                            Radius="10"
+                            Opacity="0.5" />
             </Border.Shadow>
         </Border>
 
@@ -436,6 +347,9 @@
                             <x:String># Times Read (Descending)</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
+                    <Picker.Behaviors>
+                        <mct:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding RefreshThoughtsCommand}"/>
+                    </Picker.Behaviors>
                 </Picker>
             </StackLayout>
             <Border.GestureRecognizers>
@@ -444,6 +358,26 @@
         </Border>
 
         <!--#endregion-->
+
+
+        <Grid
+            Grid.RowSpan="2"
+            ZIndex="12"
+            IsVisible="{Binding PageLoading}">
+            <Border
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 5,5,5,5"
+            Opacity="1"
+            Background="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}"/>
+
+            <ActivityIndicator
+            x:Name="pageLoading"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            IsRunning="{Binding PageLoading}"
+            IsVisible="{Binding PageLoading}"
+            Color="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
+        </Grid>
 
     </Grid>
 </ContentPage>

@@ -183,11 +183,13 @@
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Padding="2.5"/>
                     <Slider
-                    Value="{Binding CloudScaleSlider}"
-                    Maximum="2"
-                    Minimum="0.5"
-                    Margin="20,0,20,0"
-                    MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
+                        Value="{Binding CloudScaleSlider}"
+                        Maximum="2"
+                        Minimum="0.5"
+                        Margin="20,0,20,0"
+                        MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"
+                        MaximumTrackColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"
+                        ThumbColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
                 </VerticalStackLayout>
             </Border>
 

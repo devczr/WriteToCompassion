@@ -14,11 +14,26 @@ public partial class LibraryViewModel : BaseViewModel
 
     private readonly ThoughtsService thoughtsService;
 
-    private bool initialized;
-
     public ObservableCollection<Thought> UnreadThoughts { get; } = new();
 
     public ObservableCollection<Thought> AllThoughts { get; } = new();
+
+    private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
+
+    public ObservableCollection<object> SelectedThoughts { get => _selectedThoughts; set => _selectedThoughts = value; }
+
+    public Command<Thought> LongPressCommand { get; private set; }
+
+    public Command<Thought> TappedCommand { get; private set; }
+
+    public Thought SelectedItem { get; set; }
+
+    public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
+
+    private SelectionMode _selectionMode = SelectionMode.None;
+
+    [ObservableProperty]
+    string sortBy = "Newest to Oldest";
 
     [ObservableProperty]
     bool isRefreshing;
@@ -43,32 +58,30 @@ public partial class LibraryViewModel : BaseViewModel
     public bool IsNotOneColumn => !isOneColumn;
 
     [ObservableProperty]
-    string sortBy = "Newest to Oldest";
+    bool pageLoading;
 
-    private ObservableCollection<object> _selectedThoughts = new ObservableCollection<object>();
-    private SelectionMode _selectionMode = SelectionMode.None;
-    public Thought SelectedItem { get; set; }
-    public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
 
-    public ObservableCollection<object> SelectedThoughts { get => _selectedThoughts; set => _selectedThoughts = value; }
-
-    public Command<Thought> LongPressCommand { get; private set; }
-
-    public Command<Thought> TappedCommand { get; private set; }
-
-    
     public LibraryViewModel(ISettingsService settingsService, ThoughtsService thoughtsService) : base(settingsService)
     {
+        pageLoading = true;
+
         this.settingsService = settingsService;
         this.thoughtsService = thoughtsService;
 
-        RefreshThoughtsAsync();
+
         LongPressCommand = new Command<Thought>(OnLongPress);
         TappedCommand = new Command<Thought>(OnTapped);
-        IsOneColumn = false;
+
+        HideLoadingScreenAsync();
     }
 
-
+    async Task HideLoadingScreenAsync()
+    {
+        await RefreshThoughtsAsync();
+        IsOneColumn = false;
+        await Task.Delay(550);
+        PageLoading = false;
+    }
 
     private async void OnTapped(Thought thought)
     {
@@ -128,6 +141,11 @@ public partial class LibraryViewModel : BaseViewModel
 
     }
 
+    [RelayCommand]
+    private async void RefreshAfterSort()
+    {
+        await RefreshThoughtsAsync();
+    }
 
     // Multi Select
     [RelayCommand]
@@ -223,6 +241,8 @@ public partial class LibraryViewModel : BaseViewModel
         finally
         {
             OnPropertyChanged(nameof(AllThoughts));
+            // Delaying to give refresh animation more time to spin
+            await Task.Delay(1000);
             IsBusy = false;
             IsRefreshing = false;
         }
