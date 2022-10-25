@@ -30,7 +30,7 @@ public partial class HomeViewModel : BaseViewModel
     //holds user preferences
     private readonly ISettingsService settingsService;
 
-
+    private int currentCloudIndex = 0;
 
     //User can adjust in Settings
     [ObservableProperty]
@@ -92,9 +92,6 @@ public partial class HomeViewModel : BaseViewModel
         }
         finally
         {
-            //delaying here due to OnSizeAllocated firing 3 times on app startup
-            //also gives time for the page to load in between NavigatedTo and actual page visiblity
-            //            await Task.Delay(1500);
             await InitDriftAsync();
             IsBusy = false;
         }
@@ -104,8 +101,8 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task InitDriftAsync()
     {
-        await Task.Delay(500);
-        
+        if (UserThoughts.Count <= 0)
+            return;
 
         //the number of clouds added to Clouds collection depends on:
         // 1) how many thoughts the user has saved in database
@@ -113,19 +110,47 @@ public partial class HomeViewModel : BaseViewModel
         // 3) their "Unread Only" or "All" setting
         //    a thought is considered Unread if its content has never been displayed (swipe up gesture)
 
-        int cloudCount = Math.Clamp(UserThoughts.Count, 0, MaxClouds);
+        await SortAndRandomizeThoughts();
+
+        int cloudCount = Math.Clamp(SortedThoughts.Count, 0, MaxClouds);
 
         for (int i = 0; i < cloudCount; i++)
         {
             Cloud c = new()
             {
                 AnimationType = CloudAnimationType.Drift,
-                CloudID = Guid.NewGuid()
             };
             Clouds.Add(c);
         }
     }
 
+    private async Task SpawnCloudAfterSwipe(int previousCloud)
+    {
+        Clouds.RemoveAt(previousCloud);
+        SortedThoughts.RemoveAt(previousCloud);
+
+        if (SortedThoughts.Count > Clouds.Count)
+        {
+            Cloud c = new()
+            {
+                AnimationType = CloudAnimationType.Drift,
+            };
+            Clouds.Add(c);
+        }
+        else if((SortedThoughts.Count <= Clouds.Count) && (Clouds.Count > 0))
+        {
+            return;
+        }
+        else
+        {
+            SortedThoughts.Clear();
+            SessionService.GenSessionID();
+            await ShortToast("Nice! All thoughts have been read. Repeating list.");
+            await InitDriftAsync();
+        }
+    }
+
+    // await Shell.Current.DisplayAlert("Out of clouds", "inside SpawnCloudAfterSwipe \n sorted thoughts <= Clouds.count ", "OK");
 
     // Cloud Animations
 
@@ -157,19 +182,19 @@ public partial class HomeViewModel : BaseViewModel
     {
         if ((swipedCloud is null) || (ContentBoxBusy))
             return;
+
         try
         {
             ContentBoxBusy = true;
 
-            var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
+            currentCloudIndex = await Task.Run(() => Clouds.IndexOf(swipedCloud));
             
-            Clouds[index].AnimationType = CloudAnimationType.Display;
+            Clouds[currentCloudIndex].AnimationType = CloudAnimationType.Display;
             
             if (instantText)
-                await UpdateContentInstantly(index);
+                await UpdateContentInstantly(currentCloudIndex);
             else
-                await UpdateContent(index);
-
+                await UpdateContent(currentCloudIndex);
 
         }
         catch (Exception ex)
@@ -203,24 +228,17 @@ public partial class HomeViewModel : BaseViewModel
     //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
 
-    [RelayCommand]
     private async Task SortAndRandomizeThoughts()
     {
         var x = UserThoughts.SkipWhile(t => t.MostRecentReadSessionID == SessionService.SessionID).ToList();
         SortedThoughts = ShuffleService.FYShuffle(x);
-        StringBuilder sb = new();
-        sb.AppendLine(SortedThoughts[0].Id.ToString());
-        sb.AppendLine(SortedThoughts[1].Id.ToString());
-        sb.AppendLine(SortedThoughts[2].Id.ToString());
-        var sample = sb.ToString();
-        await Shell.Current.DisplayAlert("plz work", sample, "OK");
     }
 
     private async Task UpdateContent(int index)
     {
         StringBuilder sb = new();
 
-        var charArray = await Task.Run(() => UserThoughts[index].Content.ToCharArray());
+        var charArray = await Task.Run(() => SortedThoughts[index].Content.ToCharArray());
 
         for(int i = 0; i < charArray.Length; i++)
         {
@@ -229,17 +247,21 @@ public partial class HomeViewModel : BaseViewModel
             CloudContent = sb.ToString();
         }
 
-        await UpdateReadCount(UserThoughts[index]);
-
+        await UpdateReadCount(SortedThoughts[index]);
+        SpawnCloudAfterSwipe(currentCloudIndex);
     }
 
     private async Task UpdateContentInstantly(int index)
     {
 
-        CloudContent = await Task.Run(() => UserThoughts[index].Content);
+        CloudContent = await Task.Run(() => SortedThoughts[index].Content);
 
-        await UpdateReadCount(UserThoughts[index]);
+        await UpdateReadCount(SortedThoughts[index]);
+
+        await Task.Delay(1500);
+        SpawnCloudAfterSwipe(currentCloudIndex);
     }
+
 
     //Navigation
     [RelayCommand]
