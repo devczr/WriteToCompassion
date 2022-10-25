@@ -273,6 +273,7 @@
                     HeightRequest="51"
                     Opacity="1"
                     ZIndex="9"
+                    Command="{Binding SortAndRandomizeThoughtsCommand}"
                     Style="{StaticResource CustomTabBar}">
                     <ImageButton.Behaviors>
                         <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>

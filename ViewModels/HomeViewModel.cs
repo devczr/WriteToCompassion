@@ -21,7 +21,7 @@ public partial class HomeViewModel : BaseViewModel
     //Read & unread thoughts retrieved from db via thoughtsservice
     public List<Thought> UserThoughts { get; } = new();
 
-    public List<Thought> SortedThoughts { get; } = new();
+    public List<Thought> SortedThoughts { get; set; } = new();
 
 
     //handles database logic
@@ -202,6 +202,20 @@ public partial class HomeViewModel : BaseViewModel
     // Updates xaml label
     //Content is chosen simply by matching the index of the list with the collection
     //TODO: Randomize how a Thought is chosen when cloud is swiped
+
+    [RelayCommand]
+    private async Task SortAndRandomizeThoughts()
+    {
+        var x = UserThoughts.SkipWhile(t => t.MostRecentReadSessionID == SessionService.SessionID).ToList();
+        SortedThoughts = ShuffleService.FYShuffle(x);
+        StringBuilder sb = new();
+        sb.AppendLine(SortedThoughts[0].Id.ToString());
+        sb.AppendLine(SortedThoughts[1].Id.ToString());
+        sb.AppendLine(SortedThoughts[2].Id.ToString());
+        var sample = sb.ToString();
+        await Shell.Current.DisplayAlert("plz work", sample, "OK");
+    }
+
     private async Task UpdateContent(int index)
     {
         StringBuilder sb = new();
