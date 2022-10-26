@@ -36,7 +36,6 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
-        mauiAppBuilder.Services.AddSingleton<NoteService>();
         mauiAppBuilder.Services.AddSingleton<ThoughtsService>();
         mauiAppBuilder.Services.AddSingleton<AnimationService>();
         return mauiAppBuilder;

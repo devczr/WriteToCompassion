@@ -242,7 +242,7 @@ public partial class LibraryViewModel : BaseViewModel
         {
             OnPropertyChanged(nameof(AllThoughts));
             // Delaying to give refresh animation more time to spin
-            await Task.Delay(1000);
+            await Task.Delay(750);
             IsBusy = false;
             IsRefreshing = false;
         }

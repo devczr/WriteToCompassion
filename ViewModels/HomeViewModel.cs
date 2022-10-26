@@ -150,8 +150,6 @@ public partial class HomeViewModel : BaseViewModel
         }
     }
 
-    // await Shell.Current.DisplayAlert("Out of clouds", "inside SpawnCloudAfterSwipe \n sorted thoughts <= Clouds.count ", "OK");
-
     // Cloud Animations
 
     /* CustomCloudControls have a CloudAnimation enum property bound to a matching type on the Clouds collection
@@ -224,10 +222,6 @@ public partial class HomeViewModel : BaseViewModel
     }
 
 
-    // Updates xaml label
-    //Content is chosen simply by matching the index of the list with the collection
-    //TODO: Randomize how a Thought is chosen when cloud is swiped
-
     private async Task SortAndRandomizeThoughts()
     {
         var x = UserThoughts.SkipWhile(t => t.MostRecentReadSessionID == SessionService.SessionID).ToList();
@@ -276,7 +270,7 @@ public partial class HomeViewModel : BaseViewModel
         await Shell.Current.GoToAsync(nameof(LibraryView));
     }
 
-    [RelayCommand]
+/*    [RelayCommand]
     async Task ClearCloudsAsync()
     {
         for (int i = 0; i < Clouds.Count; i++)
@@ -285,6 +279,6 @@ public partial class HomeViewModel : BaseViewModel
         }
         Clouds.Clear();
         GetUserThoughtsAsync();
-    }
+    }*/
 
 }

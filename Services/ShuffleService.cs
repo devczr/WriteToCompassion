@@ -7,7 +7,7 @@ public static class ShuffleService
 
     public static List<Thought> FYShuffle<Thought>(this List<Thought> thoughts)
     {
-        for(int i = thoughts.Count -1; i > 0; i--)
+        for(int i = thoughts.Count -1; i > 0; --i)
         {
             int z = rng.Next(i + 1);
             Thought tmp = thoughts[z];
