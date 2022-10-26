@@ -264,6 +264,8 @@
                     BackgroundColor="{AppThemeBinding Light={StaticResource light_tertiaryContainer}, Dark={StaticResource dark_primaryContainer}}">
                 </Border>
                 <ImageButton
+                    x:Name="Spot"
+                    Clicked="HandleTutorial"
                     Grid.Column="0"
                     Source="thoughticon.png"
                     HorizontalOptions="Center"
@@ -279,6 +281,7 @@
                 </ImageButton>
 
                 <ImageButton
+                    x:Name="newThoughtIcon"
                     Grid.Column="1"
                     Source="writeicon.png"
                     HorizontalOptions="Center"

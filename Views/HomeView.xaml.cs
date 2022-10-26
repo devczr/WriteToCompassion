@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls.PlatformConfiguration;
-using System.Text;
+using WriteToCompassion.Views.Popups;
 namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage
@@ -28,4 +29,23 @@ public partial class HomeView : ContentPage
     {
 
     }
+
+    async void HandleTutorial(object sender, EventArgs e)
+    {
+        var tutorialPopup = new TutorialNewThoughtIconPopup();
+        tutorialPopup.Anchor = newThoughtIcon;
+        /*
+        tutorialPopup.HorizontalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Start;
+        tutorialPopup.VerticalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Center;*/
+
+
+        await this.ShowPopupAsync(tutorialPopup);
+
+
+    }
+
+
+
+
+
 }

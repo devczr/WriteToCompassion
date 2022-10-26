@@ -37,7 +37,6 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="5">
-            
             <!--#region Display - Theme-->
             <Border 
                 Padding="10"
@@ -112,7 +111,6 @@
                     <BoxView Style="{StaticResource Divider}"/>
                     
                     <Label
-
                         Text="Max Clouds"
                         Style="{StaticResource CategoryLabelPrimary}"/>
                     <Label
@@ -121,7 +119,6 @@
                         Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                         Padding="2.5"/>
                     <Stepper
-                        
                         Value="{Binding MaxClouds}"
                         Maximum="30"
                         Minimum="1"/>
@@ -196,10 +193,11 @@
 
             <BoxView Style="{StaticResource Divider}"/>
 
-            <Button 
+            <Button
+                x:Name="tutorialButton"
                 Margin="10"
                 Text="Toggle Tutorial On Start"
-            Command="{Binding ToggleDisplayTutorialCommand}"/>
+                Command="{Binding ToggleDisplayTutorialCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    x:Class="WriteToCompassion.Views.Popups.TutorialPopup"
+    Color="Transparent">
+    
+    
+    
+    <VerticalStackLayout>
+        <BoxView
+            Color="Red"
+            WidthRequest="50"
+            HeightRequest="25"/>
+        <Label 
+            Text="Save new thoughts here!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+    
+    
+    
+</mct:Popup>

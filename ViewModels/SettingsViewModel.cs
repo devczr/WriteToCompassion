@@ -1,9 +1,16 @@
-﻿using WriteToCompassion.Views;
+﻿using System.Windows.Input;
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
+using WriteToCompassion.Views;
+using WriteToCompassion.Views.Popups;
 
 namespace WriteToCompassion.ViewModels;
 
 public partial class SettingsViewModel : BaseViewModel
 {
+
+    static Page Page => Application.Current?.MainPage ?? throw new NullReferenceException();
+
     private readonly ISettingsService settingsService;
     private HomeViewModel homeViewModel;
 

@@ -1,6 +1,8 @@
-﻿
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Alerts;
 using System;
+using LayoutAlignment = Microsoft.Maui.Primitives.LayoutAlignment;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,14 @@ using System.Windows.Input;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
+using WriteToCompassion.Views.Popups;
 
 namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {
+    static Page Page => Application.Current?.MainPage ?? throw new NullReferenceException();
+
     //HomeView grid bindable layout bound to this Clouds observable collection
     //number of clouds visible = Clouds.Count
     public ObservableCollection<Cloud> Clouds { get; set; } = new();
@@ -267,18 +272,8 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView));
+        await Shell.Current.GoToAsync(nameof(LibraryView), true);
     }
 
-/*    [RelayCommand]
-    async Task ClearCloudsAsync()
-    {
-        for (int i = 0; i < Clouds.Count; i++)
-        {
-            Clouds[i].AnimationType = CloudAnimationType.None;
-        }
-        Clouds.Clear();
-        GetUserThoughtsAsync();
-    }*/
 
 }
