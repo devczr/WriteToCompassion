@@ -3,22 +3,80 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
+    xmlns:popupviewmodels="clr-namespace:WriteToCompassion.ViewModels.Popups"
+    x:DataType="popupviewmodels:TutorialPopupViewModel"
     x:Class="WriteToCompassion.Views.Popups.TutorialPopup"
     Color="Transparent">
-    
-    
-    
-    <VerticalStackLayout>
-        <BoxView
-            Color="Red"
-            WidthRequest="50"
-            HeightRequest="25"/>
-        <Label 
-            Text="Save new thoughts here!"
-            VerticalOptions="Center" 
+
+
+    <Grid
+        Margin="15"
+        WidthRequest="400"
+        HeightRequest="500"
+        RowDefinitions="50,100,100,100,*"
+        Padding="20">
+        <Border
+            Grid.RowSpan="3"
+            BackgroundColor="{AppThemeBinding Light={StaticResource light_secondary}, Dark={StaticResource dark_secondary}}"
+            Stroke="{AppThemeBinding Light={StaticResource light_outline},Dark={StaticResource dark_outline}}"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 10"/>
+        <VerticalStackLayout
+            Grid.Row="0">
+            <Label
+                Padding="10"
+                Text="Welcome!"
+                TextColor="{AppThemeBinding Light={StaticResource light_onSecondary}, Dark={StaticResource dark_onSecondary}}"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+            <BoxView
+                HorizontalOptions="Center"
+                WidthRequest="100"
+                Style="{StaticResource Divider}"/>
+        </VerticalStackLayout>
+
+            <Label
+                x:Name="introLabel1"
+                Padding="10"
+                Grid.Row="1"
+                LineBreakMode="WordWrap"
+                FontSize="Medium"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Opacity="0"
+                HorizontalTextAlignment="Center"
+                TextColor="{AppThemeBinding Light={StaticResource light_onSecondary}, Dark={StaticResource dark_onSecondary}}"
+                Text="This app is like a little treasure chest where you can store thoughts: "/>
+            <Label
+                Padding="10"
+                Grid.Row="2"
+                Opacity="0"
+                x:Name="introThoughtType"
+                FontSize="Large"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                TextColor="{AppThemeBinding Light={StaticResource light_onSecondary}, Dark={StaticResource dark_onSecondary}}"
+                Text=" kind thoughts "/>
+
+        <Button
+            Text="Next"
+            FontSize="Medium">
+            
+        </Button>
+        
+        <Label
+            x:Name="introLabel2"
+            Padding="10"
+            Grid.Row="1"
+            FontSize="Large"
+            TextColor="{AppThemeBinding Light={StaticResource light_onSecondary}, Dark={StaticResource dark_onSecondary}}"
+            LineBreakMode="WordWrap"
+            Text=""
+            VerticalOptions="Center"
             HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    </Grid>
     
     
     

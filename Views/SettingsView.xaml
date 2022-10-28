@@ -86,17 +86,20 @@
                             RadioButtonGroup.GroupName="UseableThoughts">
                             <Border
                                 WidthRequest="100"
-                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                Background="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"
                                 StrokeShape="RoundRectangle 5">
                                 <RadioButton Content="All"
-                                             IsChecked="{Binding UseAll}"/>
+                                             IsChecked="{Binding UseAll}"
+                                             TextColor="{AppThemeBinding Light={StaticResource light_onPrimary}, Dark={StaticResource dark_onPrimary}}"/>
                             </Border>
                             <Border
                                 WidthRequest="100"
-                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                Background="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"
                                 StrokeShape="RoundRectangle 5">
                                 <RadioButton Content="Unread Only"
-                                             IsChecked="{Binding UseUnreadOnly}"/>
+                                             IsChecked="{Binding UseUnreadOnly}"
+                                             TextColor="{AppThemeBinding Light={StaticResource light_onPrimary}, Dark={StaticResource dark_onPrimary}}"/>
+
                             </Border>
                         </HorizontalStackLayout>
                         

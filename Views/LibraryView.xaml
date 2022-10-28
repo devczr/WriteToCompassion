@@ -107,7 +107,7 @@
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
                                 <Setter Property="BackgroundColor"
-                                        Value="{AppThemeBinding Light={StaticResource light_tertiaryContainer}, Dark={StaticResource dark_tertiaryContainer}}" />
+                                        Value="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}" />
                                 <Setter Property="Padding"
                                         Value="5" />
                             </VisualState.Setters>
