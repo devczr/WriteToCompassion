@@ -25,24 +25,29 @@
                 Grid.Column="0"
                 Text="X"
                 TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
-                FontSize="Medium"
-                VerticalOptions="Center"
+                FontSize="Large"
                 HorizontalOptions="Start"
                 BackgroundColor="Transparent"
                 Command="{Binding CancelCommand}"/>
 
             <Button
-                x:Name="saveButton"
                 Text="Save"
                 Grid.Column="1"
-                FontSize="Medium"
-                VerticalOptions="End"
                 HorizontalOptions="End"
-                Style="{StaticResource TransparentBackgroundPrimary}"
+                Margin="0,0,20,0"
+                x:Name="saveButton"
+                FontSize="Medium"
+                Padding="5"
+                HeightRequest="35"
+                WidthRequest="100"
+                CornerRadius="5"
+                Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
+                TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
                 Command="{Binding SaveCommand}"/>
 
         </Grid>
     </Shell.TitleView>
+    
     <Grid>
         <Grid
             Padding="15">
@@ -50,7 +55,6 @@
             x:Name="editor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="1"
-            Completed="editor_Completed"
             Placeholder="{Binding PlaceholderText}">
                 <Editor.Behaviors>
                     <mct:EventToCommandBehavior 
@@ -65,56 +69,5 @@
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"/>
         </Grid>
-      <!--
-     DISABLED bottom tab bar due to issue with Android soft keyboard not being dismissed on navigation
-     This means the only way to leave the editor page is through the cancel or save button, which call the backbutton behavior
-     Having no bottom tabbar is a common UI layout found on popular android app pages that consist primarily of an editor
-        <Grid
-            Grid.Row="1"
-            ColumnDefinitions="*,*,*"
-            Padding="0"
-            VerticalOptions="Center">
-
-            <ImageButton
-                Grid.Column="0"
-                Source="writeicon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="52"
-                HeightRequest="52"
-                Style="{StaticResource CustomTabBar}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-
-            <ImageButton
-                Grid.Column="1"
-                Source="thoughticon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="56"
-                HeightRequest="51"
-                Style="{StaticResource CustomTabBar}"
-                Command="{Binding CheckForSaveThenGoToThoughtsCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-
-            <ImageButton
-                Grid.Column="2"
-                Source="scrollicon.png"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="54"
-                HeightRequest="50"
-                Style="{StaticResource CustomTabBar}"
-                Command="{Binding CheckForSaveThenGoToLibraryCommand}">
-                <ImageButton.Behaviors>
-                    <mct:IconTintColorBehavior TintColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"/>
-                </ImageButton.Behaviors>
-            </ImageButton>
-        </Grid>     -->
     </Grid>
 </ContentPage>

@@ -19,15 +19,4 @@ public partial class NewThoughtEditorView : ContentPage
 		editor.Unfocus();
 	}
 
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-
-    }
-
-    private void editor_Completed(object sender, EventArgs e)
-    {
-
-    }
 }

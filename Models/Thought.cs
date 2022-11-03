@@ -11,7 +11,7 @@ public class Thought
 
     public int ReadCount { get; set; }
 
-    public string ReadSessionID { get; set; }
+    public Guid MostRecentReadSessionID { get; set; }
 
     public DateTime TimeSaved { get; set; }
 

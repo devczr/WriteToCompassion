@@ -6,6 +6,7 @@ using WriteToCompassion.Services;
 using WriteToCompassion.Services.Settings;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.ViewModels;
+using WriteToCompassion.ViewModels.Popups;
 using WriteToCompassion.Views;
 using WriteToCompassion.Views.Popups;
 namespace WriteToCompassion;
@@ -36,7 +37,6 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterAppServices(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<ISettingsService, SettingsService>();
-        mauiAppBuilder.Services.AddSingleton<NoteService>();
         mauiAppBuilder.Services.AddSingleton<ThoughtsService>();
         mauiAppBuilder.Services.AddSingleton<AnimationService>();
         return mauiAppBuilder;
@@ -44,18 +44,17 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<TutorialViewModel>();
         mauiAppBuilder.Services.AddTransient<HomeViewModel>();
         mauiAppBuilder.Services.AddTransient<EditorViewModel>();
         mauiAppBuilder.Services.AddTransient<NewThoughtEditorViewModel>();
         mauiAppBuilder.Services.AddTransient<SettingsViewModel>();
         mauiAppBuilder.Services.AddTransient<LibraryViewModel>();
+
         return mauiAppBuilder;
     }
 
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
-        mauiAppBuilder.Services.AddSingleton<TutorialView>();
         mauiAppBuilder.Services.AddTransient<SettingsView>();
         mauiAppBuilder.Services.AddTransient<HomeView>();
         mauiAppBuilder.Services.AddTransient<EditorView>();

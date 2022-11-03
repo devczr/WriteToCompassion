@@ -1,14 +1,18 @@
 using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls.PlatformConfiguration;
-using System.Text;
+using WriteToCompassion.ViewModels.Popups;
+using WriteToCompassion.Views.Popups;
 namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage
 {
+    private readonly HomeViewModel homeViewModel;
 	public HomeView(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
 		BindingContext = homeViewModel;
+        this.homeViewModel = homeViewModel;
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -19,13 +23,33 @@ public partial class HomeView : ContentPage
      
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
+/*
+        if(homeViewModel.DisplayTutorialPopups)
+        {
+            await StartTutorialPopupChainAsync();
+        }*/
     }
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    async void HandleTutorial(object sender, EventArgs e)
     {
+        /*        var tutorialPopup = new TutorialNewThoughtIconPopup();
+                tutorialPopup.Anchor = newThoughtIcon;*/
+/*
+        tutorialPopup.HorizontalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Start;
+        tutorialPopup.VerticalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Center;*/
 
     }
+
+    async Task StartTutorialPopupChainAsync()
+    {
+        var mainTutPopup = new TutorialPopup();
+        await this.ShowPopupAsync(mainTutPopup);
+    }
+
+
+
+
 }

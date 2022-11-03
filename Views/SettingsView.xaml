@@ -37,7 +37,6 @@
     <ScrollView>
         <VerticalStackLayout
             Padding="5">
-            
             <!--#region Display - Theme-->
             <Border 
                 Padding="10"
@@ -87,17 +86,20 @@
                             RadioButtonGroup.GroupName="UseableThoughts">
                             <Border
                                 WidthRequest="100"
-                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                Background="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"
                                 StrokeShape="RoundRectangle 5">
                                 <RadioButton Content="All"
-                                             IsChecked="{Binding UseAll}"/>
+                                             IsChecked="{Binding UseAll}"
+                                             TextColor="{AppThemeBinding Light={StaticResource light_onPrimary}, Dark={StaticResource dark_onPrimary}}"/>
                             </Border>
                             <Border
                                 WidthRequest="100"
-                                Background="{AppThemeBinding Dark={StaticResource dark_primary}}"
+                                Background="{AppThemeBinding Light={StaticResource light_primary}, Dark={StaticResource dark_primary}}"
                                 StrokeShape="RoundRectangle 5">
                                 <RadioButton Content="Unread Only"
-                                             IsChecked="{Binding UseUnreadOnly}"/>
+                                             IsChecked="{Binding UseUnreadOnly}"
+                                             TextColor="{AppThemeBinding Light={StaticResource light_onPrimary}, Dark={StaticResource dark_onPrimary}}"/>
+
                             </Border>
                         </HorizontalStackLayout>
                         
@@ -112,7 +114,6 @@
                     <BoxView Style="{StaticResource Divider}"/>
                     
                     <Label
-
                         Text="Max Clouds"
                         Style="{StaticResource CategoryLabelPrimary}"/>
                     <Label
@@ -121,7 +122,6 @@
                         Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                         Padding="2.5"/>
                     <Stepper
-                        
                         Value="{Binding MaxClouds}"
                         Maximum="30"
                         Minimum="1"/>
@@ -183,21 +183,24 @@
                     Style="{StaticResource ItemUnderCategoryLabelPrimary}"
                     Padding="2.5"/>
                     <Slider
-                    Value="{Binding CloudScaleSlider}"
-                    Maximum="2"
-                    Minimum="0.5"
-                    Margin="20,0,20,0"
-                    MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"/>
+                        Value="{Binding CloudScaleSlider}"
+                        Maximum="2"
+                        Minimum="0.5"
+                        Margin="20,0,20,0"
+                        MinimumTrackColor="{AppThemeBinding Light={StaticResource light_secondary},Dark={StaticResource dark_secondary}}"
+                        MaximumTrackColor="{AppThemeBinding Light={StaticResource light_onSurfaceVariant}, Dark={StaticResource dark_onSurfaceVariant}}"
+                        ThumbColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"/>
                 </VerticalStackLayout>
             </Border>
 
 
             <BoxView Style="{StaticResource Divider}"/>
 
-            <Button 
+            <Button
+                x:Name="tutorialButton"
                 Margin="10"
                 Text="Toggle Tutorial On Start"
-            Command="{Binding ToggleDisplayTutorialCommand}"/>
+                Command="{Binding ToggleDisplayTutorialCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

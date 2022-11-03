@@ -1,6 +1,8 @@
-﻿
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Alerts;
 using System;
+using LayoutAlignment = Microsoft.Maui.Primitives.LayoutAlignment;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -8,11 +10,14 @@ using System.Windows.Input;
 using WriteToCompassion.Models;
 using WriteToCompassion.Services.Thoughts;
 using WriteToCompassion.Views;
+using WriteToCompassion.Views.Popups;
 
 namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {
+    static Page Page => Application.Current?.MainPage ?? throw new NullReferenceException();
+
     //HomeView grid bindable layout bound to this Clouds observable collection
     //number of clouds visible = Clouds.Count
     public ObservableCollection<Cloud> Clouds { get; set; } = new();
@@ -21,7 +26,7 @@ public partial class HomeViewModel : BaseViewModel
     //Read & unread thoughts retrieved from db via thoughtsservice
     public List<Thought> UserThoughts { get; } = new();
 
-    public List<Thought> SortedThoughts { get; } = new();
+    public List<Thought> SortedThoughts { get; set; } = new();
 
 
     //handles database logic
@@ -30,7 +35,7 @@ public partial class HomeViewModel : BaseViewModel
     //holds user preferences
     private readonly ISettingsService settingsService;
 
-
+    private int currentCloudIndex = 0;
 
     //User can adjust in Settings
     [ObservableProperty]
@@ -40,6 +45,9 @@ public partial class HomeViewModel : BaseViewModel
     int maxClouds = 5;
 
     private bool instantText = false;
+
+    [ObservableProperty]
+    bool displayTutorialPopups;
 
     //general XAML Bindings
     [ObservableProperty]
@@ -59,8 +67,34 @@ public partial class HomeViewModel : BaseViewModel
         cloudScale = settingsService.CloudScale;
         maxClouds = settingsService.MaxClouds;
         instantText = settingsService.InstantText;
+        displayTutorialPopups = settingsService.DisplayTutorial;
+        CheckTutorial();
     }
 
+    async void CheckTutorial()
+    {
+        if(settingsService.DisplayTutorial)
+        {
+            var mainTutPopup = new TutorialPopup();
+           var result = await Page.ShowPopupAsync(mainTutPopup);
+            if(result is bool boolResult)
+            {
+                if(boolResult)
+                {
+                    //skip the rest of tutorial
+                }
+                else 
+                { 
+                    //tapped outside or continue
+                    var nextTutPopup = new TutorialNewThoughtIconPopup();
+                    nextTutPopup.HorizontalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Center;
+                    nextTutPopup.VerticalOptions = Microsoft.Maui.Primitives.LayoutAlignment.End;
+                    await Page.ShowPopupAsync(nextTutPopup);
+                    settingsService.DisplayTutorial = false;
+                }
+            }
+        }
+    }
 
     //mct:EventToCommand behavior on HomeView contentpage behavior calls this when "NavigatedTo" fires
     [RelayCommand]
@@ -92,9 +126,6 @@ public partial class HomeViewModel : BaseViewModel
         }
         finally
         {
-            //delaying here due to OnSizeAllocated firing 3 times on app startup
-            //also gives time for the page to load in between NavigatedTo and actual page visiblity
-            //            await Task.Delay(1500);
             await InitDriftAsync();
             IsBusy = false;
         }
@@ -104,8 +135,8 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task InitDriftAsync()
     {
-        await Task.Delay(500);
-        
+        if (UserThoughts.Count <= 0)
+            return;
 
         //the number of clouds added to Clouds collection depends on:
         // 1) how many thoughts the user has saved in database
@@ -113,19 +144,45 @@ public partial class HomeViewModel : BaseViewModel
         // 3) their "Unread Only" or "All" setting
         //    a thought is considered Unread if its content has never been displayed (swipe up gesture)
 
-        int cloudCount = Math.Clamp(UserThoughts.Count, 0, MaxClouds);
+        await SortAndRandomizeThoughts();
+
+        int cloudCount = Math.Clamp(SortedThoughts.Count, 0, MaxClouds);
 
         for (int i = 0; i < cloudCount; i++)
         {
             Cloud c = new()
             {
                 AnimationType = CloudAnimationType.Drift,
-                CloudID = Guid.NewGuid()
             };
             Clouds.Add(c);
         }
     }
 
+    private async Task SpawnCloudAfterSwipe(int previousCloud)
+    {
+        Clouds.RemoveAt(previousCloud);
+        SortedThoughts.RemoveAt(previousCloud);
+
+        if (SortedThoughts.Count > Clouds.Count)
+        {
+            Cloud c = new()
+            {
+                AnimationType = CloudAnimationType.Drift,
+            };
+            Clouds.Add(c);
+        }
+        else if((SortedThoughts.Count <= Clouds.Count) && (Clouds.Count > 0))
+        {
+            return;
+        }
+        else
+        {
+            SortedThoughts.Clear();
+            SessionService.GenSessionID();
+            await ShortToast("Nice! All thoughts have been read. Repeating list.");
+            await InitDriftAsync();
+        }
+    }
 
     // Cloud Animations
 
@@ -157,19 +214,19 @@ public partial class HomeViewModel : BaseViewModel
     {
         if ((swipedCloud is null) || (ContentBoxBusy))
             return;
+
         try
         {
             ContentBoxBusy = true;
 
-            var index = await Task.Run(() => Clouds.IndexOf(swipedCloud));
+            currentCloudIndex = await Task.Run(() => Clouds.IndexOf(swipedCloud));
             
-            Clouds[index].AnimationType = CloudAnimationType.Display;
+            Clouds[currentCloudIndex].AnimationType = CloudAnimationType.Display;
             
             if (instantText)
-                await UpdateContentInstantly(index);
+                await UpdateContentInstantly(currentCloudIndex);
             else
-                await UpdateContent(index);
-
+                await UpdateContent(currentCloudIndex);
 
         }
         catch (Exception ex)
@@ -188,6 +245,7 @@ public partial class HomeViewModel : BaseViewModel
         try
         {
             thought.ReadCount++;
+            thought.MostRecentReadSessionID = SessionService.SessionID;
             await thoughtsService.UpdateThought(thought);
         }
         catch (Exception ex)
@@ -195,18 +253,20 @@ public partial class HomeViewModel : BaseViewModel
             await Shell.Current.DisplayAlert("Error",
                 $"Trouble updating read count with database {ex.Message}", "OK");
         }
-        await Shell.Current.DisplayAlert("read count", $"{thought.ReadCount}", "OK");
     }
 
 
-    // Updates xaml label
-    //Content is chosen simply by matching the index of the list with the collection
-    //TODO: Randomize how a Thought is chosen when cloud is swiped
+    private async Task SortAndRandomizeThoughts()
+    {
+        var x = UserThoughts.SkipWhile(t => t.MostRecentReadSessionID == SessionService.SessionID).ToList();
+        SortedThoughts = ShuffleService.FYShuffle(x);
+    }
+
     private async Task UpdateContent(int index)
     {
         StringBuilder sb = new();
 
-        var charArray = await Task.Run(() => UserThoughts[index].Content.ToCharArray());
+        var charArray = await Task.Run(() => SortedThoughts[index].Content.ToCharArray());
 
         for(int i = 0; i < charArray.Length; i++)
         {
@@ -215,17 +275,21 @@ public partial class HomeViewModel : BaseViewModel
             CloudContent = sb.ToString();
         }
 
-        await UpdateReadCount(UserThoughts[index]);
-
+        await UpdateReadCount(SortedThoughts[index]);
+        SpawnCloudAfterSwipe(currentCloudIndex);
     }
 
     private async Task UpdateContentInstantly(int index)
     {
 
-        CloudContent = await Task.Run(() => UserThoughts[index].Content);
+        CloudContent = await Task.Run(() => SortedThoughts[index].Content);
 
-        await UpdateReadCount(UserThoughts[index]);
+        await UpdateReadCount(SortedThoughts[index]);
+
+        await Task.Delay(1500);
+        SpawnCloudAfterSwipe(currentCloudIndex);
     }
+
 
     //Navigation
     [RelayCommand]
@@ -237,18 +301,8 @@ public partial class HomeViewModel : BaseViewModel
     [RelayCommand]
     async Task GoToLibraryAsync()
     {
-        await Shell.Current.GoToAsync(nameof(LibraryView));
+        await Shell.Current.GoToAsync(nameof(LibraryView), true);
     }
 
-    [RelayCommand]
-    async Task ClearCloudsAsync()
-    {
-        for (int i = 0; i < Clouds.Count; i++)
-        {
-            Clouds[i].AnimationType = CloudAnimationType.None;
-        }
-        Clouds.Clear();
-        GetUserThoughtsAsync();
-    }
 
 }

@@ -81,6 +81,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Popups\TutorialNewThoughtIconPopup.xaml.cs">
+	    <DependentUpon>TutorialNewThoughtIconPopup.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="Controls\CustomCloudControl.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -102,10 +108,13 @@
 	  <MauiXaml Update="Views\Popups\ThemeOptionsPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\SettingsView.xaml">
+	  <MauiXaml Update="Views\Popups\TutorialNewThoughtIconPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\TutorialView.xaml">
+	  <MauiXaml Update="Views\Popups\TutorialPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SettingsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

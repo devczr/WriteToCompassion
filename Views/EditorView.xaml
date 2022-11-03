@@ -78,12 +78,13 @@
                 ZIndex="5">
 
                 <Button
+                    Text="Info"
+                    Command="{Binding DisplayThoughtInfoCommand}"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"
                     WidthRequest="90"
                     Background="{AppThemeBinding Light={StaticResource light_primaryContainer}, Dark={StaticResource dark_primaryContainer}}"
                     TextColor="{AppThemeBinding Light={StaticResource light_onPrimaryContainer}, Dark={StaticResource dark_onPrimaryContainer}}"
-                    Text="Info"
                     FontSize="Medium"
                     CornerRadius="1"
                     ZIndex="6"
