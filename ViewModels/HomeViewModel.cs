@@ -46,6 +46,9 @@ public partial class HomeViewModel : BaseViewModel
 
     private bool instantText = false;
 
+    [ObservableProperty]
+    bool displayTutorialPopups;
+
     //general XAML Bindings
     [ObservableProperty]
     bool animateCloudLottie = false;
@@ -64,8 +67,34 @@ public partial class HomeViewModel : BaseViewModel
         cloudScale = settingsService.CloudScale;
         maxClouds = settingsService.MaxClouds;
         instantText = settingsService.InstantText;
+        displayTutorialPopups = settingsService.DisplayTutorial;
+        CheckTutorial();
     }
 
+    async void CheckTutorial()
+    {
+        if(settingsService.DisplayTutorial)
+        {
+            var mainTutPopup = new TutorialPopup();
+           var result = await Page.ShowPopupAsync(mainTutPopup);
+            if(result is bool boolResult)
+            {
+                if(boolResult)
+                {
+                    //skip the rest of tutorial
+                }
+                else 
+                { 
+                    //tapped outside or continue
+                    var nextTutPopup = new TutorialNewThoughtIconPopup();
+                    nextTutPopup.HorizontalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Center;
+                    nextTutPopup.VerticalOptions = Microsoft.Maui.Primitives.LayoutAlignment.End;
+                    await Page.ShowPopupAsync(nextTutPopup);
+                    settingsService.DisplayTutorial = false;
+                }
+            }
+        }
+    }
 
     //mct:EventToCommand behavior on HomeView contentpage behavior calls this when "NavigatedTo" fires
     [RelayCommand]

@@ -7,10 +7,12 @@ namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage
 {
+    private readonly HomeViewModel homeViewModel;
 	public HomeView(HomeViewModel homeViewModel)
 	{
 		InitializeComponent();
 		BindingContext = homeViewModel;
+        this.homeViewModel = homeViewModel;
     }
 
     protected override void OnSizeAllocated(double width, double height)
@@ -21,32 +23,31 @@ public partial class HomeView : ContentPage
      
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-    }
-
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
-    {
-
+/*
+        if(homeViewModel.DisplayTutorialPopups)
+        {
+            await StartTutorialPopupChainAsync();
+        }*/
     }
 
     async void HandleTutorial(object sender, EventArgs e)
     {
         /*        var tutorialPopup = new TutorialNewThoughtIconPopup();
                 tutorialPopup.Anchor = newThoughtIcon;*/
-        /*
+/*
         tutorialPopup.HorizontalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Start;
         tutorialPopup.VerticalOptions = Microsoft.Maui.Primitives.LayoutAlignment.Center;*/
 
-        var mainTutPopup = new TutorialPopup();
-
-
-        await this.ShowPopupAsync(mainTutPopup);
-
-
     }
 
+    async Task StartTutorialPopupChainAsync()
+    {
+        var mainTutPopup = new TutorialPopup();
+        await this.ShowPopupAsync(mainTutPopup);
+    }
 
 
 
