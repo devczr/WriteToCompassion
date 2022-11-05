@@ -16,10 +16,10 @@
   *  
   
 * MAUI Community Toolkit
-  > IconTintColorBehavior
-  >> *HomeView.xaml*
-  
-  > EventToCommandBehavior
+  * IconTintColorBehavior
+  * HomeView.xaml
+ 
+* EventToCommandBehavior
   * 
   * 
   * 
