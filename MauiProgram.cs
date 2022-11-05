@@ -2,13 +2,7 @@
 using MauiGestures;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using WriteToCompassion.Models.Popups;
-using WriteToCompassion.Services;
-using WriteToCompassion.Services.Settings;
-using WriteToCompassion.Services.Thoughts;
-using WriteToCompassion.ViewModels;
-using WriteToCompassion.ViewModels.Popups;
-using WriteToCompassion.Views;
-using WriteToCompassion.Views.Popups;
+
 namespace WriteToCompassion;
 
 public static class MauiProgram

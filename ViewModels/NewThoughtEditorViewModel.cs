@@ -1,12 +1,4 @@
-﻿
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using System.Threading;
-using System.Windows.Input;
-using WriteToCompassion.Services.Thoughts;
-using WriteToCompassion.Views;
-
-namespace WriteToCompassion.ViewModels;
+﻿namespace WriteToCompassion.ViewModels;
 
 public partial class NewThoughtEditorViewModel : BaseViewModel
 {

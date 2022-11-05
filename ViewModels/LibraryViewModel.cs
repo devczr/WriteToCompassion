@@ -1,12 +1,4 @@
-﻿using System.Diagnostics;
-using CommunityToolkit.Maui.Alerts;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using WriteToCompassion.Services.Thoughts;
-using WriteToCompassion.Views;
-using Microsoft.Maui.Networking;
-
-namespace WriteToCompassion.ViewModels;
+﻿namespace WriteToCompassion.ViewModels;
 
 public partial class LibraryViewModel : BaseViewModel
 {

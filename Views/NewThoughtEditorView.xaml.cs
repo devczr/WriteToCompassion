@@ -1,5 +1,3 @@
-using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
-
 namespace WriteToCompassion.Views;
 
 public partial class NewThoughtEditorView : ContentPage

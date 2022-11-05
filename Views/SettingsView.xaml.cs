@@ -1,10 +1,3 @@
-using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Views;
-using WriteToCompassion.Models;
-using WriteToCompassion.Models.Popups;
-using WriteToCompassion.ViewModels;
-using WriteToCompassion.Views.Popups;
-
 namespace WriteToCompassion.Views;
 
 public partial class SettingsView : ContentPage

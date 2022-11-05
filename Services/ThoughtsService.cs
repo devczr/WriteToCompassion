@@ -1,21 +1,16 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using SQLite;
-using System.Collections.ObjectModel;
+﻿using SQLite;
 using System.Diagnostics;
-using System.Linq;
-using WriteToCompassion.Models;
-using WriteToCompassion.Services.Settings;
 
-namespace WriteToCompassion.Services.Thoughts;
+namespace WriteToCompassion.Services;
 
 public class ThoughtsService
 {
     private readonly ISettingsService settingsService;
 
     public ThoughtsService(ISettingsService settingsService)
-	{
+    {
         this.settingsService = settingsService;
-	}
+    }
 
     private SQLiteAsyncConnection dbAsyncConn;
 
@@ -47,7 +42,7 @@ public class ThoughtsService
                     ReadCount = 0,
                     Content = content.Trim(),
                     TimeSaved = DateTime.Now,
-                }); 
+                });
 
         }
         catch (Exception ex)
