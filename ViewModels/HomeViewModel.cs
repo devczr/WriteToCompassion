@@ -1,18 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Maui.Alerts;
-using System;
-using LayoutAlignment = Microsoft.Maui.Primitives.LayoutAlignment;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using WriteToCompassion.Models;
-using WriteToCompassion.Services.Thoughts;
-using WriteToCompassion.Views;
-using WriteToCompassion.Views.Popups;
-
-namespace WriteToCompassion.ViewModels;
+﻿namespace WriteToCompassion.ViewModels;
 
 public partial class HomeViewModel : BaseViewModel
 {

@@ -1,6 +1,3 @@
-using CommunityToolkit.Maui.Views;
-using WriteToCompassion.Models.Popups;
-
 namespace WriteToCompassion.Views.Popups;
 
 public partial class ThemeOptionsPopup : Popup

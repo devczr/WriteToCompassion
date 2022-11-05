@@ -1,10 +1,4 @@
-﻿using System.Windows.Input;
-using CommunityToolkit.Maui.Views;
-using CommunityToolkit.Mvvm.Input;
-using WriteToCompassion.Views;
-using WriteToCompassion.Views.Popups;
-
-namespace WriteToCompassion.ViewModels;
+﻿namespace WriteToCompassion.ViewModels;
 
 public partial class SettingsViewModel : BaseViewModel
 {

@@ -1,8 +1,3 @@
-using CommunityToolkit.Maui.Behaviors;
-using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using WriteToCompassion.ViewModels.Popups;
-using WriteToCompassion.Views.Popups;
 namespace WriteToCompassion.Views;
 
 public partial class HomeView : ContentPage

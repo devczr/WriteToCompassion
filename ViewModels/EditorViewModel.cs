@@ -1,11 +1,4 @@
-﻿using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
-using CommunityToolkit.Maui.Views;
-using WriteToCompassion.Services.Thoughts;
-using WriteToCompassion.Views;
-using WriteToCompassion.Views.Popups;
-
-namespace WriteToCompassion.ViewModels;
+﻿namespace WriteToCompassion.ViewModels;
 
 [QueryProperty(nameof(Thought), "Thought")]
 public partial class EditorViewModel : BaseViewModel
