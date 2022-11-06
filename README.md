@@ -21,7 +21,7 @@
 
 * MVVM Toolkit
   * ObservableProperty <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/ViewModels/HomeViewModel.cs#L27)</sup>
-  * RelayCommand <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/ViewModels/HomeViewModel.cs#L27)</sup>
+  * RelayCommand <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/a0128e695dce33a0ea9f64569f2c83aa85f6b8bf/ViewModels/HomeViewModel.cs#L287-L291)</sup>
 
 * SQLite
   * CRUD Operations  <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Services/ThoughtsService.cs)</sup>
