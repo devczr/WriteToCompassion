@@ -1,4 +1,4 @@
-> **NOTE:** Please note, this app is currently still in development and has only been tested on Android & Windows
+> **NOTE:** Please note, this app is currently still in development and has only been tested on Android
 
 # WriteToCompassion
 
