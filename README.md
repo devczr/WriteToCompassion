@@ -6,20 +6,18 @@
 # .NET MAUI Features
 
 * .NET MAUI Standard Features
-  * Custom Controls
-  * Behaviors
+  * Custom Controls 
   * MVVM Data Bindings
   * Animations
-  * 
+  * Bindable Layout
   * 
   * 
   *  
   
 * MAUI Community Toolkit
-  * IconTintColorBehavior
-  * HomeView.xaml
+  * IconTintColorBehavior [HomeView](https://github.com/devczr/WriteToCompassion/blob/0b6ca714d6a588acd0efddf28f8994490d41400d/Views/HomeView.xaml#L312)
  
-* EventToCommandBehavior
+  * EventToCommandBehavior
   * 
   * 
   * 
