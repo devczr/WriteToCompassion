@@ -6,31 +6,25 @@
 # .NET MAUI Features
 
 * .NET MAUI Standard Features
-  * Custom Controls 
   * MVVM Data Bindings
-  * Animations
-  * Bindable Layout
-  * 
-  * 
-  *  
+  * Animations 
+  * Custom Controls <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Controls/CustomCloudControl.xaml)</sup>
+  * Bindable Layout <sup>[[1]] (https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Views/HomeView.xaml#L207-L226)</sup>
+  * Preferences <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Services/Settings/SettingsService.cs) </sup> 
   
 * MAUI Community Toolkit
   * IconTintColorBehavior   <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/0b6ca714d6a588acd0efddf28f8994490d41400d/Views/HomeView.xaml#L312) </sup>
  
   * EventToCommandBehavior <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/1523ad40d0bc0eac9338bbe64f51856052724110/Views/HomeView.xaml#L22) </sup>
   * Popups <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/1523ad40d0bc0eac9338bbe64f51856052724110/Views/Popups/ThemeOptionsPopup.xaml) </sup>
-  * Popups <sup>[Example]() </sup>
-  * Popups <sup>[Example]() </sup>
-  * Popups <sup>[Example]() </sup>
-  * 
+  * Toast <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/ViewModels/BaseViewModel.cs#L21-L32) </sup>
 
 * MVVM Toolkit
-  * 
-  * 
-  * 
-  * 
-  * 
-  * 
+  * ObservableProperty <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/ViewModels/HomeViewModel.cs#L27)</sup>
+  * RelayCommand <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/ViewModels/HomeViewModel.cs#L27)</sup>
+
+* SQLite
+  * CRUD Operations  <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Services/ThoughtsService.cs)</sup>
   
   
 # 3rd Party Licenses 
