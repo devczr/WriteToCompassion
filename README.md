@@ -9,7 +9,7 @@
   * MVVM Data Bindings
   * Animations 
   * Custom Controls <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Controls/CustomCloudControl.xaml)</sup>
-  * Bindable Layout <sup>[[1]] (https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Views/HomeView.xaml#L207-L226)</sup>
+  * Bindable Layout <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Views/HomeView.xaml#L207-L226)</sup>
   * Preferences <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Services/Settings/SettingsService.cs) </sup> 
   
 * MAUI Community Toolkit
