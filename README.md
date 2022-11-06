@@ -17,9 +17,11 @@
 * MAUI Community Toolkit
   * IconTintColorBehavior   <sup>[Example](https://github.com/devczr/WriteToCompassion/blob/0b6ca714d6a588acd0efddf28f8994490d41400d/Views/HomeView.xaml#L312) </sup>
  
-  * EventToCommandBehavior
-  * 
-  * 
+  * EventToCommandBehavior <sup>[Example](https://github.com/devczr/WriteToCompassion/blob/1523ad40d0bc0eac9338bbe64f51856052724110/Views/HomeView.xaml#L22) </sup>
+  * Popups <sup>[Example](https://github.com/devczr/WriteToCompassion/blob/1523ad40d0bc0eac9338bbe64f51856052724110/Views/Popups/ThemeOptionsPopup.xaml) </sup>
+  * Popups <sup>[Example]() </sup>
+  * Popups <sup>[Example]() </sup>
+  * Popups <sup>[Example]() </sup>
   * 
 
 * MVVM Toolkit
