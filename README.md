@@ -15,7 +15,7 @@
   *  
   
 * MAUI Community Toolkit
-  * IconTintColorBehavior   [Example](https://github.com/devczr/WriteToCompassion/blob/0b6ca714d6a588acd0efddf28f8994490d41400d/Views/HomeView.xaml#L312)
+  * IconTintColorBehavior   <sup>[Example](https://github.com/devczr/WriteToCompassion/blob/0b6ca714d6a588acd0efddf28f8994490d41400d/Views/HomeView.xaml#L312) </sup>
  
   * EventToCommandBehavior
   * 
