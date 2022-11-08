@@ -5,7 +5,8 @@
              xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
              x:DataType="viewmodels:EditorViewModel"
              x:Class="WriteToCompassion.Views.EditorView"
-             Shell.TabBarIsVisible="False">
+             Shell.TabBarIsVisible="False"
+             BackgroundColor="{AppThemeBinding Light={StaticResource dark_onPrimaryContainer}, Dark={StaticResource light_onPrimaryContainer}}">
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior IsEnabled="False"
@@ -129,8 +130,7 @@
             x:Name="thoughtEditor"
             Style="{StaticResource ThoughtEditor}"
             Grid.Row="0"
-            Text="{Binding Thought.Content}"
-            TextColor="HotPink">
+            Text="{Binding Thought.Content}">
             
             <Editor.Behaviors>
                 <mct:EventToCommandBehavior EventName="TextChanged"

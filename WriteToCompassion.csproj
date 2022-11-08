@@ -36,7 +36,6 @@
 		<MauiIcon Include="Resources\AppIcon\appiconfg.svg" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="d1d1d1" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -63,12 +62,7 @@
 	  <None Remove="Resources\Images\thoughticon.svg" />
 	  <None Remove="Resources\Images\trashicon.svg" />
 	  <None Remove="Resources\Images\writeicon.svg" />
-	  <None Remove="Resources\Raw\bigcloudlottie.json" />
 	  <None Remove="Resources\Raw\cloudlottie.json" />
-	  <None Remove="Resources\Raw\greencloudlottie.json" />
-	  <None Remove="Resources\Raw\xflip.json" />
-	  <None Remove="Resources\Raw\xspin.json" />
-	  <None Remove="Resources\Raw\yellowcloudlottie.json" />
 	</ItemGroup>
 
 	<ItemGroup>
