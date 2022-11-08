@@ -19,7 +19,21 @@ public partial class App : Application
     { 
         SessionService.GenSessionID();
         settingsService.ThemeChoice = settingsService.ThemeChoice;
+        ModifyEditor();
     }
+
+
+    void ModifyEditor()
+    {
+        Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
+        {
+#if ANDROID
+            handler.PlatformView.TextCursorDrawable = null;
+#endif
+        });
+    }
+
+
 }
 
 

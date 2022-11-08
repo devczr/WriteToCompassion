@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
-    xmlns:triggers="clr-namespace:WriteToCompassion.Triggers"
     xmlns:viewmodels="clr-namespace:WriteToCompassion.ViewModels"
     xmlns:models="clr-namespace:WriteToCompassion.Models"
     xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -233,10 +232,10 @@
                             HeightRequest="140"
                             Opacity="1"
                             IsAnimationEnabled="true"
-                            IsVisible="false"
+                            IsVisible="true"
                             ZIndex="0"
                             RepeatCount="-1"
-                            Source="yellowcloudlottie.json"/>
+                            Source="cloudlottie.json"/>
         </Grid>
 
 

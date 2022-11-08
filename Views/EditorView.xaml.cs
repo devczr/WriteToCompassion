@@ -8,7 +8,6 @@ public partial class EditorView : ContentPage
     {
         InitializeComponent();
         BindingContext = editorViewModel;
-        ModifyEditor();
         moreButtonStack.Opacity = 0;
         showMore = false;
         showMoreBusy = false;
@@ -49,17 +48,6 @@ public partial class EditorView : ContentPage
             showMoreBusy = false;
         }
     }
-
-    void ModifyEditor()
-    {
-        Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("MyCustomization", (handler, view) =>
-        {
-#if ANDROID
-            handler.PlatformView.TextCursorDrawable = null;
-#endif
-        });
-    }
-
     async void HandleOutOfMoreButtonStackBoundsTapped(object sender, TappedEventArgs e)
     {
         await ToggleMoreStack();
