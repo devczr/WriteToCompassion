@@ -1,9 +1,13 @@
-> **NOTE:** Please note, this app is currently still in development and has only been tested on Android
-
 # WriteToCompassion
+`WriteToCompassion` is an experimental note-taking app that aims to improve the helpfulness of an individual's thoughts. 
+* Feeling ***upbeat*** & ***positive***? Stockpile some of that positivity by recording a few kind, self-compassionate thoughts.
+* Feeling overly ***harsh*** or ***self-critical***? Read through your previously recorded thoughts to find inspiration and hopefully replace unhelpful thoughts.
 
 
-# .NET MAUI Features
+# Architecture
+The MVVM architectural pattern is implemented wherever possible, though some code-behind logic is necessary for the animations and popups.
+
+### .NET MAUI Features
 
 * .NET MAUI Standard Features
   * MVVM Data Bindings
@@ -25,9 +29,28 @@
 
 * SQLite
   * CRUD Operations  <sup>[[1]](https://github.com/devczr/WriteToCompassion/blob/ce4cfaddc0cc4fcffa9c2d39c2d0a92961b915a1/Services/ThoughtsService.cs)</sup>
-  
-  
-# 3rd Party Licenses 
-* [Lottie Simple License (FL 9.13.21)](https://lottiefiles.com/page/license)
+
+# Supported Platforms
+- Android
+
+# Licenses
+## 3rd Party Licenses 
+* Lottie Animation from LottieFiles under the [Lottie Simple License (FL 9.13.21)](https://lottiefiles.com/page/license)
 * [.NET MAUI Community Toolkit](https://github.com/CommunityToolkit/Maui)
 
+## Copyright and license
+Code released under the MIT license.
+
+# Acknowledgements / Helpful Resources
+Huge thanks to the open source community and content creators that make learning free and easy! Here are some resources were instrumental in making this app.
+>## Youtube Tutorials
+> - James Montemagno's [**.NET MAUI - Full Course for Beginners**](https://youtu.be/DuNLR_NJv8U)
+> - David Ortinau's [**CollectionView SelectionMode with LongPress**](https://youtu.be/As5vv40ZmsE)
+> - .NET's [**.NET MAUI for Beginners**](https://youtu.be/Hh279ES_FNQ)
+> - Gerald Versluis' [**Lottie Animations in MAUI**](https://youtu.be/o5X5yXdWpuc)
+> - Javier Suárez's [**Ways to create controls in .NET MAUI**](https://youtu.be/8d7xLErPm9o)
+
+>## Books / Reading Material
+> - Michael Stonis' [**Enterprise Application Patterns using .NET MAUI**](https://learn.microsoft.com/en-us/dotnet/architecture/maui/)
+> - Maui Community Toolkit's [**Github**](https://github.com/CommunityToolkit/Maui) &  [**Microsoft Learn**](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/maui/)
+> - MVVM Community Toolkit's [**Microsoft Learn**](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/)
